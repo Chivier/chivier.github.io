@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>开机流程 | Chivier&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍关于基于Linux开机流程的知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开机流程">
+<meta property="og:url" content="https://chivier.github.io/2019/01/09/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B-1/index.html">
+<meta property="og:site_name" content="Chivier&#39;s Blog">
+<meta property="og:description" content="介绍关于基于Linux开机流程的知识。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-01-08T22:17:17.000Z">
+<meta property="article:modified_time" content="2021-02-24T08:30:18.120Z">
+<meta property="article:author" content="Chivier Humber">
+<meta property="article:tag" content="COD">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="System">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="https://github.com/Chivier" title="Chivier&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Chivier&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/Whoami">About</a>
+        
+          <a class="main-nav-link" href="/categories">Catagories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" target="_blank" rel="noopener" href="https://github.com/Chivier" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="chivier.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="[post]-开机流程-1" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/09/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B-1/" class="article-date">
+  <time datetime="2019-01-08T22:17:17.000Z" itemprop="datePublished">2019-01-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      开机流程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-%E7%8E%AF%E5%A2%83"><span class="toc-text">0 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-BIOS%E5%90%AF%E5%8A%A8"><span class="toc-text">1 BIOS启动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-BIOS%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86"><span class="toc-text">1.1 BIOS启动原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-BIOS%E5%90%AF%E5%8A%A8"><span class="toc-text">1.2 BIOS启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8A%A0%E8%BD%BD%E7%A8%8B%E5%BA%8F"><span class="toc-text">2 加载程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%8A%A0%E8%BD%BD%E5%BC%95%E5%AF%BC%E7%A8%8B%E5%BA%8F"><span class="toc-text">2.1 加载引导程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8A%A0%E8%BD%BDsetup"><span class="toc-text">2.2 加载setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%8A%A0%E8%BD%BDsystem%E6%A8%A1%E5%9D%97"><span class="toc-text">2.3 加载system模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%8F%90%E5%8F%96%E6%9C%BA%E5%99%A8%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE"><span class="toc-text">2.4 提取机器系统数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BD%AC%E5%90%9132%E4%BD%8D%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%87%86%E5%A4%87main%E5%87%BD%E6%95%B0"><span class="toc-text">3 转向32位模式，准备main函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%B0%86system%E7%A7%BB%E5%8A%A8%E5%88%B0%E5%86%85%E5%AD%98%E8%B5%B7%E5%A7%8B%E5%9C%B0%E5%9D%80%E4%B8%BA0x00000"><span class="toc-text">3.1 将system移动到内存起始地址为0x00000</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%AD"><span class="toc-text">3.2 设置中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%89%93%E5%BC%80A20%EF%BC%8C%E5%AE%9E%E7%8E%B032%E4%BD%8D%E5%AF%BB%E5%9D%80"><span class="toc-text">3.3 打开A20，实现32位寻址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%87%86%E5%A4%87head-s"><span class="toc-text">3.4 准备head.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E6%89%A7%E8%A1%8Chead-s"><span class="toc-text">3.5 执行head.s</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%AE%BE%E7%BD%AE%E6%A0%B9%E8%AE%BE%E5%A4%87%E5%92%8C%E7%A1%AC%E7%9B%98"><span class="toc-text">4 设置根设备和硬盘</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E8%BF%9B%E8%A1%8C%E8%A7%84%E5%88%92"><span class="toc-text">4.1 进行规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%AE%BE%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%9B%98%E7%A9%BA%E9%97%B4%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">4.2 设置虚拟盘空间并初始化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%BB%BA%E7%AB%8B%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92%E7%95%8C%E9%9D%A2%E4%BB%A5%E5%8F%8A%E5%A4%96%E8%AE%BE%E7%9A%84%E4%B8%AD%E6%96%AD%E6%9C%8D%E5%8A%A1%E6%8C%82%E8%BD%BD"><span class="toc-text">5 建立人机交互界面以及外设的中断服务挂载</span></a></li></ol>
+      </div>
+      
+        <p>分析计算机开机的流程，详解附代码。</p>
+ <span id="more"></span>
+
+<h2 id="0-环境"><a href="#0-环境" class="headerlink" title="0 环境"></a>0 环境</h2><p>不同的计算机开机的流程是有微小差异的。显然的，大型并行的计算机和小型计算机开机的流程是不同的。同事，不同操作系统开机运行什么样的程序也是有区别的。这里我选择的是 <strong>Intel 80x86</strong> CPU操作模式，和 <strong>Linux 0.11</strong> 内核。</p>
+<h2 id="1-BIOS启动"><a href="#1-BIOS启动" class="headerlink" title="1 BIOS启动"></a>1 BIOS启动</h2><p>计算机的运行离不开程序，加电的一瞬间，计算机内存（准确的说这里是指RAM）中最初是空的。CPU中的逻辑电路设计是执行我们内存中的程序的，而不是软盘中的程序。最初我们启动BIOS显然是不可能靠软件方法的，其实是靠硬件启动的。</p>
+<h3 id="1-1-BIOS启动原理"><a href="#1-1-BIOS启动原理" class="headerlink" title="1.1 BIOS启动原理"></a>1.1 BIOS启动原理</h3><p>硬件角度看，<strong>Intel 80x86</strong> 系列CPU可以分别可以在<strong>16位实模式</strong>和<strong>32位保护模式</strong>下运行。为保证兼容，所有<strong>Intel 80x86</strong> 系列CPU设计都是加电直接进入<strong>16位实模式</strong>的。同时，CPU<strong>硬件逻辑</strong>设计为瞬间<strong>强行</strong>将CS的值置为0xF000,IP的值置为0xFFF0。这样CS：IP就指向了0xFFFF0的位置。我们硬件设计的时候也将BIOS的入口地址设置为0xFFFF0。</p>
+<h3 id="1-2-BIOS启动"><a href="#1-2-BIOS启动" class="headerlink" title="1.2 BIOS启动"></a>1.2 BIOS启动</h3><p>BIOS的程序被固化在计算机主机板上一块较小的ROM的芯片中。通常，不同主机板的BIOS是不同的。就我们选取的BIOS为例 <strong>Intel 80x86</strong> CPU操作模式，和 <strong>Linux 0.11</strong> 内核的环境下，我们的BIOS程序也只有8K，所占的地址在<strong>0xFE000~0xFFFFF</strong>。BIOS程序运行的时候，显示器上会显示显卡、内存的各种信息，表示BIOS程序在依次检测显卡、内存等。其中有一项boot对于系统至关重要要——BIOS在内存中建立中断向量表和中断服务程序。BIOS会在内存开始的位置0x00000用1KB的内存(0x00000~0x003FF)构建中断向量表。</p>
+<h2 id="2-加载程序"><a href="#2-加载程序" class="headerlink" title="2 加载程序"></a>2 加载程序</h2><h3 id="2-1-加载引导程序"><a href="#2-1-加载引导程序" class="headerlink" title="2.1 加载引导程序"></a>2.1 加载引导程序</h3><p>CPU通过收到BIOS传来的int0x19的中断向量，指向0x0E6F2，这里是int0x19指向的地址，BIOS程序从这里开始进行两项工作“找到硬/软盘”以及“加载第一扇区”。BIOS将0号磁头的对应盘里面的0磁道第一扇区的内容复制到0x07C00处，这里就是Linux0.11的引导程序。</p>
+<h3 id="2-2-加载setup"><a href="#2-2-加载setup" class="headerlink" title="2.2 加载setup"></a>2.2 加载setup</h3><p>我们的引导程序bootsec导入内存之后，第一件重要的事情是规划内存。bootsect程序中有一段分别规定了BOOTSEG、INITSEG、SETUPSEG等常量，表示setup的扇区数、加载位置，启动扇区的位置等等。这样规划好之后，bootsect会将自己复制到0x07C000到0x90000处。这一段是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">entry start</span><br><span class="line">start:</span><br><span class="line">	mov	ax,#BOOTSEG</span><br><span class="line">	mov ds,ax</span><br><span class="line">	mov	ax,#INITSEG</span><br><span class="line">	mov es,ax</span><br><span class="line">	mov cx,#256</span><br><span class="line">	sub	si,si</span><br><span class="line">	sub di,di</span><br><span class="line">	rep</span><br><span class="line">	movw</span><br></pre></td></tr></table></figure>
+
+<p>这里ds（0x07C0）和si（0x0000）联合使用起来，组成了原地址0x7C00。es和di联合构成0x90000，<code>mov cx</code>这里正好决定了大小</p>
+<p>本次复制之后我们进行下一阶段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	rep</span><br><span class="line">	movw</span><br><span class="line">	jmpi go,INITSEG</span><br><span class="line">go:	mov ax,cs</span><br><span class="line">	mov ds,ax</span><br></pre></td></tr></table></figure>
+
+<p>这里我们执行跳转，CS变成0x9000，IP从0x9000转到go处。从现在起我们的操作系统完成了转移，不在完全依赖BIOS了，可以根据自己的意志进行移动。</p>
+<p>由于bootsect复制的新的位置，之前修改了CS，现在轮到DS、ES、SS、和SP了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">go:	mov	ax,cs</span><br><span class="line">	mov ds,ax</span><br><span class="line">	mov	ed,ax</span><br><span class="line">! put stack at 0x9ff00</span><br><span class="line">	mov	ss,ax</span><br><span class="line">	mov	sp,#0xFF00</span><br></pre></td></tr></table></figure>
+
+<p>这里通过ax，用CS的值去修改其他寄存器的值。数据段寄存器、附加段寄存器、栈基址寄存器全部设置为代码段寄存器的位置（CS），并且将栈顶指针设置为偏移地址0xFF00的地方。这题我们可以开始加载setup程序了。</p>
+<p>我们首先执行的是int0x13，但我们要先指定扇区加载的内存位置等信息，即传参：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">load_setup:</span><br><span class="line">	mov	dx,#0x0000</span><br><span class="line">	mov cx,#0x0002</span><br><span class="line">	mov bx,#0x0200</span><br><span class="line">	mov ax,#0x0200 + SUPERLEN</span><br><span class="line">	int 0x13</span><br><span class="line">	jnc ok_load_setup</span><br><span class="line">	mov dx,#0x0000</span><br><span class="line">	mov ax,#0x0000</span><br><span class="line">	int 0x13</span><br><span class="line">	j load_setup</span><br></pre></td></tr></table></figure>
+
+<p>完成传参后执行int0x13。全部完成这些之后我们已经从软盘里面加载了5个扇区的代码。</p>
+<h3 id="2-3-加载system模块"><a href="#2-3-加载system模块" class="headerlink" title="2.3 加载system模块"></a>2.3 加载system模块</h3><p>加载完setup之后我们还是用类似之前的方法再来加载第三部分的代码，反复调用int0x13。这部分代码较长，开机的时候我们会显示**”Loading system …”**的信息，我们会在这里加载240个扇区的信息。我们最后还会在bootsect中执行一个小任务：确认根设备号。</p>
+<p>加载完成3个部分之后，我们bootsect功德圆满，然后我们回去执行下一步的setup程序。</p>
+<p>跳转依赖bootsect中的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmpi 0, SETUPSEG</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-提取机器系统数据"><a href="#2-4-提取机器系统数据" class="headerlink" title="2.4 提取机器系统数据"></a>2.4 提取机器系统数据</h3><p>setup程序开始的第一件事情就是利用BIOS中的中断服务提取内核运行所需要的机器系统数据，其中包括贯标位置，显示页面等数据。并且还在int0x41还有int0x46上硬盘参数表。将他们存放在其他位置。</p>
+<p>位置在<code>boot/setup.s</code>里面的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	mov	ax,	#INITSEG</span><br><span class="line">	mov	ds,	as</span><br><span class="line">	mov	ah,	#0x03</span><br><span class="line">	xor bh,	bh</span><br><span class="line">	int	0x10</span><br><span class="line">	mov	[0],dx</span><br><span class="line">	</span><br><span class="line">!get memory size (extended memory,KB)</span><br><span class="line">	mov ah,	#0x88</span><br><span class="line">	int 0x15</span><br><span class="line">	mov [2],ax</span><br><span class="line">mov cx,	#0x10</span><br><span class="line">mov ax, #0x00</span><br><span class="line">rep</span><br><span class="line">stosb</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这些步骤之后我们完成的实际上是将Linux0.11<strong>从实模式转到了保护模式</strong>。</p>
+<h2 id="3-转向32位模式，准备main函数"><a href="#3-转向32位模式，准备main函数" class="headerlink" title="3 转向32位模式，准备main函数"></a>3 转向32位模式，准备main函数</h2><h3 id="3-1-将system移动到内存起始地址为0x00000"><a href="#3-1-将system移动到内存起始地址为0x00000" class="headerlink" title="3.1 将system移动到内存起始地址为0x00000"></a>3.1 将system移动到内存起始地址为0x00000</h3><p>在这些之前我们先要关闭中断，防止以外情况，在setup.s中有一行<code>cli</code>关闭了中断。setup再将0x10000的内核复制到0x00000的位置。DS和ES配合完成内核移位的任务。这里其实是为我们下一步破旧立新做准备。</p>
+<h3 id="3-2-设置中断"><a href="#3-2-设置中断" class="headerlink" title="3.2 设置中断"></a>3.2 设置中断</h3><p>我们这里会建立新的中断模式，通过setup程序自己提供的数据信息去完成初始化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">end_move:</span><br><span class="line">	mov	ax,#SETUPSEG</span><br><span class="line">	mov ds,ax</span><br><span class="line">	lidt idt_48</span><br><span class="line">	lgdt gdt_48</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">gdt:</span><br><span class="line">	.word 0,0,0,0</span><br><span class="line">	</span><br><span class="line">	.word 0x07FF</span><br><span class="line">	.word 0x0000</span><br><span class="line">	.word 0x9A00</span><br><span class="line">	.word 0x00C0</span><br><span class="line">	</span><br><span class="line">	.word 0x07FF</span><br><span class="line">	.word 0x0000</span><br><span class="line">	.word 0x9200</span><br><span class="line">	.word 0x00C0</span><br><span class="line">	</span><br><span class="line">idt_48:</span><br><span class="line">	.word 0</span><br><span class="line">	.word 0,0</span><br><span class="line">	</span><br><span class="line">gdt_48:</span><br><span class="line">	.word 0x800</span><br><span class="line">	.word 512 + gdt,0x9</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-打开A20，实现32位寻址"><a href="#3-3-打开A20，实现32位寻址" class="headerlink" title="3.3 打开A20，实现32位寻址"></a>3.3 打开A20，实现32位寻址</h3><p>这里将我们的寻址模式进行改动，最大地址从0xFFFFF扩展到了0xFFFFFFFF。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">call empty_8042</span><br><span class="line">mov a1,#0xD1</span><br><span class="line">out #0x64,al</span><br><span class="line">call empty_8042</span><br><span class="line">mov al,#0xDF  !A20 on</span><br><span class="line">out #0x60,al</span><br><span class="line">call empty_8042</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-准备head-s"><a href="#3-4-准备head-s" class="headerlink" title="3.4 准备head.s"></a>3.4 准备head.s</h3><p>setup对8259A进行重编程。这里有一点很难理解，在我们设置GDT之后有一句跳转语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmpi 0,8</span><br></pre></td></tr></table></figure>
+
+<p>这里需要声明，8是保护模式的选择符，这样成就可以理解了。</p>
+<h3 id="3-5-执行head-s"><a href="#3-5-执行head-s" class="headerlink" title="3.5 执行head.s"></a>3.5 执行head.s</h3><p>head.s中，我们完成了很多很多任务，例如将SS转32为的esp，对IDT重新设置和构建，调整DS、ES，检测数学协调处理器等等。之后我们将main函数的执行入口地址压给CS：EIP。这样我们可以开始运行main了。</p>
+<h2 id="4-设置根设备和硬盘"><a href="#4-设置根设备和硬盘" class="headerlink" title="4 设置根设备和硬盘"></a>4 设置根设备和硬盘</h2><h3 id="4-1-进行规划"><a href="#4-1-进行规划" class="headerlink" title="4.1 进行规划"></a>4.1 进行规划</h3><p>我们开始使用32字的机器的时候设置了drive_info实在<code>init/main.c</code>里面执行的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DRIVE_INFO (*(struct drive_info *)0x90080)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_ROOT_DEV (*(struct short *)0x901FC)</span></span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ROOT_DEV = ORIG_ROOT_DEV;</span><br><span class="line">    drive_info = DRIVE_INFO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们会设置缓冲区、虚拟盘、主内存等各自的存储位置。</p>
+<h3 id="4-2-设置虚拟盘空间并初始化"><a href="#4-2-设置虚拟盘空间并初始化" class="headerlink" title="4.2 设置虚拟盘空间并初始化"></a>4.2 设置虚拟盘空间并初始化</h3><h2 id="5-建立人机交互界面以及外设的中断服务挂载"><a href="#5-建立人机交互界面以及外设的中断服务挂载" class="headerlink" title="5 建立人机交互界面以及外设的中断服务挂载"></a>5 建立人机交互界面以及外设的中断服务挂载</h2><p>我们加载完操作系统并不完全算完成了开机，要真正的使用我们还要加载外设。Linux中的ttyinit函数就是为了完成字符设备的初始化工作。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tty</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rs_init ();</span><br><span class="line">    con_init ();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中我们对串口进行设置的代码是rs_init()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">rs_init (<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	set_intr_gate (<span class="number">0x24</span>, rs1_interrupt);</span><br><span class="line">	set_intr_gate (<span class="number">0x23</span>, rs2_interrupt);</span><br><span class="line">	init (tty_table[<span class="number">1</span>].read_q.data);</span><br><span class="line">	init (tty_table[<span class="number">2</span>].read_q.data);</span><br><span class="line">	outb (inb_p (<span class="number">0x21</span>) &amp; <span class="number">0xE7</span>, <span class="number">0x21</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>之后我们依次完成显示器、键盘等设置。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_X (*(unsigned char *)0x90000)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_Y (*(unsigned char *)0x90001)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_PAGE (*(unsigned short *)0x90004)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_MODE ((*(unsigned short *)0x90006) &amp; 0xff)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_COLS (((*(unsigned short *)0x90006) &amp; 0xff00) &gt;&gt; 8)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_LINES (25)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_EGA_AX (*(unsigned short *)0x90008)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_EGA_BX (*(unsigned short *)0x9000a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_EGA_CX (*(unsigned short *)0x9000c)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_MDA 0x10 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_CGA 0x11 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_EGAM 0x20 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_EGAC 0x21 </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NPAR 16</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">con_init (<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> a;</span><br><span class="line">	<span class="keyword">char</span> *display_desc = <span class="string">&quot;????&quot;</span>;</span><br><span class="line">	<span class="keyword">char</span> *display_ptr;</span><br><span class="line"></span><br><span class="line">	video_num_columns = ORIG_VIDEO_COLS;	</span><br><span class="line">	video_size_row = video_num_columns * <span class="number">2</span>;	</span><br><span class="line">	video_num_lines = ORIG_VIDEO_LINES;	</span><br><span class="line">	video_page = (<span class="keyword">unsigned</span> <span class="keyword">char</span>)ORIG_VIDEO_PAGE;	</span><br><span class="line">	video_erase_char = <span class="number">0x0720</span>;	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ORIG_VIDEO_MODE == <span class="number">7</span>)	</span><br><span class="line">	&#123;</span><br><span class="line">		video_mem_start = <span class="number">0xb0000</span>;	</span><br><span class="line">		video_port_reg = <span class="number">0x3b4</span>;	</span><br><span class="line">		video_port_val = <span class="number">0x3b5</span>;	</span><br><span class="line">        </span><br><span class="line">		<span class="keyword">if</span> ((ORIG_VIDEO_EGA_BX &amp; <span class="number">0xff</span>) != <span class="number">0x10</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_EGAM;	</span><br><span class="line">			video_mem_end = <span class="number">0xb8000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;EGAm&quot;</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_MDA;</span><br><span class="line">			video_mem_end = <span class="number">0xb2000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;*MDA&quot;</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		video_mem_start = <span class="number">0xb8000</span>;</span><br><span class="line">		video_port_reg = <span class="number">0x3d4</span>;</span><br><span class="line">		video_port_val = <span class="number">0x3d5</span>;</span><br><span class="line">        </span><br><span class="line">		<span class="keyword">if</span> ((ORIG_VIDEO_EGA_BX &amp; <span class="number">0xff</span>) != <span class="number">0x10</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_EGAC;</span><br><span class="line">			video_mem_end = <span class="number">0xbc000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;EGAc&quot;</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_CGA;</span><br><span class="line">			video_mem_end = <span class="number">0xba000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;*CGA&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	display_ptr = ((<span class="keyword">char</span> *) video_mem_start) + video_size_row - <span class="number">8</span>;</span><br><span class="line">	<span class="keyword">while</span> (*display_desc)</span><br><span class="line">	&#123;</span><br><span class="line">		*display_ptr++ = *display_desc++;</span><br><span class="line">		display_ptr++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	origin = video_mem_start;</span><br><span class="line">	scr_end = video_mem_start + video_num_lines * video_size_row;</span><br><span class="line">	top = <span class="number">0</span>;</span><br><span class="line">	bottom = video_num_lines;</span><br><span class="line"></span><br><span class="line">	gotoxy (ORIG_X, ORIG_Y);</span><br><span class="line">	set_trap_gate (<span class="number">0x21</span>, &amp;keyboard_interrupt);</span><br><span class="line">	outb_p ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(inb_p (<span class="number">0x21</span>) &amp; <span class="number">0xfd</span>), <span class="number">0x21</span>);</span><br><span class="line">	a = inb_p (<span class="number">0x61</span>);	</span><br><span class="line">	outb_p ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(a | <span class="number">0x80</span>), <span class="number">0x61</span>);</span><br><span class="line">	outb (a, <span class="number">0x61</span>);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们还有一项任务就是激活<code>Process0</code>。此时才算真正完成了开机任务！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/01/09/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B-1/" data-id="cklj6habk00865cwd8jt3hwig" class="article-share-link" data-share="baidu" data-title="开机流程">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/COD/" rel="tag">COD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System/" rel="tag">System</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/02/18/Bash-in-Linux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Bash-in-Linux
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/02/Linux%E7%9A%84%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux的权限</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Assembly/" style="font-size: 11.43px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.43px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.14px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/Latex/" style="font-size: 11.43px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.86px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.86px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.43px;">Network</a> <a href="/tags/Programming-language/" style="font-size: 15.71px;">Programming language</a> <a href="/tags/Rust/" style="font-size: 14.29px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/System/" style="font-size: 18.57px;">System</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 15.71px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/29/x-forwarding-check/">X-forwarding Check</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/29/WSL2-Quick-Fix/">WSL 2 Quick Fix</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/18/Linux-Themes/">Linux Themes</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/11/Rebuild-My-Home-04-Beautify/">Rebuild My Home - 04 Beautify</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/11/Rebuild-My-Home-03-Programming/">Rebuild My Home - 03 Programming</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/Chivier" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Chivier Humber<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/Whoami" class="mobile-nav-link">About</a>
+  
+    <a href="/categories" class="mobile-nav-link">Catagories</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
