@@ -76,14 +76,14 @@
     <div class="outer">
       <section id="main">
   
-    <article id="[post]-Ubuntu设置默认打开方式" class="article article-type-[post]" itemscope itemprop="blogPost">
+    <article id="post-2021/Logic-谓词演算-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/03/26/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/" class="article-date">
-  <time datetime="2019-03-25T20:40:17.000Z" itemprop="datePublished">2019-03-26</time>
+    <a href="/2019/04/23/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97-2/" class="article-date">
+  <time datetime="2019-04-23T00:01:39.000Z" itemprop="datePublished">2019-04-23</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a>
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>►<a class="article-category-link" href="/categories/Maths/Logic/">Logic</a>
   </div>
 
   </div>
@@ -94,7 +94,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/26/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/">Ubuntu设置默认打开方式</a>
+      <a class="article-title" href="/2019/04/23/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97-2/">Logic-谓词演算-2</a>
     </h1>
   
 
@@ -102,23 +102,92 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Ubuntu使用技巧，认定默认打开方式。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/03/26/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/#more">Read More</a>
-          </p>
-        
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E8%AF%AD%E4%B9%89"><span class="toc-text">谓词演算语义</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%9F%9F%E5%92%8C%E9%A1%B9%E8%A7%A3%E9%87%8A"><span class="toc-text">解释域和项解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0"><span class="toc-text">公式的赋值函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E8%B5%8B%E5%80%BC%E5%87%BD%E6%95%B0-1"><span class="toc-text">公式的赋值函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%BC%8F%E8%AF%AD%E4%B9%89%E7%89%B9%E5%BE%81"><span class="toc-text">闭式语义特征</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E7%AD%89%E6%80%A7"><span class="toc-text">语义等性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%81%92%E7%9C%9F%E6%81%92%E5%81%87%E6%8E%A8%E8%AE%BA%E6%B3%95"><span class="toc-text">恒真恒假推论法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E6%8E%A8%E8%AE%BA%E5%92%8C%E6%9C%89%E6%95%88%E5%BC%8F"><span class="toc-text">语义推论和有效式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%AD%E4%B9%89%E8%AF%AD%E6%B3%95%E5%85%B3%E8%81%94"><span class="toc-text">语义语法关联</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#K%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-text">K可靠性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#K%E5%AE%8C%E5%85%A8%E6%80%A7"><span class="toc-text">K完全性</span></a></li></ol></li></ol>
+      </div>
+      
+         <span id="more"></span>
+
+<h1 id="谓词演算语义"><a href="#谓词演算语义" class="headerlink" title="谓词演算语义"></a>谓词演算语义</h1><h2 id="解释域和项解释"><a href="#解释域和项解释" class="headerlink" title="解释域和项解释"></a>解释域和项解释</h2><p><strong>解释域</strong>:非空集合M具有</p>
+<ol>
+<li>K中每个个体常元$c_i$，M中都有对应的$\overline{c_i}$</li>
+<li>K中每个运算符$f_i^n$，M中都有对应的n元运算符$\overline{f_i^n}​$</li>
+<li>K中每个谓词$R_i^n$，M中都有对应n元关系的$\overline{R_i^n}​$</li>
+</ol>
+<p>具有这三类映射的集合才被成为K的解释域</p>
+<p>例子：</p>
+<p>参考汪芳庭的《数理逻辑》中Page82的例子。同时证明了，只有解释域中才可以说明K中公式的真假。</p>
+<p>我们之前定义过K中的项集构造：</p>
+<ul>
+<li>变元和常元是项</li>
+<li>若$t_1,…,t_n$是项，则$f_i^n(t_1,…,t_n)$也是项</li>
+</ul>
+<p>我们类似定义出我们的<strong>项解释</strong>$\varphi:T\rightarrow M$：</p>
+<ul>
+<li><p>$\varphi(x_i)=\varphi_0(x_i),,\varphi(c_i)=\overline{c_i}$</p>
+</li>
+<li><p>若$\varphi(t_1),…,\varphi(t_n)$已经定义好，那么</p>
+<p>$\varphi(f_i^n(t_1,…,t_n))=\overline{f_i^n}(\varphi(t_1),…,\varphi(t_n))$（保运算性）</p>
+</li>
+</ul>
+<p>总结为：</p>
+<p>解释域完成了常元、运算符、谓词的映射</p>
+<p>项解释完成了变元的映射</p>
+<p>这样M中所有元素都有了相对应的映射。</p>
+<p>解释域M下我们的所有发项解释集合记作$\Phi_M$</p>
+<p><strong>项解释的变元变通</strong>：x是某个给定的个体变元，y是任意的个体变元，$\varphi,,\varphi’ \in \Phi_M$</p>
+<p>使得：$y\neq x ,\Rightarrow , \varphi(y)=\varphi’(y)$，则$\varphi’$叫$\varphi$的变通。</p>
+<font color=0x0099ff>
+
+<p>通俗来说，变通，顾名思义，就是说明再特定变量x上采取变通的方式，只有变量x的解释产生变化，其余变量保持不变。</p>
+</font>
+
+
+<h2 id="公式的赋值函数"><a href="#公式的赋值函数" class="headerlink" title="公式的赋值函数"></a>公式的赋值函数</h2><h3 id="公式的赋值函数-1"><a href="#公式的赋值函数-1" class="headerlink" title="公式的赋值函数"></a>公式的赋值函数</h3><p>解释域M给定，p是K中任一公式</p>
+<p>按下面的方式定义的$|p|:\Phi_M \rightarrow Z_2​$叫公式的赋值函数：</p>
+<p>对于任意项解释$\varphi$，</p>
+<ul>
+<li><p>p为原子公式$R_i^n(t_1,…,t_n)​$时，令<br>$$<br>|p|(\varphi)=\begin{cases}<br>1,\quad if,(\overline{t_1},\overline{t_2},…,\overline{t_n})\in \overline{R^n_i} \\<br>0,\quad if,(\overline{t_1},\overline{t_2},…,\overline{t_n})\notin \overline{R^n_i}<br>\end{cases}<br>$$<br>规定原子公式的赋值</p>
+</li>
+<li><p>$p=\neg q​$ 或 $p=q\rightarrow r​$<br>$$<br>|\neg q| (\varphi) = \neg |q| (\varphi) \\<br>|q \rightarrow r| (\varphi) = |q| (\varphi) \rightarrow |r| (\varphi)<br>$$<br>规定对于$\neg$和$\rightarrow$的保运算性</p>
+</li>
+<li><p>$p=\forall q​$<br>$$<br>|\forall x q|(\varphi)=\begin{cases}<br>1,\quad if,\varphi任意一个x变通\varphi’都有|q|(\varphi’)=1\\<br>0,\quad otherwise<br>\end{cases}<br>$$</p>
+<p>规定全称</p>
+</li>
+</ul>
+<h2 id="闭式语义特征"><a href="#闭式语义特征" class="headerlink" title="闭式语义特征"></a>闭式语义特征</h2><h3 id="语义等性"><a href="#语义等性" class="headerlink" title="语义等性"></a>语义等性</h3><p>M是K的解释域$\varphi,\psi \in \Phi_M$</p>
+<ul>
+<li>如果项t中任一变元x都有$\varphi(x) = \psi(x)​$，则$\varphi(t) = \psi(t)​$</li>
+<li>如果p中任意一个自由变元x都有$\varphi(x) = \psi(x)$，则$|p|(\varphi) = |p|(\psi)$</li>
+</ul>
+<h3 id="恒真恒假推论法"><a href="#恒真恒假推论法" class="headerlink" title="恒真恒假推论法"></a>恒真恒假推论法</h3><p>如果M解释域下任一一种指派都使得p的语义为1则p恒真，类似的我们也可以知道恒假</p>
+<p>$p$中所有的变元为$x_1,x_2,…,x_n$，则$\forall x_1 \forall x_2 … \forall x_n p$记作$p’$，成为<strong>全称闭式</strong></p>
+<p>对于这一类有如下两条重要关系：</p>
+<ul>
+<li><p>$$<br>|p|_M = 1 \Leftrightarrow |p’|_M = 1<br>$$</p>
+</li>
+<li><p>$$<br>|p|_M = 0 \Leftrightarrow |p’|_M = 0<br>$$</p>
+</li>
+</ul>
+<h2 id="语义推论和有效式"><a href="#语义推论和有效式" class="headerlink" title="语义推论和有效式"></a>语义推论和有效式</h2><p>模型： M为K的解释域，M是公式集$\Gamma$的模型是指$\Gamma$中每一个公式M中都恒真，即<br>$$<br>r \in \Gamma \Rightarrow |r|_M = 1<br>$$<br>语义推论：类似与语法推论，$\Gamma \models p$解释为，当所有$\Gamma$中元素都解释为真的时候，p解释也为恒真</p>
+<p>结论关系：<br>$$<br>\Gamma \models p \Leftrightarrow \Gamma \models p’<br>$$</p>
+<h1 id="语义语法关联"><a href="#语义语法关联" class="headerlink" title="语义语法关联"></a>语义语法关联</h1><h2 id="K可靠性"><a href="#K可靠性" class="headerlink" title="K可靠性"></a>K可靠性</h2><p>$$<br>\vdash p \Rightarrow \models p<br>$$</p>
+<h2 id="K完全性"><a href="#K完全性" class="headerlink" title="K完全性"></a>K完全性</h2><p>$$<br>\models p \Rightarrow \vdash p<br>$$</p>
+
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://chivier.github.io/2019/03/26/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/" data-id="ckxotsnm7003k0vc11w94e6ml" class="article-share-link" data-share="baidu" data-title="Ubuntu设置默认打开方式">Share</a>
+        <a data-url="https://chivier.github.io/2019/04/23/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97-2/" data-id="ckyma425c001tvhc1ging58la" class="article-share-link" data-share="baidu" data-title="Logic-谓词演算-2">Share</a>
       
 
       
 
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logic/" rel="tag">Logic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maths/" rel="tag">Maths</a></li></ul>
 
     </footer>
   </div>
@@ -127,316 +196,10 @@
 
 
   
-    <article id="[post]-Create-shortcut-in-Ubuntu" class="article article-type-[post]" itemscope itemprop="blogPost">
+    <article id="post-2021/Instructions" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/03/26/Create-shortcut-in-Ubuntu/" class="article-date">
-  <time datetime="2019-03-25T20:28:01.000Z" itemprop="datePublished">2019-03-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/26/Create-shortcut-in-Ubuntu/">Create shortcut in Ubuntu</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 在Linux下创建快捷方式的小技巧。当然现在19.04版本之后，我们可以更简单的通过右击目标文件，点击创建连接就可以创建一个新的快捷方式了。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/03/26/Create-shortcut-in-Ubuntu/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2019/03/26/Create-shortcut-in-Ubuntu/" data-id="ckxotsnln000r0vc17gnac9n1" class="article-share-link" data-share="baidu" data-title="Create shortcut in Ubuntu">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[post]-8086-Quick-Start" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/19/8086-Quick-Start/" class="article-date">
-  <time datetime="2019-03-18T22:17:17.000Z" itemprop="datePublished">2019-03-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Assembly/">Assembly</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/19/8086-Quick-Start/">8086 Quick Start</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>安装emu8086 并在该环境下写简单的汇编程序。一个快速上手的教程。旨在实用，旨在实用。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/03/19/8086-Quick-Start/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2019/03/19/8086-Quick-Start/" data-id="ckxotsnla00010vc1b5es6jsz" class="article-share-link" data-share="baidu" data-title="8086 Quick Start">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/COD/" rel="tag">COD</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[post]-Git使用速成" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/17/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/" class="article-date">
-  <time datetime="2019-03-16T22:18:17.000Z" itemprop="datePublished">2019-03-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/17/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/">Git使用速成</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 简单的Git使用，速成教程。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/03/17/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2019/03/17/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/" data-id="ckxotsnlp000v0vc1fymc8c2n" class="article-share-link" data-share="baidu" data-title="Git使用速成">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[post]-Bash-in-Linux" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/18/Bash-in-Linux/" class="article-date">
-  <time datetime="2019-02-18T13:17:17.000Z" itemprop="datePublished">2019-02-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/18/Bash-in-Linux/">Bash-in-Linux</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Bash"><a href="#Bash" class="headerlink" title="Bash"></a>Bash</h1><p>bash shell 是我们在linux中常用的一个shell程序，在这里我给大家简单介绍一下。本教程以实例为主。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/02/18/Bash-in-Linux/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2019/02/18/Bash-in-Linux/" data-id="ckxotsnlg00080vc14oz04g85" class="article-share-link" data-share="baidu" data-title="Bash-in-Linux">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System/" rel="tag">System</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[post]-开机流程-1" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/09/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B-1/" class="article-date">
-  <time datetime="2019-01-08T22:17:17.000Z" itemprop="datePublished">2019-01-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/09/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B-1/">开机流程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>分析计算机开机的流程，详解附代码。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/01/09/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B-1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2019/01/09/%E5%BC%80%E6%9C%BA%E6%B5%81%E7%A8%8B-1/" data-id="ckxotsnma00400vc1chc92ia8" class="article-share-link" data-share="baidu" data-title="开机流程">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/COD/" rel="tag">COD</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System/" rel="tag">System</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[post]-Linux的权限问题" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/02/Linux%E7%9A%84%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/" class="article-date">
-  <time datetime="2019-01-01T23:17:17.000Z" itemprop="datePublished">2019-01-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/02/Linux%E7%9A%84%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/">Linux的权限</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 简单介绍Ubuntu下的文件权限系统。</p>
-        
-          <p class="article-more-link">
-            <a href="/2019/01/02/Linux%E7%9A%84%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2019/01/02/Linux%E7%9A%84%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/" data-id="ckxotsnlv001i0vc105bpewea" class="article-share-link" data-share="baidu" data-title="Linux的权限">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System/" rel="tag">System</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="[post]-hello-world" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/12/01/hello-world/" class="article-date">
-  <time datetime="2018-12-01T12:17:17.000Z" itemprop="datePublished">2018-12-01</time>
+    <a href="/2019/04/23/2021/Instructions/" class="article-date">
+  <time datetime="2019-04-22T23:41:54.000Z" itemprop="datePublished">2019-04-23</time>
 </a>
     
   <div class="article-category">
@@ -451,7 +214,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/01/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/04/23/2021/Instructions/">Instructions</a>
     </h1>
   
 
@@ -459,17 +222,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Hexo default file</p>
+        <p>参考使用，Hexo使用指令</p>
         
           <p class="article-more-link">
-            <a href="/2018/12/01/hello-world/#more">Read More</a>
+            <a href="/2019/04/23/2021/Instructions/#more">Read More</a>
           </p>
         
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="https://chivier.github.io/2018/12/01/hello-world/" data-id="ckxotsnm9003s0vc1exh68y8l" class="article-share-link" data-share="baidu" data-title="Hello World">Share</a>
+        <a data-url="https://chivier.github.io/2019/04/23/2021/Instructions/" data-id="ckyma42560015vhc1c43b4442" class="article-share-link" data-share="baidu" data-title="Instructions">Share</a>
       
 
       
@@ -484,10 +247,725 @@
 
 
   
+    <article id="[post]-2021/Rust-Shell-Project" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/22/2021/Rust-Shell-Project/" class="article-date">
+  <time datetime="2019-04-22T06:34:46.000Z" itemprop="datePublished">2019-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Rust/">Rust</a>►<a class="article-category-link" href="/categories/Rust/Rust-Project/">Rust Project</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/22/2021/Rust-Shell-Project/">Rust-Shell-Project</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> Rust项目——Rust编写Shell。一个用Rust写的Shell。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/22/2021/Rust-Shell-Project/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/22/2021/Rust-Shell-Project/" data-id="ckyma425n002zvhc17qupfeuf" class="article-share-link" data-share="baidu" data-title="Rust-Shell-Project">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/" rel="tag">Shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2021/Logic-形式算术1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/16/2021/Logic-%E5%BD%A2%E5%BC%8F%E7%AE%97%E6%9C%AF1/" class="article-date">
+  <time datetime="2019-04-16T00:27:57.000Z" itemprop="datePublished">2019-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>►<a class="article-category-link" href="/categories/Maths/Logic/">Logic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/16/2021/Logic-%E5%BD%A2%E5%BC%8F%E7%AE%97%E6%9C%AF1/">Logic-形式算数-1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%A6%E7%AD%89%E8%AF%8D%E7%9A%84%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97"><span class="toc-text">带等词的谓词演算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%89%E8%AF%8D%E5%85%AC%E7%90%86"><span class="toc-text">等词公理</span></a></li></ol></li></ol>
+      </div>
+      
+          <span id="more"></span>
+
+<h1 id="带等词的谓词演算"><a href="#带等词的谓词演算" class="headerlink" title="带等词的谓词演算"></a>带等词的谓词演算</h1><h2 id="等词公理"><a href="#等词公理" class="headerlink" title="等词公理"></a>等词公理</h2><ul>
+<li><p>$$<br>(E1) \quad t \approx t<br>$$</p>
+</li>
+<li><p>$$<br>(E2) \quad t_k \approx u \rightarrow f_i^n (t_1,…,t_k,…,t_n) \approx f_i^n (t_1,…,u,…,t_n)<br>$$</p>
+</li>
+<li><p>$$<br>(E3) \quad t_k \approx u \rightarrow R_i^n (t_1,…,t_k,…,t_n) \rightarrow R_i^n (t_1,…,u,…,t_n)<br>$$</p>
+</li>
+</ul>
+<p>如果M是E的模型，则等词$\approx$可以解释为等价关系</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/16/2021/Logic-%E5%BD%A2%E5%BC%8F%E7%AE%97%E6%9C%AF1/" data-id="ckyma425b001qvhc1dphjhal7" class="article-share-link" data-share="baidu" data-title="Logic-形式算数-1">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logic/" rel="tag">Logic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maths/" rel="tag">Maths</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2021/Logic-谓词演算" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/" class="article-date">
+  <time datetime="2019-04-16T00:27:57.000Z" itemprop="datePublished">2019-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Maths/">Maths</a>►<a class="article-category-link" href="/categories/Maths/Logic/">Logic</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/">Logic-谓词演算-1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%85%83%E7%B4%A0"><span class="toc-text">基本元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E9%9B%86%E5%90%88"><span class="toc-text">基本集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%85%AC%E5%BC%8F"><span class="toc-text">基本公式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%BF%90%E7%AE%97%E5%AE%9A%E4%B9%89"><span class="toc-text">其他运算定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E5%87%BA%E7%8E%B0%E5%92%8C%E8%87%AA%E7%94%B1%E5%87%BA%E7%8E%B0"><span class="toc-text">约束出现和自由出现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97K"><span class="toc-text">谓词演算K</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B8%E7%9C%9F%E5%BC%8F%E5%92%8C%E5%AE%9A%E7%90%86"><span class="toc-text">永真式和定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exists-1-%E8%A7%84%E5%88%99"><span class="toc-text">$\exists_1$规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exists-2-%E8%A7%84%E5%88%99"><span class="toc-text">$\exists_2$规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E7%BB%8E%E5%AE%9A%E7%90%86"><span class="toc-text">演绎定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E8%AF%81%E5%BE%8B"><span class="toc-text">反证律</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E8%B0%AC%E5%BE%8B"><span class="toc-text">归谬律</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%85%AC%E5%BC%8F%E7%AD%89%E4%BB%B7%E6%9B%BF%E6%8D%A2"><span class="toc-text">子公式等价替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%BE%8B"><span class="toc-text">对偶律</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%9D%9F%E8%8C%83%E5%BC%8F"><span class="toc-text">前束范式</span></a></li></ol></li></ol>
+      </div>
+      
+          <span id="more"></span>
+
+<h1 id="基本元素"><a href="#基本元素" class="headerlink" title="基本元素"></a>基本元素</h1><h2 id="基本集合"><a href="#基本集合" class="headerlink" title="基本集合"></a>基本集合</h2><p>谓词演算与命题演算不同之处在于公式定义上的区别，产生了新的命题元素：$\forall$</p>
+<p>四个基本集合：</p>
+<p>个体变元集$X$，个体常元集$C$，运算函数集$F$，谓词集$R$</p>
+<p>我们定义项集T为层次集合，$T_i​$为i次运算函数产生的项</p>
+<p><strong>原子公式集</strong>:<br>$$<br>Y = \bigcup_\text{i,n} ((R_i^n) \times T \times … \times T)<br>$$<br>定义为原子公式集。原子公式就是指代形如$R_i^n(t_1,…,t_2)$。</p>
+<h2 id="基本公式"><a href="#基本公式" class="headerlink" title="基本公式"></a>基本公式</h2><p>公式定义：</p>
+<ul>
+<li>原子公式是公式</li>
+<li>若$p,q​$是公式，则$\neg p​$，$p \rightarrow q​$，$\forall x_i p​$都是公式</li>
+<li>前两条若干次变换</li>
+</ul>
+<h2 id="其他运算定义"><a href="#其他运算定义" class="headerlink" title="其他运算定义"></a>其他运算定义</h2><p>$$<br>p \vee q = \neg p \rightarrow q \\<br>p \wedge q = \neg (p \rightarrow \neg q) \\<br>p \leftrightarrow q = (p \rightarrow q) \wedge (q \rightarrow p) \\<br>\exists x_i p = \neg \forall x_i p<br>$$</p>
+<p>定义了$\vee\ \quad \wedge \quad \leftrightarrow \quad \exists​$四种运算符</p>
+<h2 id="约束出现和自由出现"><a href="#约束出现和自由出现" class="headerlink" title="约束出现和自由出现"></a>约束出现和自由出现</h2><p>变元的<strong>自由出现</strong>指变元$x$不在$\forall x​$的范围内出现，反之叫约束出现</p>
+<p>如果公式中没有自由出现的变元，则叫<strong>闭式</strong></p>
+<p><strong>项t对p中x自由</strong>，完整的说法是“项t对于公式p中的x变元自由”，即用t取替换p中自由出现的x之后，所有的t变元还是自由的。等价于满足下面3条中任意一条：</p>
+<ul>
+<li>t是闭项（只有常元没有变元）</li>
+<li>x再p中不自由出现</li>
+<li>x对p中x自由</li>
+</ul>
+<p>符号p(x)表示公式，p(t)默认表示用t取代换所有的x</p>
+<h1 id="谓词演算K"><a href="#谓词演算K" class="headerlink" title="谓词演算K"></a>谓词演算K</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>指有一下规定的功利和证明的公式集：</p>
+<ul>
+<li><p>公理</p>
+<p>(K1) $p \rightarrow (q \rightarrow p)​$</p>
+<p>(K2) $(p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r))$</p>
+<p>(K3) $(\neg p  \rightarrow \neg q) \rightarrow (q \rightarrow p)$</p>
+<p>(K4) $\forall x ,p(x)  \rightarrow p(t) \quad$其中t对p(x)中x自由</p>
+<p>(K5) $\forall x,(p \rightarrow q) \rightarrow (p \rightarrow \forall x ,q)\quad$其中x不在p中自由出现</p>
+</li>
+<li><p>证明</p>
+<p>p是公式，$\Gamma$是公式集。p从$\Gamma$可证，记作$\Gamma \vdash p$</p>
+<p>指：</p>
+<p>从有限公式序列$p_1,…,p_n$有$p_n=p$并且每个k=1…n都有</p>
+<ul>
+<li>$p_k \in \Gamma$</li>
+<li>$p_k$是公理</li>
+<li>$\exists i,j&lt;k$使得$p_j = p_i \rightarrow p_k$ <em>（等价于：要有$p_k$，必须现有$p_i$和$p_i \rightarrow p_k$）</em></li>
+<li>$\exists j&lt;k$使得$p_k = \forall x , p_j $</li>
+</ul>
+</li>
+</ul>
+<h2 id="永真式和定理"><a href="#永真式和定理" class="headerlink" title="永真式和定理"></a>永真式和定理</h2><p>如果K中命题再L中有对应的命题演算定理，且永真，则叫永真式</p>
+<p>简而言之：L中也有的叫永真，永真式一定是定理，反之未必</p>
+<h2 id="exists-1-规则"><a href="#exists-1-规则" class="headerlink" title="$\exists_1$规则"></a>$\exists_1$规则</h2><p>如果项t对于p中x自由，则：<br>$$<br>\vdash p (t) \rightarrow \exists x,p(x)<br>$$</p>
+<h2 id="exists-2-规则"><a href="#exists-2-规则" class="headerlink" title="$\exists_2$规则"></a>$\exists_2$规则</h2><p>设$\Gamma \cup {p}\vdash q​$其证明中Gen变元不在p中自由出现，x不在q中自由出现，则有$\Gamma \cup {\exists x , p}\vdash q​$，且出来x不增加其他Gen变元</p>
+<p>注意：<strong>演绎定理、归谬律、反证律</strong>都可以使用，但是<strong>略有不同</strong></p>
+<h2 id="演绎定理"><a href="#演绎定理" class="headerlink" title="演绎定理"></a>演绎定理</h2><ul>
+<li>若$\Gamma \vdash p \rightarrow q​$则$\Gamma \cup {p} \vdash q​$</li>
+<li>若$\Gamma \cup {p} \vdash q$且证明中所用Gen变元不在p中自由出现，则不增加Gen变元就能使$\Gamma \vdash p \rightarrow q$</li>
+</ul>
+<p>推论：</p>
+<ul>
+<li>p是闭式时$\Gamma \vdash p \rightarrow q \Leftrightarrow \Gamma \cup {p} \vdash q$</li>
+</ul>
+<h2 id="反证律"><a href="#反证律" class="headerlink" title="反证律"></a>反证律</h2><p>若$\Gamma \cup {\neg p} \vdash q​$ 且$\Gamma \cup {\neg p} \vdash \neg q​$切所用Gen变元不在p中自由出现，则不增加新的Gen变元就能使得$\Gamma \vdash p​$</p>
+<h2 id="归谬律"><a href="#归谬律" class="headerlink" title="归谬律"></a>归谬律</h2><p>若$\Gamma \cup {p} \vdash q​$ 且$\Gamma \cup {p} \vdash \neg q​$切所用Gen变元不在p中自由出现，则不增加新的Gen变元就能使得$\Gamma \vdash \neg p​$</p>
+<p>注意演绎定理、归谬律、反证律说起来都是多了<strong>不增加新的Gen变元就能使得</strong></p>
+<h2 id="子公式等价替换"><a href="#子公式等价替换" class="headerlink" title="子公式等价替换"></a>子公式等价替换</h2><p>如果公式q是p的子公式：$p=…q…$</p>
+<p>公式$q’$替代$q$得到：$p’ = … q’ …$</p>
+<p>则 $\Gamma \vdash q \leftrightarrow q’ \Rightarrow \Gamma \vdash p \leftrightarrow p’$</p>
+<h2 id="对偶律"><a href="#对偶律" class="headerlink" title="对偶律"></a>对偶律</h2><p>将公式p表示为只含有原子公式以及$\neg,\vee,\wedge,\forall,\exists​$的形式之后：</p>
+<ul>
+<li>所有原子公式改为他们的否定</li>
+<li>$\wedge​$和$\vee​$互换</li>
+<li>$\forall​$和$\exists​$互换</li>
+</ul>
+<p>新公式记为$p^<em>​$则<br>$$<br>\vdash p^</em> \leftrightarrow \neg p<br>$$</p>
+<h2 id="前束范式"><a href="#前束范式" class="headerlink" title="前束范式"></a>前束范式</h2><p>形如$Q_1x…Q_ny p​$的式子叫前束范式，其中$Q_i​$表示量词符号$\forall​$或者$\exists​$，一般的，我们将$Q​$的对偶符号记作$Q^*​$</p>
+<p>结论：</p>
+<ol>
+<li>若y不在$p(x)​$中自由出现，则</li>
+</ol>
+<p>$$<br>\vdash Qxp(x) \leftrightarrow Qyp(y)<br>$$</p>
+<ol start="2">
+<li>若x不在p中自由出现，则</li>
+</ol>
+<p>$$<br>\vdash (p\rightarrow Qxq) \leftrightarrow Qx(p\rightarrow q)<br>$$<br>​    若x不在q中自由出现，则<br>$$<br>\vdash(Qxp \rightarrow q) \leftrightarrow Q^*x(p \rightarrow q)<br>$$</p>
+<ol start="3">
+<li>$$<br> \vdash \neg Q x p \leftrightarrow Q^* x \neg p<br> $$</li>
+</ol>
+<font color=0x0099ff>
+
+<p>用上述三条结论完成前束范式的变形，步骤：</p>
+<ul>
+<li><p>利用好结论1和子公式替换，替换p中变元</p>
+</li>
+<li><p>利用结论2和3将量词移动 </p>
+<ul>
+<li>结论2用于移动量词在$\rightarrow$两侧的情况</li>
+<li>结论3用于移动再$\neg$之后的情况</li>
+</ul>
+</li>
+</ul>
+</font>
+
+
+
+<p>补充两个定义：</p>
+<ul>
+<li><strong>$\Pi_n$型前束范式</strong>：从$\forall​$开始，从左往右改变n-1次词性</li>
+<li><strong>$\Sigma_n$型前束范式</strong>：从$\exists$开始，从左往右改变n-1次词性</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/" data-id="ckyma425c001wvhc1dlxn3utr" class="article-share-link" data-share="baidu" data-title="Logic-谓词演算-1">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logic/" rel="tag">Logic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maths/" rel="tag">Maths</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="[post]-2021/Operating-System-Concept-1" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/10/2021/Operating-System-Concept-1/" class="article-date">
+  <time datetime="2019-04-10T06:56:09.000Z" itemprop="datePublished">2019-04-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>►<a class="article-category-link" href="/categories/Operating-System/Concepts/">Concepts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/10/2021/Operating-System-Concept-1/">Operating System Concept - 1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OS"><span class="toc-text">OS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OS-Functions"><span class="toc-text">OS Functions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OS-Structure"><span class="toc-text">OS Structure</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Simple-Structure"><span class="toc-text">Simple Structure</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MS-DOS"><span class="toc-text">MS-DOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unix"><span class="toc-text">Unix</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Layered-Structure"><span class="toc-text">Layered Structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Microkernel-System-Structure"><span class="toc-text">Microkernel System Structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Module-based"><span class="toc-text">Module based</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hybrid-Systems"><span class="toc-text">Hybrid Systems</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Virtual-Machines"><span class="toc-text">Virtual Machines</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8A%A3"><span class="toc-text">优劣</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vmware"><span class="toc-text">Vmware</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-%E8%99%9A%E6%8B%9F%E6%9C%BA-JVM"><span class="toc-text">Java 虚拟机 (JVM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NET"><span class="toc-text">.NET</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Process"><span class="toc-text">Process</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%A6%82%E5%BF%B5"><span class="toc-text">进程概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%8A%B6%E6%80%81"><span class="toc-text">进程状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9D%97"><span class="toc-text">进程控制块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B"><span class="toc-text">线程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6"><span class="toc-text">进程调度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E9%98%9F%E5%88%97"><span class="toc-text">调度队列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%88%9B%E5%BB%BA"><span class="toc-text">进程创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%BB%93%E6%9D%9F"><span class="toc-text">进程结束</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E7%A8%8B%E5%BA%8F"><span class="toc-text">调度程序</span></a></li></ol></li></ol>
+      </div>
+      
+         <span id="more"></span>
+
+<h1 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h1><blockquote>
+<p>A piece of software that manages a computer, making computer’s hardware<br>resources accessible to software through a consistent set of interfaces.</p>
+</blockquote>
+<p>并发(Concurrence)</p>
+<p>共享(Sharing) </p>
+<p>虚拟(Virtual) </p>
+<p>异步(Asynchronism)</p>
+<p>四项重要特征为OS的核心特征，也是我们进一步做得更好的核心挑战所在。</p>
+<h2 id="OS-Functions"><a href="#OS-Functions" class="headerlink" title="OS Functions"></a>OS Functions</h2><ol>
+<li>CPU管理<ol>
+<li>进程/线程控制和管理</li>
+<li>进程同步和互斥（mutual exclusion）</li>
+<li>进程通信和死锁（dead lock）</li>
+<li>处理器调度，作业调度和进程调度</li>
+</ol>
+</li>
+<li>存储管理<ol>
+<li>存储分配</li>
+<li>存储共享</li>
+<li>存储保护</li>
+<li>地址转换</li>
+<li>存储扩充</li>
+</ol>
+</li>
+<li>⽂件管理<ol>
+<li>⽬录管理</li>
+<li>存取控制/保护</li>
+<li>逻辑组织</li>
+<li>物理组织</li>
+<li>⽂件存储空间管理</li>
+</ol>
+</li>
+<li>设备管理<ol>
+<li>设备分配</li>
+<li>设备驱动</li>
+<li>缓冲管理</li>
+</ol>
+</li>
+<li>⽤户接口<ol>
+<li>命令接口</li>
+<li>程序接口</li>
+<li>图形接口</li>
+</ol>
+</li>
+<li>⽹络与通信管理</li>
+</ol>
+<h1 id="OS-Structure"><a href="#OS-Structure" class="headerlink" title="OS Structure"></a>OS Structure</h1><blockquote>
+<p>System calls provide an interface to the services made available by an operating system.</p>
+</blockquote>
+<p>Categories of System call:</p>
+<p>• Process control<br>• File management<br>• Device management<br>• Information maintenance<br>• Communications</p>
+<h2 id="Simple-Structure"><a href="#Simple-Structure" class="headerlink" title="Simple Structure"></a>Simple Structure</h2><h3 id="MS-DOS"><a href="#MS-DOS" class="headerlink" title="MS-DOS"></a>MS-DOS</h3><p>MS-DOS – written to provide the most functionality in the least space</p>
+<ul>
+<li>Not divided into modules</li>
+<li>Interfaces and levels of functionality not well separated</li>
+</ul>
+<img src="DOS.png" width="80%" height="80%">
+
+<h3 id="Unix"><a href="#Unix" class="headerlink" title="Unix"></a>Unix</h3><p>Limited by hardware functionality</p>
+<p>Original UNIX operating system consists of two separable parts:</p>
+<ul>
+<li>Systems programs</li>
+<li>The kernel<ul>
+<li>Consists of everything below the system-call interface and above the physical hardware</li>
+<li>Provides the file system, CPU scheduling, memory management, and other operating-system functions;</li>
+<li>Many interacting functions for one level</li>
+</ul>
+</li>
+</ul>
+<img src="Unix.png" width="80%" height="80%">
+
+<h2 id="Layered-Structure"><a href="#Layered-Structure" class="headerlink" title="Layered Structure"></a>Layered Structure</h2><p> Operating system is divided many layers (levels)</p>
+<ul>
+<li>Each built on top of lower layers</li>
+<li>Bottom layer (layer 0) is hardware</li>
+<li>Highest layer (layer N) is the user interface</li>
+</ul>
+<p>模块化，易于调试</p>
+<h2 id="Microkernel-System-Structure"><a href="#Microkernel-System-Structure" class="headerlink" title="Microkernel System Structure"></a>Microkernel System Structure</h2><blockquote>
+<p> Moves as much from the kernel into “user” space as possible.</p>
+</blockquote>
+<p>非基本的方法从内核中抽离，留下基本的方法。<em>（基本：一般认为内存管理和通信功能是必须的基本方法）</em></p>
+<p>Benefits:<br>• Easier to extend a microkernel<br>• Easier to port the operating system to new architectures<br>• More reliable (less code is running in kernel mode)<br>• More secure<br>Detriments:<br>• Performance overhead of user space to kernel space communication</p>
+<h2 id="Module-based"><a href="#Module-based" class="headerlink" title="Module based"></a>Module based</h2><p>Most modern operating systems implement kernel<br>modules<br>• Uses object-oriented approach<br>• Each core component is separate<br>• Each talks to the others over known interfaces<br>• Each is loadable as needed within the kernel</p>
+<p>类似于layered structure，但是灵活性大大增长</p>
+<p>Example:</p>
+<img src="Queueing-diagram.png" width="80%" height="80%">
+
+<ol>
+<li>Scheduling classes</li>
+<li>File systems</li>
+<li>Loadable system calls</li>
+<li>Executable formats</li>
+<li>STREAMS modules</li>
+<li>Miscellaneous</li>
+<li>Device and bus drivers</li>
+</ol>
+<h2 id="Hybrid-Systems"><a href="#Hybrid-Systems" class="headerlink" title="Hybrid Systems"></a>Hybrid Systems</h2><p>更为现代的设计方式都是采用混合模型</p>
+<h1 id="Virtual-Machines"><a href="#Virtual-Machines" class="headerlink" title="Virtual Machines"></a>Virtual Machines</h1><p>分层方法逻辑可延伸为虚拟机概念。虚拟机的基本思想是<u>单个计算机(CPU 、内存、磁盘、网卡等)的硬件<strong>抽象</strong>为几个不同的执行部件</u>，从而造成一种”幻觉”，仿佛每个独立的执行环境都在自己的计算机上运行一样。</p>
+<p>创建虚拟机有几个原因，最根本的是，在并行运行几个不同的执行环境(即不同的操作系统)时能够共享相同的硬件。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>底层机器有两种模式:用户模式和内核模式。虚拟机软件可以运行在内核模式，因为它就是操作系统。虚拟机<u>本身只能运行在用户模式</u>。正如物理机器有两种模式一样，虚拟机也有两种模式。因此，<strong>必须有虚拟用户模式和虚拟内核模式</strong>，这<strong>两种模式都运行在物理用户模式</strong>。</p>
+<h2 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h2><p>• Isolation from all other virtual machines. 保证安全<br>• No disruption on normal system operation. 开发测试操作系统不需要中断正常操作系统的服务<br>• Difficult to implement due to the effort required to provide an exact duplicate to the underlying machine</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="Vmware"><a href="#Vmware" class="headerlink" title="Vmware"></a>Vmware</h3><p>虚拟层是VMware 的核心，因为它将物理硬件抽象为独立的作为客户操作系统的虚拟机运行。每个虚拟机都有它自己的虚拟 CPU、内存、磁盘驱动、网络接口等。</p>
+<h3 id="Java-虚拟机-JVM"><a href="#Java-虚拟机-JVM" class="headerlink" title="Java 虚拟机 (JVM)"></a>Java 虚拟机 (JVM)</h3><p>Java 对象用类结构来描述; Java 程序由一个或多个类组成。对于每个 Java 类， Java编译器会生成<strong>与平台无关的字节码 (bytecode) 输出文件( .class )</strong> ，它可运行在任何JVM 上。</p>
+<p>JVM包括类加载器和执行与平台无关的字节码的Java解释器。JVM 通过执行垃圾收集(garbage collection ，回收不再使用的内存并返回给系统)来自动管理内存。</p>
+<h3 id="NET"><a href="#NET" class="headerlink" title=".NET"></a>.NET</h3><p>.NET框架是一套包含了类库集舍、执行环境和软件开发平台的技术。这个平台允许基于.NET框架编程而不是针对任何特定平台。</p>
+<p>.NET 框架的核心是公共语言运行时间 (CLR)</p>
+<p> CLR 是 .NET 虚拟机的实现</p>
+<p>用 C#或者 VB.NET 编写的程序被编译为一种平台无关的中间语言(叫做微软中间语言 MS-IU 。这些被编译好的文件叫做组合 (assembly) ,它包含了 MS-IL 指令和元数据。它们的文件名后缀是.dll 或者.exeo 当要运行这些程序的时候， CLR 把这些组合加载进应用程序域 (Application Domain) 。</p>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><p>进程不只是程序代码，程序代码有时称为<strong>文本段(或代码段)**。进程还包括</strong>当前活动<strong>，通过程序计数器的值和处理器寄存器的内容来表示。另外，进程通常还包括进程</strong>堆栈段**(包括临时数据，如函数参数、返回地址和局部变量)和<strong>数据段</strong>(包括全局变量)。进程还可能包括堆 (heap) ，是在进程运行期间动态分配的内存。</p>
+<p>英文解释更为简单：</p>
+<p><strong>A process is a program in execution</strong></p>
+<p>进程在执行时产生许多进程是很常见的。</p>
+<blockquote>
+<p>程序与进程之间的区别:</p>
+<ul>
+<li>“进程”是一个动态的概念:进程强调的是程序的一次“执行”过程,程序是一组有序指令的集合,在多道程序设计环境下,它不涉及“执行”,因此,是一个静态的概念;</li>
+<li>不同的进程可以执行同一个程序:即使多个进程执行同一个程序,只要它们运行在不同的数据集合上,它们就是不同的进程;</li>
+<li>每一个进程都有自己的生命期:当系统要完成某一项工作时,它就“创建”一个进程,程序执行完毕,系统就“撤销”这个进程,收回它所占用的资源。</li>
+</ul>
+</blockquote>
+<h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3><p>进程在执行时会改变状态。进程状态在某种程度上是由当前活动所定义的。每个进程可能处于下列状态之一:</p>
+<ul>
+<li>新的:进程正在被创建。</li>
+<li>运行:指令正在被执行。</li>
+<li>等待:进程等待某个事件的发生(如 IO 完成或收到信号)。</li>
+<li>就绪:进程等待分配处理器。</li>
+<li>终止:进程完成执行。</li>
+</ul>
+<img src="process.png" width="80%" height="80%">
+
+<h3 id="进程控制块"><a href="#进程控制块" class="headerlink" title="进程控制块"></a>进程控制块</h3><p>每个进程在操作系统内用<strong>进程控制块</strong> (process control block. PCB. 也称为任务控制块)来表示。</p>
+<img src="PCB.png" width="30%" height="30%">
+
+<ul>
+<li>**进程状态:**状态可包括新的、就绪、运行、等待、停止等。</li>
+<li>**程序计数器:**计数器表示进程要执行的下个指令的地址。</li>
+<li>**CPU 寄存器:**根据计算机体系结构的不同，寄存器的数量和类型也不同。它们包括累加器、索引寄存器、堆战指针、通用寄存器和其他条件码信息寄存器。与程序计数器一起，这些状态信息在出现中断时也需要保存，以便进程以后能正确地继续执行。</li>
+<li>**CPU 调度信息:**这类信息包括进程优先级、调度队列的指针和其他调度参数</li>
+<li>**内存管理信息:**根据操作系统所使用的内存系统，这类信息包括基址和界限寄存器的值、页表或段表(见第 8 章)。</li>
+<li>**记账信息:**这类信息包括 CPU 时间、实际使用时间、时间界限、记账数据、作业或进程数量等。</li>
+<li>**I/O 状态信息:**这类信息包括分配给进程的 νo 设备列表、打开的文件列表等。<br>简而言之， PCB 简单地作为这些信息的仓库，这些信息在进程与进程之间是不同的。</li>
+</ul>
+<img src="PCB_Switch.png" width="80%" height="80%">
+
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>一个进程是一个只能进行单个执行线程的程序。</p>
+<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><h3 id="调度队列"><a href="#调度队列" class="headerlink" title="调度队列"></a>调度队列</h3><p>进程进入系统时，会被加到作业队列中，该队列包括系统中的所有进程。</p>
+<p>讨论进程调度的常用表示方法是<strong>队列图</strong></p>
+<p>每个长方形表示一个队列。有两种队列:就绪队列和一组设备队列。圆形表示为队列服务的资源，箭头表示系统内进程的流向。</p>
+<img src="Queueing-diagram.png" width="80%" height="80%">
+
+<h2 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h2><p>当进程创建新进程时，有两种执行可能:</p>
+<ul>
+<li>父进程与子进程并发执行。</li>
+<li>父进程等待，直到某个或全部子进程执行完。</li>
+</ul>
+<p>新进程的地址空间也有两种可能:</p>
+<ul>
+<li>子进程是父进程的复制品(具有与父进程相同的程序和数据)。</li>
+<li>子进程装入另一个新程序。</li>
+</ul>
+<p>Unix通过pid变量标记进程，fork（）函数创建进程。</p>
+<p><strong>fork的时候发生什么？</strong><br>=》执行到这一句的时候，一个进程被创建了，这个进程与父进程一样，拥有一套与父进程相同的变量，相同的一套代码，这里可以粗浅的理解为子进程又复制了一份main函数。这里返回一个子进程的进程号，大于0。（第一次fork）</p>
+<p>通常，在系统调用<code>fork()</code>之后，一个进程会使用系统调用<code>exec()</code>，以用新程序来取代进<br>程的内存雪间。系统调用<code>exec()</code>将二进制文件装入内存(消除了原来包含系统调用<code>exec()</code>的<br>程序的内存映射)，并开始执行。采用这种方式，两个进程能相互通信，并能按各自的方法<br>执行。父进程能创建更多的子进程，或者如果在子进程运行时没有什么可做，那么它采用<br>系统调用<code>wait()</code>把自己移出就绪队列来等待子进程的终止。</p>
+<p><strong>子进程怎么执行：</strong></p>
+<p>=》<strong>子进程从fork()的位置开始执行</strong>，也就是说前面的代码不走，但是拥有之前的变量以及变量的值，与父进程的值一样，这次fork()，返回值是0，所以在子进程里面直接执行了pid==0这一个分支，父进程里面并不执行这个分支的语句。这就为我们在写mian函数的时候怎么写子进程的程序提供了一个方法来隔离代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">pid_t</span> pid[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    pid[<span class="number">0</span>] = fork();</span><br><span class="line">    pid[<span class="number">1</span>] = fork();</span><br><span class="line">    pid[<span class="number">2</span>] = fork();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;this is process\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行会输出8次<code>this is a process</code></p>
+<h2 id="进程结束"><a href="#进程结束" class="headerlink" title="进程结束"></a>进程结束</h2><p>当进程完成执行最后的语句并使用系统调用<code>exit()</code>请求操作系统删除自身时，进程终止。这时，进程可以返回状态值(通常为整数)到父进程(通过系统调用<code>wait()</code>) 。所有进程资源(包括物理和虚拟内存、打开文件和 I/O 缓冲)会被操作系统释放。</p>
+<p>有些系统，包括 VMS ，不允许子进程在父进程己终止的情况下存在。对于这类系统，如果一个进程终止(正常或不正常)，那么它的所有子进程也将终止。这种现象，称为<strong>级联终止</strong>( cascading termination) ，通常由操作系统进行。</p>
+<h2 id="调度程序"><a href="#调度程序" class="headerlink" title="调度程序"></a>调度程序</h2><p>进程调度算法的原则:</p>
+<ul>
+<li>(1)公平性。</li>
+<li>(2)资源利用率(特别是CPU利用率)。</li>
+<li>(3)响应时间 - 交互式系统情况。</li>
+<li>(4)系统吞吐量 - 批处理系统。</li>
+<li>(5)周转时间 – 从进程提交到进程完成的时间间隔。</li>
+<li>(6)等待时间 – 在就绪队列中等待所花费的时间之和</li>
+</ul>
+<p>通常对于批处理系统，进程更多地是被提交，而不是马上执行。这些进程被放到大容量存储设备(通常为磁盘)的缓冲地中，保存在那里以便以后执行。<strong>长期调度程序(long-term scheduler)</strong> 或<strong>作业调度程序 (job scheduler)</strong> 从该地中选择进程，并装入内存以准备执行。<strong>短期调度程序 (short-term scheduler)</strong> 或 <strong>CPU 调度程序</strong>从准备执行的进程中选择进程，并为之分配 CPU 。</p>
+<p>这两个调度程序的主要差别是它们执行的频率。短期调度程序必须频繁地为CPU 选择新进程。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/10/2021/Operating-System-Concept-1/" data-id="ckyma425h0025vhc1hdqya2qh" class="article-share-link" data-share="baidu" data-title="Operating System Concept - 1">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System/" rel="tag">System</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="[post]-2021/Rust-Learning-4" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/09/2021/Rust-Learning-4/" class="article-date">
+  <time datetime="2019-04-09T02:47:23.000Z" itemprop="datePublished">2019-04-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/2021/Rust-Learning-4/">Rust-Learning-4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> Rust学习进阶。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/09/2021/Rust-Learning-4/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/09/2021/Rust-Learning-4/" data-id="ckyma425m002wvhc1472feat7" class="article-share-link" data-share="baidu" data-title="Rust-Learning-4">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="[post]-2021/Rust-Learning-3" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/07/2021/Rust-Learning-3/" class="article-date">
+  <time datetime="2019-04-07T14:26:44.000Z" itemprop="datePublished">2019-04-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/07/2021/Rust-Learning-3/">Rust-Learning-3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Rust学习进阶。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/07/2021/Rust-Learning-3/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/07/2021/Rust-Learning-3/" data-id="ckyma425m002tvhc162m4c0d6" class="article-share-link" data-share="baidu" data-title="Rust-Learning-3">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="[post]-2021/Rust-Learning-2" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/05/2021/Rust-Learning-2/" class="article-date">
+  <time datetime="2019-04-05T09:31:34.000Z" itemprop="datePublished">2019-04-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/05/2021/Rust-Learning-2/">Rust-Learning-2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Rust学习篇，介绍Rust的基础知识。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/05/2021/Rust-Learning-2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/05/2021/Rust-Learning-2/" data-id="ckyma425l002qvhc12uzc1liq" class="article-share-link" data-share="baidu" data-title="Rust-Learning-2">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="[post]-2021/Rust-Learning-1" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/05/2021/Rust-Learning-1/" class="article-date">
+  <time datetime="2019-04-05T07:31:34.000Z" itemprop="datePublished">2019-04-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/05/2021/Rust-Learning-1/">Rust-Learning-1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Rust学习篇，介绍Rust的基础知识。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/05/2021/Rust-Learning-1/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2019/04/05/2021/Rust-Learning-1/" data-id="ckyma425l002nvhc1h207dy2s" class="article-share-link" data-share="baidu" data-title="Rust-Learning-1">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rust/" rel="tag">Rust</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
   </nav>
 </section>
       
@@ -497,7 +975,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/">Architechture</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Dataflow/">Dataflow</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/DSL/">DSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/Translator/">Translator</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Tutorial/">Tutorial</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/">ICS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/TA/">TA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/">LLVM</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Work/UI/">UI</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -506,7 +984,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architechture/" rel="tag">Architechture</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSL/" rel="tag">DSL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TA/" rel="tag">TA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translator/" rel="tag">Translator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/" rel="tag">Tutorial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/" rel="tag">Work</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -515,7 +993,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Assembly/" style="font-size: 11.43px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.43px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.14px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/Latex/" style="font-size: 11.43px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.86px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.86px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.43px;">Network</a> <a href="/tags/Programming-language/" style="font-size: 15.71px;">Programming language</a> <a href="/tags/Rust/" style="font-size: 14.29px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/System/" style="font-size: 18.57px;">System</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 15.71px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.43px;">Windows</a>
+      <a href="/tags/Architechture/" style="font-size: 12.86px;">Architechture</a> <a href="/tags/Assembly/" style="font-size: 11.43px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.43px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.14px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Compiler/" style="font-size: 12.86px;">Compiler</a> <a href="/tags/DSL/" style="font-size: 11.43px;">DSL</a> <a href="/tags/Dataflow/" style="font-size: 12.86px;">Dataflow</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/ICS/" style="font-size: 10px;">ICS</a> <a href="/tags/LLVM/" style="font-size: 11.43px;">LLVM</a> <a href="/tags/Latex/" style="font-size: 11.43px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.86px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.86px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.43px;">Network</a> <a href="/tags/Programming-language/" style="font-size: 15.71px;">Programming language</a> <a href="/tags/Rust/" style="font-size: 14.29px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/System/" style="font-size: 18.57px;">System</a> <a href="/tags/TA/" style="font-size: 10px;">TA</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Translator/" style="font-size: 10px;">Translator</a> <a href="/tags/Tutorial/" style="font-size: 10px;">Tutorial</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 15.71px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.43px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
     </div>
   </div>
 
@@ -524,7 +1002,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -536,23 +1014,23 @@
       <ul>
         
           <li>
-            <a href="/2021/03/25/NewLaptop/">New Laptop</a>
+            <a href="/2022/01/22/2022/2110-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8A%A0%E9%80%9F%E5%A4%84%E7%90%86%E5%99%A8/">2110-数据流加速处理器</a>
           </li>
         
           <li>
-            <a href="/2020/09/29/x-forwarding-check/">X-forwarding Check</a>
+            <a href="/2022/01/22/2022/2110-OP-DSL/">2110-OP DSL</a>
           </li>
         
           <li>
-            <a href="/2020/09/29/WSL2-Quick-Fix/">WSL 2 Quick Fix</a>
+            <a href="/2022/01/22/2022/2111-%E6%95%B0%E6%8D%AE%E6%B5%81%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1-version1/">2111-数据流语言设计-version1</a>
           </li>
         
           <li>
-            <a href="/2020/09/18/Linux-Themes/">Linux Themes</a>
+            <a href="/2022/01/22/2022/2111-%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/">2111-数据流经典论文整理</a>
           </li>
         
           <li>
-            <a href="/2020/02/11/Rebuild-My-Home-04-Beautify/">Rebuild My Home - 04 Beautify</a>
+            <a href="/2022/01/22/2022/2112-Docker%E7%AC%94%E8%AE%B0/">2112-Docker笔记</a>
           </li>
         
       </ul>
@@ -582,7 +1060,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2021 Chivier Humber<br>
+      &copy; 2022 Chivier Humber<br>
       Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2109-Source to Source LLVM 调研 | Chivier&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="翻译器调研">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2109-Source to Source LLVM 调研">
+<meta property="og:url" content="https://chivier.github.io/2021/10/26/2022/2109-Source-to-Source-LLVM-%E8%B0%83%E7%A0%94/index.html">
+<meta property="og:site_name" content="Chivier&#39;s Blog">
+<meta property="og:description" content="翻译器调研">
+<meta property="og:locale">
+<meta property="og:image" content="https://chivier.github.io/2021/10/26/2022/2109-Source-to-Source-LLVM-%E8%B0%83%E7%A0%94/image1.png">
+<meta property="og:image" content="https://chivier.github.io/2021/10/26/2022/2109-Source-to-Source-LLVM-%E8%B0%83%E7%A0%94/image2.png">
+<meta property="article:published_time" content="2021-10-26T07:22:05.000Z">
+<meta property="article:modified_time" content="2022-01-21T18:47:48.138Z">
+<meta property="article:author" content="Chivier Humber">
+<meta property="article:tag" content="LLVM">
+<meta property="article:tag" content="DSL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chivier.github.io/2021/10/26/2022/2109-Source-to-Source-LLVM-%E8%B0%83%E7%A0%94/image1.png">
+  
+    <link rel="alternative" href="https://github.com/Chivier" title="Chivier&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Chivier&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/Whoami">About</a>
+        
+          <a class="main-nav-link" href="/categories">Catagories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" target="_blank" rel="noopener" href="https://github.com/Chivier" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="chivier.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="[post]-2022/2109-Source-to-Source-LLVM-调研" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/26/2022/2109-Source-to-Source-LLVM-%E8%B0%83%E7%A0%94/" class="article-date">
+  <time datetime="2021-10-26T07:22:05.000Z" itemprop="datePublished">2021-10-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/LLVM/">LLVM</a>►<a class="article-category-link" href="/categories/LLVM/DSL/">DSL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2109-Source to Source LLVM 调研
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91%E5%99%A8%E8%B0%83%E7%A0%94"><span class="toc-text">翻译器调研</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91%E5%99%A8%E5%AE%9E%E9%AA%8C-clang-tool"><span class="toc-text">翻译器实验 clang-tool</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E8%AE%B0%E5%BD%95-1"><span class="toc-text">失败记录 #1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E8%AE%B0%E5%BD%95-2"><span class="toc-text">失败记录 #2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E8%AE%B0%E5%BD%95-3"><span class="toc-text">失败记录 #3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%8A%9F%E8%AE%B0%E5%BD%95"><span class="toc-text">成功记录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#clang-tooling"><span class="toc-text">clang tooling</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OP2-Clang"><span class="toc-text">OP2-Clang</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      </div>
+      
+        <h1 id="翻译器调研"><a href="#翻译器调研" class="headerlink" title="翻译器调研"></a>翻译器调研</h1><span id="more"></span>
+
+
+<p>首先阅读了一些相关的科研工作</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/OP-DSL/clang-op-translator">GitHub - OP-DSL/clang-op-translator: Clang-based translator for OP2</a></p>
+<p>但是这里最重要的还是自己实现一个Demo并且测试</p>
+<h2 id="翻译器实验-clang-tool"><a href="#翻译器实验-clang-tool" class="headerlink" title="翻译器实验 clang-tool"></a>翻译器实验 clang-tool</h2><p>这里众说纷纭，网上并没有一个”直接可用“的版本供我进行快速测试和检查，经历了一整天的失败之后，在LLVM12.0和LLVM12.1版本上，Google搜索的几乎所有方法全部失败，因为LLVM11的API大改动导致之后的GetLocStart等clang::Stmt类里的方法更名，需要重新设计测试例子。</p>
+<p>这里测试方案重新在 LLVM clang-extra-tools 里，基于 LLVM clang tool template 进行更改和测试。</p>
+<h3 id="失败记录-1"><a href="#失败记录-1" class="headerlink" title="失败记录 #1"></a>失败记录 #1</h3><p>直接进行 cmake 失败，失败记录如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">CMake Warning (dev) <span class="keyword">in</span> CMakeLists.txt:</span><br><span class="line">  No project() <span class="built_in">command</span> is present.  The top-level CMakeLists.txt file must</span><br><span class="line">  contain a literal, direct call to the project() <span class="built_in">command</span>.  Add a line of</span><br><span class="line">  code such as</span><br><span class="line"></span><br><span class="line">    project(ProjectName)</span><br><span class="line"></span><br><span class="line">  near the top of the file, but after cmake_minimum_required().</span><br><span class="line"></span><br><span class="line">  CMake is pretending there is a <span class="string">&quot;project(Project)&quot;</span> <span class="built_in">command</span> on the first</span><br><span class="line">  line.</span><br><span class="line">This warning is <span class="keyword">for</span> project developers.  Use -Wno-dev to suppress it.</span><br><span class="line"></span><br><span class="line">CMake Error at CMakeLists.txt:6 (add_clang_executable):</span><br><span class="line">  Unknown CMake <span class="built_in">command</span> <span class="string">&quot;add_clang_executable&quot;</span>.</span><br><span class="line"></span><br><span class="line">CMake Warning (dev) <span class="keyword">in</span> CMakeLists.txt:</span><br><span class="line">  No cmake_minimum_required <span class="built_in">command</span> is present.  A line of code such as</span><br><span class="line"></span><br><span class="line">    cmake_minimum_required(VERSION 3.16)</span><br><span class="line"></span><br><span class="line">  should be added at the top of the file.  The version specified may be lower</span><br><span class="line">  <span class="keyword">if</span> you wish to support older CMake versions <span class="keyword">for</span> this project.  For more</span><br><span class="line">  information run <span class="string">&quot;cmake --help-policy CMP0000&quot;</span>.</span><br><span class="line">This warning is <span class="keyword">for</span> project developers.  Use -Wno-dev to suppress it.</span><br><span class="line"></span><br><span class="line">-- Configuring incomplete, errors occurred!</span><br><span class="line">See also <span class="string">&quot;/home/chivier/opt/llvm/clang-tools/tool-template/build/CMakeFiles/CMakeOutput.log&quot;</span>.</span><br></pre></td></tr></table></figure>
+
+<p>add_clang_executable 没有 include 合适的 .cmake 文件，所以无法使用</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/64271841/unknown-cmake-command-add-clang-executable">Unknown CMake command “add_clang_executable”</a></p>
+<p>此处给出了一个不了了之的回答，并没有解决问题。之后对于LLVM的框架重新理解和思考，应该在find_package LLVM 和 libclang 入手，着手解决 LLVM 的 cmake 发现问题。</p>
+<p>尝试用其他方法链接 LLVM 的 cmake 内容</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/11933485/building-llvm-example">Building LLVM example</a></p>
+<p>这里只给出了解决 add_llvm_excutable 的方案，并没有解决我的问题</p>
+<h3 id="失败记录-2"><a href="#失败记录-2" class="headerlink" title="失败记录 #2"></a>失败记录 #2</h3><p>这里尝试直接去解决LLVM的问题，直接编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ ToolTemplate.cpp -I/home/chivier/opt/llvm/llvm-download/include -std=c++14   -fno-exceptions -fno-rtti -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS `llvm-config --libs all`</span><br></pre></td></tr></table></figure>
+<p>这里直接采用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">llvm-config --cxxflags</span><br><span class="line">llvm-config --libs all</span><br></pre></td></tr></table></figure>
+<p>得到llvm需要的c++编译选项和llvm需要链接选项，但是此时发现无法链接，找不到需要的链接库，报错如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: cannot find -lLLVMMCParser</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMMC</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMDebugInfoCodeView</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMDebugInfoMSF</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMBitReader</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMCore</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMRemarks</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMBitstreamReader</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMBinaryFormat</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMTableGen</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMSupport</span><br><span class="line">/usr/bin/ld: cannot find -lLLVMDemangle</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="失败记录-3"><a href="#失败记录-3" class="headerlink" title="失败记录 #3"></a>失败记录 #3</h3><p>根据之前的失败经验，分析之前的错误内容，主要错误集中在：<code>add_clang_executable</code> 的执行可行问题。在github里对该关键词进行搜索，找到和我需求最为相似的项目：<br><a target="_blank" rel="noopener" href="https://github.com/firolino/clang-tool.git">https://github.com/firolino/clang-tool.git</a><br>但是编译报错还没有解决。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/home/chivier/Projects/clang-tool/src/utils/utils.cc: In <span class="keyword">function</span> ‘bool utils::customRunToolOnCodeWithArgs(std::unique_ptr&lt;clang::FrontendAction&gt;, const llvm::Twine&amp;, const std::vector&lt;std::__cxx11::basic_string&lt;char&gt; &gt;&amp;, const llvm::Twine&amp;, const FileContentMappings&amp;)’:</span><br><span class="line">/home/chivier/Projects/clang-tool/src/utils/utils.cc:32:16: error: ‘class clang::tooling::ToolInvocation’ has no member named ‘mapVirtualFile’</span><br><span class="line">   32 |     invocation.mapVirtualFile(fileNameRef, code.toNullTerminatedStringRef(codeStorage));</span><br><span class="line">      |                ^~~~~~~~~~~~~~</span><br><span class="line">/home/chivier/Projects/clang-tool/src/utils/utils.cc:35:20: error: ‘class clang::tooling::ToolInvocation’ has no member named ‘mapVirtualFile’</span><br><span class="line">   35 |         invocation.mapVirtualFile(filenameWithContent.first, filenameWithContent.second);</span><br><span class="line">      |                    ^~~~~~~~~~~~~~</span><br><span class="line">make[2]: *** [src/CMakeFiles/clang-tool.dir/build.make:102: src/CMakeFiles/clang-tool.dir/utils/utils.cc.o] Error 1</span><br><span class="line">make[1]: *** [CMakeFiles/Makefile2:94: src/CMakeFiles/clang-tool.dir/all] Error 2</span><br><span class="line">make: *** [Makefile:84: all] Error 2</span><br></pre></td></tr></table></figure>
+
+<p>这里继续分析mapVirtualFile</p>
+<p>调用 mapVirtualFile 的是一个 TollInnovation 类。这里存在一些借口不适配的问题。</p>
+<h3 id="成功记录"><a href="#成功记录" class="headerlink" title="成功记录"></a>成功记录</h3><p>在网上搜索 ToolInnovation， 在 github 上找到了一个性质类似的项目：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/firolino/clang-tool.git">https://github.com/firolino/clang-tool.git</a></p>
+<p>此项目可以很好的完善我目前的研究，基于 clang-tool 的 CMakeLists 我写出了如下的文件：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(LLVM_test)</span><br><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>)</span><br><span class="line"><span class="keyword">find_package</span>(LLVM REQUIRED)</span><br><span class="line"><span class="keyword">find_package</span>(Clang REQUIRED)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS <span class="string">&quot;-Wall -g3 -O0 -fno-rtti $&#123;LLVM_COMPILE_FLAGS&#125;&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;LLVM_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;CLANG_INCLUDE_DIRS&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(LLVM_LINK_COMPONENTS</span><br><span class="line">  FrontendOpenMP</span><br><span class="line">  Support</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(tool-template</span><br><span class="line">  ToolTemplate.cpp</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(tool-template</span><br><span class="line">  PRIVATE</span><br><span class="line">  clangAST</span><br><span class="line">  clangASTMatchers</span><br><span class="line">  clangBasic</span><br><span class="line">  clangFrontend</span><br><span class="line">  clangTooling</span><br><span class="line">  clangToolingRefactoring</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="clang-tooling"><a href="#clang-tooling" class="headerlink" title="clang tooling"></a>clang tooling</h1><p>对于 clang tooling 的做法，需要有如下考量</p>
+<p>调研期间发现了一个 LLVM 更好用一些的文档网站：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.hdoc.io/hdoc/llvm-project/">https://docs.hdoc.io/hdoc/llvm-project/</a></p>
+<p>优势在于提供了 doxygen 中不便于搜索的麻烦，提供了搜索接口</p>
+<p><a target="_blank" rel="noopener" href="https://docs.hdoc.io/hdoc/llvm-project/search.html">https://docs.hdoc.io/hdoc/llvm-project/search.html</a></p>
+<p>LLVM 框架的整体架构是</p>
+<p>Frontend -&gt; Optimizer -&gt; Backend<br>Frontend = Lexer + Parser<br>Optimizer = Passed<br>Backend = MD Optimizer + CodeGen</p>
+<p>分析出的 AST 树使我们前端分析的目标，但是 AST 的遍历具有一定的麻烦，我们不太可能根据 LLVM 每一代 API 的接口去设计我们的程序，这个实话需要借助 LLVM 一个相对独立的子项目，就是 clang tooling，作为 LLVM18 大会上的报告，Clang tooling 以及其代表组件 LibClang 在 “few years” 将维持稳定版本。</p>
+<p>LibClang 的作用更想一个“光标”，用于遍历和访问每一个 AST 的 Translate Unit。</p>
+<p>作为一个方便的接口，测试的时候可以先使用 Python 去开发和测试，便于调试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> clang.cindex <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_function_call</span>(<span class="params">funcdecl, c</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; Determine where a call-expression cursor refers to a particular function declaration</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    defn = c.get_definition()</span><br><span class="line">    <span class="keyword">return</span> (defn <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>) <span class="keyword">and</span> (defn == funcdecl)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fully_qualified</span>(<span class="params">c</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; Retrieve a fully qualified function name (with namespaces)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    res = c.spelling</span><br><span class="line">    c = c.semantic_parent</span><br><span class="line">    <span class="keyword">while</span> c.kind != CursorKind.TRANSLATION_UNIT:</span><br><span class="line">        res = c.spelling + <span class="string">&#x27;::&#x27;</span> + res</span><br><span class="line">        c = c.semantic_parent</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_funcs_and_calls</span>(<span class="params">tu</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; Retrieve lists of function declarations and call expressions in a translation unit</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    filename = tu.cursor.spelling</span><br><span class="line">    calls = []</span><br><span class="line">    funcs = []</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> tu.cursor.walk_preorder():</span><br><span class="line">        <span class="keyword">if</span> c.location.file <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> c.location.file.name != filename:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">elif</span> c.kind == CursorKind.CALL_EXPR:</span><br><span class="line">            calls.append(c)</span><br><span class="line">        <span class="keyword">elif</span> c.kind == CursorKind.FUNCTION_DECL:</span><br><span class="line">            funcs.append(c)</span><br><span class="line">    <span class="keyword">return</span> funcs, calls</span><br><span class="line"></span><br><span class="line">idx = Index.create()</span><br><span class="line">args =  <span class="string">&#x27;-x c++ --std=c++11&#x27;</span>.split()</span><br><span class="line">tu = idx.parse(<span class="string">&#x27;tmp.cpp&#x27;</span>, args=args)</span><br><span class="line">funcs, calls = find_funcs_and_calls(tu)</span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> funcs:</span><br><span class="line">    print(fully_qualified(f), f.location)</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> calls:</span><br><span class="line">        <span class="keyword">if</span> is_function_call(f, c):</span><br><span class="line">            print(<span class="string">&#x27;-&#x27;</span>, c.location)</span><br><span class="line">    print()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="OP2-Clang"><a href="#OP2-Clang" class="headerlink" title="OP2-Clang"></a>OP2-Clang</h1><p>OP2 clang 项目是基于 LLVM 项目开发的。基本思想是为了适应更多更新的硬件设备，我们不应该去专门花时间在底层设计上，这些部分理应由编译器后端进行处理。更好的构建起前端到这里的框架才是一个 DSL 应该做的事情。非结构化网格是一个代表性的问题。</p>
+<img src="image1.png" width="80%" height="80%">
+
+<p>OP2 Clang 的主要工作是借用 Clang 将中间层 API 转移，用户不必直接去写 OP2 Library 中的 API 代码，而是用简单的逻辑说明代码的逻辑。Clang 再利用前端去实现 OP2 中的并行化。</p>
+<p>Youtube 的视频讲解了论文的思路 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Ie2WjoUEnKw">https://www.youtube.com/watch?v=Ie2WjoUEnKw</a></p>
+<p>设计思想重要部分是：<br><strong>handle significant structural transformations</strong></p>
+<p>其实这个工作的价值并不在于 Clang，而在于 OP2 库的并行化的易用性，那么这项工作是否真的那么容易复现呢？</p>
+<p>答案是肯定的，并且这里将给出一个更加简单的复现思路，如果读了之前的工作文档，那么会发现，如果使用 libclang Python API ，那么复现此工作将不再复杂，知识简单的：“模式匹配” + “代码替换”</p>
+<p>其代码框架如下：</p>
+<p>Op2ModeScan -&gt; [generator]</p>
+<p>generator 包含如下部分：<br>common, cuda, openmp, sequntial, vectorization</p>
+<p>以 openmp 举例，我在下面的代码标出注释</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> &#123;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> clang::ast_matchers;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">auto</span> parLoopSkeletonCompStmtMatcher =</span><br><span class="line">    compoundStmt(hasParent(functionDecl(hasName(<span class="string">&quot;op_par_loop_skeleton&quot;</span>))));</span><br><span class="line">&#125; <span class="comment">// namespace</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> OP2 &#123;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> clang::ast_matchers;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> clang;</span><br><span class="line"><span class="comment">//___________________________________MATCHERS__________________________________</span></span><br><span class="line"><span class="comment">// 下面用LLVM接口对AST的节点进行判定</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StatementMatcher OMPKernelHandler::locRedVarMatcher =</span><br><span class="line">    declStmt(containsDeclaration(<span class="number">0</span>, varDecl(hasName(<span class="string">&quot;arg0_l&quot;</span>))),</span><br><span class="line">             hasParent(parLoopSkeletonCompStmtMatcher))</span><br><span class="line">        .bind(<span class="string">&quot;local_reduction_variable&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StatementMatcher OMPKernelHandler::locRedToArgMatcher =</span><br><span class="line">    binaryOperator(</span><br><span class="line">        hasOperatorName(<span class="string">&quot;=&quot;</span>),</span><br><span class="line">        hasRHS(ignoringImpCasts(declRefExpr(to(varDecl(hasName(<span class="string">&quot;arg0_l&quot;</span>)))))),</span><br><span class="line">        hasParent(parLoopSkeletonCompStmtMatcher))</span><br><span class="line">        .bind(<span class="string">&quot;loc_red_to_arg_assignment&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StatementMatcher OMPKernelHandler::ompParForMatcher =</span><br><span class="line">    ompParallelForDirective().bind(</span><br><span class="line">        <span class="string">&quot;ompParForDir&quot;</span>); <span class="comment">// FIXME check if it is in the main file.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//_________________________________CONSTRUCTORS________________________________</span></span><br><span class="line">OMPKernelHandler::OMPKernelHandler(</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">map</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>, clang::tooling::Replacements&gt; *Replace,</span><br><span class="line">    <span class="keyword">const</span> ParLoop &amp;loop)</span><br><span class="line">    : Replace(Replace), loop(loop) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//________________________________GLOBAL_HANDLER_______________________________</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">OMPKernelHandler::run</span><span class="params">(<span class="keyword">const</span> MatchFinder::MatchResult &amp;Result)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!lineReplHandler&lt;DeclStmt, <span class="number">1</span>&gt;(</span><br><span class="line">          Result, Replace, <span class="string">&quot;local_reduction_variable&quot;</span>,</span><br><span class="line">          <span class="built_in">std</span>::bind(&amp;OMPKernelHandler::handleRedLocalVarDecl, <span class="keyword">this</span>)))</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">if</span> (!HANDLER(CallExpr, <span class="number">2</span>, <span class="string">&quot;func_call&quot;</span>, OMPKernelHandler::handleFuncCall))</span><br><span class="line">    <span class="keyword">return</span>; <span class="comment">// if successfully handled return</span></span><br><span class="line">  <span class="keyword">if</span> (!lineReplHandler&lt;BinaryOperator, <span class="number">7</span>&gt;(</span><br><span class="line">          Result, Replace, <span class="string">&quot;loc_red_to_arg_assignment&quot;</span>,</span><br><span class="line">          <span class="built_in">std</span>::bind(&amp;OMPKernelHandler::handlelocRedToArgAssignment, <span class="keyword">this</span>)))</span><br><span class="line">    <span class="keyword">return</span>; <span class="comment">// if successfully handled return</span></span><br><span class="line">  <span class="keyword">if</span> (!HANDLER(OMPParallelForDirective, <span class="number">0</span>, <span class="string">&quot;ompParForDir&quot;</span>,</span><br><span class="line">               OMPKernelHandler::handleOMPParLoop)) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//___________________________________HANDLERS__________________________________</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">OMPKernelHandler::handleFuncCall</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> funcCall = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="function">llvm::raw_string_ostream <span class="title">ss</span><span class="params">(funcCall)</span></span>;</span><br><span class="line">  ss &lt;&lt; loop.getUserFuncInfo().funcName &lt;&lt; <span class="string">&quot;(&quot;</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; loop.getNumArgs(); ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!loop.getArg(i).isReduction()) &#123;</span><br><span class="line">      <span class="keyword">if</span> (loop.getArg(i).isDirect()) &#123;</span><br><span class="line">        ss &lt;&lt; loop.getArg(i).getArgCall(i, <span class="string">&quot;n&quot;</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">        ss &lt;&lt; loop.getArg(i).getArgCall(</span><br><span class="line">            loop.dat2argIdxs[loop.dataIdxs[i]],</span><br><span class="line">            (<span class="string">&quot;map&quot;</span> + <span class="built_in">std</span>::to_string(loop.mapIdxs[i]) + <span class="string">&quot;idx&quot;</span>));</span><br><span class="line">      &#125;</span><br><span class="line">      ss &lt;&lt; <span class="string">&quot;,&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      ss &lt;&lt; <span class="string">&quot;&amp;arg&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;_l,&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ss.str();</span><br><span class="line">  <span class="keyword">return</span> funcCall.substr(<span class="number">0</span>, funcCall.length() - <span class="number">1</span>) + <span class="string">&quot;);&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">OMPKernelHandler::handleRedLocalVarDecl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> s;</span><br><span class="line">  <span class="function">llvm::raw_string_ostream <span class="title">os</span><span class="params">(s)</span></span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> ind = <span class="number">0</span>; ind &lt; loop.getNumArgs(); ++ind) &#123;</span><br><span class="line">    <span class="keyword">const</span> OPArg &amp;arg = loop.getArg(ind);</span><br><span class="line">    <span class="keyword">if</span> (arg.isReduction()) &#123;</span><br><span class="line">      os &lt;&lt; arg.type &lt;&lt; <span class="string">&quot; arg&quot;</span> &lt;&lt; ind &lt;&lt; <span class="string">&quot;_l = *(&quot;</span> + arg.type + <span class="string">&quot; *)arg&quot;</span> &lt;&lt; ind</span><br><span class="line">         &lt;&lt; <span class="string">&quot;.data;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> os.str();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">OMPKernelHandler::handlelocRedToArgAssignment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> s;</span><br><span class="line">  <span class="function">llvm::raw_string_ostream <span class="title">os</span><span class="params">(s)</span></span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> ind = <span class="number">0</span>; ind &lt; loop.getNumArgs(); ++ind) &#123;</span><br><span class="line">    <span class="keyword">const</span> OPArg &amp;arg = loop.getArg(ind);</span><br><span class="line">    <span class="keyword">if</span> (arg.isReduction()) &#123;</span><br><span class="line">      os &lt;&lt; <span class="string">&quot;*((&quot;</span> + arg.type + <span class="string">&quot; *)arg&quot;</span> &lt;&lt; ind &lt;&lt; <span class="string">&quot;.data) = arg&quot;</span> &lt;&lt; ind</span><br><span class="line">         &lt;&lt; <span class="string">&quot;_l;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> os.str();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">OMPKernelHandler::handleOMPParLoop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> plusReds, minReds, maxReds;</span><br><span class="line">  <span class="function">llvm::raw_string_ostream <span class="title">os</span><span class="params">(plusReds)</span></span>;</span><br><span class="line">  <span class="function">llvm::raw_string_ostream <span class="title">osMin</span><span class="params">(minReds)</span></span>;</span><br><span class="line">  <span class="function">llvm::raw_string_ostream <span class="title">osMax</span><span class="params">(maxReds)</span></span>;</span><br><span class="line">  <span class="comment">// 计算可用资源</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">size_t</span> ind = <span class="number">0</span>; ind &lt; loop.getNumArgs(); ++ind) &#123;</span><br><span class="line">    <span class="keyword">const</span> OPArg &amp;arg = loop.getArg(ind);</span><br><span class="line">    <span class="keyword">if</span> (arg.isReduction()) &#123;</span><br><span class="line">      <span class="keyword">switch</span> (arg.accs) &#123;</span><br><span class="line">      <span class="keyword">case</span> OP2::OP_INC:</span><br><span class="line">        os &lt;&lt; <span class="string">&quot;arg&quot;</span> &lt;&lt; ind &lt;&lt; <span class="string">&quot;_l, &quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> OP2::OP_MAX:</span><br><span class="line">        osMax &lt;&lt; <span class="string">&quot;arg&quot;</span> &lt;&lt; ind &lt;&lt; <span class="string">&quot;_l, &quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> OP2::OP_MIN:</span><br><span class="line">        osMin &lt;&lt; <span class="string">&quot;arg&quot;</span> &lt;&lt; ind &lt;&lt; <span class="string">&quot;_l, &quot;</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// error if this is a reduction it must be one of OP_MIN, OP_MAX or</span></span><br><span class="line">        <span class="comment">// OP_INC</span></span><br><span class="line">        assert(!arg.isReduction() ||</span><br><span class="line">               (arg.accs == OP2::OP_INC || arg.accs == OP2::OP_MAX ||</span><br><span class="line">                arg.accs == OP2::OP_MIN));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 生成 omp 宏语句</span></span><br><span class="line">  <span class="keyword">if</span> (os.str().length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    plusReds =</span><br><span class="line">        <span class="string">&quot; reduction(+:&quot;</span> + plusReds.substr(<span class="number">0</span>, plusReds.length() - <span class="number">2</span>) + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (osMin.str().length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    minReds = <span class="string">&quot; reduction(min:&quot;</span> + minReds.substr(<span class="number">0</span>, minReds.length() - <span class="number">2</span>) + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (osMax.str().length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    maxReds = <span class="string">&quot; reduction(max:&quot;</span> + maxReds.substr(<span class="number">0</span>, maxReds.length() - <span class="number">2</span>) + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;omp parallel for &quot;</span> + plusReds + <span class="string">&quot; &quot;</span> + minReds + <span class="string">&quot; &quot;</span> + maxReds;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="comment">// namespace OP2</span></span><br></pre></td></tr></table></figure>
+
+<p>这项工作本质上难度不大，对于之后工作的意义在于：</p>
+<p>网格划分部分的代码其实可以根据群论提供的对称性思想进行划分和生成。我们只需要简单描述网格方法，之后就可以生成那一部分的代码，并且自动将 OpenMP 的部分自动植入。</p>
+<p>正在测试的例子：</p>
+<img src="image2.png" width="80%" height="80%">
+
+<p>生成一个3维网格，每个格子里有10个点，之后会自由扩散。目前编码方法为自然编码，按长宽高依次顺次编号。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本周工作：</p>
+<ol>
+<li>总结 OP2 Clang，学习项目框架，自己基本复现。</li>
+<li>总结 LLVM Clang Tooling 工作框架，于 github: Chivier/still</li>
+<li>总结 LLVM Python Clang API，分析 Translation Unit 的行为，编写函数调用 demo 见 github: Chivier/still</li>
+<li>学习文档工具 hdoc</li>
+<li>继续完善 3D 绘图库，目前可以完成自动生成任意亏格小于2的管状模型</li>
+<li>编译 LLVM 12，13，14 的文档，对比 LLVM Clang 接口</li>
+<li>Sourcetrail 分析 Python Clang API</li>
+</ol>
+<p>之后工作计划：</p>
+<ol>
+<li>完善算例，将该算例发展成为网格Benchmark</li>
+<li>基于改 Benchmark 测试自动 OpenMP 并行化方案的可行性</li>
+<li>自动优化工具测试 SPH 原版代码</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2021/10/26/2022/2109-Source-to-Source-LLVM-%E8%B0%83%E7%A0%94/" data-id="ckyoqufxi0000n2c124sogclp" class="article-share-link" data-share="baidu" data-title="2109-Source to Source LLVM 调研">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DSL/" rel="tag">DSL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/11/05/2022/2110-LLVM%E6%95%B4%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2110-LLVM整理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/25/2021/NewLaptop/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">New Laptop</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/">Architechture</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Dataflow/">Dataflow</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/DSL/">DSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/Translator/">Translator</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Tutorial/">Tutorial</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/">ICS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/TA/">TA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/">LLVM</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">17</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Work/UI/">UI</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architechture/" rel="tag">Architechture</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSL/" rel="tag">DSL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TA/" rel="tag">TA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translator/" rel="tag">Translator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/" rel="tag">Tutorial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/" rel="tag">Work</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Architechture/" style="font-size: 12.86px;">Architechture</a> <a href="/tags/Assembly/" style="font-size: 11.43px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.43px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.14px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Compiler/" style="font-size: 12.86px;">Compiler</a> <a href="/tags/DSL/" style="font-size: 11.43px;">DSL</a> <a href="/tags/Dataflow/" style="font-size: 12.86px;">Dataflow</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Hexo/" style="font-size: 11.43px;">Hexo</a> <a href="/tags/ICS/" style="font-size: 10px;">ICS</a> <a href="/tags/LLVM/" style="font-size: 11.43px;">LLVM</a> <a href="/tags/Latex/" style="font-size: 11.43px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.86px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.86px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.43px;">Network</a> <a href="/tags/Programming-language/" style="font-size: 15.71px;">Programming language</a> <a href="/tags/Rust/" style="font-size: 14.29px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/System/" style="font-size: 18.57px;">System</a> <a href="/tags/TA/" style="font-size: 10px;">TA</a> <a href="/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/tags/Translator/" style="font-size: 10px;">Translator</a> <a href="/tags/Tutorial/" style="font-size: 10px;">Tutorial</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 15.71px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.43px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/01/22/2022/2110-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8A%A0%E9%80%9F%E5%A4%84%E7%90%86%E5%99%A8/">2110-数据流加速处理器</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/22/2022/2110-OP-DSL/">2110-OP DSL</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/22/2022/2111-%E6%95%B0%E6%8D%AE%E6%B5%81%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1-version1/">2111-数据流语言设计-version1</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/22/2022/2111-%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/">2111-数据流经典论文整理</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/22/2022/2112-Docker%E7%AC%94%E8%AE%B0/">2112-Docker笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/Chivier" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Chivier Humber<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/Whoami" class="mobile-nav-link">About</a>
+  
+    <a href="/categories" class="mobile-nav-link">Catagories</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
