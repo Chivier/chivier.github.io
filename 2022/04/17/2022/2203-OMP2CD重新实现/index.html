@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2203-OMP2CD重新实现 | Chivier&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之所以会有这一片文章，是因为 LLVM OMP2CD 的项目中出现了一些不太符合实验数据的情况，其项目完整性和项目可用性存疑。在这里提出一些我的个人异议。并且基于此异议提出新的个人实现方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2203-OMP2CD重新实现">
+<meta property="og:url" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Chivier&#39;s Blog">
+<meta property="og:description" content="之所以会有这一片文章，是因为 LLVM OMP2CD 的项目中出现了一些不太符合实验数据的情况，其项目完整性和项目可用性存疑。在这里提出一些我的个人异议。并且基于此异议提出新的个人实现方案。">
+<meta property="og:locale">
+<meta property="og:image" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/image1.png">
+<meta property="og:image" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/image2.png">
+<meta property="og:image" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/image3.png">
+<meta property="og:image" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/image4.png">
+<meta property="og:image" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/image5.png">
+<meta property="og:image" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/image6.png">
+<meta property="article:published_time" content="2022-04-17T05:00:07.000Z">
+<meta property="article:modified_time" content="2022-04-17T05:00:28.055Z">
+<meta property="article:author" content="Chivier Humber">
+<meta property="article:tag" content="LLVM">
+<meta property="article:tag" content="Compiler">
+<meta property="article:tag" content="Dataflow">
+<meta property="article:tag" content="DARTS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/image1.png">
+  
+    <link rel="alternative" href="https://github.com/Chivier" title="Chivier&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Chivier&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/Whoami">About</a>
+        
+          <a class="main-nav-link" href="/categories">Catagories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" target="_blank" rel="noopener" href="https://github.com/Chivier" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="chivier.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="[post]-2022/2203-OMP2CD重新实现" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time datetime="2022-04-17T05:00:07.000Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Compiler/">Compiler</a>►<a class="article-category-link" href="/categories/Compiler/LLVM/">LLVM</a>►<a class="article-category-link" href="/categories/Compiler/LLVM/Dataflow/">Dataflow</a>►<a class="article-category-link" href="/categories/Compiler/LLVM/Dataflow/DARTS/">DARTS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2203-OMP2CD重新实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB"><span class="toc-text">论文阅读</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91%E5%99%A8%E9%80%BB%E8%BE%91%E6%95%B4%E7%90%86"><span class="toc-text">翻译器逻辑整理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E6%95%B4%E7%90%86"><span class="toc-text">思路整理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%84%E4%BB%B7%E5%92%8C%E6%80%9D%E8%80%83"><span class="toc-text">评价和思考</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-text">References</span></a></li></ol>
+      </div>
+      
+        <p>之所以会有这一片文章，是因为 LLVM OMP2CD 的项目中出现了一些不太符合实验数据的情况，其项目完整性和项目可用性存疑。在这里提出一些我的个人异议。并且基于此异议提出新的个人实现方案。</p>
+<span id="more"></span>
+
+
+<p>由于一周前 LLVM14 正式发布稳定版本，因此之后的实现方案基于 LLVM14 进行。（好吧其实我个人之会 LLVM9 以前的项目框架，12 还在学习中，之后打算写一个 LLVM12 的学习笔记）</p>
+<h1 id="论文阅读"><a href="#论文阅读" class="headerlink" title="论文阅读"></a>论文阅读</h1><p>首先看论文原文： <a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3155288">https://dl.acm.org/doi/pdf/10.1145/3155288</a></p>
+<img src="image1.png" width="80%" height="80%">
+
+<p>走的是一个传统的 LLVM 框架：</p>
+<ol>
+<li>首先是前端分析生成 AST</li>
+<li>之后在 AST 基础上生成 Annotation</li>
+<li>多粒度并行转换，Codelet：细，TP：粗</li>
+<li>CDG 转换，Codelet Graph</li>
+<li>代码生成</li>
+</ol>
+<p>TP Rule：</p>
+<ul>
+<li>TP- 1: The declaration of a function, other than main(), that contains an omp executable directive.</li>
+<li>TP- 2: An omp region.</li>
+</ul>
+<p>Codelet Rule:</p>
+<ul>
+<li>CBB- 1: An omp executable directive.</li>
+<li>CBB- 2: A call to a function containing an omp executable directive.</li>
+<li>CBB- 3: The first statement in an omp region.</li>
+<li>CBB- 4: The first statement in a function, other than main(), containing an omp executable directive.</li>
+<li>CBB- 5: The first statement of a branch, provided any of the branch’s parent nodes are part of a CBB.</li>
+<li>CBB- 6: The implicit barrier of an omp region.</li>
+<li>CBB- 7: The statement following a CBB whose leader was created using rules CBB-1, CBB-2, or CBB-6.</li>
+</ul>
+<h1 id="翻译器逻辑整理"><a href="#翻译器逻辑整理" class="headerlink" title="翻译器逻辑整理"></a>翻译器逻辑整理</h1><p>维持代码运行的内容分布在两个部分里：</p>
+<ul>
+<li>extra-tools</li>
+<li>clang</li>
+</ul>
+<img src="image2.png" width="80%" height="80%">
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">./llvm/tools/clang/include/clang/AST/OpenMPClause.h:class OMPCodeletClause : public OMPClause &#123;  </span><br><span class="line">./llvm/tools/clang/include/clang/AST/OpenMPClause.h: OMPCodeletClause(SourceLocation StartLoc, SourceLocation End  </span><br><span class="line">Loc)  </span><br><span class="line">./llvm/tools/clang/include/clang/AST/OpenMPClause.h: OMPCodeletClause()  </span><br><span class="line">./llvm/tools/clang/include/clang/AST/RecursiveASTVisitor.h:bool RecursiveASTVisitor&lt;Derived&gt;::VisitOMPCodeletClaus  </span><br><span class="line">e(OMPCodeletClause *) &#123;  </span><br><span class="line">./llvm/tools/clang/include/clang/Basic/OpenMPKinds.def:OPENMP_CLAUSE(codelet, OMPCodeletClause)  </span><br><span class="line">./llvm/tools/clang/lib/AST/StmtProfile.cpp:void OMPClauseProfiler::VisitOMPCodeletClause(const OMPCodeletClause *)  </span><br><span class="line">&#123;&#125;  </span><br><span class="line">./llvm/tools/clang/lib/AST/StmtPrinter.cpp:void OMPClausePrinter::VisitOMPCodeletClause(OMPCodeletClause*) &#123;&#125;  </span><br><span class="line">./llvm/tools/clang/lib/Sema/SemaOpenMP.cpp: <span class="built_in">return</span> new (Context) OMPCodeletClause(StartLoc, EndLoc);  </span><br><span class="line">./llvm/tools/clang/lib/Sema/TreeTransform.h:TreeTransform&lt;Derived&gt;::TransformOMPCodeletClause(OMPCodeletClause *C)  </span><br><span class="line">&#123;  </span><br><span class="line">./llvm/tools/clang/lib/Serialization/ASTWriterStmt.cpp:void OMPClauseWriter::VisitOMPCodeletClause(OMPCodeletClaus  </span><br><span class="line">e *) &#123;&#125;  </span><br><span class="line">./llvm/tools/clang/lib/Serialization/ASTReaderStmt.cpp: C = new (Context) OMPCodeletClause();  </span><br><span class="line">./llvm/tools/clang/lib/Serialization/ASTReaderStmt.cpp:void OMPClauseReader::VisitOMPCodeletClause(OMPCodeletClaus  </span><br><span class="line">e *) &#123;&#125;  </span><br><span class="line">./llvm/tools/clang/tools/libclang/CIndex.cpp:void OMPClauseEnqueue::VisitOMPCodeletClause(const OMPCodeletClause *  </span><br><span class="line">) &#123;&#125;  </span><br><span class="line">./llvm/tools/clang/tools/extra/omp2cd/src/Compiler/ASTVisit.cpp: <span class="keyword">else</span> <span class="keyword">if</span> (dyn_cast&lt;OMPCodeletClause&gt;(clause  </span><br><span class="line">)) &#123;</span><br></pre></td></tr></table></figure>
+
+<p>移植 llvm 14 已经完成：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Chivier/chranslate">https://github.com/Chivier/chranslate</a></p>
+<h1 id="思路整理"><a href="#思路整理" class="headerlink" title="思路整理"></a>思路整理</h1><p>如果我们使用 LLVM 的框架，我们需要遍历 AST。</p>
+<img src="image3.png" width="80%" height="80%">
+
+<p>读取命令行参数</p>
+<img src="image4.png" width="80%" height="80%">
+
+<p>只处理两层以内的 omp 嵌套。</p>
+<p>代码精读：</p>
+<h1 id="评价和思考"><a href="#评价和思考" class="headerlink" title="评价和思考"></a>评价和思考</h1><p>这个论文的工作其实不复杂，可以说非常工程，首先先评价一下这个工作。这个工作虽然发了 TACO，但是惨淡的引用量反应了很多问题：</p>
+<ol>
+<li>项目代码混乱，对于AST的行为描述上没有很好的继承clang的优势，而是自己打散重新建立，不仅麻烦，而且有一些逻辑上错误</li>
+<li>项目在clang的代码部分这边有很多疏漏，应该继承一个出来，而不是直接在clang的基础上改代码，（作者应该不太懂设计模式的问题）</li>
+<li>项目的可用性存疑，在 omp 嵌套的时候很多时候没法跑，这个应该是第一点导致的</li>
+</ol>
+<p>这个和 llvm-3.9 的历史也有一定的关系，有一些部分 API 不是作者不想进行继承，而是作者没有办法进行继承。</p>
+<p>官网说明：</p>
+<p><a target="_blank" rel="noopener" href="https://openmp.llvm.org/optimizations/OpenMPOpt.html">https://openmp.llvm.org/optimizations/OpenMPOpt.html</a></p>
+<p>有一句：</p>
+<blockquote>
+<p>LLVM, since <a target="_blank" rel="noopener" href="https://releases.llvm.org/download.html#11.0.0">version 11</a> (12 Oct 2020), has an <a target="_blank" rel="noopener" href="https://openmp.llvm.org/optimizations/OpenMPOpt.html">OpenMP-Aware optimization pass</a> as well as the ability to <a target="_blank" rel="noopener" href="https://openmp.llvm.org/optimizations/OpenMPUnawareOptimizations.html">perform “scalar optimizations” across OpenMP region boundaries</a>.<br>In-depth discussion of the topic can be found <a target="_blank" rel="noopener" href="https://openmp.llvm.org/optimizations/Overview.html">here</a>.</p>
+</blockquote>
+<p>说明 2020 年之前是不可能做成一个可以便捷拓展的项目的。<br><img src="image5.png" width="80%" height="80%"></p>
+<img src="image6.png" width="80%" height="80%">
+
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/" data-id="cl22tlamh0000kwc129yfd8fl" class="article-share-link" data-share="baidu" data-title="2203-OMP2CD重新实现">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DARTS/" rel="tag">DARTS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/04/11/2022/2204-GPU%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2204-GPU程序优化方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/">Architechture</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/">Compiler</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/FP/">FP</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Dataflow/">Dataflow</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Parallel/">Parallel</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/DSL/">DSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/">LLVM</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/">Dataflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/DARTS/">DARTS</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/Translator/">Translator</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/">Cuda</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/">Parallel</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/Develop/">Develop</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/">Develop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Graphics/">Graphics</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Tutorial/">Tutorial</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/">ICS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/TA/">TA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/">LLVM</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/">Qemu</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/Compiler/">Compiler</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/">Tricks</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/">Develop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/">Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/Deeplearning/">Deeplearning</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/Develop/">Develop</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Work/UI/">UI</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architechture/" rel="tag">Architechture</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cuda/" rel="tag">Cuda</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DARTS/" rel="tag">DARTS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSL/" rel="tag">DSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deeplearning/" rel="tag">Deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop/" rel="tag">Develop</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FP/" rel="tag">FP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/" rel="tag">Graphics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel/" rel="tag">Parallel</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qemu/" rel="tag">Qemu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TA/" rel="tag">TA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translator/" rel="tag">Translator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tricks/" rel="tag">Tricks</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/" rel="tag">Tutorial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/" rel="tag">Work</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Architechture/" style="font-size: 15px;">Architechture</a> <a href="/tags/Assembly/" style="font-size: 11.25px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.25px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.5px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Compiler/" style="font-size: 16.25px;">Compiler</a> <a href="/tags/Cuda/" style="font-size: 12.5px;">Cuda</a> <a href="/tags/DARTS/" style="font-size: 10px;">DARTS</a> <a href="/tags/DSL/" style="font-size: 12.5px;">DSL</a> <a href="/tags/Dataflow/" style="font-size: 13.75px;">Dataflow</a> <a href="/tags/Deeplearning/" style="font-size: 10px;">Deeplearning</a> <a href="/tags/Develop/" style="font-size: 15px;">Develop</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/FP/" style="font-size: 10px;">FP</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Graphics/" style="font-size: 10px;">Graphics</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/ICS/" style="font-size: 10px;">ICS</a> <a href="/tags/LLVM/" style="font-size: 12.5px;">LLVM</a> <a href="/tags/Latex/" style="font-size: 11.25px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.5px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.5px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.25px;">Network</a> <a href="/tags/Parallel/" style="font-size: 12.5px;">Parallel</a> <a href="/tags/Programming-language/" style="font-size: 16.25px;">Programming language</a> <a href="/tags/Qemu/" style="font-size: 10px;">Qemu</a> <a href="/tags/Rust/" style="font-size: 16.25px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/System/" style="font-size: 18.75px;">System</a> <a href="/tags/TA/" style="font-size: 10px;">TA</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Tools/" style="font-size: 11.25px;">Tools</a> <a href="/tags/Translator/" style="font-size: 10px;">Translator</a> <a href="/tags/Tricks/" style="font-size: 11.25px;">Tricks</a> <a href="/tags/Tutorial/" style="font-size: 10px;">Tutorial</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 16.25px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/">2203-OMP2CD重新实现</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/11/2022/2204-GPU%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/">2204-GPU程序优化方法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/28/2022/2203-%E6%94%B6%E8%97%8F%E5%A4%B9%E6%95%B4%E7%90%86%E7%B3%BB%E5%88%971/">2203-收藏夹整理系列1</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/28/2022/2203-voronoi%E6%9C%B4%E7%B4%A0%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">2203-voronoi朴素开发笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/28/2022/2203-%E5%B9%B6%E8%A1%8C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B01/">2203-并行体系结构笔记1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/Chivier" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Chivier Humber<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/Whoami" class="mobile-nav-link">About</a>
+  
+    <a href="/categories" class="mobile-nav-link">Catagories</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
