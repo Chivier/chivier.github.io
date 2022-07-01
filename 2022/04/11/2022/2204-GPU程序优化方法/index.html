@@ -1,12 +1,21 @@
 
+
 <!DOCTYPE html>
-<html>
+<html lang="" data-default-color-scheme=auto>
+
+
+
 <head>
-    <meta charset="utf-8">
-    
-    <title>2204-GPU程序优化方法 | Chivier&#39;s Blog</title>
-    <base href="https://dwqs.github.io" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chivier Humber">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="在目前为止的科研和学习经历中，cuda 的使用已经成为了日程的一个通电和要点问题。这里总结一些我用过的优化方法，留作笔记。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2204-GPU程序优化方法">
@@ -27,105 +36,257 @@
 <meta property="article:tag" content="Develop">
 <meta property="article:tag" content="Cuda">
 <meta property="article:tag" content="Parallel">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chivier.github.io/2022/04/11/2022/2204-GPU%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/image1.png">
-    
-    
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    
-    
-<link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  <title>2204-GPU程序优化方法 - Chivier&#39;s Blog</title>
 
-    <link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
-    <![endif]-->
-    
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chivier.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
 <body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-    <span id="forkongithub">
-        <a target="_blank" rel="noopener" href="https://github.com/dwqs/nx">Fork me on GitHub</a>
-    </span>
-    <div id="banner"></div>
-    <div id="header-outer" class="outer">
-        <div id="header-title" class="inner">
-            <h1 id="logo-wrap">
-                <a href="/" id="logo">Chivier&#39;s Blog</a>
-            </h1>
-            
-        </div>
-        <div id="header-inner" class="inner">
-            <nav id="main-nav">
-                <a id="main-nav-toggle" class="nav-icon"></a>
-                
-                <a class="main-nav-link" href="/">Home
-                    <i class="fa fa-home "></i>
-                </a>
-                
-                <a class="main-nav-link" href="/archives">Archives
-                    <i class="fa fa-archive "></i>
-                </a>
-                
-                <a class="main-nav-link" href="/about">About
-                    <i class="fa fa-user "></i>
-                </a>
-                
-            </nav>
-            <nav id="sub-nav">
-                <a id="nav-search-btn" title="Search">
-                    <i class="fa fa-search"></i>
-                </a>
-            </nav>
-            <div id="search-form-wrap">
-                <form action="https://www.google.com.hk/search" method="get" accept-charset="utf-8" class="search-form" target="_blank">
-                    <input name="q" type=hidden value="site:dwqs.github.io">
-                    <input type="search" name="q" maxlength="20" class="search-form-input" placeholder="Search">
-                    <input type="submit" value="" class="search-form-submit">
-                    <input name="sourceid" type=hidden value="chrome">
-                    <input name="aqs" type="hidden" value="chrome..69i57.2732j0j9">
-                    <input name="es_sm" type=hidden value="91">
-                    <input name="ie" type=hidden value="UTF-8">
-                    <input type="hidden" name="si" value="chivier.github.io">
-                </form>
-            </div>
-        </div>
-    </div>
-</header>
-    <div class="outer">
-      <section id="main"><article id="[post]-2022/2204-GPU程序优化方法" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 class="article-title" itemprop="name">
-      2204-GPU程序优化方法
-    </h1>
   
 
-                <div class="article-meta">
-                    <a href="/2022/04/11/2022/2204-GPU%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" class="article-date">
-  <time datetime="2022-04-10T19:42:41.000Z" itemprop="datePublished">2022-04-11</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Cuda/">Cuda</a>►<a class="article-category-link" href="/categories/Cuda/Parallel/">Parallel</a>►<a class="article-category-link" href="/categories/Cuda/Parallel/Develop/">Develop</a>
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chivier</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2204-GPU程序优化方法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-11 03:42" pubdate>
+          April 11, 2022 am
+        </time>
+      </span>
+    
   </div>
 
-                </div>
-            </header>
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
         
-        <div class="article-entry" itemprop="articleBody">
+          undefined words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          NaN mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2204-GPU程序优化方法</h1>
             
+            
+              <div class="markdown-body">
+                
                 <p>在目前为止的科研和学习经历中，cuda 的使用已经成为了日程的一个通电和要点问题。这里总结一些我用过的优化方法，留作笔记。</p>
 <span id="more"></span>
 
@@ -136,10 +297,10 @@
 <p>使用的时候和大部分的方法是相同的，但是不同之处是我们需要使用 cudaSetDevice 去手动设置使用的设备编号。参考 cudatest-18。</p>
 <p>但是由于鲁棒性的需求，我们的 cudaSetDevice 在下标超出范围的时候还是可以正常使用的，一般编号超过范围的卡，我们会把卡的计算信息映射到最后一张卡上面。但是会返回 cudaError 的 bool 数值，详情参考 cudaSetDevice 的 API 手册。</p>
 <p>下面是使用 cudatest19 把 8 个 1080 都用满的例子。</p>
-<img src="image1.png" width="80%" height="80%">
+<img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <h2 id="2-fast-math-amp-精度"><a href="#2-fast-math-amp-精度" class="headerlink" title="2 fast math &amp; 精度"></a>2 fast math &amp; 精度</h2><p>如果程序中的数学函数：三角函数、快速傅立叶变换、幂次、根号，等等。这些使用频率过高的时候，我们在 cuda 中可以从用 fast math 编译选项进行优化。一般会有 5~15%的效率提升。</p>
-<img src="image2.png" width="80%" height="80%">
+<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>nvcc -h 中可以读取 –use_fast_math 的具体内容和功能</p>
 <h2 id="3-wrap-divergence"><a href="#3-wrap-divergence" class="headerlink" title="3 wrap divergence"></a>3 wrap divergence</h2><p>之前说过：</p>
@@ -162,13 +323,13 @@
 <p>memory where registers and other thread data is spilled</p>
 </blockquote>
 <p>之所以这么设计和 GPU 的架构有关，以 Fermi 架构为例：</p>
-<img src="image3.png" width="80%" height="80%">
+<img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>图中我们看到我们的 LMEM 指的是 “SMEM 用尽，或者说也就是 SM 资源用尽的时候，额外使用的内存”，充分利用 L1 的存储空间可以发挥最大性能，但是如果我们没有使用好，就会造成 L1 和 L2 通信，正如下面这个链接所示</p>
 <p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/23876594/cuda-local-memory-register-spilling-overhead">https://stackoverflow.com/questions/23876594/cuda-local-memory-register-spilling-overhead</a></p>
 <p>从 L2/DRAM 中取数据或者写数据的代价是非常昂贵的。</p>
 <p><strong>在 Maxwell 和之后的架构中 L1 和 SMEM 合并</strong></p>
-<img src="image4.png" width="80%" height="80%">
+<img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>这里官方说了一下 LMEM 的使用场景，如果线程的场景比较复杂，我们就需要进行 register spill 从而达到避免寄存器冲突的目的。具体的 spill 策略未知，官方文档中也只有 <strong>heuristics</strong> 一词。<br>但是这里也说明了 Spill 不是坏事，数组是通过 SM 的 Register 访问的，这个在上面 20-wrapdivergence 的例子里面有个很好的对比，我们用错了访存顺序，就会导致每一次访存都进行 register spill。</p>
 <p>cuda 对数组的使用不是用寄存器的，这个细节问题在下面的这个问题旁敲侧击给了一个漂亮的答案：</p>
@@ -178,7 +339,7 @@
 <p>简而言之：Thread Block 越多越好，Register 少一些（少一些换入换出）更好。</p>
 <p>下面使用一个例子说明。</p>
 <p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#launch-bounds">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#launch-bounds</a></p>
-<img src="image5.png" width="80%" height="80%">
+<img src="image5.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>基于 modernGPU 项目写了 launchbound mergesort 测试，在 21-目录里对不同的 launch bound 进行测试。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::chrono::duration_cast;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::chrono::milliseconds;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::chrono::seconds;</span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::chrono::system_clock;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> mgpu;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">standard_context_t</span> context;</span><br><span class="line"></span><br><span class="line">  cudaDeviceSynchronize(); </span><br><span class="line">  <span class="keyword">auto</span> begin_millis = duration_cast&lt;milliseconds&gt;(system_clock::now().time_since_epoch()).count();</span><br><span class="line">  <span class="keyword">int</span> count = <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it = <span class="number">1</span>; it &lt;= <span class="number">50</span>; ++it) &#123;</span><br><span class="line">      <span class="keyword">mem_t</span>&lt;<span class="keyword">int</span>&gt; data = fill_random(<span class="number">0</span>, <span class="number">100000</span>, count, <span class="literal">false</span>, context);</span><br><span class="line">      </span><br><span class="line">      mergesort(data.data(), count, <span class="keyword">less_t</span>&lt;<span class="keyword">int</span>&gt;(), context);</span><br><span class="line"></span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ref = from_mem(data);</span><br><span class="line">      <span class="built_in">std</span>::sort(ref.begin(), ref.end());</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sorted = from_mem(data);</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="keyword">auto</span> end_millis = duration_cast&lt;milliseconds&gt;(system_clock::now().time_since_epoch()).count();</span><br><span class="line">  cudaDeviceSynchronize();</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%ld\n&quot;</span>, end_millis - begin_millis);</span><br><span class="line"></span><br><span class="line">  cudaDeviceSynchronize(); </span><br><span class="line">  begin_millis = duration_cast&lt;milliseconds&gt;(system_clock::now().time_since_epoch()).count();</span><br><span class="line">  count = <span class="number">1000000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> it = <span class="number">1</span>; it &lt;= <span class="number">50</span>; ++it) &#123;</span><br><span class="line">      <span class="keyword">mem_t</span>&lt;<span class="keyword">int</span>&gt; data = fill_random(<span class="number">0</span>, <span class="number">100000</span>, count, <span class="literal">false</span>, context);</span><br><span class="line">      </span><br><span class="line">      launchboundsort(data.data(), count, <span class="keyword">less_t</span>&lt;<span class="keyword">int</span>&gt;(), context);</span><br><span class="line"></span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ref = from_mem(data);</span><br><span class="line">      <span class="built_in">std</span>::sort(ref.begin(), ref.end());</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sorted = from_mem(data);</span><br><span class="line">    &#125;</span><br><span class="line">  end_millis = duration_cast&lt;milliseconds&gt;(system_clock::now().time_since_epoch()).count();</span><br><span class="line">  cudaDeviceSynchronize();</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%ld\n&quot;</span>, end_millis - begin_millis);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -210,14 +371,14 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// First, pin the memory (or cudaHostAlloc instead)</span></span><br><span class="line">cudaHostRegister(h_a, …, cudaHostRegisterMapped);</span><br><span class="line">cudaHostRegister(h_b, …, cudaHostRegisterMapped);</span><br><span class="line">cudaHostRegister(h_c, …, cudaHostRegisterMapped);</span><br><span class="line"></span><br><span class="line">cudaHostGetDevicePointer(&amp;a, h_a, <span class="number">0</span>);</span><br><span class="line">cudaHostGetDevicePointer(&amp;b, h_b, <span class="number">0</span>);</span><br><span class="line">cudaHostGetDevicePointer(&amp;c, h_c, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">kernel&lt;&lt;&lt;...&gt;&gt;&gt;(a, b, c);</span><br><span class="line">cudaDeviceSynchronize();</span><br><span class="line"></span><br><span class="line"><span class="comment">// unpin/release host memory</span></span><br><span class="line">cudaHostUnregister(h_a);</span><br><span class="line">cudaHostUnregister(h_b);</span><br><span class="line">cudaHostUnregister(h_c);</span><br></pre></td></tr></table></figure>
 
 <h2 id="7-coalesced-acccess"><a href="#7-coalesced-acccess" class="headerlink" title="7 coalesced acccess"></a>7 coalesced acccess</h2><p>和 4.3 小节中的例子一样，但是那个例子因为边界情况，有一些复杂，这里补充说明一下</p>
-<p><img src="https://i.stack.imgur.com/fFhFo.jpg" alt="enter image description here"></p>
+<p><img src="https://i.stack.imgur.com/fFhFo.jpg" srcset="/img/loading.gif" lazyload alt="enter image description here"></p>
 <p>问题的出现在于我们取的数据不是连续数据。</p>
 <p>在图。(a) n 个长度为 m 的向量以线性方式存储。向量 j 的元素 i 用 v j i 表示，GPU 内核中的每个线程都分配给一个 m 长的向量。CUDA 中的线程组成一个块数组，GPU 中的每个线程都有一个唯一的 id，可以定义为 indx = bd * bx + tx，其中 bd 表示块维度，bx 表示块索引，tx 表示每个块中的线程索引。</p>
 <p>垂直箭头表示平行线程访问每个向量的第一个分量，这种情况下，内存访问不是连续的。通过对这些地址之间的间隔进行归零(如上图所示的红色箭头) ，内存访问就得到了合并。</p>
 <h2 id="8-bank-conflict"><a href="#8-bank-conflict" class="headerlink" title="8 bank conflict"></a>8 bank conflict</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42730667/article/details/106171382">https://blog.csdn.net/weixin_42730667/article/details/106171382</a></p>
 <p>GPU 的共享内存，实际上是 32 块内存条通过并联组成的，每个时钟周期都可以读取一个 int。第 i 块内存，负责 addr % 32 == i 的数据。这样交错存储，可以保证随机访问时，访存能够尽量分摊到 32 个块。</p>
 <p>如果在block内多个线程访问的地址落入到同一个bank内，那么就会访问同一个bank就会产生bank conflict，这些访问将是变成串行，在实际开发调式中非常主要bank conflict.</p>
-<p><img src="https://img-blog.csdn.net/20150724161715938" alt="è¿éåå¾çæè¿°"></p>
+<p><img src="https://img-blog.csdn.net/20150724161715938" srcset="/img/loading.gif" lazyload alt="è¿éåå¾çæè¿°"></p>
 <p>处理方法非常简单，我们不要把 shared memory 开辟的空间设置成 32 的倍数即可（线性同余方程，原理也很好理解）</p>
 <p>也可以采用一个 API 的办法：</p>
 <p>使用 cudaDeviceGetSharedMemConfig 手动修改 GPU 的 shared memory ，少用一点，不过这个办法看起来不如上面的划算，其实性能差不太多。因为上面的办法实际上也会有空间浪费。</p>
@@ -240,160 +401,358 @@
 <li><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html</a></li>
 </ul>
 
+                
+              </div>
             
-        </div>
-        
-    </div>
-    
-    
-<nav id="article-nav">
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
         
-          2203-OMP2CD重新实现
-        
+  <a href="/categories/Cuda/" class="category-chain-item">Cuda</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Cuda/Parallel/" class="category-chain-item">Parallel</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Cuda/Parallel/Develop/" class="category-chain-item">Develop</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Develop/">#Develop</a>
+      
+        <a href="/tags/Cuda/">#Cuda</a>
+      
+        <a href="/tags/Parallel/">#Parallel</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2204-GPU程序优化方法</div>
+      <div>https://chivier.github.io/2022/04/11/2022/2204-GPU程序优化方法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Chivier Humber</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 11, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
       </div>
-    </a>
-  
-  
-    <a href="/2022/03/28/2022/2203-%E6%94%B6%E8%97%8F%E5%A4%B9%E6%95%B4%E7%90%86%E7%B3%BB%E5%88%971/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">2203-收藏夹整理系列1</div>
-    </a>
-  
-</nav>
-
-    
-</article>
-
-</section>
-      
-      <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/">Architechture</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/">Compiler</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/FP/">FP</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Dataflow/">Dataflow</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Parallel/">Parallel</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/DSL/">DSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/">LLVM</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/">Dataflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/DARTS/">DARTS</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/Translator/">Translator</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/">Cuda</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/">Parallel</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/Develop/">Develop</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/">Develop</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Graphics/">Graphics</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/">Parallel/Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/Develop-Applications-Lammps/">Develop/Applications/Lammps</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Tutorial/">Tutorial</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/">ICS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/TA/">TA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/">LLVM</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/">Qemu</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/Compiler/">Compiler</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/">Tricks</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/Tools/">Tools</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/">Parallel</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/">Study</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/Parallel-MPI/">Parallel/MPI</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/">Develop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/">Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/Deeplearning/">Deeplearning</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/Develop/">Develop</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Work/UI/">UI</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architechture/" rel="tag">Architechture</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cuda/" rel="tag">Cuda</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DARTS/" rel="tag">DARTS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSL/" rel="tag">DSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deeplearning/" rel="tag">Deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop/" rel="tag">Develop</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications/" rel="tag">Develop/Applications</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications-Lammps/" rel="tag">Develop/Applications/Lammps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FP/" rel="tag">FP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/" rel="tag">Graphics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel/" rel="tag">Parallel</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-Cuda/" rel="tag">Parallel/Cuda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-MPI/" rel="tag">Parallel/MPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qemu/" rel="tag">Qemu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study/" rel="tag">Study</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TA/" rel="tag">TA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translator/" rel="tag">Translator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tricks/" rel="tag">Tricks</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/" rel="tag">Tutorial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/" rel="tag">Work</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Architechture/" style="font-size: 15px;">Architechture</a> <a href="/tags/Assembly/" style="font-size: 11.25px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.25px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.5px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Compiler/" style="font-size: 16.25px;">Compiler</a> <a href="/tags/Cuda/" style="font-size: 12.5px;">Cuda</a> <a href="/tags/DARTS/" style="font-size: 10px;">DARTS</a> <a href="/tags/DSL/" style="font-size: 12.5px;">DSL</a> <a href="/tags/Dataflow/" style="font-size: 13.75px;">Dataflow</a> <a href="/tags/Deeplearning/" style="font-size: 10px;">Deeplearning</a> <a href="/tags/Develop/" style="font-size: 16.25px;">Develop</a> <a href="/tags/Develop-Applications/" style="font-size: 11.25px;">Develop/Applications</a> <a href="/tags/Develop-Applications-Lammps/" style="font-size: 10px;">Develop/Applications/Lammps</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/FP/" style="font-size: 10px;">FP</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Graphics/" style="font-size: 10px;">Graphics</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/ICS/" style="font-size: 10px;">ICS</a> <a href="/tags/LLVM/" style="font-size: 12.5px;">LLVM</a> <a href="/tags/Latex/" style="font-size: 11.25px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.5px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.5px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.25px;">Network</a> <a href="/tags/Parallel/" style="font-size: 13.75px;">Parallel</a> <a href="/tags/Parallel-Cuda/" style="font-size: 10px;">Parallel/Cuda</a> <a href="/tags/Parallel-MPI/" style="font-size: 10px;">Parallel/MPI</a> <a href="/tags/Programming-language/" style="font-size: 16.25px;">Programming language</a> <a href="/tags/Qemu/" style="font-size: 10px;">Qemu</a> <a href="/tags/Rust/" style="font-size: 16.25px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/Study/" style="font-size: 10px;">Study</a> <a href="/tags/System/" style="font-size: 18.75px;">System</a> <a href="/tags/TA/" style="font-size: 10px;">TA</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Tools/" style="font-size: 12.5px;">Tools</a> <a href="/tags/Translator/" style="font-size: 10px;">Translator</a> <a href="/tags/Tricks/" style="font-size: 12.5px;">Tricks</a> <a href="/tags/Tutorial/" style="font-size: 10px;">Tutorial</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 16.25px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
-    </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/" title="2203-OMP2CD重新实现">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2203-OMP2CD重新实现</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/28/2022/2203-%E6%94%B6%E8%97%8F%E5%A4%B9%E6%95%B4%E7%90%86%E7%B3%BB%E5%88%971/" title="2203-收藏夹整理系列1">
+                        <span class="hidden-mobile">2203-收藏夹整理系列1</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/07/01/2022/2205-omp2tbb%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">2205-omp2tbb开发笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/16/2022/2205-Lammps-EFF-GPU-version-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B01/">2205-Lammps-EFF GPU version 开发笔记1</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/13/2022/2205-MPI-and-timer/">2205-MPI and timer</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/26/2022/2204-qinitial/">2204-qinitial</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/">2203-OMP2CD重新实现</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Links</h3>
-    <div class="widget">
-      <ul>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-      
-    </div>
-    <footer id="footer">
-    
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2022 Chivier Humber<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-            .
-            Theme by <a href="https://github.com/dwqs/nx" target="_blank">nx</a>
+            
+          </article>
         </div>
+      </div>
     </div>
-</footer>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
   </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav>
-  <!-- totop start -->
-<div id="totop">
-<a title="totop"><img src="/img/scrollup.png"/></a>
 </div>
 
-<!-- totop end -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
 
 
 
 
 
-<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
 
+    
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-
-<script src="/js/script.js"></script>
-
-
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>

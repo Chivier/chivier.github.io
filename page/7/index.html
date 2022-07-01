@@ -1,926 +1,1044 @@
 
+
 <!DOCTYPE html>
-<html>
+<html lang="" data-default-color-scheme=auto>
+
+
+
 <head>
-    <meta charset="utf-8">
-    
-    <title>Chivier&#39;s Blog</title>
-    <base href="https://dwqs.github.io" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chivier Humber">
+  <meta name="keywords" content="">
+  
     <meta property="og:type" content="website">
 <meta property="og:title" content="Chivier&#39;s Blog">
 <meta property="og:url" content="https://chivier.github.io/page/7/index.html">
 <meta property="og:site_name" content="Chivier&#39;s Blog">
 <meta property="og:locale">
 <meta property="article:author" content="Chivier Humber">
-<meta name="twitter:card" content="summary">
-    
-    
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    
-    
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Chivier&#39;s Blog</title>
 
-    <link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
-    <![endif]-->
-    
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chivier.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
 <body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-    <span id="forkongithub">
-        <a target="_blank" rel="noopener" href="https://github.com/dwqs/nx">Fork me on GitHub</a>
-    </span>
-    <div id="banner"></div>
-    <div id="header-outer" class="outer">
-        <div id="header-title" class="inner">
-            <h1 id="logo-wrap">
-                <a href="/" id="logo">Chivier&#39;s Blog</a>
-            </h1>
-            
-        </div>
-        <div id="header-inner" class="inner">
-            <nav id="main-nav">
-                <a id="main-nav-toggle" class="nav-icon"></a>
-                
-                <a class="main-nav-link" href="/">Home
-                    <i class="fa fa-home "></i>
-                </a>
-                
-                <a class="main-nav-link" href="/archives">Archives
-                    <i class="fa fa-archive "></i>
-                </a>
-                
-                <a class="main-nav-link" href="/about">About
-                    <i class="fa fa-user "></i>
-                </a>
-                
-            </nav>
-            <nav id="sub-nav">
-                <a id="nav-search-btn" title="Search">
-                    <i class="fa fa-search"></i>
-                </a>
-            </nav>
-            <div id="search-form-wrap">
-                <form action="https://www.google.com.hk/search" method="get" accept-charset="utf-8" class="search-form" target="_blank">
-                    <input name="q" type=hidden value="site:dwqs.github.io">
-                    <input type="search" name="q" maxlength="20" class="search-form-input" placeholder="Search">
-                    <input type="submit" value="" class="search-form-submit">
-                    <input name="sourceid" type=hidden value="chrome">
-                    <input name="aqs" type="hidden" value="chrome..69i57.2732j0j9">
-                    <input name="es_sm" type=hidden value="91">
-                    <input name="ie" type=hidden value="UTF-8">
-                    <input type="hidden" name="si" value="chivier.github.io">
-                </form>
-            </div>
-        </div>
-    </div>
-</header>
-    <div class="outer">
-      <section id="main">
-  
-    <article id="post-2021/Logic-谓词演算" class="article article-type-post" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/">Logic-谓词演算-1</a>
-    </h1>
   
 
-                <div class="article-meta">
-                    <a href="/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/" class="article-date">
-  <time datetime="2019-04-16T00:27:57.000Z" itemprop="datePublished">2019-04-16</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Maths/">Maths</a>►<a class="article-category-link" href="/categories/Maths/Logic/">Logic</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                  <span id="more"></span>
-
-<h1 id="基本元素"><a href="#基本元素" class="headerlink" title="基本元素"></a>基本元素</h1><h2 id="基本集合"><a href="#基本集合" class="headerlink" title="基本集合"></a>基本集合</h2><p>谓词演算与命题演算不同之处在于公式定义上的区别，产生了新的命题元素：$\forall$</p>
-<p>四个基本集合：</p>
-<p>个体变元集$X$，个体常元集$C$，运算函数集$F$，谓词集$R$</p>
-<p>我们定义项集T为层次集合，$T_i​$为i次运算函数产生的项</p>
-<p><strong>原子公式集</strong>:<br>$$<br>Y = \bigcup_\text{i,n} ((R_i^n) \times T \times … \times T)<br>$$<br>定义为原子公式集。原子公式就是指代形如$R_i^n(t_1,…,t_2)$。</p>
-<h2 id="基本公式"><a href="#基本公式" class="headerlink" title="基本公式"></a>基本公式</h2><p>公式定义：</p>
-<ul>
-<li>原子公式是公式</li>
-<li>若$p,q​$是公式，则$\neg p​$，$p \rightarrow q​$，$\forall x_i p​$都是公式</li>
-<li>前两条若干次变换</li>
-</ul>
-<h2 id="其他运算定义"><a href="#其他运算定义" class="headerlink" title="其他运算定义"></a>其他运算定义</h2><p>$$<br>p \vee q = \neg p \rightarrow q \\<br>p \wedge q = \neg (p \rightarrow \neg q) \\<br>p \leftrightarrow q = (p \rightarrow q) \wedge (q \rightarrow p) \\<br>\exists x_i p = \neg \forall x_i p<br>$$</p>
-<p>定义了$\vee\ \quad \wedge \quad \leftrightarrow \quad \exists​$四种运算符</p>
-<h2 id="约束出现和自由出现"><a href="#约束出现和自由出现" class="headerlink" title="约束出现和自由出现"></a>约束出现和自由出现</h2><p>变元的<strong>自由出现</strong>指变元$x$不在$\forall x​$的范围内出现，反之叫约束出现</p>
-<p>如果公式中没有自由出现的变元，则叫<strong>闭式</strong></p>
-<p><strong>项t对p中x自由</strong>，完整的说法是“项t对于公式p中的x变元自由”，即用t取替换p中自由出现的x之后，所有的t变元还是自由的。等价于满足下面3条中任意一条：</p>
-<ul>
-<li>t是闭项（只有常元没有变元）</li>
-<li>x再p中不自由出现</li>
-<li>x对p中x自由</li>
-</ul>
-<p>符号p(x)表示公式，p(t)默认表示用t取代换所有的x</p>
-<h1 id="谓词演算K"><a href="#谓词演算K" class="headerlink" title="谓词演算K"></a>谓词演算K</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>指有一下规定的功利和证明的公式集：</p>
-<ul>
-<li><p>公理</p>
-<p>(K1) $p \rightarrow (q \rightarrow p)​$</p>
-<p>(K2) $(p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r))$</p>
-<p>(K3) $(\neg p  \rightarrow \neg q) \rightarrow (q \rightarrow p)$</p>
-<p>(K4) $\forall x ,p(x)  \rightarrow p(t) \quad$其中t对p(x)中x自由</p>
-<p>(K5) $\forall x,(p \rightarrow q) \rightarrow (p \rightarrow \forall x ,q)\quad$其中x不在p中自由出现</p>
-</li>
-<li><p>证明</p>
-<p>p是公式，$\Gamma$是公式集。p从$\Gamma$可证，记作$\Gamma \vdash p$</p>
-<p>指：</p>
-<p>从有限公式序列$p_1,…,p_n$有$p_n=p$并且每个k=1…n都有</p>
-<ul>
-<li>$p_k \in \Gamma$</li>
-<li>$p_k$是公理</li>
-<li>$\exists i,j&lt;k$使得$p_j = p_i \rightarrow p_k$ <em>（等价于：要有$p_k$，必须现有$p_i$和$p_i \rightarrow p_k$）</em></li>
-<li>$\exists j&lt;k$使得$p_k = \forall x , p_j $</li>
-</ul>
-</li>
-</ul>
-<h2 id="永真式和定理"><a href="#永真式和定理" class="headerlink" title="永真式和定理"></a>永真式和定理</h2><p>如果K中命题再L中有对应的命题演算定理，且永真，则叫永真式</p>
-<p>简而言之：L中也有的叫永真，永真式一定是定理，反之未必</p>
-<h2 id="exists-1-规则"><a href="#exists-1-规则" class="headerlink" title="$\exists_1$规则"></a>$\exists_1$规则</h2><p>如果项t对于p中x自由，则：<br>$$<br>\vdash p (t) \rightarrow \exists x,p(x)<br>$$</p>
-<h2 id="exists-2-规则"><a href="#exists-2-规则" class="headerlink" title="$\exists_2$规则"></a>$\exists_2$规则</h2><p>设$\Gamma \cup {p}\vdash q​$其证明中Gen变元不在p中自由出现，x不在q中自由出现，则有$\Gamma \cup {\exists x , p}\vdash q​$，且出来x不增加其他Gen变元</p>
-<p>注意：<strong>演绎定理、归谬律、反证律</strong>都可以使用，但是<strong>略有不同</strong></p>
-<h2 id="演绎定理"><a href="#演绎定理" class="headerlink" title="演绎定理"></a>演绎定理</h2><ul>
-<li>若$\Gamma \vdash p \rightarrow q​$则$\Gamma \cup {p} \vdash q​$</li>
-<li>若$\Gamma \cup {p} \vdash q$且证明中所用Gen变元不在p中自由出现，则不增加Gen变元就能使$\Gamma \vdash p \rightarrow q$</li>
-</ul>
-<p>推论：</p>
-<ul>
-<li>p是闭式时$\Gamma \vdash p \rightarrow q \Leftrightarrow \Gamma \cup {p} \vdash q$</li>
-</ul>
-<h2 id="反证律"><a href="#反证律" class="headerlink" title="反证律"></a>反证律</h2><p>若$\Gamma \cup {\neg p} \vdash q​$ 且$\Gamma \cup {\neg p} \vdash \neg q​$切所用Gen变元不在p中自由出现，则不增加新的Gen变元就能使得$\Gamma \vdash p​$</p>
-<h2 id="归谬律"><a href="#归谬律" class="headerlink" title="归谬律"></a>归谬律</h2><p>若$\Gamma \cup {p} \vdash q​$ 且$\Gamma \cup {p} \vdash \neg q​$切所用Gen变元不在p中自由出现，则不增加新的Gen变元就能使得$\Gamma \vdash \neg p​$</p>
-<p>注意演绎定理、归谬律、反证律说起来都是多了<strong>不增加新的Gen变元就能使得</strong></p>
-<h2 id="子公式等价替换"><a href="#子公式等价替换" class="headerlink" title="子公式等价替换"></a>子公式等价替换</h2><p>如果公式q是p的子公式：$p=…q…$</p>
-<p>公式$q’$替代$q$得到：$p’ = … q’ …$</p>
-<p>则 $\Gamma \vdash q \leftrightarrow q’ \Rightarrow \Gamma \vdash p \leftrightarrow p’$</p>
-<h2 id="对偶律"><a href="#对偶律" class="headerlink" title="对偶律"></a>对偶律</h2><p>将公式p表示为只含有原子公式以及$\neg,\vee,\wedge,\forall,\exists​$的形式之后：</p>
-<ul>
-<li>所有原子公式改为他们的否定</li>
-<li>$\wedge​$和$\vee​$互换</li>
-<li>$\forall​$和$\exists​$互换</li>
-</ul>
-<p>新公式记为$p^<em>​$则<br>$$<br>\vdash p^</em> \leftrightarrow \neg p<br>$$</p>
-<h2 id="前束范式"><a href="#前束范式" class="headerlink" title="前束范式"></a>前束范式</h2><p>形如$Q_1x…Q_ny p​$的式子叫前束范式，其中$Q_i​$表示量词符号$\forall​$或者$\exists​$，一般的，我们将$Q​$的对偶符号记作$Q^*​$</p>
-<p>结论：</p>
-<ol>
-<li>若y不在$p(x)​$中自由出现，则</li>
-</ol>
-<p>$$<br>\vdash Qxp(x) \leftrightarrow Qyp(y)<br>$$</p>
-<ol start="2">
-<li>若x不在p中自由出现，则</li>
-</ol>
-<p>$$<br>\vdash (p\rightarrow Qxq) \leftrightarrow Qx(p\rightarrow q)<br>$$<br>​    若x不在q中自由出现，则<br>$$<br>\vdash(Qxp \rightarrow q) \leftrightarrow Q^*x(p \rightarrow q)<br>$$</p>
-<ol start="3">
-<li>$$<br> \vdash \neg Q x p \leftrightarrow Q^* x \neg p<br> $$</li>
-</ol>
-<font color=0x0099ff>
-
-<p>用上述三条结论完成前束范式的变形，步骤：</p>
-<ul>
-<li><p>利用好结论1和子公式替换，替换p中变元</p>
-</li>
-<li><p>利用结论2和3将量词移动 </p>
-<ul>
-<li>结论2用于移动量词在$\rightarrow$两侧的情况</li>
-<li>结论3用于移动再$\neg$之后的情况</li>
-</ul>
-</li>
-</ul>
-</font>
-
-
-
-<p>补充两个定义：</p>
-<ul>
-<li><strong>$\Pi_n$型前束范式</strong>：从$\forall​$开始，从左往右改变n-1次词性</li>
-<li><strong>$\Sigma_n$型前束范式</strong>：从$\exists$开始，从左往右改变n-1次词性</li>
-</ul>
-
-            
-        </div>
-        
-    </div>
+  <header>
     
-</article>
 
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chivier</strong>
+    </a>
 
-  
-    <article id="[post]-2021/Operating-System-Concept-1" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
         
         
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/10/2021/Operating-System-Concept-1/">Operating System Concept - 1</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/04/10/2021/Operating-System-Concept-1/" class="article-date">
-  <time datetime="2019-04-10T06:56:09.000Z" itemprop="datePublished">2019-04-10</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Operating-System/">Operating System</a>►<a class="article-category-link" href="/categories/Operating-System/Concepts/">Concepts</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                 <span id="more"></span>
-
-<h1 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h1><blockquote>
-<p>A piece of software that manages a computer, making computer’s hardware<br>resources accessible to software through a consistent set of interfaces.</p>
-</blockquote>
-<p>并发(Concurrence)</p>
-<p>共享(Sharing) </p>
-<p>虚拟(Virtual) </p>
-<p>异步(Asynchronism)</p>
-<p>四项重要特征为OS的核心特征，也是我们进一步做得更好的核心挑战所在。</p>
-<h2 id="OS-Functions"><a href="#OS-Functions" class="headerlink" title="OS Functions"></a>OS Functions</h2><ol>
-<li>CPU管理<ol>
-<li>进程/线程控制和管理</li>
-<li>进程同步和互斥（mutual exclusion）</li>
-<li>进程通信和死锁（dead lock）</li>
-<li>处理器调度，作业调度和进程调度</li>
-</ol>
-</li>
-<li>存储管理<ol>
-<li>存储分配</li>
-<li>存储共享</li>
-<li>存储保护</li>
-<li>地址转换</li>
-<li>存储扩充</li>
-</ol>
-</li>
-<li>⽂件管理<ol>
-<li>⽬录管理</li>
-<li>存取控制/保护</li>
-<li>逻辑组织</li>
-<li>物理组织</li>
-<li>⽂件存储空间管理</li>
-</ol>
-</li>
-<li>设备管理<ol>
-<li>设备分配</li>
-<li>设备驱动</li>
-<li>缓冲管理</li>
-</ol>
-</li>
-<li>⽤户接口<ol>
-<li>命令接口</li>
-<li>程序接口</li>
-<li>图形接口</li>
-</ol>
-</li>
-<li>⽹络与通信管理</li>
-</ol>
-<h1 id="OS-Structure"><a href="#OS-Structure" class="headerlink" title="OS Structure"></a>OS Structure</h1><blockquote>
-<p>System calls provide an interface to the services made available by an operating system.</p>
-</blockquote>
-<p>Categories of System call:</p>
-<p>• Process control<br>• File management<br>• Device management<br>• Information maintenance<br>• Communications</p>
-<h2 id="Simple-Structure"><a href="#Simple-Structure" class="headerlink" title="Simple Structure"></a>Simple Structure</h2><h3 id="MS-DOS"><a href="#MS-DOS" class="headerlink" title="MS-DOS"></a>MS-DOS</h3><p>MS-DOS – written to provide the most functionality in the least space</p>
-<ul>
-<li>Not divided into modules</li>
-<li>Interfaces and levels of functionality not well separated</li>
-</ul>
-<img src="DOS.png" width="80%" height="80%">
-
-<h3 id="Unix"><a href="#Unix" class="headerlink" title="Unix"></a>Unix</h3><p>Limited by hardware functionality</p>
-<p>Original UNIX operating system consists of two separable parts:</p>
-<ul>
-<li>Systems programs</li>
-<li>The kernel<ul>
-<li>Consists of everything below the system-call interface and above the physical hardware</li>
-<li>Provides the file system, CPU scheduling, memory management, and other operating-system functions;</li>
-<li>Many interacting functions for one level</li>
-</ul>
-</li>
-</ul>
-<img src="Unix.png" width="80%" height="80%">
-
-<h2 id="Layered-Structure"><a href="#Layered-Structure" class="headerlink" title="Layered Structure"></a>Layered Structure</h2><p> Operating system is divided many layers (levels)</p>
-<ul>
-<li>Each built on top of lower layers</li>
-<li>Bottom layer (layer 0) is hardware</li>
-<li>Highest layer (layer N) is the user interface</li>
-</ul>
-<p>模块化，易于调试</p>
-<h2 id="Microkernel-System-Structure"><a href="#Microkernel-System-Structure" class="headerlink" title="Microkernel System Structure"></a>Microkernel System Structure</h2><blockquote>
-<p> Moves as much from the kernel into “user” space as possible.</p>
-</blockquote>
-<p>非基本的方法从内核中抽离，留下基本的方法。<em>（基本：一般认为内存管理和通信功能是必须的基本方法）</em></p>
-<p>Benefits:<br>• Easier to extend a microkernel<br>• Easier to port the operating system to new architectures<br>• More reliable (less code is running in kernel mode)<br>• More secure<br>Detriments:<br>• Performance overhead of user space to kernel space communication</p>
-<h2 id="Module-based"><a href="#Module-based" class="headerlink" title="Module based"></a>Module based</h2><p>Most modern operating systems implement kernel<br>modules<br>• Uses object-oriented approach<br>• Each core component is separate<br>• Each talks to the others over known interfaces<br>• Each is loadable as needed within the kernel</p>
-<p>类似于layered structure，但是灵活性大大增长</p>
-<p>Example:</p>
-<img src="Queueing-diagram.png" width="80%" height="80%">
-
-<ol>
-<li>Scheduling classes</li>
-<li>File systems</li>
-<li>Loadable system calls</li>
-<li>Executable formats</li>
-<li>STREAMS modules</li>
-<li>Miscellaneous</li>
-<li>Device and bus drivers</li>
-</ol>
-<h2 id="Hybrid-Systems"><a href="#Hybrid-Systems" class="headerlink" title="Hybrid Systems"></a>Hybrid Systems</h2><p>更为现代的设计方式都是采用混合模型</p>
-<h1 id="Virtual-Machines"><a href="#Virtual-Machines" class="headerlink" title="Virtual Machines"></a>Virtual Machines</h1><p>分层方法逻辑可延伸为虚拟机概念。虚拟机的基本思想是<u>单个计算机(CPU 、内存、磁盘、网卡等)的硬件<strong>抽象</strong>为几个不同的执行部件</u>，从而造成一种”幻觉”，仿佛每个独立的执行环境都在自己的计算机上运行一样。</p>
-<p>创建虚拟机有几个原因，最根本的是，在并行运行几个不同的执行环境(即不同的操作系统)时能够共享相同的硬件。</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>底层机器有两种模式:用户模式和内核模式。虚拟机软件可以运行在内核模式，因为它就是操作系统。虚拟机<u>本身只能运行在用户模式</u>。正如物理机器有两种模式一样，虚拟机也有两种模式。因此，<strong>必须有虚拟用户模式和虚拟内核模式</strong>，这<strong>两种模式都运行在物理用户模式</strong>。</p>
-<h2 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h2><p>• Isolation from all other virtual machines. 保证安全<br>• No disruption on normal system operation. 开发测试操作系统不需要中断正常操作系统的服务<br>• Difficult to implement due to the effort required to provide an exact duplicate to the underlying machine</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="Vmware"><a href="#Vmware" class="headerlink" title="Vmware"></a>Vmware</h3><p>虚拟层是VMware 的核心，因为它将物理硬件抽象为独立的作为客户操作系统的虚拟机运行。每个虚拟机都有它自己的虚拟 CPU、内存、磁盘驱动、网络接口等。</p>
-<h3 id="Java-虚拟机-JVM"><a href="#Java-虚拟机-JVM" class="headerlink" title="Java 虚拟机 (JVM)"></a>Java 虚拟机 (JVM)</h3><p>Java 对象用类结构来描述; Java 程序由一个或多个类组成。对于每个 Java 类， Java编译器会生成<strong>与平台无关的字节码 (bytecode) 输出文件( .class )</strong> ，它可运行在任何JVM 上。</p>
-<p>JVM包括类加载器和执行与平台无关的字节码的Java解释器。JVM 通过执行垃圾收集(garbage collection ，回收不再使用的内存并返回给系统)来自动管理内存。</p>
-<h3 id="NET"><a href="#NET" class="headerlink" title=".NET"></a>.NET</h3><p>.NET框架是一套包含了类库集舍、执行环境和软件开发平台的技术。这个平台允许基于.NET框架编程而不是针对任何特定平台。</p>
-<p>.NET 框架的核心是公共语言运行时间 (CLR)</p>
-<p> CLR 是 .NET 虚拟机的实现</p>
-<p>用 C#或者 VB.NET 编写的程序被编译为一种平台无关的中间语言(叫做微软中间语言 MS-IU 。这些被编译好的文件叫做组合 (assembly) ,它包含了 MS-IL 指令和元数据。它们的文件名后缀是.dll 或者.exeo 当要运行这些程序的时候， CLR 把这些组合加载进应用程序域 (Application Domain) 。</p>
-<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><p>进程不只是程序代码，程序代码有时称为<strong>文本段(或代码段)**。进程还包括</strong>当前活动<strong>，通过程序计数器的值和处理器寄存器的内容来表示。另外，进程通常还包括进程</strong>堆栈段**(包括临时数据，如函数参数、返回地址和局部变量)和<strong>数据段</strong>(包括全局变量)。进程还可能包括堆 (heap) ，是在进程运行期间动态分配的内存。</p>
-<p>英文解释更为简单：</p>
-<p><strong>A process is a program in execution</strong></p>
-<p>进程在执行时产生许多进程是很常见的。</p>
-<blockquote>
-<p>程序与进程之间的区别:</p>
-<ul>
-<li>“进程”是一个动态的概念:进程强调的是程序的一次“执行”过程,程序是一组有序指令的集合,在多道程序设计环境下,它不涉及“执行”,因此,是一个静态的概念;</li>
-<li>不同的进程可以执行同一个程序:即使多个进程执行同一个程序,只要它们运行在不同的数据集合上,它们就是不同的进程;</li>
-<li>每一个进程都有自己的生命期:当系统要完成某一项工作时,它就“创建”一个进程,程序执行完毕,系统就“撤销”这个进程,收回它所占用的资源。</li>
-</ul>
-</blockquote>
-<h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3><p>进程在执行时会改变状态。进程状态在某种程度上是由当前活动所定义的。每个进程可能处于下列状态之一:</p>
-<ul>
-<li>新的:进程正在被创建。</li>
-<li>运行:指令正在被执行。</li>
-<li>等待:进程等待某个事件的发生(如 IO 完成或收到信号)。</li>
-<li>就绪:进程等待分配处理器。</li>
-<li>终止:进程完成执行。</li>
-</ul>
-<img src="process.png" width="80%" height="80%">
-
-<h3 id="进程控制块"><a href="#进程控制块" class="headerlink" title="进程控制块"></a>进程控制块</h3><p>每个进程在操作系统内用<strong>进程控制块</strong> (process control block. PCB. 也称为任务控制块)来表示。</p>
-<img src="PCB.png" width="30%" height="30%">
-
-<ul>
-<li>**进程状态:**状态可包括新的、就绪、运行、等待、停止等。</li>
-<li>**程序计数器:**计数器表示进程要执行的下个指令的地址。</li>
-<li>**CPU 寄存器:**根据计算机体系结构的不同，寄存器的数量和类型也不同。它们包括累加器、索引寄存器、堆战指针、通用寄存器和其他条件码信息寄存器。与程序计数器一起，这些状态信息在出现中断时也需要保存，以便进程以后能正确地继续执行。</li>
-<li>**CPU 调度信息:**这类信息包括进程优先级、调度队列的指针和其他调度参数</li>
-<li>**内存管理信息:**根据操作系统所使用的内存系统，这类信息包括基址和界限寄存器的值、页表或段表(见第 8 章)。</li>
-<li>**记账信息:**这类信息包括 CPU 时间、实际使用时间、时间界限、记账数据、作业或进程数量等。</li>
-<li>**I/O 状态信息:**这类信息包括分配给进程的 νo 设备列表、打开的文件列表等。<br>简而言之， PCB 简单地作为这些信息的仓库，这些信息在进程与进程之间是不同的。</li>
-</ul>
-<img src="PCB_Switch.png" width="80%" height="80%">
-
-<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>一个进程是一个只能进行单个执行线程的程序。</p>
-<h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><h3 id="调度队列"><a href="#调度队列" class="headerlink" title="调度队列"></a>调度队列</h3><p>进程进入系统时，会被加到作业队列中，该队列包括系统中的所有进程。</p>
-<p>讨论进程调度的常用表示方法是<strong>队列图</strong></p>
-<p>每个长方形表示一个队列。有两种队列:就绪队列和一组设备队列。圆形表示为队列服务的资源，箭头表示系统内进程的流向。</p>
-<img src="Queueing-diagram.png" width="80%" height="80%">
-
-<h2 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h2><p>当进程创建新进程时，有两种执行可能:</p>
-<ul>
-<li>父进程与子进程并发执行。</li>
-<li>父进程等待，直到某个或全部子进程执行完。</li>
-</ul>
-<p>新进程的地址空间也有两种可能:</p>
-<ul>
-<li>子进程是父进程的复制品(具有与父进程相同的程序和数据)。</li>
-<li>子进程装入另一个新程序。</li>
-</ul>
-<p>Unix通过pid变量标记进程，fork（）函数创建进程。</p>
-<p><strong>fork的时候发生什么？</strong><br>=》执行到这一句的时候，一个进程被创建了，这个进程与父进程一样，拥有一套与父进程相同的变量，相同的一套代码，这里可以粗浅的理解为子进程又复制了一份main函数。这里返回一个子进程的进程号，大于0。（第一次fork）</p>
-<p>通常，在系统调用<code>fork()</code>之后，一个进程会使用系统调用<code>exec()</code>，以用新程序来取代进<br>程的内存雪间。系统调用<code>exec()</code>将二进制文件装入内存(消除了原来包含系统调用<code>exec()</code>的<br>程序的内存映射)，并开始执行。采用这种方式，两个进程能相互通信，并能按各自的方法<br>执行。父进程能创建更多的子进程，或者如果在子进程运行时没有什么可做，那么它采用<br>系统调用<code>wait()</code>把自己移出就绪队列来等待子进程的终止。</p>
-<p><strong>子进程怎么执行：</strong></p>
-<p>=》<strong>子进程从fork()的位置开始执行</strong>，也就是说前面的代码不走，但是拥有之前的变量以及变量的值，与父进程的值一样，这次fork()，返回值是0，所以在子进程里面直接执行了pid==0这一个分支，父进程里面并不执行这个分支的语句。这就为我们在写mian函数的时候怎么写子进程的程序提供了一个方法来隔离代码。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">pid_t</span> pid[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    pid[<span class="number">0</span>] = fork();</span><br><span class="line">    pid[<span class="number">1</span>] = fork();</span><br><span class="line">    pid[<span class="number">2</span>] = fork();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;this is process\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行会输出8次<code>this is a process</code></p>
-<h2 id="进程结束"><a href="#进程结束" class="headerlink" title="进程结束"></a>进程结束</h2><p>当进程完成执行最后的语句并使用系统调用<code>exit()</code>请求操作系统删除自身时，进程终止。这时，进程可以返回状态值(通常为整数)到父进程(通过系统调用<code>wait()</code>) 。所有进程资源(包括物理和虚拟内存、打开文件和 I/O 缓冲)会被操作系统释放。</p>
-<p>有些系统，包括 VMS ，不允许子进程在父进程己终止的情况下存在。对于这类系统，如果一个进程终止(正常或不正常)，那么它的所有子进程也将终止。这种现象，称为<strong>级联终止</strong>( cascading termination) ，通常由操作系统进行。</p>
-<h2 id="调度程序"><a href="#调度程序" class="headerlink" title="调度程序"></a>调度程序</h2><p>进程调度算法的原则:</p>
-<ul>
-<li>(1)公平性。</li>
-<li>(2)资源利用率(特别是CPU利用率)。</li>
-<li>(3)响应时间 - 交互式系统情况。</li>
-<li>(4)系统吞吐量 - 批处理系统。</li>
-<li>(5)周转时间 – 从进程提交到进程完成的时间间隔。</li>
-<li>(6)等待时间 – 在就绪队列中等待所花费的时间之和</li>
-</ul>
-<p>通常对于批处理系统，进程更多地是被提交，而不是马上执行。这些进程被放到大容量存储设备(通常为磁盘)的缓冲地中，保存在那里以便以后执行。<strong>长期调度程序(long-term scheduler)</strong> 或<strong>作业调度程序 (job scheduler)</strong> 从该地中选择进程，并装入内存以准备执行。<strong>短期调度程序 (short-term scheduler)</strong> 或 <strong>CPU 调度程序</strong>从准备执行的进程中选择进程，并为之分配 CPU 。</p>
-<p>这两个调度程序的主要差别是它们执行的频率。短期调度程序必须频繁地为CPU 选择新进程。</p>
-
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/Rust-Learning-4" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/09/2021/Rust-Learning-4/">Rust-Learning-4</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/04/09/2021/Rust-Learning-4/" class="article-date">
-  <time datetime="2019-04-09T02:47:23.000Z" itemprop="datePublished">2019-04-09</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p> Rust学习进阶。</p>
-                
-                    <p class="article-more-link">
-                        <a href="/2019/04/09/2021/Rust-Learning-4/#more">阅读全文</a>
-                    </p>
-                
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/Rust-Learning-3" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/07/2021/Rust-Learning-3/">Rust-Learning-3</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/04/07/2021/Rust-Learning-3/" class="article-date">
-  <time datetime="2019-04-07T14:26:44.000Z" itemprop="datePublished">2019-04-07</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p>Rust学习进阶。</p>
-                
-                    <p class="article-more-link">
-                        <a href="/2019/04/07/2021/Rust-Learning-3/#more">阅读全文</a>
-                    </p>
-                
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/Rust-Learning-2" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/05/2021/Rust-Learning-2/">Rust-Learning-2</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/04/05/2021/Rust-Learning-2/" class="article-date">
-  <time datetime="2019-04-05T09:31:34.000Z" itemprop="datePublished">2019-04-05</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p>Rust学习篇，介绍Rust的基础知识。</p>
-                
-                    <p class="article-more-link">
-                        <a href="/2019/04/05/2021/Rust-Learning-2/#more">阅读全文</a>
-                    </p>
-                
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/Rust-Learning-1" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/05/2021/Rust-Learning-1/">Rust-Learning-1</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/04/05/2021/Rust-Learning-1/" class="article-date">
-  <time datetime="2019-04-05T07:31:34.000Z" itemprop="datePublished">2019-04-05</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Rust/">Rust</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p>Rust学习篇，介绍Rust的基础知识。</p>
-                
-                    <p class="article-more-link">
-                        <a href="/2019/04/05/2021/Rust-Learning-1/#more">阅读全文</a>
-                    </p>
-                
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/Linux-入门资源" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/02/2021/Linux-%E5%85%A5%E9%97%A8%E8%B5%84%E6%BA%90/">Linux入门资源</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/04/02/2021/Linux-%E5%85%A5%E9%97%A8%E8%B5%84%E6%BA%90/" class="article-date">
-  <time datetime="2019-04-01T19:38:12.000Z" itemprop="datePublished">2019-04-02</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                  <span id="more"></span>
-
-<h1 id="命令行？入门教程视频"><a href="#命令行？入门教程视频" class="headerlink" title="命令行？入门教程视频"></a>命令行？入门教程视频</h1><p><a target="_blank" rel="noopener" href="https://ftp.ustclug.org/course/">USTC-Linux教程</a></p>
-<h1 id="命令查询"><a href="#命令查询" class="headerlink" title="命令查询"></a>命令查询</h1><p><a href="man.linuxde.net">命令查询网站</a></p>
-<p><a target="_blank" rel="noopener" href="http://www.runoob.com/linux/linux-shell.html">Shell脚本教程</a></p>
-<h1 id="鸟哥PDF下载"><a href="#鸟哥PDF下载" class="headerlink" title="鸟哥PDF下载"></a>鸟哥PDF下载</h1><p><a href="/Download/LinuxBasic.pdf">Linux-Basic</a></p>
-<p><a href="/Download/LinuxWeb.pdf">Linux-web</a></p>
-<p>个人觉得为了快速达到使用目的</p>
-<p>还是实践一下来得快～</p>
-
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/Ubuntu设置默认打开方式" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/26/2021/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/">Ubuntu设置默认打开方式</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/03/26/2021/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/" class="article-date">
-  <time datetime="2019-03-25T20:40:17.000Z" itemprop="datePublished">2019-03-26</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p>Ubuntu使用技巧，认定默认打开方式。</p>
-                
-                    <p class="article-more-link">
-                        <a href="/2019/03/26/2021/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/#more">阅读全文</a>
-                    </p>
-                
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/Create-shortcut-in-Ubuntu" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/26/2021/Create-shortcut-in-Ubuntu/">Create shortcut in Ubuntu</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/03/26/2021/Create-shortcut-in-Ubuntu/" class="article-date">
-  <time datetime="2019-03-25T20:28:01.000Z" itemprop="datePublished">2019-03-26</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p> 在Linux下创建快捷方式的小技巧。当然现在19.04版本之后，我们可以更简单的通过右击目标文件，点击创建连接就可以创建一个新的快捷方式了。</p>
-                
-                    <p class="article-more-link">
-                        <a href="/2019/03/26/2021/Create-shortcut-in-Ubuntu/#more">阅读全文</a>
-                    </p>
-                
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-    <article id="[post]-2021/8086-Quick-Start" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/19/2021/8086-Quick-Start/">8086 Quick Start</a>
-    </h1>
-  
-
-                <div class="article-meta">
-                    <a href="/2019/03/19/2021/8086-Quick-Start/" class="article-date">
-  <time datetime="2019-03-18T22:17:17.000Z" itemprop="datePublished">2019-03-19</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Programming-language/">Programming language</a>►<a class="article-category-link" href="/categories/Programming-language/Assembly/">Assembly</a>
-  </div>
-
-                </div>
-            </header>
-        
-        <div class="article-entry" itemprop="articleBody">
-            
-                <p>安装emu8086 并在该环境下写简单的汇编程序。一个快速上手的教程。旨在实用，旨在实用。</p>
-                
-                    <p class="article-more-link">
-                        <a href="/2019/03/19/2021/8086-Quick-Start/#more">阅读全文</a>
-                    </p>
-                
-            
-        </div>
-        
-    </div>
-    
-</article>
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
-    </nav>
-  
-</section>
-      
-      <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/">Architechture</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/">Compiler</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/FP/">FP</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Dataflow/">Dataflow</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Parallel/">Parallel</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/DSL/">DSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/">LLVM</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/">Dataflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/DARTS/">DARTS</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/Translator/">Translator</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/">Cuda</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/">Parallel</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/Develop/">Develop</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/">Develop</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Graphics/">Graphics</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/">Parallel/Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/Develop-Applications-Lammps/">Develop/Applications/Lammps</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Tutorial/">Tutorial</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/">ICS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/TA/">TA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/">LLVM</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/">Qemu</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/Compiler/">Compiler</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/">Tricks</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/Tools/">Tools</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/">Parallel</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/">Study</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/Parallel-MPI/">Parallel/MPI</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/">Develop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/">Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/Deeplearning/">Deeplearning</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/Develop/">Develop</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Work/UI/">UI</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architechture/" rel="tag">Architechture</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cuda/" rel="tag">Cuda</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DARTS/" rel="tag">DARTS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSL/" rel="tag">DSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deeplearning/" rel="tag">Deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop/" rel="tag">Develop</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications/" rel="tag">Develop/Applications</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications-Lammps/" rel="tag">Develop/Applications/Lammps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FP/" rel="tag">FP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/" rel="tag">Graphics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel/" rel="tag">Parallel</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-Cuda/" rel="tag">Parallel/Cuda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-MPI/" rel="tag">Parallel/MPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qemu/" rel="tag">Qemu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study/" rel="tag">Study</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TA/" rel="tag">TA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translator/" rel="tag">Translator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tricks/" rel="tag">Tricks</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/" rel="tag">Tutorial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/" rel="tag">Work</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Architechture/" style="font-size: 15px;">Architechture</a> <a href="/tags/Assembly/" style="font-size: 11.25px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.25px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.5px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Compiler/" style="font-size: 16.25px;">Compiler</a> <a href="/tags/Cuda/" style="font-size: 12.5px;">Cuda</a> <a href="/tags/DARTS/" style="font-size: 10px;">DARTS</a> <a href="/tags/DSL/" style="font-size: 12.5px;">DSL</a> <a href="/tags/Dataflow/" style="font-size: 13.75px;">Dataflow</a> <a href="/tags/Deeplearning/" style="font-size: 10px;">Deeplearning</a> <a href="/tags/Develop/" style="font-size: 16.25px;">Develop</a> <a href="/tags/Develop-Applications/" style="font-size: 11.25px;">Develop/Applications</a> <a href="/tags/Develop-Applications-Lammps/" style="font-size: 10px;">Develop/Applications/Lammps</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/FP/" style="font-size: 10px;">FP</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Graphics/" style="font-size: 10px;">Graphics</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/ICS/" style="font-size: 10px;">ICS</a> <a href="/tags/LLVM/" style="font-size: 12.5px;">LLVM</a> <a href="/tags/Latex/" style="font-size: 11.25px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.5px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.5px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.25px;">Network</a> <a href="/tags/Parallel/" style="font-size: 13.75px;">Parallel</a> <a href="/tags/Parallel-Cuda/" style="font-size: 10px;">Parallel/Cuda</a> <a href="/tags/Parallel-MPI/" style="font-size: 10px;">Parallel/MPI</a> <a href="/tags/Programming-language/" style="font-size: 16.25px;">Programming language</a> <a href="/tags/Qemu/" style="font-size: 10px;">Qemu</a> <a href="/tags/Rust/" style="font-size: 16.25px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/Study/" style="font-size: 10px;">Study</a> <a href="/tags/System/" style="font-size: 18.75px;">System</a> <a href="/tags/TA/" style="font-size: 10px;">TA</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Tools/" style="font-size: 12.5px;">Tools</a> <a href="/tags/Translator/" style="font-size: 10px;">Translator</a> <a href="/tags/Tricks/" style="font-size: 12.5px;">Tricks</a> <a href="/tags/Tutorial/" style="font-size: 10px;">Tutorial</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 16.25px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/07/01/2022/2205-omp2tbb%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">2205-omp2tbb开发笔记</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2022/05/16/2022/2205-Lammps-EFF-GPU-version-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B01/">2205-Lammps-EFF GPU version 开发笔记1</a>
-          </li>
         
-          <li>
-            <a href="/2022/05/13/2022/2205-MPI-and-timer/">2205-MPI and timer</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/26/2022/2204-qinitial/">2204-qinitial</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/">2203-OMP2CD重新实现</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
     </div>
   </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Links</h3>
-    <div class="widget">
-      <ul>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-      
-    </div>
-    <footer id="footer">
-    
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2022 Chivier Humber<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-            .
-            Theme by <a href="https://github.com/dwqs/nx" target="_blank">nx</a>
-        </div>
-    </div>
-</footer>
-  </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
 </nav>
-  <!-- totop start -->
-<div id="totop">
-<a title="totop"><img src="/img/scrollup.png"/></a>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Chivier&#39;s Blog"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
 </div>
 
-<!-- totop end -->
-
-
-
-
-
-<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-
-
-
-
-
-<script src="/js/script.js"></script>
-
-
 </div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/" target="_self">
+          Logic-谓词演算-1
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/" target="_self">
+        <div>
+          介绍谓词演算
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-16 08:27" pubdate>
+              2019-04-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Maths/" class="category-chain-item">Maths</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Maths/Logic/" class="category-chain-item">Logic</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Maths/">#Maths</a>
+            
+              <a href="/tags/Logic/">#Logic</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/10/2021/Operating-System-Concept-1/" target="_self">
+          Operating System Concept - 1
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/04/10/2021/Operating-System-Concept-1/" target="_self">
+        <div>
+          OS A piece of software that manages a computer, making computer’s hardwareresources accessible to software through a consistent set of interfaces.  并发(Concurrence) 共享(Sharing)  虚拟(Virtual)  异步(Asyn
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-10 14:56" pubdate>
+              2019-04-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Operating-System/" class="category-chain-item">Operating System</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Operating-System/Concepts/" class="category-chain-item">Concepts</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/System/">#System</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/09/2021/Rust-Learning-4/" target="_self">
+          Rust-Learning-4
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/04/09/2021/Rust-Learning-4/" target="_self">
+        <div>
+          Rust学习进阶
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-09 10:47" pubdate>
+              2019-04-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Programming-language/" class="category-chain-item">Programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Programming-language/Rust/" class="category-chain-item">Rust</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Rust/">#Rust</a>
+            
+              <a href="/tags/Programming-language/">#Programming language</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/07/2021/Rust-Learning-3/" target="_self">
+          Rust-Learning-3
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/04/07/2021/Rust-Learning-3/" target="_self">
+        <div>
+          Rust学习进阶
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-07 22:26" pubdate>
+              2019-04-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Programming-language/" class="category-chain-item">Programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Programming-language/Rust/" class="category-chain-item">Rust</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Rust/">#Rust</a>
+            
+              <a href="/tags/Programming-language/">#Programming language</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/05/2021/Rust-Learning-2/" target="_self">
+          Rust-Learning-2
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/04/05/2021/Rust-Learning-2/" target="_self">
+        <div>
+          Rust学习篇，介绍Rust的基础知识
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-05 17:31" pubdate>
+              2019-04-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Programming-language/" class="category-chain-item">Programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Programming-language/Rust/" class="category-chain-item">Rust</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Rust/">#Rust</a>
+            
+              <a href="/tags/Programming-language/">#Programming language</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/05/2021/Rust-Learning-1/" target="_self">
+          Rust-Learning-1
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/04/05/2021/Rust-Learning-1/" target="_self">
+        <div>
+          Rust学习篇，介绍Rust的基础知识
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-05 15:31" pubdate>
+              2019-04-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Programming-language/" class="category-chain-item">Programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Programming-language/Rust/" class="category-chain-item">Rust</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Rust/">#Rust</a>
+            
+              <a href="/tags/Programming-language/">#Programming language</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/04/02/2021/Linux-%E5%85%A5%E9%97%A8%E8%B5%84%E6%BA%90/" target="_self">
+          Linux入门资源
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/04/02/2021/Linux-%E5%85%A5%E9%97%A8%E8%B5%84%E6%BA%90/" target="_self">
+        <div>
+          Linux入门资源分享。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-04-02 03:38" pubdate>
+              2019-04-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Linux/Linux-Learning/" class="category-chain-item">Linux Learning</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+              <a href="/tags/System/">#System</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/03/26/2021/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/" target="_self">
+          Ubuntu设置默认打开方式
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/03/26/2021/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/" target="_self">
+        <div>
+          介绍关于 Linux 的知识。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-03-26 04:40" pubdate>
+              2019-03-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Linux/Linux-tricks/" class="category-chain-item">Linux tricks</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/03/26/2021/Create-shortcut-in-Ubuntu/" target="_self">
+          Create shortcut in Ubuntu
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/03/26/2021/Create-shortcut-in-Ubuntu/" target="_self">
+        <div>
+          介绍关于 Linux 的知识。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-03-26 04:28" pubdate>
+              2019-03-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Linux/Linux-tricks/" class="category-chain-item">Linux tricks</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux/">#Linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2019/03/19/2021/8086-Quick-Start/" target="_self">
+          8086 Quick Start
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2019/03/19/2021/8086-Quick-Start/" target="_self">
+        <div>
+          安装emu8086 并在该环境下写简单的汇编程序
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2019-03-19 06:17" pubdate>
+              2019-03-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Programming-language/" class="category-chain-item">Programming language</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Programming-language/Assembly/" class="category-chain-item">Assembly</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/COD/">#COD</a>
+            
+              <a href="/tags/Assembly/">#Assembly</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>

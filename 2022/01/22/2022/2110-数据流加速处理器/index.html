@@ -1,12 +1,21 @@
 
+
 <!DOCTYPE html>
-<html>
+<html lang="" data-default-color-scheme=auto>
+
+
+
 <head>
-    <meta charset="utf-8">
-    
-    <title>2110-数据流加速处理器 | Chivier&#39;s Blog</title>
-    <base href="https://dwqs.github.io" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chivier Humber">
+  <meta name="keywords" content="">
+  
     <meta name="description" content="综述">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2110-数据流加速处理器">
@@ -36,105 +45,257 @@
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Architechture">
 <meta property="article:tag" content="Dataflow">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chivier.github.io/2022/01/22/2022/2110-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8A%A0%E9%80%9F%E5%A4%84%E7%90%86%E5%99%A8/image1.png">
-    
-    
-    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    
-    
-<link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  <title>2110-数据流加速处理器 - Chivier&#39;s Blog</title>
 
-    <link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
-    <![endif]-->
-    
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"chivier.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
 <body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-    <span id="forkongithub">
-        <a target="_blank" rel="noopener" href="https://github.com/dwqs/nx">Fork me on GitHub</a>
-    </span>
-    <div id="banner"></div>
-    <div id="header-outer" class="outer">
-        <div id="header-title" class="inner">
-            <h1 id="logo-wrap">
-                <a href="/" id="logo">Chivier&#39;s Blog</a>
-            </h1>
-            
-        </div>
-        <div id="header-inner" class="inner">
-            <nav id="main-nav">
-                <a id="main-nav-toggle" class="nav-icon"></a>
-                
-                <a class="main-nav-link" href="/">Home
-                    <i class="fa fa-home "></i>
-                </a>
-                
-                <a class="main-nav-link" href="/archives">Archives
-                    <i class="fa fa-archive "></i>
-                </a>
-                
-                <a class="main-nav-link" href="/about">About
-                    <i class="fa fa-user "></i>
-                </a>
-                
-            </nav>
-            <nav id="sub-nav">
-                <a id="nav-search-btn" title="Search">
-                    <i class="fa fa-search"></i>
-                </a>
-            </nav>
-            <div id="search-form-wrap">
-                <form action="https://www.google.com.hk/search" method="get" accept-charset="utf-8" class="search-form" target="_blank">
-                    <input name="q" type=hidden value="site:dwqs.github.io">
-                    <input type="search" name="q" maxlength="20" class="search-form-input" placeholder="Search">
-                    <input type="submit" value="" class="search-form-submit">
-                    <input name="sourceid" type=hidden value="chrome">
-                    <input name="aqs" type="hidden" value="chrome..69i57.2732j0j9">
-                    <input name="es_sm" type=hidden value="91">
-                    <input name="ie" type=hidden value="UTF-8">
-                    <input type="hidden" name="si" value="chivier.github.io">
-                </form>
-            </div>
-        </div>
-    </div>
-</header>
-    <div class="outer">
-      <section id="main"><article id="[post]-2022/2110-数据流加速处理器" class="article article-type-[post]" itemscope
-         itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-  
-    <h1 class="article-title" itemprop="name">
-      2110-数据流加速处理器
-    </h1>
   
 
-                <div class="article-meta">
-                    <a href="/2022/01/22/2022/2110-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8A%A0%E9%80%9F%E5%A4%84%E7%90%86%E5%99%A8/" class="article-date">
-  <time datetime="2022-01-21T18:46:15.000Z" itemprop="datePublished">2022-01-22</time>
-</a>
-                    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Architechture/">Architechture</a>►<a class="article-category-link" href="/categories/Architechture/Dataflow/">Dataflow</a>
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chivier</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2110-数据流加速处理器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-22 02:46" pubdate>
+          January 22, 2022 am
+        </time>
+      </span>
+    
   </div>
 
-                </div>
-            </header>
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
         
-        <div class="article-entry" itemprop="articleBody">
+          undefined words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          NaN mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">2110-数据流加速处理器</h1>
             
+            
+              <div class="markdown-body">
+                
                 <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><span id="more"></span>
 
 <p>近年来数据流处理器需求增长，传统冯诺依曼架构不再够用。</p>
@@ -148,22 +309,22 @@
 <p>原因很简单：通过利用并发性，这些属性有助于非常高效的硬件实现。</p>
 <p>现有的数据并行硬件解决方案在这些工作负载上表现良好，但为了更通用，为了取代特定领域的硬件，牺牲了太多的效率。</p>
 <p>例如，短向量 SIMD 依赖于低效的通用流水来进行控制和地址生成，但加速代码通常没有复杂的控制和内存访问。 GPU 使用硬件来隐藏内存延迟以实现大规模多线程，但加速代码的内存访问模式通常可以在没有多线程的情况下轻松解耦。</p>
-<img src="image1.png" width="80%" height="80%">
+<img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>可重构的粗粒组成架构（CGRA）和专用的地址空间（Scratchpad）</p>
-<p>图1：<br><img src="image2.png" width="80%" height="80%"><br>图2：<br><img src="image3.png" width="80%" height="80%"><br>图3：<br><img src="image4.png" width="80%" height="80%"></p>
+<p>图1：<br><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"><br>图2：<br><img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"><br>图3：<br><img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>红色箭头表面着之间存在依赖关系，这里不能同时执行。</p>
 <p>当端口A和端口B可用，则计算开始。同时，最后两个命令生成并排队。一旦计算的一个实例完成，所计算的数据就开始流传输到内存。</p>
 <p>适应数据流的特征：<br><strong>1. 应该保证DFG图应该保证足够大<br>2. 数据流的流动应该尽可能的“长”<br>3. 重用的数据应该保证被scratchpad记录，以保证减少访存</strong></p>
 <p>理解：scratchpad = Cache，可以根据应用定制大小</p>
 <p>应该设计的接口范例：</p>
-<img src="image5.png" width="80%" height="80%">
+<img src="image5.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>例子：</p>
-<img src="image6.png" width="80%" height="80%">
+<img src="image6.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>重新回到 Scoreboard 设计</p>
-<img src="image7.png" width="80%" height="80%">
+<img src="image7.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
 <p>这个图非常关键，应该就是OneAPI的设计逻辑，因为OneAPI引用了ISCA09和ISCA17的文章和此文均有关联。</p>
 <p>在之前的文章中，不止一次提到了数据流处理器这个“古老”的设计理念。根据我所掌握的历史来看，数据流思想的诞生应该从1974年，在ISCA上由Dennis 和Misunas在“A Preliminary Architecture for a Basic Data Flow Processor”中提及。在之后的若干年里，Treleaven （ACM Computing Surveys1982） ，Veen （ACM Computing Surveys1986）,Gurd （CACM 1985 ），Arvind and Nikhil （IEEE TC 1990）,Lee （IEEE Computer 1994 ）中也数次提及这个概念。但是由于控制流结构在通用处理器中的商业模式已经较为稳定，数据流的研究一直以来被视为非主流的设计方案。直到深度学习处理器这类逐渐向火以来，数据流的概念又被当下的研究者重新研究。本文主要对于ISCA_2017中的一文写些文中的精髓部分的理解。</p>
@@ -175,15 +336,15 @@
 <li>  <strong>专用（便签本）地址空间，可以有效地重复使用数据</strong></li>
 </ul>
 <p>基于以上的三点抽象原则：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-23f61f9b313817e6db1b0586a6bf27a4_720w.jpg"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-23f61f9b313817e6db1b0586a6bf27a4_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>上图描述了流数据流的程序员视图，包括数据流图本身，以及用于内存访问，读取重用和递归的显式流通信。抽象的表达了直观的硬件实现；</p>
-<p><img src="https://pic2.zhimg.com/80/v2-9d1391a4b130c2b09865bcea0d7fd439_720w.jpg"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-9d1391a4b130c2b09865bcea0d7fd439_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>上图表示的是本文中的high-level的设计。它由可重构的粗粒组成架构（CGRA）和专用的地址空间（Scratchpad），通过宽总线连接至内存。它由一个简单的控制核心进行控制，该控制核心发送流命令由内存控制引擎，暂存器控制引擎和CGRA同时执行。这个基于流的接口的粗颗粒性质使内核相当简单而不牺牲高度并行的执行。流访问模式和受限的内存语义也使高效地址生成和协调硬件。相对于特定领域的体系结构，流数据流处理器可以重新配置其数据路径和内存流，因此更普遍和适应性强。</p>
 <ul>
 <li>  <strong>初探Stream-Dataflow架构</strong></li>
 </ul>
 <p>本文提出的流式数据流的架构主要由Stream组件和dataflow组件构成。其中Stream组件提供类似于vertor运算的与内存交互的接口（这是vertor架构的优势，下图b），dataflow组件提供空间上的计算规范（这是dataflow的优势，下图a）。</p>
-<p><img src="https://pic2.zhimg.com/80/v2-92918df12ab536c8461623e3b9c4b115_720w.jpg"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-92918df12ab536c8461623e3b9c4b115_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>Stream-Dataflow 流式数据流的抽象架构</p>
 <p>上图主要设计思想是stream接口提供对一组有序的stream命令的支持，该命令嵌入在现有的Von Neu mann ISA中。流命令指定长和并发的内存访问模式。可表达的模式包括连续的，跨步的和间接的。我们添加了一个单独的“Scratch”地址空间，该地址空间可用于有效收集和访问重复使用的数据。最后，数据流接口通过数据流图（DFG）公开指令及其相关性。 DFG的输入和输出接口被命名为具有可配置宽度的端口，它们是流命令的源和目的地。</p>
 <p><strong>Micro-architecture设计思想</strong></p>
@@ -200,15 +361,15 @@
 <li>  <strong>编程与执行模型</strong></li>
 </ul>
 <p>Stream-Dataflow由配置信息，数据流动，以及barrier命令组成。在通用的程序当中，可以通过转换变为数据流的代码，实例如下：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-8f58bf4abfa55fdb918e4d4b47dc84fe_720w.jpg"></p>
+<p><img src="https://pic3.zhimg.com/80/v2-8f58bf4abfa55fdb918e4d4b47dc84fe_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>在图a中，内存访问了a，b和r。根据架构a的乘加运算关系可将左侧的代码转换为右侧的代码。在下面的b图中，是上述程序的执行过程。程序均以命令开始启动数据开始计算，红色箭头表面着之间存在依赖关系，这里不能同时执行。当端口A和端口B可用（端口宽度为3），则计算开始。同时，最后两个命令生成并排队。一旦计算的一个实例完成，所计算的数据就开始流传输到内存。当所有数据都释放到内存系统中时，屏障命令的条件得到满足，控制核心也将恢复。为了获得更好的性能，应该保证DFG图应该保证足够大，这样可以满足尽可能多的指令并行运算。第二，数据流的流动应该尽可能的“长”。第三，重用的数据应该保证被scratchpad记录，以保证减少访存。</p>
 <ul>
 <li>  <strong>ISA指令集</strong></li>
 </ul>
 <p>指令集的设计代表了体系结构设计的灵魂。下图是Stream-Dataflow支持的指令集。</p>
-<p><img src="https://pic1.zhimg.com/80/v2-6e53efc23e1de480e98c5c59c9ae2888_720w.jpg"></p>
+<p><img src="https://pic1.zhimg.com/80/v2-6e53efc23e1de480e98c5c59c9ae2888_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>在上面的表格中，访存的地址的格式文中作者进行了特别的设计使得更符合数据流思想。</p>
-<p><img src="https://pic2.zhimg.com/80/v2-2afcff086137920e15c5625aefe3e54d_720w.jpg"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-2afcff086137920e15c5625aefe3e54d_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>这样的模式是二维的仿射访问，由访问大小access size（最低级别访问的大小），跨步stride size（连续访问之间的大小）和前进的步数number of strides。对于不同情况下的（linear，Strided等）可以映射成下面图那种形式。</p>
 <ul>
 <li>  <strong>微架构的设计</strong></li>
@@ -219,7 +380,7 @@
 <li> 充分利用ISA提供的并发性。</li>
 </ol>
 <p>根据以上的两个原则，可以设计出：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-691fe204b4dceb95ae415d2f56c485f9_720w.jpg"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-691fe204b4dceb95ae415d2f56c485f9_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>在整体上看来，该设计在生成流命令的时候考虑了低功耗控制内核，一组与引擎有效连接并移动数据的流引擎，以及用于高效并行计算的深层管道可重配置数据流基板。</p>
 <p>详细来说，主要由以下五种组件构成：</p>
 <ol>
@@ -234,7 +395,7 @@
 <li>  <strong>流调度与控制核心</strong></li>
 </ul>
 <p>流分派器的作用是增强对流（和屏障命令）的资源依赖性，并通过向它们发送命令来协调流引擎的执行。这部分的内部架构设计如下：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-58dd48b623358ac9139822ce26585ead_720w.jpg"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-58dd48b623358ac9139822ce26585ead_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>从图中可以看出，来自控制核心的流请求被排队<strong>（Stream Cmd Queue）</strong>，直到它们可以被命令解码器处理为止。该单元与资源状态检查逻辑进行协商，以确定是否可以发出命令，如果可以，则将其出队。屏障命令阻止核心发出进一步的流命令，直到解决屏障条件为止。</p>
 <ul>
 <li>  <strong>资源管理</strong></li>
@@ -246,168 +407,357 @@
 </ul>
 <p>流引擎管理组件通过被许多激活流对各种资源的并发访问（内存接口，暂存器，输出向量端口）。通过从流分配器接收命令来启动流引擎。然后，它们在流的生命周期内协调地址生成和数据传输，并最终在释放相应的向量端口时通知调度程序（当流完成的时候）。流分配器确保并发流对其向量端口具有专用访问权限。未连接到CGRA的矢量端口促进了间接访问，该端口可缓冲运行中的地址。</p>
 <p>整体上来说，该架构的设计就大致如此。他的效果评估如下：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-2cac1ba2f30995f0e77333a817347ec6_720w.jpg"></p>
+<p><img src="https://pic3.zhimg.com/80/v2-2cac1ba2f30995f0e77333a817347ec6_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>55nm下的仿真结果，对比功耗与面积。</p>
-<p><img src="https://pic4.zhimg.com/80/v2-64503393c16ff8911e3114a34bf3310f_720w.jpg"></p>
+<p><img src="https://pic4.zhimg.com/80/v2-64503393c16ff8911e3114a34bf3310f_720w.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>运行DNN时候与GPU,Diannao的性能比较。</p>
 <p><strong>总结：</strong></p>
 <p>本文提出了一种新的执行模型和架构，流式数据流架构，它提供了抽象，可以平衡矢量和空间体系结构之间的折衷，并在重要的一类数据处理工作负载上获得二者的专业化能力。</p>
 <p>我们设想，这种架构的范式可以具有根本性通过减少专用模块的数量来简化对未来芯片的影响。相反，流数据流类型的结构可以与CPU和GPU处理器并排放置，并具有综合功能当程序遇到适当的阶段以进行高效加载时，就可以快速运行。这不仅减少了面积和复杂性大量的专用加速器，还可以减轻不断增长的设计和验证成本。在如此广阔的环境中，开发有效的编译工具以平衡这些架构所提供的并行性和数据重用之间的复杂权衡至关重要。为流数据流体系结构提供动态编译支持可以提高特定架构的能效。</p>
 
+                
+              </div>
             
-        </div>
-        
-    </div>
-    
-    
-<nav id="article-nav">
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-    <a href="/2022/01/31/2022/2201-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%BC%96%E8%BE%91%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
         
-          2201-环境变量编辑器
-        
+  <a href="/categories/Architechture/" class="category-chain-item">Architechture</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Architechture/Dataflow/" class="category-chain-item">Dataflow</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Architechture/">#Architechture</a>
+      
+        <a href="/tags/Dataflow/">#Dataflow</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2110-数据流加速处理器</div>
+      <div>https://chivier.github.io/2022/01/22/2022/2110-数据流加速处理器/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Chivier Humber</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>January 22, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
       </div>
-    </a>
-  
-  
-    <a href="/2022/01/22/2022/2110-OP-DSL/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">2110-OP DSL</div>
-    </a>
-  
-</nav>
-
-    
-</article>
-
-</section>
-      
-      <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/">Architechture</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/">Compiler</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/FP/">FP</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Dataflow/">Dataflow</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Parallel/">Parallel</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/DSL/">DSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/">LLVM</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/">Dataflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/DARTS/">DARTS</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/Translator/">Translator</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/">Cuda</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/">Parallel</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/Develop/">Develop</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/">Develop</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Graphics/">Graphics</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/">Parallel/Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/Develop-Applications-Lammps/">Develop/Applications/Lammps</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Tutorial/">Tutorial</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/">ICS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/TA/">TA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/">LLVM</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/">Qemu</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/Compiler/">Compiler</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/">Tricks</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/Tools/">Tools</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/">Parallel</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/">Study</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/Parallel-MPI/">Parallel/MPI</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/">Develop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/">Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/Deeplearning/">Deeplearning</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/Develop/">Develop</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Work/UI/">UI</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
+    <div class="license-icon iconfont"></div>
   </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architechture/" rel="tag">Architechture</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cuda/" rel="tag">Cuda</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DARTS/" rel="tag">DARTS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSL/" rel="tag">DSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deeplearning/" rel="tag">Deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop/" rel="tag">Develop</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications/" rel="tag">Develop/Applications</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications-Lammps/" rel="tag">Develop/Applications/Lammps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FP/" rel="tag">FP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/" rel="tag">Graphics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel/" rel="tag">Parallel</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-Cuda/" rel="tag">Parallel/Cuda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-MPI/" rel="tag">Parallel/MPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qemu/" rel="tag">Qemu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study/" rel="tag">Study</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TA/" rel="tag">TA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translator/" rel="tag">Translator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tricks/" rel="tag">Tricks</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/" rel="tag">Tutorial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/" rel="tag">Work</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Architechture/" style="font-size: 15px;">Architechture</a> <a href="/tags/Assembly/" style="font-size: 11.25px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.25px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.5px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Compiler/" style="font-size: 16.25px;">Compiler</a> <a href="/tags/Cuda/" style="font-size: 12.5px;">Cuda</a> <a href="/tags/DARTS/" style="font-size: 10px;">DARTS</a> <a href="/tags/DSL/" style="font-size: 12.5px;">DSL</a> <a href="/tags/Dataflow/" style="font-size: 13.75px;">Dataflow</a> <a href="/tags/Deeplearning/" style="font-size: 10px;">Deeplearning</a> <a href="/tags/Develop/" style="font-size: 16.25px;">Develop</a> <a href="/tags/Develop-Applications/" style="font-size: 11.25px;">Develop/Applications</a> <a href="/tags/Develop-Applications-Lammps/" style="font-size: 10px;">Develop/Applications/Lammps</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/FP/" style="font-size: 10px;">FP</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Graphics/" style="font-size: 10px;">Graphics</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/ICS/" style="font-size: 10px;">ICS</a> <a href="/tags/LLVM/" style="font-size: 12.5px;">LLVM</a> <a href="/tags/Latex/" style="font-size: 11.25px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.5px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.5px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.25px;">Network</a> <a href="/tags/Parallel/" style="font-size: 13.75px;">Parallel</a> <a href="/tags/Parallel-Cuda/" style="font-size: 10px;">Parallel/Cuda</a> <a href="/tags/Parallel-MPI/" style="font-size: 10px;">Parallel/MPI</a> <a href="/tags/Programming-language/" style="font-size: 16.25px;">Programming language</a> <a href="/tags/Qemu/" style="font-size: 10px;">Qemu</a> <a href="/tags/Rust/" style="font-size: 16.25px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/Study/" style="font-size: 10px;">Study</a> <a href="/tags/System/" style="font-size: 18.75px;">System</a> <a href="/tags/TA/" style="font-size: 10px;">TA</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Tools/" style="font-size: 12.5px;">Tools</a> <a href="/tags/Translator/" style="font-size: 10px;">Translator</a> <a href="/tags/Tricks/" style="font-size: 12.5px;">Tricks</a> <a href="/tags/Tutorial/" style="font-size: 10px;">Tutorial</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 16.25px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
-    </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/31/2022/2201-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%BC%96%E8%BE%91%E5%99%A8/" title="2201-环境变量编辑器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2201-环境变量编辑器</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/22/2022/2110-OP-DSL/" title="2110-OP DSL">
+                        <span class="hidden-mobile">2110-OP DSL</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/07/01/2022/2205-omp2tbb%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">2205-omp2tbb开发笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/16/2022/2205-Lammps-EFF-GPU-version-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B01/">2205-Lammps-EFF GPU version 开发笔记1</a>
-          </li>
-        
-          <li>
-            <a href="/2022/05/13/2022/2205-MPI-and-timer/">2205-MPI and timer</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/26/2022/2204-qinitial/">2204-qinitial</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/">2203-OMP2CD重新实现</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Links</h3>
-    <div class="widget">
-      <ul>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-      
-    </div>
-    <footer id="footer">
-    
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2022 Chivier Humber<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-            .
-            Theme by <a href="https://github.com/dwqs/nx" target="_blank">nx</a>
+            
+          </article>
         </div>
+      </div>
     </div>
-</footer>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
   </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav>
-  <!-- totop start -->
-<div id="totop">
-<a title="totop"><img src="/img/scrollup.png"/></a>
 </div>
 
-<!-- totop end -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
 
 
 
 
 
-<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
 
+    
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-
-<script src="/js/script.js"></script>
-
-
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
 </div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>
