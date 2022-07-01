@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Git使用速成 | Chivier&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="介绍关于Linux下Git的知识。">
+    <meta charset="utf-8">
+    
+    <title>Git使用速成 | Chivier&#39;s Blog</title>
+    <base href="https://dwqs.github.io" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="介绍关于Linux下Git的知识。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git使用速成">
 <meta property="og:url" content="https://chivier.github.io/2019/03/17/2021/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/index.html">
@@ -19,17 +20,18 @@
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternative" href="https://github.com/Chivier" title="Chivier&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
+    
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    
+    
 <link rel="stylesheet" href="/css/style.css">
 
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-  
+    <link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+    
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
@@ -39,81 +41,83 @@
 <div id="container">
   <div id="wrap">
     <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Chivier&#39;s Blog</a>
-      </h1>
-      
+    <span id="forkongithub">
+        <a target="_blank" rel="noopener" href="https://github.com/dwqs/nx">Fork me on GitHub</a>
+    </span>
+    <div id="banner"></div>
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <h1 id="logo-wrap">
+                <a href="/" id="logo">Chivier&#39;s Blog</a>
+            </h1>
+            
+        </div>
+        <div id="header-inner" class="inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                <a class="main-nav-link" href="/">Home
+                    <i class="fa fa-home "></i>
+                </a>
+                
+                <a class="main-nav-link" href="/archives">Archives
+                    <i class="fa fa-archive "></i>
+                </a>
+                
+                <a class="main-nav-link" href="/about">About
+                    <i class="fa fa-user "></i>
+                </a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <a id="nav-search-btn" title="Search">
+                    <i class="fa fa-search"></i>
+                </a>
+            </nav>
+            <div id="search-form-wrap">
+                <form action="https://www.google.com.hk/search" method="get" accept-charset="utf-8" class="search-form" target="_blank">
+                    <input name="q" type=hidden value="site:dwqs.github.io">
+                    <input type="search" name="q" maxlength="20" class="search-form-input" placeholder="Search">
+                    <input type="submit" value="" class="search-form-submit">
+                    <input name="sourceid" type=hidden value="chrome">
+                    <input name="aqs" type="hidden" value="chrome..69i57.2732j0j9">
+                    <input name="es_sm" type=hidden value="91">
+                    <input name="ie" type=hidden value="UTF-8">
+                    <input type="hidden" name="si" value="chivier.github.io">
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-          <a class="main-nav-link" href="/Whoami">About</a>
-        
-          <a class="main-nav-link" href="/categories">Catagories</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" target="_blank" rel="noopener" href="https://github.com/Chivier" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-          <input type="submit" value="" class="search-form-submit">
-          <input name=tn type=hidden value="bds">
-          <input name=cl type=hidden value="3">
-          <input name=ct type=hidden value="2097152">
-          <input type="hidden" name="si" value="chivier.github.io">
-        </form>
-      </div>
-    </div>
-  </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="[post]-2021/Git使用速成" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/17/2021/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/" class="article-date">
-  <time datetime="2019-03-16T22:18:17.000Z" itemprop="datePublished">2019-03-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+      <section id="main"><article id="[post]-2021/Git使用速成" class="article article-type-[post]" itemscope
+         itemprop="blogPost">
+    <div class="article-inner">
         
+        
+            <header class="article-header">
+                
   
     <h1 class="article-title" itemprop="name">
       Git使用速成
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      <!-- Table of Contents -->
-      
-      <div id="toc" class="toc-article">
-        <strong class="toc-title">目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E4%BD%BF%E7%94%A8"><span class="toc-text">Git使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85git"><span class="toc-text">安装git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">创建版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%92%8C%E4%B8%8A%E4%BC%A0"><span class="toc-text">添加文件和上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="toc-text">删除文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="toc-text">版本回退</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">设置远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-text">创建与合并分支</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE"><span class="toc-text">创建标签</span></a></li></ol></li></ol>
-      </div>
-      
-        <p> 简单的Git使用，速成教程。</p>
+                <div class="article-meta">
+                    <a href="/2019/03/17/2021/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/" class="article-date">
+  <time datetime="2019-03-16T22:18:17.000Z" itemprop="datePublished">2019-03-17</time>
+</a>
+                    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>►<a class="article-category-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a>
+  </div>
+
+                </div>
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <p> 简单的Git使用，速成教程。</p>
 <span id="more"></span>
 
 <h1 id="Git使用"><a href="#Git使用" class="headerlink" title="Git使用"></a>Git使用</h1><h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>命令行下使用：<code>sudo apt-get install git </code>即可</p>
@@ -148,21 +152,11 @@
 <li>命令<code>git tag</code>可以查看所有标签。</li>
 </ul>
 
-      
+            
+        </div>
+        
     </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2019/03/17/2021/Git%E4%BD%BF%E7%94%A8%E9%80%9F%E6%88%90/" data-id="ckyma4253000zvhc170dq2uaw" class="article-share-link" data-share="baidu" data-title="Git使用速成">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
+    
     
 <nav id="article-nav">
   
@@ -183,7 +177,7 @@
   
 </nav>
 
-  
+    
 </article>
 
 </section>
@@ -263,10 +257,6 @@
     <div class="widget">
       <ul>
         
-          <li>
-            <a href="https://github.com/Chivier" target="_blank">主题作者</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -276,15 +266,15 @@
       
     </div>
     <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 Chivier Humber<br>
-      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 Chivier Humber<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            .
+            Theme by <a href="https://github.com/dwqs/nx" target="_blank">nx</a>
+        </div>
     </div>
-  </div>
 </footer>
   </div>
   <nav id="mobile-nav">
@@ -293,9 +283,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="/Whoami" class="mobile-nav-link">About</a>
-  
-    <a href="/categories" class="mobile-nav-link">Catagories</a>
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
   <!-- totop start -->
@@ -306,82 +294,12 @@
 <!-- totop end -->
 
 
-<!-- 百度分享 start -->
-
-<div id="article-share-box" class="article-share-box">
-  <div id="bdshare" class="bdsharebuttonbox article-share-links">
-    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
-    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
-    <a class="article-share-more" data-cmd="more" title="更多"></a>
-  </div>
-</div>
-<script>
-  function SetShareData(cmd, config) {
-    if (shareDataTitle && shareDataUrl) {
-      config.bdText = shareDataTitle;
-      config.bdUrl = shareDataUrl;
-    }
-    return config;
-  }
-  window._bd_share_config={
-    "common":{onBeforeClick: SetShareData},
-    "share":{"bdCustomStyle":"/css/bdshare.css"}
-  };
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
-<!-- 百度分享 end -->
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
+<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
-<! -- mathjax config similar to math.stackexchange -->
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-                processEscapes: true
-                    
-}
-  
-        });
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-                  
-}
-    
-        });
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Queue(function() {
-            var all = MathJax.Hub.getAllJax(), i;
-            for(i=0; i < all.length; i += 1) {
-                            all[i].SourceElement().parentNode.className += ' has-jax';
-                                    
-            }
-                
-        });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 

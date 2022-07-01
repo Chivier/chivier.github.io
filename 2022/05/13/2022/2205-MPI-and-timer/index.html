@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>2205-MPI and timer | Chivier&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MPI 和 OpenMP 工作模式">
+    <meta charset="utf-8">
+    
+    <title>2205-MPI and timer | Chivier&#39;s Blog</title>
+    <base href="https://dwqs.github.io" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="MPI 和 OpenMP 工作模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2205-MPI and timer">
 <meta property="og:url" content="https://chivier.github.io/2022/05/13/2022/2205-MPI-and-timer/index.html">
@@ -20,17 +21,18 @@
 <meta property="article:tag" content="Study">
 <meta property="article:tag" content="Parallel&#x2F;MPI">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternative" href="https://github.com/Chivier" title="Chivier&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
+    
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    
+    
 <link rel="stylesheet" href="/css/style.css">
 
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-  
+    <link href="https://cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <![endif]-->
+    
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
@@ -40,81 +42,83 @@
 <div id="container">
   <div id="wrap">
     <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Chivier&#39;s Blog</a>
-      </h1>
-      
+    <span id="forkongithub">
+        <a target="_blank" rel="noopener" href="https://github.com/dwqs/nx">Fork me on GitHub</a>
+    </span>
+    <div id="banner"></div>
+    <div id="header-outer" class="outer">
+        <div id="header-title" class="inner">
+            <h1 id="logo-wrap">
+                <a href="/" id="logo">Chivier&#39;s Blog</a>
+            </h1>
+            
+        </div>
+        <div id="header-inner" class="inner">
+            <nav id="main-nav">
+                <a id="main-nav-toggle" class="nav-icon"></a>
+                
+                <a class="main-nav-link" href="/">Home
+                    <i class="fa fa-home "></i>
+                </a>
+                
+                <a class="main-nav-link" href="/archives">Archives
+                    <i class="fa fa-archive "></i>
+                </a>
+                
+                <a class="main-nav-link" href="/about">About
+                    <i class="fa fa-user "></i>
+                </a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <a id="nav-search-btn" title="Search">
+                    <i class="fa fa-search"></i>
+                </a>
+            </nav>
+            <div id="search-form-wrap">
+                <form action="https://www.google.com.hk/search" method="get" accept-charset="utf-8" class="search-form" target="_blank">
+                    <input name="q" type=hidden value="site:dwqs.github.io">
+                    <input type="search" name="q" maxlength="20" class="search-form-input" placeholder="Search">
+                    <input type="submit" value="" class="search-form-submit">
+                    <input name="sourceid" type=hidden value="chrome">
+                    <input name="aqs" type="hidden" value="chrome..69i57.2732j0j9">
+                    <input name="es_sm" type=hidden value="91">
+                    <input name="ie" type=hidden value="UTF-8">
+                    <input type="hidden" name="si" value="chivier.github.io">
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-          <a class="main-nav-link" href="/Whoami">About</a>
-        
-          <a class="main-nav-link" href="/categories">Catagories</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" target="_blank" rel="noopener" href="https://github.com/Chivier" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-          <input type="submit" value="" class="search-form-submit">
-          <input name=tn type=hidden value="bds">
-          <input name=cl type=hidden value="3">
-          <input name=ct type=hidden value="2097152">
-          <input type="hidden" name="si" value="chivier.github.io">
-        </form>
-      </div>
-    </div>
-  </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="[post]-2022/2205-MPI-and-timer" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/05/13/2022/2205-MPI-and-timer/" class="article-date">
-  <time datetime="2022-05-13T06:31:37.000Z" itemprop="datePublished">2022-05-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Parallel/">Parallel</a>►<a class="article-category-link" href="/categories/Parallel/Study/">Study</a>►<a class="article-category-link" href="/categories/Parallel/Study/Parallel-MPI/">Parallel/MPI</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+      <section id="main"><article id="[post]-2022/2205-MPI-and-timer" class="article article-type-[post]" itemscope
+         itemprop="blogPost">
+    <div class="article-inner">
         
+        
+            <header class="article-header">
+                
   
     <h1 class="article-title" itemprop="name">
       2205-MPI and timer
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      <!-- Table of Contents -->
-      
-      <div id="toc" class="toc-article">
-        <strong class="toc-title">目录</strong>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MPI-%E5%92%8C-OpenMP-%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-text">MPI 和 OpenMP 工作模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MPI%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-text">MPI快速上手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenMPI-%E5%92%8C-MPICH"><span class="toc-text">OpenMPI 和 MPICH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-MPICH"><span class="toc-text">安装 MPICH</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-text">编译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E5%AF%B9%E5%9F%BA%E6%9C%AC%E5%87%BD%E6%95%B0"><span class="toc-text">3对基本函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MPI-Hello-World"><span class="toc-text">MPI Hello World</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPI-Init-amp-MPI-Finalize"><span class="toc-text">MPI_Init &amp; MPI_Finalize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPI-Comm-rank-amp-MPI-Comm-size"><span class="toc-text">MPI_Comm_rank &amp; MPI_Comm_size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPI-Send-amp-MPI-Recv"><span class="toc-text">MPI_Send &amp; MPI_Recv</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPI-%E9%80%9A%E4%BF%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">MPI 通信数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">一般数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPI-PACKED-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">MPI_PACKED 数据类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPI-%E7%82%B9%E5%AF%B9%E7%82%B9%E9%80%9A%E4%BF%A1"><span class="toc-text">MPI 点对点通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E%E9%80%9A%E4%BF%A1%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%80%9A%E4%BF%A1"><span class="toc-text">阻塞通信和非阻塞通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4-%E7%AE%A1%E7%BA%BF%E9%80%9A%E4%BF%A1"><span class="toc-text">流水&#x2F;管线通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E7%BC%93%E5%86%B2"><span class="toc-text">双缓冲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E4%BD%8D%E7%BD%AE%E6%B6%88%E6%81%AF%E6%8E%A2%E6%9F%A5"><span class="toc-text">对位置消息探查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPI-%E9%80%9A%E4%BF%A1%E5%9F%9F"><span class="toc-text">MPI 通信域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MPI-%E9%9B%86%E7%BE%A4%E9%80%9A%E4%BF%A1"><span class="toc-text">MPI 集群通信</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenMP%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-text">OpenMP快速上手</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E4%B9%8B%E5%89%8D"><span class="toc-text">实例之前</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%EF%BC%9Atime"><span class="toc-text">方法1：time</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%952%EF%BC%9Agettimeofday"><span class="toc-text">方法2：gettimeofday</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%953%EF%BC%9Aclock-gettime"><span class="toc-text">方法3：clock_gettime</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%954%EF%BC%9Achrono%E5%BA%93"><span class="toc-text">方法4：chrono库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%955%EF%BC%9Ardtsc"><span class="toc-text">方法5：rdtsc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B1%EF%BC%9A%E4%B8%8D%E9%80%82%E7%94%A8%E5%B9%B6%E8%A1%8C%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">实例1：不适用并行的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MPI%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-text">MPI实现方案</span></a></li></ol></li></ol></li></ol>
-      </div>
-      
-        <h1 id="MPI-和-OpenMP-工作模式"><a href="#MPI-和-OpenMP-工作模式" class="headerlink" title="MPI 和 OpenMP 工作模式"></a>MPI 和 OpenMP 工作模式</h1><span id="more"></span>
+                <div class="article-meta">
+                    <a href="/2022/05/13/2022/2205-MPI-and-timer/" class="article-date">
+  <time datetime="2022-05-13T06:31:37.000Z" itemprop="datePublished">2022-05-13</time>
+</a>
+                    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Parallel/">Parallel</a>►<a class="article-category-link" href="/categories/Parallel/Study/">Study</a>►<a class="article-category-link" href="/categories/Parallel/Study/Parallel-MPI/">Parallel/MPI</a>
+  </div>
+
+                </div>
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+            
+                <h1 id="MPI-和-OpenMP-工作模式"><a href="#MPI-和-OpenMP-工作模式" class="headerlink" title="MPI 和 OpenMP 工作模式"></a>MPI 和 OpenMP 工作模式</h1><span id="more"></span>
 
 
 <p>OpenMP对于共享内存处理更优，但是没有通信的功能，所以MPI可以弥补这一缺点。</p>
@@ -502,21 +506,11 @@
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>如果使用C++，那么使用<code>chrono</code>库是最好的选择，相信STL不会翻大车<br>如果机器由<code>constant tsc</code>特性，那么可以使用rdtsc方法<br>如果没有，那么使用<code>gettimeofday</code>时一个比较稳定的方法</p>
 <h2 id="实例1：不适用并行的例子"><a href="#实例1：不适用并行的例子" class="headerlink" title="实例1：不适用并行的例子"></a>实例1：不适用并行的例子</h2><p>刻意并行化，或者过低的并行层级往往会带来巨大的负优化。这里用一个求和的例子说明。<br>采用如下方式对一个数组求和。</p>
 <h3 id="MPI实现方案"><a href="#MPI实现方案" class="headerlink" title="MPI实现方案"></a>MPI实现方案</h3>
-      
+            
+        </div>
+        
     </div>
-    <footer class="article-footer">
-      
-        <a data-url="https://chivier.github.io/2022/05/13/2022/2205-MPI-and-timer/" data-id="cl342b0th0001wnc1hiap5otg" class="article-share-link" data-share="baidu" data-title="2205-MPI and timer">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Parallel/" rel="tag">Parallel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Parallel-MPI/" rel="tag">Parallel/MPI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study/" rel="tag">Study</a></li></ul>
-
-    </footer>
-  </div>
-  
+    
     
 <nav id="article-nav">
   
@@ -537,7 +531,7 @@
   
 </nav>
 
-  
+    
 </article>
 
 </section>
@@ -617,10 +611,6 @@
     <div class="widget">
       <ul>
         
-          <li>
-            <a href="https://github.com/Chivier" target="_blank">主题作者</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -630,15 +620,15 @@
       
     </div>
     <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 Chivier Humber<br>
-      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2022 Chivier Humber<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            .
+            Theme by <a href="https://github.com/dwqs/nx" target="_blank">nx</a>
+        </div>
     </div>
-  </div>
 </footer>
   </div>
   <nav id="mobile-nav">
@@ -647,9 +637,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="/Whoami" class="mobile-nav-link">About</a>
-  
-    <a href="/categories" class="mobile-nav-link">Catagories</a>
+    <a href="/about" class="mobile-nav-link">About</a>
   
 </nav>
   <!-- totop start -->
@@ -660,82 +648,12 @@
 <!-- totop end -->
 
 
-<!-- 百度分享 start -->
-
-<div id="article-share-box" class="article-share-box">
-  <div id="bdshare" class="bdsharebuttonbox article-share-links">
-    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
-    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
-    <a class="article-share-more" data-cmd="more" title="更多"></a>
-  </div>
-</div>
-<script>
-  function SetShareData(cmd, config) {
-    if (shareDataTitle && shareDataUrl) {
-      config.bdText = shareDataTitle;
-      config.bdUrl = shareDataUrl;
-    }
-    return config;
-  }
-  window._bd_share_config={
-    "common":{onBeforeClick: SetShareData},
-    "share":{"bdCustomStyle":"/css/bdshare.css"}
-  };
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
-</script>
-
-<!-- 百度分享 end -->
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
+<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 
-<! -- mathjax config similar to math.stackexchange -->
 
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-                processEscapes: true
-                    
-}
-  
-        });
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-tex2jax: {
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-                  
-}
-    
-        });
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Queue(function() {
-            var all = MathJax.Hub.getAllJax(), i;
-            for(i=0; i < all.length; i += 1) {
-                            all[i].SourceElement().parentNode.className += ' has-jax';
-                                    
-            }
-                
-        });
-</script>
-
-<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
 
 
 
