@@ -1,0 +1,1157 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2205-omp2tbb开发笔记 | Chivier&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Version 0.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2205-omp2tbb开发笔记">
+<meta property="og:url" content="https://chivier.github.io/2022/07/01/2022/2205-omp2tbb%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Chivier&#39;s Blog">
+<meta property="og:description" content="Version 0.0">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-07-01T06:22:25.000Z">
+<meta property="article:modified_time" content="2022-07-01T06:24:10.804Z">
+<meta property="article:author" content="Chivier Humber">
+<meta property="article:tag" content="Develop">
+<meta property="article:tag" content="Develop&#x2F;Applications">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="https://github.com/Chivier" title="Chivier&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Chivier&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/Whoami">About</a>
+        
+          <a class="main-nav-link" href="/categories">Catagories</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" target="_blank" rel="noopener" href="https://github.com/Chivier" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="chivier.github.io">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="[post]-2022/2205-omp2tbb开发笔记" class="article article-type-[post]" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/07/01/2022/2205-omp2tbb%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2022-07-01T06:22:25.000Z" itemprop="datePublished">2022-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Develop/">Develop</a>►<a class="article-category-link" href="/categories/Develop/Develop-Applications/">Develop/Applications</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2205-omp2tbb开发笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+      
+      <div id="toc" class="toc-article">
+        <strong class="toc-title">目录</strong>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Version-0-0"><span class="toc-text">Version 0.0</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#omp2tbb"><span class="toc-text">omp2tbb</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E7%90%86-OpenMP-5-2-%E5%AF%BC%E8%AF%AD"><span class="toc-text">整理 OpenMP 5.2 导语</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Development-Step-1"><span class="toc-text">Development Step 1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Development-Step-0"><span class="toc-text">Development Step 0</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%E6%9E%84%E5%BB%BA"><span class="toc-text">例子构建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Develop-Step-1"><span class="toc-text">Develop Step 1</span></a></li></ol>
+      </div>
+      
+        <h1 id="Version-0-0"><a href="#Version-0-0" class="headerlink" title="Version 0.0"></a>Version 0.0</h1><span id="more"></span>
+
+
+<h2 id="omp2tbb"><a href="#omp2tbb" class="headerlink" title="omp2tbb"></a>omp2tbb</h2><p>2022-05-04 开发测试</p>
+<h2 id="整理-OpenMP-5-2-导语"><a href="#整理-OpenMP-5-2-导语" class="headerlink" title="整理 OpenMP 5.2 导语"></a>整理 OpenMP 5.2 导语</h2><p>制作测试集合，用来测试各种导语的 LLVM-openmp 对应的导语。</p>
+<p>首先位于上层的接口是：</p>
+<p>LLVM OMP Stmt</p>
+<table>
+<thead>
+<tr>
+<th>LLVM OPENMPIR</th>
+<th>OMP CLAUSE</th>
+<th align="center">Care?(Y/N)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OMPParallelDirective</td>
+<td>pragma omp parallel</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPSimdDirective</td>
+<td>pragma omp simd</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPForDirective</td>
+<td>pragma omp for</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPForSimdDirective</td>
+<td>pragma omp for simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPSectionsDirective</td>
+<td>pragma omp sections</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPSectionDirective</td>
+<td>pragma omp section</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPSingleDirective</td>
+<td>pragma omp single</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPMasterDirective</td>
+<td>pragma omp master</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPCriticalDirective</td>
+<td>pragma omp critical</td>
+<td align="center">Y</td>
+</tr>
+<tr>
+<td>OMPParallelForDirective</td>
+<td>pragma omp parallel for</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPParallelForSimdDirective</td>
+<td>pragma omp parallel for simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPParallelMasterDirective</td>
+<td>pragma omp parallel master</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPParallelSectionsDirective</td>
+<td>pragma omp parallel sections</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTaskDirective</td>
+<td>pragma omp task</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTaskyieldDirective</td>
+<td>pragma omp taskyield</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPBarrierDirective</td>
+<td>pragma omp barrier</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTaskwaitDirective</td>
+<td>pragma omp taskwait</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTaskgroupDirective</td>
+<td>pragma omp taskgroup</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPFlushDirective</td>
+<td>pragma omp flush</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPDepobjDirective</td>
+<td>pragma omp depobj</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPOrderedDirective</td>
+<td>pragma omp ordered</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPAtomicDirective</td>
+<td>pragma omp atomic</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetDirective</td>
+<td>pragma omp target</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetDataDirective</td>
+<td>pragma omp target data</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetEnterDataDirective</td>
+<td>pragma omp target enter data</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetExitDataDirective</td>
+<td>pragma omp target exit data</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetParallelDirective</td>
+<td>pragma omp target parallel</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetParallelForDirective</td>
+<td>pragma omp target parallel for</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTeamsDirective</td>
+<td>pragma omp teams</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPCancellationPointDirective</td>
+<td>pragma omp cancellation point</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPCancelDirective</td>
+<td>pragma omp cancel</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTaskLoopDirective</td>
+<td>pragma omp taskloop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTaskLoopSimdDirective</td>
+<td>pragma omp taskloop simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPMasterTaskLoopDirective</td>
+<td>pragma omp master taskloop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPMasterTaskLoopSimdDirective</td>
+<td>pragma omp master taskloop simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPParallelMasterTaskLoopDirective</td>
+<td>pragma omp parallel master taskloop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPParallelMasterTaskLoopSimdDirective</td>
+<td>pragma omp parallel master taskloop simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPDistributeDirective</td>
+<td>pragma omp distribute</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetUpdateDirective</td>
+<td>pragma omp target update</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPDistributeParallelForDirective</td>
+<td>pragma omp distribute parallel for</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPDistributeParallelForSimdDirective</td>
+<td>pragma omp distribute parallel for simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPDistributeSimdDirective</td>
+<td>pragma omp distribute simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetParallelForSimdDirective</td>
+<td>pragma omp target parallel for simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetSimdDirective</td>
+<td>pragma omp target simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTeamsDistributeDirective</td>
+<td>pragma omp teams distribute</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTeamsDistributeSimdDirective</td>
+<td>pragma omp teams distribute simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTeamsDistributeParallelForSimdDirective</td>
+<td>pragma omp teams distribute parallel for simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTeamsDistributeParallelForDirective</td>
+<td>pragma omp teams distribute parallel for</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetTeamsDirective</td>
+<td>pragma omp target teams</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetTeamsDistributeDirective</td>
+<td>pragma omp target teams distribute</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetTeamsDistributeParallelForDirective</td>
+<td>pragma omp target teams distribute parallel for</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetTeamsDistributeParallelForSimdDirective</td>
+<td>pragma omp target teams distribute parallel for simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetTeamsDistributeSimdDirective</td>
+<td>pragma omp target teams distribute simd</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTileDirective</td>
+<td>pragma omp tile</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPUnrollDirective</td>
+<td>pragma omp unroll</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPScanDirective</td>
+<td>pragma omp scan</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPInteropDirective</td>
+<td>pragma omp interop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPDispatchDirective</td>
+<td>pragma omp dispatch</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPMaskedDirective</td>
+<td>pragma omp masked</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPMetaDirective</td>
+<td>pragma omp metadirective</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPGenericLoopDirective</td>
+<td>pragma omp loop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTeamsGenericLoopDirective</td>
+<td>pragma omp teams loop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetTeamsGenericLoopDirective</td>
+<td>pragma omp target teams loop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPParallelGenericLoopDirective</td>
+<td>pragma omp parallel loop</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>OMPTargetParallelGenericLoopDirective</td>
+<td>pragma omp target parallel loop</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>作为最上层的识别层，之后下一层的是：</p>
+<p>LLVM Decl</p>
+<table>
+<thead>
+<tr>
+<th align="left">LLVM OpenMP Decl</th>
+<th>openmp decl</th>
+<th>Care?(Y/N)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">OMPAllocatorClause</td>
+<td>allocator</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPAlignClause</td>
+<td>align</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPAllocateClause</td>
+<td>allocate</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPIfClause</td>
+<td>if</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPFinalClause</td>
+<td>final</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNumThreadsClause</td>
+<td>num_threads</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPSafelenClause</td>
+<td>safelen</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPSimdlenClause</td>
+<td>simdlen</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPSizesClause</td>
+<td>sizes</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPCollapseClause</td>
+<td>collapse</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDefaultClause</td>
+<td>default</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPProcBindClause</td>
+<td>proc_bind</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUnifiedAddressClause</td>
+<td>unified_address</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUnifiedSharedMemoryClause</td>
+<td>unified_shared_memory</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPReverseOffloadClause</td>
+<td>reverse_offload</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDynamicAllocatorsClause</td>
+<td>dynamic_allocators</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPAtomicDefaultMemOrderClause</td>
+<td>atomic_default_mem_order</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPScheduleClause</td>
+<td>schedule</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPOrderedClause</td>
+<td>ordered</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNowaitClause</td>
+<td>nowait</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUntiedClause</td>
+<td>untied</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPMergeableClause</td>
+<td>mergeable</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPReadClause</td>
+<td>read</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPWriteClause</td>
+<td>write</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUpdateClause</td>
+<td>update</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPCaptureClause</td>
+<td>capture</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPCompareClause</td>
+<td>compare</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPSeqCstClause</td>
+<td>seq_cst</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPAcqRelClause</td>
+<td>acq_rel</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPAcquireClause</td>
+<td>acquire</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPReleaseClause</td>
+<td>release</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPRelaxedClause</td>
+<td>relaxed</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPPrivateClause</td>
+<td>private</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPFirstprivateClause</td>
+<td>firstprivate</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPLastprivateClause</td>
+<td>lastprivate</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPSharedClause</td>
+<td>shared</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPReductionClause</td>
+<td>reduction</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPTaskReductionClause</td>
+<td>task_reduction</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPInReductionClause</td>
+<td>in_reduction</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPLinearClause</td>
+<td>linear</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPAlignedClause</td>
+<td>aligned</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPCopyinClause</td>
+<td>copyin</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPCopyprivateClause</td>
+<td>copyprivate</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPFlushClause</td>
+<td>flush</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDepobjClause</td>
+<td>depobj</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDependClause</td>
+<td>depend</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDeviceClause</td>
+<td>device</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPThreadsClause</td>
+<td>threads</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPSIMDClause</td>
+<td>simd</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPMapClause</td>
+<td>map</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNumTeamsClause</td>
+<td>num_teams</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPThreadLimitClause</td>
+<td>thread_limit</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPPriorityClause</td>
+<td>priority</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPGrainsizeClause</td>
+<td>grainsize</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNogroupClause</td>
+<td>nogroup</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNumTasksClause</td>
+<td>num_tasks</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPHintClause</td>
+<td>hint</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDistScheduleClause</td>
+<td>dist_schedule</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDefaultmapClause</td>
+<td>defaultmap</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPToClause</td>
+<td>to</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPFromClause</td>
+<td>from</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUseDevicePtrClause</td>
+<td>use_device_ptr</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUseDeviceAddrClause</td>
+<td>use_device_addr</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPIsDevicePtrClause</td>
+<td>is_device_ptr</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPHasDeviceAddrClause</td>
+<td>has_device_ptr</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNontemporalClause</td>
+<td>nontemporal</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPOrderClause</td>
+<td>order</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPInitClause</td>
+<td>init</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUseClause</td>
+<td>use</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDestroyClause</td>
+<td>destroy</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNovariantsClause</td>
+<td>novariants</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPNocontextClause</td>
+<td>nocontext</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPDetachClause</td>
+<td>detach</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPInclusiveClause</td>
+<td>inclusive</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPExclusiveClause</td>
+<td>exclusive</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPUsesAllocatorsClause</td>
+<td>uses_allocators</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPAffinityClause</td>
+<td>affinity</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPFilterClause</td>
+<td>filter</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">OMPBindClause</td>
+<td>bind</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>属实有点多，目前位置我们的目标是：<br>对于 OpenMP 的代码块，我们识别出”最上层的逻辑块”，之后将其提取成为新的函数。<br>对于包含了 OpenMP 的函数块，我们也将其提取成”新函数”。</p>
+<p>我们给新的函数命名，之后进行我们的代码翻译工作。<br>首先第一步工作是将并行代码串行化。</p>
+<h1 id="Development-Step-1"><a href="#Development-Step-1" class="headerlink" title="Development Step 1"></a>Development Step 1</h1><ul>
+<li><input checked="" disabled="" type="checkbox"> 构建可以识别 Stmt 的 Visitor</li>
+<li><input checked="" disabled="" type="checkbox"> 构建可以识别 OpenMP Directive 的 Visitor ✅ 2022-05-05</li>
+<li><input checked="" disabled="" type="checkbox"> 找出 OpenMP Directive 的范围，从而找出新的范围 ✅ 2022-05-05</li>
+</ul>
+<p>记录：<br>这里遇到一个非常大的坑点，使用 libclang 开发的工具需要加 – -fopenmp 才能启用编译选项</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 详细构建 Openmp 的树形结构</li>
+</ul>
+<h1 id="Development-Step-0"><a href="#Development-Step-0" class="headerlink" title="Development Step 0"></a>Development Step 0</h1><p>OpenMP Examples Build</p>
+<p>顺着 openmp 官方的 example 文档构建 openmp 的并行例子。从而方便我们做之后的优化分析。</p>
+<h2 id="例子构建"><a href="#例子构建" class="headerlink" title="例子构建"></a>例子构建</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> 测试时间工具部署 ✅ 2022-05-11</li>
+<li><input checked="" disabled="" type="checkbox"> 阅读 Structured Programming Models</li>
+</ul>
+<p>分为两类:</p>
+<ul>
+<li>构建 bottom 类别<ul>
+<li>从底层方案出发</li>
+</ul>
+</li>
+<li>构建 top 类别<ul>
+<li>从上层方案出发</li>
+</ul>
+</li>
+</ul>
+<p>目标：</p>
+<ul>
+<li>充分发挥 omp5.2 的特性</li>
+<li>使用 omp task 、parallel、for 方便之后进行检测和转化</li>
+<li>熟悉 intel tbb 的具体操作和语法</li>
+</ul>
+<p><strong>思路!!</strong><br>产生了新的想法：</p>
+<ul>
+<li>如果分析了数据访问的行为模式，分析一维/二维/三维的模式特征<ul>
+<li>整数泛函</li>
+<li>NLP 分析表达式特征</li>
+</ul>
+</li>
+<li>为函数/openmp 代码快称重<ul>
+<li>是否有必要 inline</li>
+<li>是否有必要并行</li>
+<li>NLP？</li>
+<li>试一试，生成这个模式的 inline/noinline 代码</li>
+</ul>
+</li>
+<li>针对多重循环</li>
+<li>针对随机离散的应用<ul>
+<li>ising model</li>
+<li>2 维图片随机的处理</li>
+<li>SPH</li>
+<li>Conway 生命游戏</li>
+</ul>
+</li>
+</ul>
+<p>已经成功构建 bottom cases。位于</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Chivier/ompfuns">https://github.com/Chivier/ompfuns</a></p>
+<h1 id="Develop-Step-1"><a href="#Develop-Step-1" class="headerlink" title="Develop Step 1"></a>Develop Step 1</h1><p>测试代码重写。找到一个合适的例子：<br>upc2c</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="https://chivier.github.io/2022/07/01/2022/2205-omp2tbb%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="cl522lux30000cfc11sly6pzn" class="article-share-link" data-share="baidu" data-title="2205-omp2tbb开发笔记">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Develop/" rel="tag">Develop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Develop-Applications/" rel="tag">Develop/Applications</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/05/16/2022/2205-Lammps-EFF-GPU-version-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2205-Lammps-EFF GPU version 开发笔记1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/Android-tricks/">Android tricks</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/">Architechture</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/">Compiler</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Compiler/FP/">FP</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Dataflow/">Dataflow</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Architechture/Parallel/">Parallel</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/">Blog</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Blog/Hexo/">Hexo</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/COD/">COD</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/">Compiler</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/DSL/">DSL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/">LLVM</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/">Dataflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/LLVM/Dataflow/DARTS/">DARTS</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Compiler/Translator/">Translator</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/">Cuda</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/">Parallel</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Cuda/Parallel/Develop/">Develop</a><span class="category-list-count">2</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/">Develop</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop/Graphics/">Graphics</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/">Develop/Applications</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/">Parallel/Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Develop-Applications/Parallel-Cuda/Develop-Applications-Lammps/">Develop/Applications/Lammps</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Tutorial/">Tutorial</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Electronic/">Electronic</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/">ICS</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ICS/TA/">TA</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/">LLVM</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/Compiler/">Compiler</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LLVM/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Learning/">Linux Learning</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-Tricks/">Linux Tricks</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Linux-tricks/">Linux tricks</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/">Qemu</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Qemu/Compiler/">Compiler</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/">Tricks</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/Tricks/Tools/">Tools</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/">Maths</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Maths/Logic/">Logic</a><span class="category-list-count">3</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/">Operating System</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Operating-System/Concepts/">Concepts</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Others/">Others</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Others/Latex/">Latex</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/">Parallel</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/">Study</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Parallel/Study/Parallel-MPI/">Parallel/MPI</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/">Programming language</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Assembly/">Assembly</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/C/">C</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming-language/Rust/">Rust</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/">Rust</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/">Develop</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Develop/DSL/">DSL</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rust/Rust-Project/">Rust Project</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/System/">System</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/">Tensorflow</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/">Cuda</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tensorflow/Cuda/Deeplearning/">Deeplearning</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/">Tools</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Tools/Develop/">Develop</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows/">Windows</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Work/">Work</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Work/UI/">UI</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/ubuntu/">ubuntu</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Architechture/" rel="tag">Architechture</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Assembly/" rel="tag">Assembly</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/COD/" rel="tag">COD</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuits/" rel="tag">Circuits</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Compiler/" rel="tag">Compiler</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cuda/" rel="tag">Cuda</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DARTS/" rel="tag">DARTS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DSL/" rel="tag">DSL</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataflow/" rel="tag">Dataflow</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deeplearning/" rel="tag">Deeplearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop/" rel="tag">Develop</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications/" rel="tag">Develop/Applications</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Develop-Applications-Lammps/" rel="tag">Develop/Applications/Lammps</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Electronic/" rel="tag">Electronic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FP/" rel="tag">FP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphics/" rel="tag">Graphics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ICS/" rel="tag">ICS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLVM/" rel="tag">LLVM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Latex/" rel="tag">Latex</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Software/" rel="tag">Linux Software</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-Tricks/" rel="tag">Linux Tricks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logic/" rel="tag">Logic</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maths/" rel="tag">Maths</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/" rel="tag">Network</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel/" rel="tag">Parallel</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-Cuda/" rel="tag">Parallel/Cuda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Parallel-MPI/" rel="tag">Parallel/MPI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming-language/" rel="tag">Programming language</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qemu/" rel="tag">Qemu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rust/" rel="tag">Rust</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadowsocks/" rel="tag">Shadowsocks</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Softwares/" rel="tag">Softwares</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Study/" rel="tag">Study</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/System/" rel="tag">System</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TA/" rel="tag">TA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tensorflow/" rel="tag">Tensorflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Translator/" rel="tag">Translator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tricks/" rel="tag">Tricks</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/" rel="tag">Tutorial</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/" rel="tag">UI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Verilog/" rel="tag">Verilog</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/" rel="tag">Web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Work/" rel="tag">Work</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Architechture/" style="font-size: 15px;">Architechture</a> <a href="/tags/Assembly/" style="font-size: 11.25px;">Assembly</a> <a href="/tags/Blog/" style="font-size: 11.25px;">Blog</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/COD/" style="font-size: 17.5px;">COD</a> <a href="/tags/Circuits/" style="font-size: 10px;">Circuits</a> <a href="/tags/Compiler/" style="font-size: 16.25px;">Compiler</a> <a href="/tags/Cuda/" style="font-size: 12.5px;">Cuda</a> <a href="/tags/DARTS/" style="font-size: 10px;">DARTS</a> <a href="/tags/DSL/" style="font-size: 12.5px;">DSL</a> <a href="/tags/Dataflow/" style="font-size: 13.75px;">Dataflow</a> <a href="/tags/Deeplearning/" style="font-size: 10px;">Deeplearning</a> <a href="/tags/Develop/" style="font-size: 16.25px;">Develop</a> <a href="/tags/Develop-Applications/" style="font-size: 11.25px;">Develop/Applications</a> <a href="/tags/Develop-Applications-Lammps/" style="font-size: 10px;">Develop/Applications/Lammps</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Electronic/" style="font-size: 10px;">Electronic</a> <a href="/tags/FP/" style="font-size: 10px;">FP</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/Graphics/" style="font-size: 10px;">Graphics</a> <a href="/tags/Hexo/" style="font-size: 11.25px;">Hexo</a> <a href="/tags/ICS/" style="font-size: 10px;">ICS</a> <a href="/tags/LLVM/" style="font-size: 12.5px;">LLVM</a> <a href="/tags/Latex/" style="font-size: 11.25px;">Latex</a> <a href="/tags/Linux/" style="font-size: 20px;">Linux</a> <a href="/tags/Linux-Software/" style="font-size: 10px;">Linux Software</a> <a href="/tags/Linux-Tricks/" style="font-size: 10px;">Linux Tricks</a> <a href="/tags/Logic/" style="font-size: 12.5px;">Logic</a> <a href="/tags/Maths/" style="font-size: 12.5px;">Maths</a> <a href="/tags/Network/" style="font-size: 11.25px;">Network</a> <a href="/tags/Parallel/" style="font-size: 13.75px;">Parallel</a> <a href="/tags/Parallel-Cuda/" style="font-size: 10px;">Parallel/Cuda</a> <a href="/tags/Parallel-MPI/" style="font-size: 10px;">Parallel/MPI</a> <a href="/tags/Programming-language/" style="font-size: 16.25px;">Programming language</a> <a href="/tags/Qemu/" style="font-size: 10px;">Qemu</a> <a href="/tags/Rust/" style="font-size: 16.25px;">Rust</a> <a href="/tags/Shadowsocks/" style="font-size: 10px;">Shadowsocks</a> <a href="/tags/Shell/" style="font-size: 10px;">Shell</a> <a href="/tags/Softwares/" style="font-size: 10px;">Softwares</a> <a href="/tags/Study/" style="font-size: 10px;">Study</a> <a href="/tags/System/" style="font-size: 18.75px;">System</a> <a href="/tags/TA/" style="font-size: 10px;">TA</a> <a href="/tags/Tensorflow/" style="font-size: 10px;">Tensorflow</a> <a href="/tags/Tools/" style="font-size: 12.5px;">Tools</a> <a href="/tags/Translator/" style="font-size: 10px;">Translator</a> <a href="/tags/Tricks/" style="font-size: 12.5px;">Tricks</a> <a href="/tags/Tutorial/" style="font-size: 10px;">Tutorial</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/Verilog/" style="font-size: 16.25px;">Verilog</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/Work/" style="font-size: 10px;">Work</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/07/01/2022/2205-omp2tbb%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">2205-omp2tbb开发笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/16/2022/2205-Lammps-EFF-GPU-version-%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B01/">2205-Lammps-EFF GPU version 开发笔记1</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/13/2022/2205-MPI-and-timer/">2205-MPI and timer</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/26/2022/2204-qinitial/">2204-qinitial</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/17/2022/2203-OMP2CD%E9%87%8D%E6%96%B0%E5%AE%9E%E7%8E%B0/">2203-OMP2CD重新实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://github.com/Chivier" target="_blank">主题作者</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 Chivier Humber<br>
+      Powered by <a href="//hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/Whoami" class="mobile-nav-link">About</a>
+  
+    <a href="/categories" class="mobile-nav-link">Catagories</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="totop"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+                processEscapes: true
+                    
+}
+  
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+                  
+}
+    
+        });
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i=0; i < all.length; i += 1) {
+                            all[i].SourceElement().parentNode.className += ' has-jax';
+                                    
+            }
+                
+        });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.5.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+</div>
+</body>
+</html>
