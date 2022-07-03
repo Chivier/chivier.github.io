@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://chivier.github.io/2022/01/22/2022/2201-ICS%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image1.png">
 <meta property="og:image" content="https://chivier.github.io/2022/01/22/2022/2201-ICS%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/image2.png">
 <meta property="article:published_time" content="2022-01-21T18:43:02.000Z">
-<meta property="article:modified_time" content="2022-01-21T18:47:49.746Z">
+<meta property="article:modified_time" content="2022-07-03T05:14:08.218Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="ICS">
 <meta property="article:tag" content="TA">
@@ -123,7 +123,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -135,7 +135,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -147,7 +147,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -159,7 +159,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -171,7 +171,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          8.5k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          NaN mins
+          71 分钟
         
       </span>
     
@@ -336,23 +336,23 @@
 <li>即使其中一个数$x$是负数，我们也可以将它视作$(M+x)$的形式，暴力处理</li>
 </ol>
 <p>那么 L 版本的代码就得到了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0001 111 111 0 00 000</span><br><span class="line">0001 001 001 1 11111</span><br><span class="line">0000 101 111111101</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">0001 111 111 0 00 000<br>0001 001 001 1 11111<br>0000 101 111111101<br></code></pre></td></tr></table></figure>
 
 <p>那么如果需要考虑性能呢？</p>
 <p>我们会用另一种我们在小学三年级的时候用过的算法进行实现，下面举一个例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">         1 0 1 1 1</span><br><span class="line"></span><br><span class="line">       * 1 1 0 1 0</span><br><span class="line">      ──────────────</span><br><span class="line">       1 0 1 1 1</span><br><span class="line"></span><br><span class="line">   1 0 1 1 1</span><br><span class="line"></span><br><span class="line"> 1 0 1 1 1</span><br><span class="line">─────────────────────</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">         1 0 1 1 1<br><br>       * 1 1 0 1 0<br>      ──────────────<br>       1 0 1 1 1<br><br>   1 0 1 1 1<br><br> 1 0 1 1 1<br>─────────────────────<br>...<br></code></pre></td></tr></table></figure>
 
 <p>在列出结果之前，相比大家已经知道做法了，就是采用位移和加法的形式对数值进行相加。</p>
 <p>下面是一个参考程序，为了方便阅读，先给出了实验的汇编形式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ADD R3, R3, #1</span><br><span class="line">ADD R5, R5, #8</span><br><span class="line">ADD R5, R5, #8</span><br><span class="line">LOOP    AND R6, R3, R1</span><br><span class="line">        BRZ NEXT</span><br><span class="line">        ADD R7, R7, R0</span><br><span class="line">NEXT    ADD R3, R3, R3   ; R3 &lt;&lt;&#x3D; 1</span><br><span class="line">        ADD R0, R0, R0   ; R0 &lt;&lt;&#x3D; 1</span><br><span class="line">        ADD R5, R5, #-1  ; R5 -&#x3D; 1</span><br><span class="line">        BRP LOOP</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ADD R3, R3, #1<br>ADD R5, R5, #8<br>ADD R5, R5, #8<br>LOOP    AND R6, R3, R1<br>        BRZ NEXT<br>        ADD R7, R7, R0<br>NEXT    ADD R3, R3, R3   ; R3 &lt;&lt;&#x3D; 1<br>        ADD R0, R0, R0   ; R0 &lt;&lt;&#x3D; 1<br>        ADD R5, R5, #-1  ; R5 -&#x3D; 1<br>        BRP LOOP<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0001011011100001</span><br><span class="line">0001101101101000</span><br><span class="line">0001101101101000</span><br><span class="line">0101110011000000</span><br><span class="line">0000010000000001</span><br><span class="line">0001111111000001</span><br><span class="line">0001011011000011</span><br><span class="line">0001001001000001</span><br><span class="line">0001101101111111</span><br><span class="line">0000001111111001</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs assembly">0001011011100001<br>0001101101101000<br>0001101101101000<br>0101110011000000<br>0000010000000001<br>0001111111000001<br>0001011011000011<br>0001001001000001<br>0001101101111111<br>0000001111111001<br></code></pre></td></tr></table></figure>
 
 <p>但是这依旧不是最好的方案，显然，可以采用“<strong>循环展开</strong>”再次优化。在Lab3的分析中我将给出详细介绍。</p>
 <p>第一次试验看似非常简单，但是蕴含了一个重要的思想：如果操作$2^x$次操作$A$可以被操作$B$替代，那么我们可以将算法进行指数级别化简。下面介绍两个类似的应用。</p>
 <h3 id="应用1：快速幂算法"><a href="#应用1：快速幂算法" class="headerlink" title="应用1：快速幂算法"></a>应用1：快速幂算法</h3><p>计算$a^b ; mod ; c$。</p>
 <p>一个简单的思路是采用我们上面L版本程序的思路：循环进行乘法</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; b; ++i) &#123;</span><br><span class="line">        ans = ans * a % c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> i;<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; b; ++i) &#123;<br>        ans = ans * a % c;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>而一个优化版本的方法和P版本程序思路一致：</p>
 <ul>
@@ -361,7 +361,7 @@
 <li><p>选出上述对应的指数相加，因为$a^p \times a^q = a ^ {p + q}$。所以这里求幂的方法和之前求加法的思路一致</p>
 </li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> t = a;</span><br><span class="line">    <span class="keyword">while</span> (b) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ans * t % c;</span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        t = t * t % c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> t = a;<br>    <span class="hljs-keyword">while</span> (b) &#123;<br>        <span class="hljs-keyword">if</span> (b &amp; <span class="hljs-number">1</span>) &#123;<br>            ans = ans * t % c;<br>        &#125;<br>        b &gt;&gt;= <span class="hljs-number">1</span>;<br>        t = t * t % c;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="应用2：递推公式求解"><a href="#应用2：递推公式求解" class="headerlink" title="应用2：递推公式求解"></a>应用2：递推公式求解</h3><p>对于递推公式，例如：</p>
 <p>$$<br>f(n) = a_{n-1}f(n-1) + a_{n-2}f(n-2) + a_{n-3}f(n-3) + … + a_{n-k}f(n-k)<br>$$</p>
@@ -384,23 +384,23 @@
 </ul>
 <p>这里如果我们使用递归方法进行编程，那么将会耗费大量的时间，所以我们采用递推方法进行编程。同时采用类似于流水的设计方案。</p>
 <p>参考代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">.ORIG x3000</span><br><span class="line">LD R5, MODNUMBER</span><br><span class="line">ADD R1, R1, #1</span><br><span class="line">ADD R2, R2, #1 ;F[1] &#x3D; 1</span><br><span class="line">ADD R3, R3, #2 ;F[2] &#x3D; 2</span><br><span class="line">ADD R4, R3, #0</span><br><span class="line">LOOP ADD R4, R4, R1 ;F[N] &#x3D; F[N - 1] + F[N - 3]</span><br><span class="line">     ADD R4, R4, R1 ;F[N] &#x3D; 2 * F[N - 1] + F[N - 3]</span><br><span class="line">     AND R4, R4, R5 ;F[N] &#x3D; (2 * F[N - 1] + F[N - 3]) mod 1024</span><br><span class="line">     ADD R1, R2, #0</span><br><span class="line">     ADD R2, R3, #0</span><br><span class="line">     ADD R3, R4, #0</span><br><span class="line">     ADD R0, R0, #-1 ;N--</span><br><span class="line">BRNP LOOP</span><br><span class="line">ADD R7, R1, #0</span><br><span class="line">HALT</span><br><span class="line">MODNUMBER .FILL #1023</span><br><span class="line">NUMBERA .FILL #0</span><br><span class="line">NUMBERB .FILL #0</span><br><span class="line">NUMBERC .FILL #0</span><br><span class="line">NUMBERD .FILL #0</span><br><span class="line">.END</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs assembly">.ORIG x3000<br>LD R5, MODNUMBER<br>ADD R1, R1, #1<br>ADD R2, R2, #1 ;F[1] &#x3D; 1<br>ADD R3, R3, #2 ;F[2] &#x3D; 2<br>ADD R4, R3, #0<br>LOOP ADD R4, R4, R1 ;F[N] &#x3D; F[N - 1] + F[N - 3]<br>     ADD R4, R4, R1 ;F[N] &#x3D; 2 * F[N - 1] + F[N - 3]<br>     AND R4, R4, R5 ;F[N] &#x3D; (2 * F[N - 1] + F[N - 3]) mod 1024<br>     ADD R1, R2, #0<br>     ADD R2, R3, #0<br>     ADD R3, R4, #0<br>     ADD R0, R0, #-1 ;N--<br>BRNP LOOP<br>ADD R7, R1, #0<br>HALT<br>MODNUMBER .FILL #1023<br>NUMBERA .FILL #0<br>NUMBERB .FILL #0<br>NUMBERC .FILL #0<br>NUMBERD .FILL #0<br>.END<br></code></pre></td></tr></table></figure>
 
 <p>程序性能的评估方法在这里为大家进行介绍，很多同学不会统计自己程序的时间。但是这一个部分的工作其实非常简单，而且方法非常多样，这里只介绍一种作为参考。例如上面的程序如果我要进行评测指令条数，最简单的方法是用一个“同构的程序”进行计算。</p>
 <p>例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">r5 = <span class="number">1023</span>;</span><br><span class="line">count++;</span><br><span class="line">r1 = <span class="number">1</span>;</span><br><span class="line">count++;</span><br><span class="line">r2 = <span class="number">1</span>;</span><br><span class="line">count++;</span><br><span class="line">r3 = <span class="number">2</span>;</span><br><span class="line">count++;</span><br><span class="line">r4 = <span class="number">0</span>;</span><br><span class="line">count++;</span><br><span class="line">loop: r4 = r4 + r1;</span><br><span class="line">count++;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>r5 = <span class="hljs-number">1023</span>;<br>count++;<br>r1 = <span class="hljs-number">1</span>;<br>count++;<br>r2 = <span class="hljs-number">1</span>;<br>count++;<br>r3 = <span class="hljs-number">2</span>;<br>count++;<br>r4 = <span class="hljs-number">0</span>;<br>count++;<br>loop: r4 = r4 + r1;<br>count++;<br>...<br></code></pre></td></tr></table></figure>
 
 <p>每一条指令之后我都进行一个count自增操作，最后输出count即可。（所以建议使用有goto语句的语言进行同构程序评测，否则需要手动转换成while/for循环）</p>
 <p>对于实验3的优化其实也非常简单，一个直观的思路是采取循环展开进行优化。我们举一个具体的例子进行理解。</p>
 <p>下面有两个循环：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Loop A</span></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    f[i] = g[i] * <span class="number">2</span>;</span><br><span class="line">    g[i] = h[i] - <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/// Loop B</span></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">    f[i] = g[i] * <span class="number">2</span>;</span><br><span class="line">    g[i] = h[i] - <span class="number">2</span>;</span><br><span class="line">    f[i + <span class="number">1</span>] = g[i + <span class="number">1</span>] * <span class="number">2</span>;</span><br><span class="line">    g[i + <span class="number">1</span>] = h[i + <span class="number">1</span>] - <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/// Loop A</span><br><span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>    f[i] = g[i] * <span class="hljs-number">2</span>;<br>    g[i] = h[i] - <span class="hljs-number">2</span>;<br>&#125;<br><br><span class="hljs-comment">/// Loop B</span><br><span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i += <span class="hljs-number">2</span>) &#123;<br>    f[i] = g[i] * <span class="hljs-number">2</span>;<br>    g[i] = h[i] - <span class="hljs-number">2</span>;<br>    f[i + <span class="hljs-number">1</span>] = g[i + <span class="hljs-number">1</span>] * <span class="hljs-number">2</span>;<br>    g[i + <span class="hljs-number">1</span>] = h[i + <span class="hljs-number">1</span>] - <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这两个循环是否一样呢？他们看起来都计算了f的10项和g数组的10项，但是两个循环的指令数目不同。原因在于对于i的操作的数目不同。我们将两个循环完整的展开：</p>
 <p>Loop A:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f[i] = g[i] * <span class="number">2</span>;</span><br><span class="line">g[i] = h[i] - <span class="number">2</span>;</span><br><span class="line">i++;</span><br><span class="line">f[i] = g[i] * <span class="number">2</span>;</span><br><span class="line">g[i] = h[i] - <span class="number">2</span>;</span><br><span class="line">i++;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c">f[i] = g[i] * <span class="hljs-number">2</span>;<br>g[i] = h[i] - <span class="hljs-number">2</span>;<br>i++;<br>f[i] = g[i] * <span class="hljs-number">2</span>;<br>g[i] = h[i] - <span class="hljs-number">2</span>;<br>i++;<br>...<br></code></pre></td></tr></table></figure>
 
 <p>Loop B:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f[i] = g[i] * <span class="number">2</span>;</span><br><span class="line">g[i] = h[i] - <span class="number">2</span>;</span><br><span class="line">f[i + <span class="number">1</span>] = g[i + <span class="number">1</span>] * <span class="number">2</span>;</span><br><span class="line">g[i + <span class="number">1</span>] = h[i + <span class="number">1</span>] - <span class="number">2</span>;</span><br><span class="line">i += <span class="number">2</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">f[i] = g[i] * <span class="hljs-number">2</span>;<br>g[i] = h[i] - <span class="hljs-number">2</span>;<br>f[i + <span class="hljs-number">1</span>] = g[i + <span class="hljs-number">1</span>] * <span class="hljs-number">2</span>;<br>g[i + <span class="hljs-number">1</span>] = h[i + <span class="hljs-number">1</span>] - <span class="hljs-number">2</span>;<br>i += <span class="hljs-number">2</span>;<br>...<br></code></pre></td></tr></table></figure>
 
 <p>同样计算两项，前者用了6条指令，后者只有5条。</p>
 <p>对于lab3的数据的设计我也采用了一个直观的方法：只评测10项，这10项我都是4的倍数，那么可以使用四次展开的方法进行优化。</p>
@@ -416,14 +416,14 @@
 <h2 id="Lab-4"><a href="#Lab-4" class="headerlink" title="Lab 4"></a>Lab 4</h2><h3 id="实验思路-2"><a href="#实验思路-2" class="headerlink" title="实验思路"></a>实验思路</h3><p>对于这次实验，其实是一个娱乐性质的游戏。我们先从第一个部分分析。</p>
 <p>第一个部分的代码，我们给出的分析模式非常简单，只有4位需要补充。最简单的方法是进行16次枚举，配合LC3 Tool完成实验。其实希望通过这一个部分的实验收取大家的脚本，看看大家都用了什么自动化的方法和工具。</p>
 <p>这一个部分希望借助这个代码帮大家理解递归程序的思想，原始汇编如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.ORIG x3000</span><br><span class="line">LEA R2,Stack ; R2 is Stack</span><br><span class="line">AND R0,R0,#0 ; Foo called?</span><br><span class="line">Main JSR Foo</span><br><span class="line">HALT</span><br><span class="line">Foo STR R7,R2,#0 ; Store R7 to stack</span><br><span class="line">ADD R2,R2,#1 ; Increment stack</span><br><span class="line">ADD R0,R0,#1 ; Called Foo!</span><br><span class="line">LD R1,Counter ; Decrement Counter</span><br><span class="line">ADD R1,R1,#-1</span><br><span class="line">ST R1,Counter</span><br><span class="line">BRz After ; After N times,RET</span><br><span class="line">JSR Foo ; Otherwise, recur</span><br><span class="line">After ADD R2,R2,#-1 ; Decrement stack</span><br><span class="line">LDR R7,R2,#0</span><br><span class="line">RET</span><br><span class="line">Stack .BLKW #10</span><br><span class="line">Counter .FILL #5</span><br><span class="line">.END</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs assembly">.ORIG x3000<br>LEA R2,Stack ; R2 is Stack<br>AND R0,R0,#0 ; Foo called?<br>Main JSR Foo<br>HALT<br>Foo STR R7,R2,#0 ; Store R7 to stack<br>ADD R2,R2,#1 ; Increment stack<br>ADD R0,R0,#1 ; Called Foo!<br>LD R1,Counter ; Decrement Counter<br>ADD R1,R1,#-1<br>ST R1,Counter<br>BRz After ; After N times,RET<br>JSR Foo ; Otherwise, recur<br>After ADD R2,R2,#-1 ; Decrement stack<br>LDR R7,R2,#0<br>RET<br>Stack .BLKW #10<br>Counter .FILL #5<br>.END<br></code></pre></td></tr></table></figure>
 
 <p>机器码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">1110010000001110</span><br><span class="line">0101000000100000</span><br><span class="line">0100100000000001</span><br><span class="line">1111000000100101</span><br><span class="line">0111111010000000</span><br><span class="line">0001010010100001</span><br><span class="line">0001000000100001</span><br><span class="line">0010001000010001</span><br><span class="line">0001001001111111</span><br><span class="line">0011001000001111</span><br><span class="line">0000010000000001</span><br><span class="line">0100111111111000</span><br><span class="line">0001010010111111</span><br><span class="line">0110111010000000</span><br><span class="line">1100000111000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000000</span><br><span class="line">0000000000000101</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plain">1110010000001110<br>0101000000100000<br>0100100000000001<br>1111000000100101<br>0111111010000000<br>0001010010100001<br>0001000000100001<br>0010001000010001<br>0001001001111111<br>0011001000001111<br>0000010000000001<br>0100111111111000<br>0001010010111111<br>0110111010000000<br>1100000111000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000101<br></code></pre></td></tr></table></figure>
 
 <p>第二个部分的程序我这边进行了一些提示，程序是希望对7计算余数，但是有一个部分是对8计算除法，我们计算$x$对7的余数时，不妨换一个表达方法，让$x = 8k + r$其中$0 \le r &lt; 8$<br>$$<br>x ; mod ; 7 = (8k + r) ; mod ; 7 = (k + r) ; mod ; 7<br>$$<br>有了这个提示，这个程序也就不难了，除8是通过位移进行的，对8取余数是通过AND进行计算的。</p>
 <p>原始汇编如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">.ORIG x3000</span><br><span class="line">LOOPM JSR DIV8</span><br><span class="line">AND R2, R1, #7</span><br><span class="line">ADD R1, R2, R4</span><br><span class="line">ADD R0, R1, #-7</span><br><span class="line">BRP LOOPM</span><br><span class="line">ADD R0, R1, #-7</span><br><span class="line">BRN STOP</span><br><span class="line">ADD R1, R1, #-7</span><br><span class="line">STOP HALT</span><br><span class="line">DIV8 AND R2, R2, #0 ; R1 &#x2F; 8 -&gt; R4</span><br><span class="line">AND R3, R3, #0</span><br><span class="line">AND R4, R4, #0</span><br><span class="line">ADD R2, R2, #1</span><br><span class="line">ADD R3, R3, #8</span><br><span class="line">LOOP AND R5, R3, R1</span><br><span class="line">BRZ NEXT</span><br><span class="line">ADD R4, R2, R4</span><br><span class="line">NEXT ADD R2, R2, R2</span><br><span class="line">ADD R3, R3, R3</span><br><span class="line">BRP LOOP</span><br><span class="line">RET</span><br><span class="line">.END</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs assembly">.ORIG x3000<br>LOOPM JSR DIV8<br>AND R2, R1, #7<br>ADD R1, R2, R4<br>ADD R0, R1, #-7<br>BRP LOOPM<br>ADD R0, R1, #-7<br>BRN STOP<br>ADD R1, R1, #-7<br>STOP HALT<br>DIV8 AND R2, R2, #0 ; R1 &#x2F; 8 -&gt; R4<br>AND R3, R3, #0<br>AND R4, R4, #0<br>ADD R2, R2, #1<br>ADD R3, R3, #8<br>LOOP AND R5, R3, R1<br>BRZ NEXT<br>ADD R4, R2, R4<br>NEXT ADD R2, R2, R2<br>ADD R3, R3, R3<br>BRP LOOP<br>RET<br>.END<br></code></pre></td></tr></table></figure>
 
 <h3 id="原始设计"><a href="#原始设计" class="headerlink" title="原始设计"></a>原始设计</h3><p>每个人拿到的程序都是不同的，是对16位bit进行随机反转得到的（不告诉你哪16位有错误）。鉴于实验难度过大，以及教务处提倡位更多同学减轻实验负担，这个部分已经被删除。于是大家都轻松愉快的完成了实验。</p>
 <h2 id="Lab-5"><a href="#Lab-5" class="headerlink" title="Lab 5"></a>Lab 5</h2><p>这一部分的实验显然大部分同学曲解了我的本意，实验本意是：<code>functionally</code>复现，也就是说我只要你判断素数即可，算法我不care。但是大部分同学都在楞写了乘法去余数，这里我只希望大家复习一下筛法求素数的算法：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AD%9B%E6%B3%95%E6%B1%82%E7%B4%A0%E6%95%B0/8670409">筛法素数百度百科</a></p>
@@ -502,15 +502,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/ICS/" class="category-chain-item">ICS</a>
+  <a href="/categories/Knowledge/" class="category-chain-item">Knowledge</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/ICS/TA/" class="category-chain-item">TA</a>
-  
-  
-
   
 
       </span>
@@ -544,25 +537,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>January 22, 2022</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -584,7 +577,7 @@
                       <a href="/2022/01/22/2022/2112-%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A3%85/" title="2112-系统重装">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">2112-系统重装</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -593,7 +586,7 @@
                     
                       <a href="/2022/01/22/2022/2201-%E5%B8%83%E8%B0%B7%E8%AE%A1%E5%88%92/" title="2201-布谷计划">
                         <span class="hidden-mobile">2201-布谷计划</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -612,7 +605,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -667,7 +660,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -675,7 +668,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -827,7 +820,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

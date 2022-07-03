@@ -24,7 +24,7 @@
 <meta property="og:description" content="介绍关于 Linux 的知识。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-03-25T20:28:01.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:46:58.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:38:46.652Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -119,7 +119,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -131,7 +131,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -143,7 +143,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -155,7 +155,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -167,7 +167,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          559 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          NaN mins
+          5 分钟
         
       </span>
     
@@ -282,14 +282,14 @@
 
 <h1 id="Method-1-Copy-one"><a href="#Method-1-Copy-one" class="headerlink" title="Method 1: Copy one"></a>Method 1: Copy one</h1><p>Open <code>/usr/share/applications</code>. Look for the program you want to create the shortcut.</p>
 <p>Copy it.</p>
-<h1 id="Method-2-Create-desktop-file"><a href="#Method-2-Create-desktop-file" class="headerlink" title="Method 2: Create .desktop file"></a>Method 2: Create .desktop file</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim  /usr/share/applications/eclipse.desktop</span><br></pre></td></tr></table></figure>
+<h1 id="Method-2-Create-desktop-file"><a href="#Method-2-Create-desktop-file" class="headerlink" title="Method 2: Create .desktop file"></a>Method 2: Create .desktop file</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo vim  /usr/share/applications/eclipse.desktop<br></code></pre></td></tr></table></figure>
+
 <p>And then input:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry] </span><br><span class="line">Encoding=UTF-8 </span><br><span class="line">Name=eclipse</span><br><span class="line">Comment=Eclipse IDE  </span><br><span class="line">Exec=/opt/eclipse/eclipse  # Where your program is</span><br><span class="line">Icon=/opt/eclipse/icon.xpm  </span><br><span class="line">Terminal=false</span><br><span class="line">StartupNotify=true  </span><br><span class="line">Type=Application  </span><br><span class="line">Categories=Application;Development;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">[Desktop Entry] <br>Encoding=UTF-8 <br>Name=eclipse<br>Comment=Eclipse IDE  <br>Exec=/opt/eclipse/eclipse  # Where your program is<br>Icon=/opt/eclipse/icon.xpm  <br>Terminal=false<br>StartupNotify=true  <br>Type=Application  <br>Categories=Application;Development;<br></code></pre></td></tr></table></figure>
 
 <p>And then we can copy </p>
 <h1 id="Method-3-ln-s"><a href="#Method-3-ln-s" class="headerlink" title="Method 3 ln -s"></a>Method 3 ln -s</h1><p>run</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s <span class="string">&#x27;Origin program&#x27;</span> <span class="string">&#x27;Your Destination&#x27;</span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ln -s <span class="hljs-string">&#x27;Origin program&#x27;</span> <span class="hljs-string">&#x27;Your Destination&#x27;</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -308,15 +308,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Linux/Linux-tricks/" class="category-chain-item">Linux tricks</a>
-  
-  
-
   
 
       </span>
@@ -348,25 +341,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>March 26, 2019</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -388,7 +381,7 @@
                       <a href="/2019/03/26/2021/Ubuntu%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/" title="Ubuntu设置默认打开方式">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Ubuntu设置默认打开方式</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -397,7 +390,7 @@
                     
                       <a href="/2019/03/19/2021/8086-Quick-Start/" title="8086 Quick Start">
                         <span class="hidden-mobile">8086 Quick Start</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -416,7 +409,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -471,7 +464,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -479,7 +472,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -631,7 +624,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

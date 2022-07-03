@@ -26,10 +26,10 @@
 <meta property="og:image" content="https://chivier.github.io/2022/02/03/2022/2202-%E6%B2%A1%E6%9C%89%E6%8C%87%E7%BA%B9%E5%A5%BD%E6%B0%94%E5%93%A6/image1.png">
 <meta property="og:image" content="https://chivier.github.io/2022/02/03/2022/2202-%E6%B2%A1%E6%9C%89%E6%8C%87%E7%BA%B9%E5%A5%BD%E6%B0%94%E5%93%A6/image2.png">
 <meta property="article:published_time" content="2022-02-03T09:19:12.000Z">
-<meta property="article:modified_time" content="2022-02-03T09:20:37.330Z">
+<meta property="article:modified_time" content="2022-07-03T05:15:35.620Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Tricks">
+<meta property="article:tag" content="Trick">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chivier.github.io/2022/02/03/2022/2202-%E6%B2%A1%E6%9C%89%E6%8C%87%E7%BA%B9%E5%A5%BD%E6%B0%94%E5%93%A6/image1.png">
   
@@ -123,7 +123,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -135,7 +135,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -147,7 +147,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -159,7 +159,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -171,7 +171,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          1.6k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          NaN mins
+          14 分钟
         
       </span>
     
@@ -300,7 +300,7 @@
 <p><a target="_blank" rel="noopener" href="https://www.dell.com/community/Linux-General/No-driver-for-fingerprint-reader-Goodix-27c6-5381-on-Linux/td-p/8018706">https://www.dell.com/community/Linux-General/No-driver-for-fingerprint-reader-Goodix-27c6-5381-on-Linux/td-p/8018706</a></p>
 <p>好家伙，就是你做坏事了。</p>
 <p>紧急查阅驱动，使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -E ./hw-probe -all -upload</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo -E ./hw-probe -all -upload<br></code></pre></td></tr></table></figure>
 
 <p>检测配件看看：</p>
 <p><a target="_blank" rel="noopener" href="https://linux-hardware.org/?probe=30ddfbc611">https://linux-hardware.org/?probe=30ddfbc611</a></p>
@@ -310,7 +310,7 @@
 <p>fprintd-enroll 无法使用</p>
 <p>这个时候发现，我用的 libfprintd 版本是 0.4。而一个可用的版本是 0.6。</p>
 <p>在一番搜索之后，在 Dell 驱动支持的一个民间网站上找到了一个版本，用下面的命令下载：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget -O ~/Downloads/libp.deb http://dell.archive.canonical.com/updates/pool/public/libf/libfprint-2-tod1-goodix/libfprint-2-tod1-goodix_0.0.6-0ubuntu1\~somer  </span><br><span class="line">ville1_amd64.deb</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -O ~/Downloads/libp.deb http://dell.archive.canonical.com/updates/pool/public/libf/libfprint-2-tod1-goodix/libfprint-2-tod1-goodix_0.0.6-0ubuntu1\~somer  <br>ville1_amd64.deb<br></code></pre></td></tr></table></figure>
 
 <p>好吧，折腾一圈心力憔悴。</p>
 <p>终于可以读入我的指纹信息了，我开开心心录完指纹之后发现：</p>
@@ -323,7 +323,7 @@
 <p><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/KDE_Wallet#Unlock_KDE_Wallet_automatically_on_login">https://wiki.archlinux.org/title/KDE_Wallet#Unlock_KDE_Wallet_automatically_on_login</a></p>
 <p>我改完之后彻底没了……</p>
 <p>所有用到 sudo 的地方都开始报错：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo: PAM account management error: Permission denied</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo: PAM account management error: Permission denied<br></code></pre></td></tr></table></figure>
 
 <p>最终我找到了一丝生机：</p>
 <p>我们使用 Dolphin 调用编辑器的时候，我可以用用户密码去获取 root 权限，而 Shell 中不可能得到。<br>这次事件之后我把我的 root 密码写到了我的笔记本（纸质）上面。终于活下来了。</p>
@@ -345,15 +345,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Linux/Tricks/" class="category-chain-item">Tricks</a>
-  
-  
-
   
 
       </span>
@@ -369,7 +362,7 @@
       
         <a href="/tags/Linux/">#Linux</a>
       
-        <a href="/tags/Tricks/">#Tricks</a>
+        <a href="/tags/Trick/">#Trick</a>
       
     </div>
   
@@ -387,25 +380,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>February 3, 2022</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -427,7 +420,7 @@
                       <a href="/2022/02/04/2022/2202-%E5%88%B6%E4%BD%9Calternative/" title="2202-制作alternative">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">2202-制作alternative</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -436,7 +429,7 @@
                     
                       <a href="/2022/01/31/2022/2201-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E7%BC%96%E8%BE%91%E5%99%A8/" title="2201-环境变量编辑器">
                         <span class="hidden-mobile">2201-环境变量编辑器</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -455,7 +448,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -510,7 +503,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -518,7 +511,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -670,7 +663,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

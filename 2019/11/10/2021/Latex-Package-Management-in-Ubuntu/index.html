@@ -24,7 +24,7 @@
 <meta property="og:description" content="介绍关于 Latex 的知识。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-11-10T14:07:48.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:46:58.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:39:51.859Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Latex">
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          361 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          NaN mins
+          4 分钟
         
       </span>
     
@@ -284,18 +284,18 @@
 
 
 <h2 id="方法一：简单粗暴"><a href="#方法一：简单粗暴" class="headerlink" title="方法一：简单粗暴"></a>方法一：简单粗暴</h2><p>讲道理，与其考虑缺这缺那，不如全部安装。所以</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install texlive-full</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install texlive-full<br></code></pre></td></tr></table></figure>
 
 <p>至此，问题全部解决</p>
 <h2 id="方法二：高级工具"><a href="#方法二：高级工具" class="headerlink" title="方法二：高级工具"></a>方法二：高级工具</h2><p>这里介绍一下一个LaTeX Package管理工具：<code>tlmgr</code></p>
 <p>这个工具安装可以直接<code>apt-get</code>进行安装处理</p>
 <p>使用第一步是进入你的package管理目录，这个在之前的Blog里面有提到。</p>
 <p>在该目录同级的位置，执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tlmgr init-usertree</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tlmgr init-usertree<br></code></pre></td></tr></table></figure>
 
 <p>可能会需要sudo</p>
 <p>我们之后就可以进行package的简单安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tlmgr install &#123;<span class="variable">$package_name</span>&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tlmgr install &#123;<span class="hljs-variable">$package_name</span>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>同样，可能也需要sudo</p>
 <p>至此，问题全部解决</p>
@@ -317,15 +317,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Others/" class="category-chain-item">Others</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Others/Latex/" class="category-chain-item">Latex</a>
-  
-  
-
   
 
       </span>
@@ -359,25 +352,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>November 10, 2019</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -399,7 +392,7 @@
                       <a href="/2019/11/15/2021/Advancing-on-X86-Assembly-1-Registers-Memory/" title="Advancing on X86 Assembly 1 - Registers &amp; Memory">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Advancing on X86 Assembly 1 - Registers &amp; Memory</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -408,7 +401,7 @@
                     
                       <a href="/2019/11/09/2021/Linux-QQ-Bug-Fix/" title="Linux QQ Bug Fix">
                         <span class="hidden-mobile">Linux QQ Bug Fix</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -427,7 +420,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -482,7 +475,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -490,7 +483,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -642,7 +635,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

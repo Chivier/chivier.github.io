@@ -24,7 +24,7 @@
 <meta property="og:description" content="As a programmer, I don’t think you can bear only working with ‘gdb’ and ‘vim’. Tools can never too better. I will introduce my working environment.">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-02-11T14:54:05.000Z">
-<meta property="article:modified_time" content="2021-12-27T14:52:11.730Z">
+<meta property="article:modified_time" content="2022-07-03T04:43:09.832Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="System">
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          1.8k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          NaN mins
+          15 分钟
         
       </span>
     
@@ -286,36 +286,36 @@
 <p>So I really recommend zsh + tilix.</p>
 <h2 id="ZSH-install"><a href="#ZSH-install" class="headerlink" title="ZSH install"></a>ZSH install</h2><ol>
 <li><p>Install zsh core and basic tools</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git zsh curl</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install git zsh curl<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>Execute</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure>
 
 <p>And then you can install zsh automatically.</p>
 </li>
 <li><p>Set zsh as default shell</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">chsh -s $(<span class="hljs-built_in">which</span> zsh)<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>Set zsh theme and edit your zsh configure.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim ~/.zshrc<br></code></pre></td></tr></table></figure>
 
 <p>I need to add some my aliases, also I need to set up some plugins for my zsh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.oh-my-zsh/custom/plugins</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-history-substring-search</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/.oh-my-zsh/custom/plugins<br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions<br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-history-substring-search<br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting<br></code></pre></td></tr></table></figure>
 
 <p>Don’t forget to add them to your .zshrc/plugins</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plugins=(git zsh-history-substring-search zsh-autosuggestions colored-man-pages zsh-syntax-highlighting)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugins=(git zsh-history-substring-search zsh-autosuggestions colored-man-pages zsh-syntax-highlighting)<br></code></pre></td></tr></table></figure>
 
 <h2 id="Tilix"><a href="#Tilix" class="headerlink" title="Tilix"></a>Tilix</h2></li>
 </ol>
 <p>So, why tilix?</p>
 <p>tilix is a really useful terminal that can split screen easily.</p>
 <p>Tilix is easy to install.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tilix</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install tilix<br></code></pre></td></tr></table></figure>
 
 <p>But I wanna to set tilix as my default terminal.</p>
 <p>Here is a tutorial:</p>
 <ol>
-<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config x-terminal-emulator</span><br></pre></td></tr></table></figure>
+<li><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo update-alternatives --config x-terminal-emulator<br></code></pre></td></tr></table></figure>
 <p>Through this you can choose your default startup terminal emulator.</p>
 </li>
 <li><p>However, if you try to use right click and ‘Open terminal here’, you will find the terminal is still gnome-terminal.</p>
@@ -325,7 +325,7 @@
 <h2 id="Gogh"><a href="#Gogh" class="headerlink" title="Gogh"></a>Gogh</h2><p>Um, we almost finish all the steps. But I am unsatisfied with the color theme. Here I will share a perfect tool with you — ‘gogh.sh’</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Mayccoll/Gogh">gogh github</a></p>
 <p>I recommend install it from here:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -c  <span class="string">&quot;<span class="subst">$(wget -qO- https://git.io/vQgMr)</span>&quot;</span> </span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash -c  <span class="hljs-string">&quot;<span class="hljs-subst">$(wget -qO- https://git.io/vQgMr)</span>&quot;</span> <br></code></pre></td></tr></table></figure>
 
 <p>And then choose your favorite color theme to download and then you can also choose in tilix preference.</p>
 <h1 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h1><p>My favorite IDE, you can view more information here: <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VS Code</a></p>
@@ -350,15 +350,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Linux/Linux-Learning/" class="category-chain-item">Linux Learning</a>
-  
-  
-
   
 
       </span>
@@ -392,25 +385,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>February 11, 2020</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -432,7 +425,7 @@
                       <a href="/2020/02/11/2021/Rebuild-My-Home-04-Beautify/" title="Rebuild My Home - 04 Beautify">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Rebuild My Home - 04 Beautify</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -441,7 +434,7 @@
                     
                       <a href="/2020/02/11/2021/Rebuild-My-Home-02-Office/" title="Rebuild My Home - 02 Office">
                         <span class="hidden-mobile">Rebuild My Home - 02 Office</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -460,7 +453,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -515,7 +508,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -523,7 +516,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -675,7 +668,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

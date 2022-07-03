@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://chivier.github.io/2022/01/22/2022/2110-OP-DSL/image4.png">
 <meta property="og:image" content="https://chivier.github.io/2022/01/22/2022/2110-OP-DSL/image5.png">
 <meta property="article:published_time" content="2022-01-21T18:46:04.000Z">
-<meta property="article:modified_time" content="2022-01-21T18:47:48.470Z">
+<meta property="article:modified_time" content="2022-07-03T05:12:55.892Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="DSL">
 <meta property="article:tag" content="Compiler">
@@ -126,7 +126,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -138,7 +138,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -150,7 +150,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -162,7 +162,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -174,7 +174,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          2.7k 字
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          NaN mins
+          23 分钟
         
       </span>
     
@@ -298,13 +298,13 @@
 <li>operation over sets</li>
 </ol>
 <p>用四边形网格为例，我们关心的集合有：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> nedges = <span class="number">12</span>; <span class="keyword">int</span> ncells = <span class="number">9</span>; <span class="keyword">int</span> nbedges = <span class="number">12</span>;  </span><br><span class="line">op_set edges = op_decl_set(nedges, <span class="string">&quot;edges&quot;</span>);  </span><br><span class="line">op_set cells = op_decl_set(ncells, <span class="string">&quot;cells&quot;</span>); </span><br><span class="line">op_set bedges = op_decl_set(nbedges, <span class="string">&quot;bedges&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> nedges = <span class="hljs-number">12</span>; <span class="hljs-keyword">int</span> ncells = <span class="hljs-number">9</span>; <span class="hljs-keyword">int</span> nbedges = <span class="hljs-number">12</span>;  <br>op_set edges = op_decl_set(nedges, <span class="hljs-string">&quot;edges&quot;</span>);  <br>op_set cells = op_decl_set(ncells, <span class="hljs-string">&quot;cells&quot;</span>); <br>op_set bedges = op_decl_set(nbedges, <span class="hljs-string">&quot;bedges&quot;</span>);<br></code></pre></td></tr></table></figure>
 <p>数据维护</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> cell_data[<span class="number">9</span>] = &#123;<span class="number">0.12B</span>, <span class="number">0.345</span>, <span class="number">0.224</span>, <span class="number">0.11B</span>, <span class="number">0.246</span>,  </span><br><span class="line"><span class="number">0.324</span>, <span class="number">0.112</span>, <span class="number">0.92B</span>, <span class="number">0.237</span>&#125;;  </span><br><span class="line"><span class="keyword">double</span> edge_data[<span class="number">12</span>] = &#123;<span class="number">3.3</span>, <span class="number">2.1</span>, <span class="number">7.4</span>, <span class="number">5.5</span>, <span class="number">7.6</span>, <span class="number">3.4</span>,  </span><br><span class="line"><span class="number">10.5</span>, <span class="number">9.9</span>, B<span class="number">.9</span>, <span class="number">6.4</span>, <span class="number">4.4</span>, <span class="number">3.6</span>&#125;;  </span><br><span class="line"><span class="function">op_dat dcells <span class="title">op_decl_dat</span><span class="params">(cells, <span class="number">1</span>, <span class="string">&quot;double&quot;</span>,  </span></span></span><br><span class="line"><span class="function"><span class="params">	cell_data, <span class="string">&quot;data_on_cells&quot;</span>)</span></span>;  </span><br><span class="line">op_decl_set(edges, <span class="number">1</span>, <span class="string">&quot;double&quot;</span>,  </span><br><span class="line">	edge_data, <span class="string">&quot;data_on_edges&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">double</span> cell_data[<span class="hljs-number">9</span>] = &#123;<span class="hljs-number">0.12B</span>, <span class="hljs-number">0.345</span>, <span class="hljs-number">0.224</span>, <span class="hljs-number">0.11B</span>, <span class="hljs-number">0.246</span>,  <br><span class="hljs-number">0.324</span>, <span class="hljs-number">0.112</span>, <span class="hljs-number">0.92B</span>, <span class="hljs-number">0.237</span>&#125;;  <br><span class="hljs-keyword">double</span> edge_data[<span class="hljs-number">12</span>] = &#123;<span class="hljs-number">3.3</span>, <span class="hljs-number">2.1</span>, <span class="hljs-number">7.4</span>, <span class="hljs-number">5.5</span>, <span class="hljs-number">7.6</span>, <span class="hljs-number">3.4</span>,  <br><span class="hljs-number">10.5</span>, <span class="hljs-number">9.9</span>, B<span class="hljs-number">.9</span>, <span class="hljs-number">6.4</span>, <span class="hljs-number">4.4</span>, <span class="hljs-number">3.6</span>&#125;;  <br><span class="hljs-function">op_dat dcells <span class="hljs-title">op_decl_dat</span><span class="hljs-params">(cells, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;double&quot;</span>,  </span></span><br><span class="hljs-function"><span class="hljs-params">	cell_data, <span class="hljs-string">&quot;data_on_cells&quot;</span>)</span></span>;  <br>op_decl_set(edges, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;double&quot;</span>,  <br>	edge_data, <span class="hljs-string">&quot;data_on_edges&quot;</span>);<br></code></pre></td></tr></table></figure>
 <p>连接性：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> edge_to_cell[<span class="number">24</span>] = &#123;<span class="number">0</span>,<span class="number">1</span>, <span class="number">1</span>,<span class="number">2</span>, <span class="number">0</span>,<span class="number">3</span>, <span class="number">1</span>,<span class="number">4</span>, <span class="number">2</span>,<span class="number">5</span>, <span class="number">3</span>,<span class="number">4</span>,  </span><br><span class="line"><span class="number">4</span>,<span class="number">5</span>, <span class="number">3</span>,<span class="number">6</span>, <span class="number">4</span>,<span class="number">7</span>, <span class="number">5</span>,B, <span class="number">6</span>,<span class="number">7</span>, <span class="number">7</span>,B &#125;;  </span><br><span class="line">op_map pecell = op_decl_map(edges, cells, <span class="number">2</span>, </span><br><span class="line">	edge_to_cell, <span class="string">&quot;edge_to_cell_map&quot;</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">int</span> edge_to_cell[<span class="hljs-number">24</span>] = &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>, <span class="hljs-number">1</span>,<span class="hljs-number">2</span>, <span class="hljs-number">0</span>,<span class="hljs-number">3</span>, <span class="hljs-number">1</span>,<span class="hljs-number">4</span>, <span class="hljs-number">2</span>,<span class="hljs-number">5</span>, <span class="hljs-number">3</span>,<span class="hljs-number">4</span>,  <br><span class="hljs-number">4</span>,<span class="hljs-number">5</span>, <span class="hljs-number">3</span>,<span class="hljs-number">6</span>, <span class="hljs-number">4</span>,<span class="hljs-number">7</span>, <span class="hljs-number">5</span>,B, <span class="hljs-number">6</span>,<span class="hljs-number">7</span>, <span class="hljs-number">7</span>,B &#125;;  <br>op_map pecell = op_decl_map(edges, cells, <span class="hljs-number">2</span>, <br>	edge_to_cell, <span class="hljs-string">&quot;edge_to_cell_map&quot;</span>);<br></code></pre></td></tr></table></figure>
 <p>操作 kernel function：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">res</span><span class="params">(<span class="keyword">double</span>* edge, <span class="keyword">double</span>* cellO, <span class="keyword">double</span>* cel11)</span></span>&#123;  </span><br><span class="line">	*cellO += *edge;  </span><br><span class="line">	*cell1 += *edge;  </span><br><span class="line">&#125;  </span><br><span class="line">op_par_loop (res, <span class="string">&quot;residual_calculation&quot;</span>, edges,  </span><br><span class="line">	op_arg(dedges, <span class="number">-1</span>, Op_ID, <span class="number">1</span>, <span class="string">&quot;double&quot;</span>, OP_READ),  </span><br><span class="line">	op_arg(dcells, <span class="number">0</span>, pecell, <span class="number">1</span>, <span class="string">&quot;double&quot;</span>, oP_INC),  </span><br><span class="line">	op_arg(dcells, <span class="number">1</span>, pecell, <span class="number">1</span>, <span class="string">&quot;double&quot;</span>, OP_INC));</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">res</span><span class="hljs-params">(<span class="hljs-keyword">double</span>* edge, <span class="hljs-keyword">double</span>* cellO, <span class="hljs-keyword">double</span>* cel11)</span></span>&#123;  <br>	*cellO += *edge;  <br>	*cell1 += *edge;  <br>&#125;  <br>op_par_loop (res, <span class="hljs-string">&quot;residual_calculation&quot;</span>, edges,  <br>	op_arg(dedges, <span class="hljs-number">-1</span>, Op_ID, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;double&quot;</span>, OP_READ),  <br>	op_arg(dcells, <span class="hljs-number">0</span>, pecell, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;double&quot;</span>, oP_INC),  <br>	op_arg(dcells, <span class="hljs-number">1</span>, pecell, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;double&quot;</span>, OP_INC));<br></code></pre></td></tr></table></figure>
 
 <p>核函数需额外的说明：<br><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>其中涉及了关于潜在数据依赖的处理，这一部分机制之后也会考虑。</p>
@@ -366,15 +366,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Compiler/" class="category-chain-item">Compiler</a>
+  <a href="/categories/Research/" class="category-chain-item">Research</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Compiler/DSL/" class="category-chain-item">DSL</a>
-  
-  
-
   
 
       </span>
@@ -408,25 +401,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>January 22, 2022</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -448,7 +441,7 @@
                       <a href="/2022/01/22/2022/2110-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%8A%A0%E9%80%9F%E5%A4%84%E7%90%86%E5%99%A8/" title="2110-数据流加速处理器">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">2110-数据流加速处理器</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -457,7 +450,7 @@
                     
                       <a href="/2022/01/22/2022/2111-%E6%95%B0%E6%8D%AE%E6%B5%81%E8%AF%AD%E8%A8%80%E8%AE%BE%E8%AE%A1-version1/" title="2111-数据流语言设计-version1">
                         <span class="hidden-mobile">2111-数据流语言设计-version1</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -476,7 +469,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -531,7 +524,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -539,7 +532,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -691,7 +684,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

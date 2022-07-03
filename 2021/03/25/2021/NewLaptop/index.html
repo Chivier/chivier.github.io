@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://chivier.github.io/2021/03/25/2021/NewLaptop/image03.png">
 <meta property="og:image" content="https://chivier.github.io/2021/03/25/2021/NewLaptop/image04.png">
 <meta property="article:published_time" content="2021-03-25T01:11:08.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:47:00.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:42:01.227Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Windows">
 <meta property="article:tag" content="Softwares">
@@ -126,7 +126,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -138,7 +138,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -150,7 +150,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -162,7 +162,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -174,7 +174,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -230,7 +230,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          3.1k 字
         
       </span>
     
@@ -241,7 +241,7 @@
         
         
         
-          NaN mins
+          26 分钟
         
       </span>
     
@@ -422,16 +422,16 @@
 <p>这5个都属于我的常用工具，官网下载即可。</p>
 <h2 id="2-8-X410"><a href="#2-8-X410" class="headerlink" title="2.8 X410"></a>2.8 X410</h2><p>X转发服务器，这里选用了X410，Microsoft Store 购买。</p>
 <p>安装之后需要将WSL2和X410进行绑定和使用。使用有些技巧，在X410启动之后，需要更改WSL2的显示设置，在bashrc末尾添加如下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> DISPLAY_NUMBER=<span class="string">&quot;0&quot;</span></span><br><span class="line"><span class="built_in">export</span> DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>):<span class="variable">$DISPLAY_NUMBER</span></span><br><span class="line"><span class="built_in">export</span> LIBGL_ALWAYS_INDIRECT=1</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> DISPLAY_NUMBER=<span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-built_in">export</span> DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>):<span class="hljs-variable">$DISPLAY_NUMBER</span><br><span class="hljs-built_in">export</span> LIBGL_ALWAYS_INDIRECT=1<br></code></pre></td></tr></table></figure>
 
 <p>这样就实现了WSL的X转发。</p>
 <h2 id="2-9-Tilix"><a href="#2-9-Tilix" class="headerlink" title="2.9 Tilix"></a>2.9 Tilix</h2><p>Tilix是我个人偏好的终端，是在Linux下分屏最方便的终端。安装在WSL中进行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install tilix</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install tilix<br></code></pre></td></tr></table></figure>
 
 <p>安装即可。</p>
 <p>在windows中更自然的使用，需要做一下额外的调整和配置。</p>
 <p>用AHK写一个快速启动的配置，使用更加像Linux。</p>
-<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">^!t::</span><br><span class="line">    Run, C:\app\tilix\tilix.vbs</span><br><span class="line">Return</span><br><span class="line"></span><br><span class="line">^BackSpace:: ;;Delete previous word</span><br><span class="line">    Send ^+&#123;Left&#125;&#123;Del&#125;</span><br><span class="line">Return</span><br></pre></td></tr></table></figure>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vbscript">^!t::<br>    Run, C:\app\tilix\tilix.vbs<br>Return<br><br>^BackSpace:: ;;Delete previous word<br>    Send ^+&#123;Left&#125;&#123;Del&#125;<br>Return<br></code></pre></td></tr></table></figure>
 
 <p>这里有一个使用习惯，Ctrl + BackSpace用于删除整个单词。</p>
 
@@ -452,7 +452,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Windows/" class="category-chain-item">Windows</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
   
 
@@ -487,25 +487,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>March 25, 2021</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -527,7 +527,7 @@
                       <a href="/2021/10/26/2022/2109-Source-to-Source-LLVM-%E8%B0%83%E7%A0%94/" title="2109-Source to Source LLVM 调研">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">2109-Source to Source LLVM 调研</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -536,7 +536,7 @@
                     
                       <a href="/2020/09/29/2021/x-forwarding-check/" title="X-forwarding Check">
                         <span class="hidden-mobile">X-forwarding Check</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -555,7 +555,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -610,7 +610,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -618,7 +618,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -770,7 +770,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

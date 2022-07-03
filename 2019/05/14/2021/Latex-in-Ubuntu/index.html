@@ -24,7 +24,7 @@
 <meta property="og:description" content="介绍关于 Latex 的知识。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-05-14T02:57:06.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:46:58.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:39:46.019Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Latex">
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          1.7k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          NaN mins
+          15 分钟
         
       </span>
     
@@ -284,25 +284,25 @@
 <h1 id="安装latex"><a href="#安装latex" class="headerlink" title="安装latex"></a>安装latex</h1><p>可以简单的直接再应用商店里面随便搜索一款latex的编辑器，就可以解决大部分问题。但是缺点在于不够灵活，设置僵硬。推荐还是按下面的步骤进行。</p>
 <h1 id="安装Latex中文环境和TexStudio"><a href="#安装Latex中文环境和TexStudio" class="headerlink" title="安装Latex中文环境和TexStudio"></a>安装Latex中文环境和TexStudio</h1><p>个人推荐的tex编辑器是TexStudio，确实十分好用，按<code>F5</code>就可以直接生成pdf再旁边，随点随用，两边同步。</p>
 <p>安装如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install texlive</span><br><span class="line">sudo apt-get install texlive-xetex</span><br><span class="line">sudo apt-get install texlive-lang-chinese</span><br><span class="line">sudo apt-get install texstudio</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install texlive<br>sudo apt-get install texlive-xetex<br>sudo apt-get install texlive-lang-chinese<br>sudo apt-get install texstudio<br></code></pre></td></tr></table></figure>
 
 <p>就完成了所有安装。</p>
 <p>但是进入texstudio之后并不能直接使用，需要我们调整一些设置，再<code>Option</code>栏里的<code>Configure TexStudio...</code>里的<code>Build</code>选项，我们需要将<code>Default</code>的编译方式转为<strong>Xelatex</strong>。这样才可以完成配置。</p>
 <h1 id="新包安装"><a href="#新包安装" class="headerlink" title="新包安装"></a>新包安装</h1><p>latex里，我们会使用各种package以满足我们的需求。Ubuntu下配置包方法如下。</p>
 <p>配置package文件都位于：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/texlive/texmf-dist/tex/latex</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/usr/share/texlive/texmf-dist/tex/latex<br></code></pre></td></tr></table></figure>
 
 <p>我们进入CTAN网站下载需要的包：<a target="_blank" rel="noopener" href="https://www.ctan.org/pkg/">CTAN</a></p>
 <p>下载之后复制到之前所说的目录里，最后再运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo texhash</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo texhash<br></code></pre></td></tr></table></figure>
 
 <p>之后就可以顺利使用了</p>
 <h1 id="插入代码"><a href="#插入代码" class="headerlink" title="插入代码"></a>插入代码</h1><p>对于CS的同学，论文中插入代码必不可少，优雅的插入代码也十分关键。</p>
 <p>一般我们先生命风格，再添加代码。</p>
 <p>这里以插入verilog代码作为例子</p>
-<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\definecolor</span>&#123;dkgreen&#125;&#123;rgb&#125;&#123;0,0.6,0&#125;</span><br><span class="line"><span class="keyword">\definecolor</span>&#123;gray&#125;&#123;rgb&#125;&#123;0.5,0.5,0.5&#125;</span><br><span class="line"><span class="keyword">\definecolor</span>&#123;mauve&#125;&#123;rgb&#125;&#123;0.58,0,0.82&#125;</span><br><span class="line"><span class="keyword">\definecolor</span>&#123;vgreen&#125;&#123;RGB&#125;&#123;104,180,104&#125;</span><br><span class="line"><span class="keyword">\definecolor</span>&#123;vblue&#125;&#123;RGB&#125;&#123;49,49,255&#125;</span><br><span class="line"><span class="keyword">\definecolor</span>&#123;vorange&#125;&#123;RGB&#125;&#123;255,143,102&#125;</span><br><span class="line"><span class="keyword">\lstdefinestyle</span>&#123;verilog-style&#125;</span><br><span class="line">&#123;</span><br><span class="line">	language=Verilog,</span><br><span class="line">	basicstyle=<span class="keyword">\small</span><span class="keyword">\ttfamily</span>,</span><br><span class="line">	breaklines=true,</span><br><span class="line">	showstringspaces=false,</span><br><span class="line">	columns=flexible,</span><br><span class="line">	keywordstyle=<span class="keyword">\color</span>&#123;vblue&#125;,</span><br><span class="line">	identifierstyle=<span class="keyword">\color</span>&#123;black&#125;,</span><br><span class="line">	commentstyle=<span class="keyword">\color</span>&#123;vgreen&#125;,</span><br><span class="line">	numbers=left,</span><br><span class="line">	numberstyle=<span class="keyword">\tiny</span><span class="keyword">\color</span>&#123;black&#125;,</span><br><span class="line">	numbersep=7pt,</span><br><span class="line">	tabsize=4,</span><br><span class="line">	literate=*&#123;:&#125;&#123;&#123;<span class="keyword">\textcolor</span>&#123;black&#125;&#123;:&#125;&#125;&#125;1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\definecolor</span>&#123;dkgreen&#125;&#123;rgb&#125;&#123;0,0.6,0&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;gray&#125;&#123;rgb&#125;&#123;0.5,0.5,0.5&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;mauve&#125;&#123;rgb&#125;&#123;0.58,0,0.82&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;vgreen&#125;&#123;RGB&#125;&#123;104,180,104&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;vblue&#125;&#123;RGB&#125;&#123;49,49,255&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;vorange&#125;&#123;RGB&#125;&#123;255,143,102&#125;<br><span class="hljs-keyword">\lstdefinestyle</span>&#123;verilog-style&#125;<br>&#123;<br>	language=Verilog,<br>	basicstyle=<span class="hljs-keyword">\small</span><span class="hljs-keyword">\ttfamily</span>,<br>	breaklines=true,<br>	showstringspaces=false,<br>	columns=flexible,<br>	keywordstyle=<span class="hljs-keyword">\color</span>&#123;vblue&#125;,<br>	identifierstyle=<span class="hljs-keyword">\color</span>&#123;black&#125;,<br>	commentstyle=<span class="hljs-keyword">\color</span>&#123;vgreen&#125;,<br>	numbers=left,<br>	numberstyle=<span class="hljs-keyword">\tiny</span><span class="hljs-keyword">\color</span>&#123;black&#125;,<br>	numbersep=7pt,<br>	tabsize=4,<br>	literate=*&#123;:&#125;&#123;&#123;<span class="hljs-keyword">\textcolor</span>&#123;black&#125;&#123;:&#125;&#125;&#125;1<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\lstinputlisting</span>[style=&#123;verilog-style&#125;,caption=&#123;....v&#125;]&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\lstinputlisting</span>[style=&#123;verilog-style&#125;,caption=&#123;....v&#125;]&#123;...&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -327,15 +327,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Others/" class="category-chain-item">Others</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Others/Latex/" class="category-chain-item">Latex</a>
-  
-  
-
   
 
       </span>
@@ -369,25 +362,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>May 14, 2019</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -409,7 +402,7 @@
                       <a href="/2019/05/14/2021/COD-Casual-Disscussion-1/" title="COD Casual Disscussion 1">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">COD Casual Disscussion 1</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -418,7 +411,7 @@
                     
                       <a href="/2019/05/14/2021/Operating-System-Concept-2/" title="Operating System Concept - 2">
                         <span class="hidden-mobile">Operating System Concept - 2</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -437,7 +430,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -492,7 +485,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -500,7 +493,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -652,7 +645,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

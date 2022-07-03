@@ -24,7 +24,7 @@
 <meta property="og:description" content="Rust项目——Rust编写Shell">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-04-22T06:34:46.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:47:02.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:43:57.240Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Rust">
@@ -122,7 +122,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -134,7 +134,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -146,7 +146,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -158,7 +158,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -170,7 +170,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          1.9k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          NaN mins
+          16 分钟
         
       </span>
     
@@ -304,7 +304,7 @@
 </li>
 </ul>
 <p>基本框架由该博客提供：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>()&#123;</span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="built_in">print!</span>(<span class="string">&quot;&gt; &quot;</span>);</span><br><span class="line">        stdout().flush();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> input = <span class="built_in">String</span>::new();</span><br><span class="line">        stdin().read_line(&amp;<span class="keyword">mut</span> input).unwrap();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// must be peekable so we know when we are on the last command</span></span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> commands = input.trim().split(<span class="string">&quot; | &quot;</span>).peekable();</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> previous_command = <span class="literal">None</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">let</span> <span class="literal">Some</span>(command) = commands.next()  &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> <span class="keyword">mut</span> parts = command.trim().split_whitespace();</span><br><span class="line">            <span class="keyword">let</span> command = parts.next().unwrap();</span><br><span class="line">            <span class="keyword">let</span> args = parts;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">match</span> command &#123;</span><br><span class="line">                <span class="string">&quot;exit&quot;</span> =&gt; <span class="keyword">return</span>,</span><br><span class="line">                command =&gt; &#123;</span><br><span class="line">                    <span class="keyword">let</span> stdin = previous_command</span><br><span class="line">                        .map_or(</span><br><span class="line">                            Stdio::inherit(),</span><br><span class="line">                            |output: Child| Stdio::from(output.stdout.unwrap())</span><br><span class="line">                        );</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">let</span> stdout = <span class="keyword">if</span> commands.peek().is_some() &#123;</span><br><span class="line">                        <span class="comment">// there is another command piped behind this one</span></span><br><span class="line">                        <span class="comment">// prepare to send output to the next command</span></span><br><span class="line">                        Stdio::piped()</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="comment">// there are no more commands piped behind this one</span></span><br><span class="line">                        <span class="comment">// send output to shell stdout</span></span><br><span class="line">                        Stdio::inherit()</span><br><span class="line">                    &#125;;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">let</span> output = Command::new(command)</span><br><span class="line">                        .args(args)</span><br><span class="line">                        .stdin(stdin)</span><br><span class="line">                        .stdout(stdout)</span><br><span class="line">                        .spawn();</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">match</span> output &#123;</span><br><span class="line">                        <span class="literal">Ok</span>(output) =&gt; &#123; previous_command = <span class="literal">Some</span>(output); &#125;,</span><br><span class="line">                        <span class="literal">Err</span>(e) =&gt; &#123;</span><br><span class="line">                            previous_command = <span class="literal">None</span>;</span><br><span class="line">                            eprintln!(<span class="string">&quot;&#123;&#125;&quot;</span>, e);</span><br><span class="line">                        &#125;,</span><br><span class="line">                    &#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> <span class="literal">Some</span>(<span class="keyword">mut</span> final_command) = previous_command &#123;</span><br><span class="line">            <span class="comment">// block until the final command has finished</span></span><br><span class="line">            final_command.wait();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>()&#123;<br>    <span class="hljs-keyword">loop</span> &#123;<br>        <span class="hljs-built_in">print!</span>(<span class="hljs-string">&quot;&gt; &quot;</span>);<br>        stdout().flush();<br><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> input = <span class="hljs-built_in">String</span>::new();<br>        stdin().read_line(&amp;<span class="hljs-keyword">mut</span> input).unwrap();<br><br>        <span class="hljs-comment">// must be peekable so we know when we are on the last command</span><br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> commands = input.trim().split(<span class="hljs-string">&quot; | &quot;</span>).peekable();<br>        <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> previous_command = <span class="hljs-literal">None</span>;<br><br>        <span class="hljs-keyword">while</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(command) = commands.next()  &#123;<br><br>            <span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> parts = command.trim().split_whitespace();<br>            <span class="hljs-keyword">let</span> command = parts.next().unwrap();<br>            <span class="hljs-keyword">let</span> args = parts;<br><br>            <span class="hljs-keyword">match</span> command &#123;<br>                <span class="hljs-string">&quot;exit&quot;</span> =&gt; <span class="hljs-keyword">return</span>,<br>                command =&gt; &#123;<br>                    <span class="hljs-keyword">let</span> stdin = previous_command<br>                        .map_or(<br>                            Stdio::inherit(),<br>                            |output: Child| Stdio::from(output.stdout.unwrap())<br>                        );<br><br>                    <span class="hljs-keyword">let</span> stdout = <span class="hljs-keyword">if</span> commands.peek().is_some() &#123;<br>                        <span class="hljs-comment">// there is another command piped behind this one</span><br>                        <span class="hljs-comment">// prepare to send output to the next command</span><br>                        Stdio::piped()<br>                    &#125; <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-comment">// there are no more commands piped behind this one</span><br>                        <span class="hljs-comment">// send output to shell stdout</span><br>                        Stdio::inherit()<br>                    &#125;;<br><br>                    <span class="hljs-keyword">let</span> output = Command::new(command)<br>                        .args(args)<br>                        .stdin(stdin)<br>                        .stdout(stdout)<br>                        .spawn();<br><br>                    <span class="hljs-keyword">match</span> output &#123;<br>                        <span class="hljs-literal">Ok</span>(output) =&gt; &#123; previous_command = <span class="hljs-literal">Some</span>(output); &#125;,<br>                        <span class="hljs-literal">Err</span>(e) =&gt; &#123;<br>                            previous_command = <span class="hljs-literal">None</span>;<br>                            eprintln!(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, e);<br>                        &#125;,<br>                    &#125;;<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> <span class="hljs-literal">Some</span>(<span class="hljs-keyword">mut</span> final_command) = previous_command &#123;<br>            <span class="hljs-comment">// block until the final command has finished</span><br>            final_command.wait();<br>        &#125;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这作为基本框架。</p>
 <h2 id="框架缺陷"><a href="#框架缺陷" class="headerlink" title="框架缺陷"></a>框架缺陷</h2><p>第一，该框架支持命令过少，很多问题无法解决</p>
@@ -335,15 +335,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Rust/" class="category-chain-item">Rust</a>
+  <a href="/categories/Develop/" class="category-chain-item">Develop</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Rust/Rust-Project/" class="category-chain-item">Rust Project</a>
-  
-  
-
   
 
       </span>
@@ -381,25 +374,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>April 22, 2019</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -421,7 +414,7 @@
                       <a href="/2019/04/23/2021/Instructions/" title="Instructions">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Instructions</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -430,7 +423,7 @@
                     
                       <a href="/2019/04/16/2021/Logic-%E5%BD%A2%E5%BC%8F%E7%AE%97%E6%9C%AF1/" title="Logic-形式算数-1">
                         <span class="hidden-mobile">Logic-形式算数-1</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -449,7 +442,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -504,7 +497,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -512,7 +505,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -664,7 +657,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

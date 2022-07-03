@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://chivier.github.io/2019/04/10/2021/Operating-System-Concept-1/PCB_Switch.png">
 <meta property="og:image" content="https://chivier.github.io/2019/04/10/2021/Operating-System-Concept-1/Queueing-diagram.png">
 <meta property="article:published_time" content="2019-04-10T06:56:09.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:47:00.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:42:12.112Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="System">
 <meta name="twitter:card" content="summary_large_image">
@@ -127,7 +127,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -139,7 +139,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -151,7 +151,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -163,7 +163,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -175,7 +175,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          5.5k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          NaN mins
+          46 分钟
         
       </span>
     
@@ -453,7 +453,7 @@
 <p>通常，在系统调用<code>fork()</code>之后，一个进程会使用系统调用<code>exec()</code>，以用新程序来取代进<br>程的内存雪间。系统调用<code>exec()</code>将二进制文件装入内存(消除了原来包含系统调用<code>exec()</code>的<br>程序的内存映射)，并开始执行。采用这种方式，两个进程能相互通信，并能按各自的方法<br>执行。父进程能创建更多的子进程，或者如果在子进程运行时没有什么可做，那么它采用<br>系统调用<code>wait()</code>把自己移出就绪队列来等待子进程的终止。</p>
 <p><strong>子进程怎么执行：</strong></p>
 <p>=》<strong>子进程从fork()的位置开始执行</strong>，也就是说前面的代码不走，但是拥有之前的变量以及变量的值，与父进程的值一样，这次fork()，返回值是0，所以在子进程里面直接执行了pid==0这一个分支，父进程里面并不执行这个分支的语句。这就为我们在写mian函数的时候怎么写子进程的程序提供了一个方法来隔离代码。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">pid_t</span> pid[<span class="number">3</span>];</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    pid[<span class="number">0</span>] = fork();</span><br><span class="line">    pid[<span class="number">1</span>] = fork();</span><br><span class="line">    pid[<span class="number">2</span>] = fork();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;this is process\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">pid_t</span> pid[<span class="hljs-number">3</span>];<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    pid[<span class="hljs-number">0</span>] = fork();<br>    pid[<span class="hljs-number">1</span>] = fork();<br>    pid[<span class="hljs-number">2</span>] = fork();<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is process\n&quot;</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>运行会输出8次<code>this is a process</code></p>
 <h2 id="进程结束"><a href="#进程结束" class="headerlink" title="进程结束"></a>进程结束</h2><p>当进程完成执行最后的语句并使用系统调用<code>exit()</code>请求操作系统删除自身时，进程终止。这时，进程可以返回状态值(通常为整数)到父进程(通过系统调用<code>wait()</code>) 。所有进程资源(包括物理和虚拟内存、打开文件和 I/O 缓冲)会被操作系统释放。</p>
@@ -487,15 +487,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Operating-System/" class="category-chain-item">Operating System</a>
+  <a href="/categories/Knowledge/" class="category-chain-item">Knowledge</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Operating-System/Concepts/" class="category-chain-item">Concepts</a>
-  
-  
-
   
 
       </span>
@@ -527,25 +520,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>April 10, 2019</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -567,7 +560,7 @@
                       <a href="/2019/04/16/2021/Logic-%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97/" title="Logic-谓词演算-1">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Logic-谓词演算-1</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -576,7 +569,7 @@
                     
                       <a href="/2019/04/09/2021/Rust-Learning-4/" title="Rust-Learning-4">
                         <span class="hidden-mobile">Rust-Learning-4</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -595,7 +588,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -650,7 +643,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -658,7 +651,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -810,7 +803,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

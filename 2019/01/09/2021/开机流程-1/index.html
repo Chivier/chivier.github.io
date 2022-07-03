@@ -24,7 +24,7 @@
 <meta property="og:description" content="介绍关于基于Linux开机流程的知识。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-01-08T22:17:17.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:47:04.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:48:53.223Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="COD">
 <meta property="article:tag" content="Linux">
@@ -121,7 +121,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -133,7 +133,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -145,7 +145,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -157,7 +157,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -169,7 +169,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          NaN mins
+          50 分钟
         
       </span>
     
@@ -288,57 +288,57 @@
 <h3 id="1-2-BIOS启动"><a href="#1-2-BIOS启动" class="headerlink" title="1.2 BIOS启动"></a>1.2 BIOS启动</h3><p>BIOS的程序被固化在计算机主机板上一块较小的ROM的芯片中。通常，不同主机板的BIOS是不同的。就我们选取的BIOS为例 <strong>Intel 80x86</strong> CPU操作模式，和 <strong>Linux 0.11</strong> 内核的环境下，我们的BIOS程序也只有8K，所占的地址在<strong>0xFE000~0xFFFFF</strong>。BIOS程序运行的时候，显示器上会显示显卡、内存的各种信息，表示BIOS程序在依次检测显卡、内存等。其中有一项boot对于系统至关重要要——BIOS在内存中建立中断向量表和中断服务程序。BIOS会在内存开始的位置0x00000用1KB的内存(0x00000~0x003FF)构建中断向量表。</p>
 <h2 id="2-加载程序"><a href="#2-加载程序" class="headerlink" title="2 加载程序"></a>2 加载程序</h2><h3 id="2-1-加载引导程序"><a href="#2-1-加载引导程序" class="headerlink" title="2.1 加载引导程序"></a>2.1 加载引导程序</h3><p>CPU通过收到BIOS传来的int0x19的中断向量，指向0x0E6F2，这里是int0x19指向的地址，BIOS程序从这里开始进行两项工作“找到硬/软盘”以及“加载第一扇区”。BIOS将0号磁头的对应盘里面的0磁道第一扇区的内容复制到0x07C00处，这里就是Linux0.11的引导程序。</p>
 <h3 id="2-2-加载setup"><a href="#2-2-加载setup" class="headerlink" title="2.2 加载setup"></a>2.2 加载setup</h3><p>我们的引导程序bootsec导入内存之后，第一件重要的事情是规划内存。bootsect程序中有一段分别规定了BOOTSEG、INITSEG、SETUPSEG等常量，表示setup的扇区数、加载位置，启动扇区的位置等等。这样规划好之后，bootsect会将自己复制到0x07C000到0x90000处。这一段是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">entry start</span><br><span class="line">start:</span><br><span class="line">	mov	ax,#BOOTSEG</span><br><span class="line">	mov ds,ax</span><br><span class="line">	mov	ax,#INITSEG</span><br><span class="line">	mov es,ax</span><br><span class="line">	mov cx,#256</span><br><span class="line">	sub	si,si</span><br><span class="line">	sub di,di</span><br><span class="line">	rep</span><br><span class="line">	movw</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs asm">entry start<br>start:<br>	mov	ax,#BOOTSEG<br>	mov ds,ax<br>	mov	ax,#INITSEG<br>	mov es,ax<br>	mov cx,#256<br>	sub	si,si<br>	sub di,di<br>	rep<br>	movw<br></code></pre></td></tr></table></figure>
 
 <p>这里ds（0x07C0）和si（0x0000）联合使用起来，组成了原地址0x7C00。es和di联合构成0x90000，<code>mov cx</code>这里正好决定了大小</p>
 <p>本次复制之后我们进行下一阶段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	rep</span><br><span class="line">	movw</span><br><span class="line">	jmpi go,INITSEG</span><br><span class="line">go:	mov ax,cs</span><br><span class="line">	mov ds,ax</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">	rep<br>	movw<br>	jmpi go,INITSEG<br>go:	mov ax,cs<br>	mov ds,ax<br></code></pre></td></tr></table></figure>
 
 <p>这里我们执行跳转，CS变成0x9000，IP从0x9000转到go处。从现在起我们的操作系统完成了转移，不在完全依赖BIOS了，可以根据自己的意志进行移动。</p>
 <p>由于bootsect复制的新的位置，之前修改了CS，现在轮到DS、ES、SS、和SP了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">go:	mov	ax,cs</span><br><span class="line">	mov ds,ax</span><br><span class="line">	mov	ed,ax</span><br><span class="line">! put stack at 0x9ff00</span><br><span class="line">	mov	ss,ax</span><br><span class="line">	mov	sp,#0xFF00</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs assembly">go:	mov	ax,cs<br>	mov ds,ax<br>	mov	ed,ax<br>! put stack at 0x9ff00<br>	mov	ss,ax<br>	mov	sp,#0xFF00<br></code></pre></td></tr></table></figure>
 
 <p>这里通过ax，用CS的值去修改其他寄存器的值。数据段寄存器、附加段寄存器、栈基址寄存器全部设置为代码段寄存器的位置（CS），并且将栈顶指针设置为偏移地址0xFF00的地方。这题我们可以开始加载setup程序了。</p>
 <p>我们首先执行的是int0x13，但我们要先指定扇区加载的内存位置等信息，即传参：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">load_setup:</span><br><span class="line">	mov	dx,#0x0000</span><br><span class="line">	mov cx,#0x0002</span><br><span class="line">	mov bx,#0x0200</span><br><span class="line">	mov ax,#0x0200 + SUPERLEN</span><br><span class="line">	int 0x13</span><br><span class="line">	jnc ok_load_setup</span><br><span class="line">	mov dx,#0x0000</span><br><span class="line">	mov ax,#0x0000</span><br><span class="line">	int 0x13</span><br><span class="line">	j load_setup</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs assembly">load_setup:<br>	mov	dx,#0x0000<br>	mov cx,#0x0002<br>	mov bx,#0x0200<br>	mov ax,#0x0200 + SUPERLEN<br>	int 0x13<br>	jnc ok_load_setup<br>	mov dx,#0x0000<br>	mov ax,#0x0000<br>	int 0x13<br>	j load_setup<br></code></pre></td></tr></table></figure>
 
 <p>完成传参后执行int0x13。全部完成这些之后我们已经从软盘里面加载了5个扇区的代码。</p>
 <h3 id="2-3-加载system模块"><a href="#2-3-加载system模块" class="headerlink" title="2.3 加载system模块"></a>2.3 加载system模块</h3><p>加载完setup之后我们还是用类似之前的方法再来加载第三部分的代码，反复调用int0x13。这部分代码较长，开机的时候我们会显示**”Loading system …”**的信息，我们会在这里加载240个扇区的信息。我们最后还会在bootsect中执行一个小任务：确认根设备号。</p>
 <p>加载完成3个部分之后，我们bootsect功德圆满，然后我们回去执行下一步的setup程序。</p>
 <p>跳转依赖bootsect中的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmpi 0, SETUPSEG</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asm">jmpi 0, SETUPSEG<br></code></pre></td></tr></table></figure>
 
 <h3 id="2-4-提取机器系统数据"><a href="#2-4-提取机器系统数据" class="headerlink" title="2.4 提取机器系统数据"></a>2.4 提取机器系统数据</h3><p>setup程序开始的第一件事情就是利用BIOS中的中断服务提取内核运行所需要的机器系统数据，其中包括贯标位置，显示页面等数据。并且还在int0x41还有int0x46上硬盘参数表。将他们存放在其他位置。</p>
 <p>位置在<code>boot/setup.s</code>里面的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	mov	ax,	#INITSEG</span><br><span class="line">	mov	ds,	as</span><br><span class="line">	mov	ah,	#0x03</span><br><span class="line">	xor bh,	bh</span><br><span class="line">	int	0x10</span><br><span class="line">	mov	[0],dx</span><br><span class="line">	</span><br><span class="line">!get memory size (extended memory,KB)</span><br><span class="line">	mov ah,	#0x88</span><br><span class="line">	int 0x15</span><br><span class="line">	mov [2],ax</span><br><span class="line">mov cx,	#0x10</span><br><span class="line">mov ax, #0x00</span><br><span class="line">rep</span><br><span class="line">stosb</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs assembly">	mov	ax,	#INITSEG<br>	mov	ds,	as<br>	mov	ah,	#0x03<br>	xor bh,	bh<br>	int	0x10<br>	mov	[0],dx<br>	<br>!get memory size (extended memory,KB)<br>	mov ah,	#0x88<br>	int 0x15<br>	mov [2],ax<br>mov cx,	#0x10<br>mov ax, #0x00<br>rep<br>stosb<br>...<br></code></pre></td></tr></table></figure>
 
 <p>这些步骤之后我们完成的实际上是将Linux0.11<strong>从实模式转到了保护模式</strong>。</p>
 <h2 id="3-转向32位模式，准备main函数"><a href="#3-转向32位模式，准备main函数" class="headerlink" title="3 转向32位模式，准备main函数"></a>3 转向32位模式，准备main函数</h2><h3 id="3-1-将system移动到内存起始地址为0x00000"><a href="#3-1-将system移动到内存起始地址为0x00000" class="headerlink" title="3.1 将system移动到内存起始地址为0x00000"></a>3.1 将system移动到内存起始地址为0x00000</h3><p>在这些之前我们先要关闭中断，防止以外情况，在setup.s中有一行<code>cli</code>关闭了中断。setup再将0x10000的内核复制到0x00000的位置。DS和ES配合完成内核移位的任务。这里其实是为我们下一步破旧立新做准备。</p>
 <h3 id="3-2-设置中断"><a href="#3-2-设置中断" class="headerlink" title="3.2 设置中断"></a>3.2 设置中断</h3><p>我们这里会建立新的中断模式，通过setup程序自己提供的数据信息去完成初始化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">end_move:</span><br><span class="line">	mov	ax,#SETUPSEG</span><br><span class="line">	mov ds,ax</span><br><span class="line">	lidt idt_48</span><br><span class="line">	lgdt gdt_48</span><br><span class="line">	...</span><br><span class="line">	</span><br><span class="line">gdt:</span><br><span class="line">	.word 0,0,0,0</span><br><span class="line">	</span><br><span class="line">	.word 0x07FF</span><br><span class="line">	.word 0x0000</span><br><span class="line">	.word 0x9A00</span><br><span class="line">	.word 0x00C0</span><br><span class="line">	</span><br><span class="line">	.word 0x07FF</span><br><span class="line">	.word 0x0000</span><br><span class="line">	.word 0x9200</span><br><span class="line">	.word 0x00C0</span><br><span class="line">	</span><br><span class="line">idt_48:</span><br><span class="line">	.word 0</span><br><span class="line">	.word 0,0</span><br><span class="line">	</span><br><span class="line">gdt_48:</span><br><span class="line">	.word 0x800</span><br><span class="line">	.word 512 + gdt,0x9</span><br><span class="line">	...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs assembly">end_move:<br>	mov	ax,#SETUPSEG<br>	mov ds,ax<br>	lidt idt_48<br>	lgdt gdt_48<br>	...<br>	<br>gdt:<br>	.word 0,0,0,0<br>	<br>	.word 0x07FF<br>	.word 0x0000<br>	.word 0x9A00<br>	.word 0x00C0<br>	<br>	.word 0x07FF<br>	.word 0x0000<br>	.word 0x9200<br>	.word 0x00C0<br>	<br>idt_48:<br>	.word 0<br>	.word 0,0<br>	<br>gdt_48:<br>	.word 0x800<br>	.word 512 + gdt,0x9<br>	...<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-3-打开A20，实现32位寻址"><a href="#3-3-打开A20，实现32位寻址" class="headerlink" title="3.3 打开A20，实现32位寻址"></a>3.3 打开A20，实现32位寻址</h3><p>这里将我们的寻址模式进行改动，最大地址从0xFFFFF扩展到了0xFFFFFFFF。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">call empty_8042</span><br><span class="line">mov a1,#0xD1</span><br><span class="line">out #0x64,al</span><br><span class="line">call empty_8042</span><br><span class="line">mov al,#0xDF  !A20 on</span><br><span class="line">out #0x60,al</span><br><span class="line">call empty_8042</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs assembly">call empty_8042<br>mov a1,#0xD1<br>out #0x64,al<br>call empty_8042<br>mov al,#0xDF  !A20 on<br>out #0x60,al<br>call empty_8042<br>..<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-4-准备head-s"><a href="#3-4-准备head-s" class="headerlink" title="3.4 准备head.s"></a>3.4 准备head.s</h3><p>setup对8259A进行重编程。这里有一点很难理解，在我们设置GDT之后有一句跳转语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmpi 0,8</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs assembly">jmpi 0,8<br></code></pre></td></tr></table></figure>
 
 <p>这里需要声明，8是保护模式的选择符，这样成就可以理解了。</p>
 <h3 id="3-5-执行head-s"><a href="#3-5-执行head-s" class="headerlink" title="3.5 执行head.s"></a>3.5 执行head.s</h3><p>head.s中，我们完成了很多很多任务，例如将SS转32为的esp，对IDT重新设置和构建，调整DS、ES，检测数学协调处理器等等。之后我们将main函数的执行入口地址压给CS：EIP。这样我们可以开始运行main了。</p>
 <h2 id="4-设置根设备和硬盘"><a href="#4-设置根设备和硬盘" class="headerlink" title="4 设置根设备和硬盘"></a>4 设置根设备和硬盘</h2><h3 id="4-1-进行规划"><a href="#4-1-进行规划" class="headerlink" title="4.1 进行规划"></a>4.1 进行规划</h3><p>我们开始使用32字的机器的时候设置了drive_info实在<code>init/main.c</code>里面执行的：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DRIVE_INFO (*(struct drive_info *)0x90080)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_ROOT_DEV (*(struct short *)0x901FC)</span></span><br><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ROOT_DEV = ORIG_ROOT_DEV;</span><br><span class="line">    drive_info = DRIVE_INFO;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DRIVE_INFO (*(struct drive_info *)0x90080)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_ROOT_DEV (*(struct short *)0x901FC)</span><br>...<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    ROOT_DEV = ORIG_ROOT_DEV;<br>    drive_info = DRIVE_INFO;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>接下来我们会设置缓冲区、虚拟盘、主内存等各自的存储位置。</p>
 <h3 id="4-2-设置虚拟盘空间并初始化"><a href="#4-2-设置虚拟盘空间并初始化" class="headerlink" title="4.2 设置虚拟盘空间并初始化"></a>4.2 设置虚拟盘空间并初始化</h3><h2 id="5-建立人机交互界面以及外设的中断服务挂载"><a href="#5-建立人机交互界面以及外设的中断服务挂载" class="headerlink" title="5 建立人机交互界面以及外设的中断服务挂载"></a>5 建立人机交互界面以及外设的中断服务挂载</h2><p>我们加载完操作系统并不完全算完成了开机，要真正的使用我们还要加载外设。Linux中的ttyinit函数就是为了完成字符设备的初始化工作。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tty</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rs_init ();</span><br><span class="line">    con_init ();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">tty</span> <span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>    rs_init ();<br>    con_init ();<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>其中我们对串口进行设置的代码是rs_init()</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">rs_init (<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	set_intr_gate (<span class="number">0x24</span>, rs1_interrupt);</span><br><span class="line">	set_intr_gate (<span class="number">0x23</span>, rs2_interrupt);</span><br><span class="line">	init (tty_table[<span class="number">1</span>].read_q.data);</span><br><span class="line">	init (tty_table[<span class="number">2</span>].read_q.data);</span><br><span class="line">	outb (inb_p (<span class="number">0x21</span>) &amp; <span class="number">0xE7</span>, <span class="number">0x21</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">void</span><br>rs_init (<span class="hljs-keyword">void</span>)<br>&#123;<br>	set_intr_gate (<span class="hljs-number">0x24</span>, rs1_interrupt);<br>	set_intr_gate (<span class="hljs-number">0x23</span>, rs2_interrupt);<br>	init (tty_table[<span class="hljs-number">1</span>].read_q.data);<br>	init (tty_table[<span class="hljs-number">2</span>].read_q.data);<br>	outb (inb_p (<span class="hljs-number">0x21</span>) &amp; <span class="hljs-number">0xE7</span>, <span class="hljs-number">0x21</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <p>之后我们依次完成显示器、键盘等设置。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_X (*(unsigned char *)0x90000)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_Y (*(unsigned char *)0x90001)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_PAGE (*(unsigned short *)0x90004)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_MODE ((*(unsigned short *)0x90006) &amp; 0xff)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_COLS (((*(unsigned short *)0x90006) &amp; 0xff00) &gt;&gt; 8)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_LINES (25)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_EGA_AX (*(unsigned short *)0x90008)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_EGA_BX (*(unsigned short *)0x9000a)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ORIG_VIDEO_EGA_CX (*(unsigned short *)0x9000c)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_MDA 0x10 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_CGA 0x11 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_EGAM 0x20 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VIDEO_TYPE_EGAC 0x21 </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NPAR 16</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">con_init (<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> a;</span><br><span class="line">	<span class="keyword">char</span> *display_desc = <span class="string">&quot;????&quot;</span>;</span><br><span class="line">	<span class="keyword">char</span> *display_ptr;</span><br><span class="line"></span><br><span class="line">	video_num_columns = ORIG_VIDEO_COLS;	</span><br><span class="line">	video_size_row = video_num_columns * <span class="number">2</span>;	</span><br><span class="line">	video_num_lines = ORIG_VIDEO_LINES;	</span><br><span class="line">	video_page = (<span class="keyword">unsigned</span> <span class="keyword">char</span>)ORIG_VIDEO_PAGE;	</span><br><span class="line">	video_erase_char = <span class="number">0x0720</span>;	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (ORIG_VIDEO_MODE == <span class="number">7</span>)	</span><br><span class="line">	&#123;</span><br><span class="line">		video_mem_start = <span class="number">0xb0000</span>;	</span><br><span class="line">		video_port_reg = <span class="number">0x3b4</span>;	</span><br><span class="line">		video_port_val = <span class="number">0x3b5</span>;	</span><br><span class="line">        </span><br><span class="line">		<span class="keyword">if</span> ((ORIG_VIDEO_EGA_BX &amp; <span class="number">0xff</span>) != <span class="number">0x10</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_EGAM;	</span><br><span class="line">			video_mem_end = <span class="number">0xb8000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;EGAm&quot;</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_MDA;</span><br><span class="line">			video_mem_end = <span class="number">0xb2000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;*MDA&quot;</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		video_mem_start = <span class="number">0xb8000</span>;</span><br><span class="line">		video_port_reg = <span class="number">0x3d4</span>;</span><br><span class="line">		video_port_val = <span class="number">0x3d5</span>;</span><br><span class="line">        </span><br><span class="line">		<span class="keyword">if</span> ((ORIG_VIDEO_EGA_BX &amp; <span class="number">0xff</span>) != <span class="number">0x10</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_EGAC;</span><br><span class="line">			video_mem_end = <span class="number">0xbc000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;EGAc&quot;</span>;	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			video_type = VIDEO_TYPE_CGA;</span><br><span class="line">			video_mem_end = <span class="number">0xba000</span>;</span><br><span class="line">			display_desc = <span class="string">&quot;*CGA&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	display_ptr = ((<span class="keyword">char</span> *) video_mem_start) + video_size_row - <span class="number">8</span>;</span><br><span class="line">	<span class="keyword">while</span> (*display_desc)</span><br><span class="line">	&#123;</span><br><span class="line">		*display_ptr++ = *display_desc++;</span><br><span class="line">		display_ptr++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	origin = video_mem_start;</span><br><span class="line">	scr_end = video_mem_start + video_num_lines * video_size_row;</span><br><span class="line">	top = <span class="number">0</span>;</span><br><span class="line">	bottom = video_num_lines;</span><br><span class="line"></span><br><span class="line">	gotoxy (ORIG_X, ORIG_Y);</span><br><span class="line">	set_trap_gate (<span class="number">0x21</span>, &amp;keyboard_interrupt);</span><br><span class="line">	outb_p ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(inb_p (<span class="number">0x21</span>) &amp; <span class="number">0xfd</span>), <span class="number">0x21</span>);</span><br><span class="line">	a = inb_p (<span class="number">0x61</span>);	</span><br><span class="line">	outb_p ((<span class="keyword">unsigned</span> <span class="keyword">char</span>)(a | <span class="number">0x80</span>), <span class="number">0x61</span>);</span><br><span class="line">	outb (a, <span class="number">0x61</span>);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_X (*(unsigned char *)0x90000)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_Y (*(unsigned char *)0x90001)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_VIDEO_PAGE (*(unsigned short *)0x90004)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_VIDEO_MODE ((*(unsigned short *)0x90006) &amp; 0xff)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_VIDEO_COLS (((*(unsigned short *)0x90006) &amp; 0xff00) &gt;&gt; 8)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_VIDEO_LINES (25)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_VIDEO_EGA_AX (*(unsigned short *)0x90008)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_VIDEO_EGA_BX (*(unsigned short *)0x9000a)</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ORIG_VIDEO_EGA_CX (*(unsigned short *)0x9000c)</span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> VIDEO_TYPE_MDA 0x10 </span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> VIDEO_TYPE_CGA 0x11 </span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> VIDEO_TYPE_EGAM 0x20 </span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> VIDEO_TYPE_EGAC 0x21 </span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NPAR 16</span><br>...<br><span class="hljs-keyword">void</span><br>con_init (<span class="hljs-keyword">void</span>)<br>&#123;<br>	<span class="hljs-keyword">register</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> a;<br>	<span class="hljs-keyword">char</span> *display_desc = <span class="hljs-string">&quot;????&quot;</span>;<br>	<span class="hljs-keyword">char</span> *display_ptr;<br><br>	video_num_columns = ORIG_VIDEO_COLS;	<br>	video_size_row = video_num_columns * <span class="hljs-number">2</span>;	<br>	video_num_lines = ORIG_VIDEO_LINES;	<br>	video_page = (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>)ORIG_VIDEO_PAGE;	<br>	video_erase_char = <span class="hljs-number">0x0720</span>;	<br><br>	<span class="hljs-keyword">if</span> (ORIG_VIDEO_MODE == <span class="hljs-number">7</span>)	<br>	&#123;<br>		video_mem_start = <span class="hljs-number">0xb0000</span>;	<br>		video_port_reg = <span class="hljs-number">0x3b4</span>;	<br>		video_port_val = <span class="hljs-number">0x3b5</span>;	<br>        <br>		<span class="hljs-keyword">if</span> ((ORIG_VIDEO_EGA_BX &amp; <span class="hljs-number">0xff</span>) != <span class="hljs-number">0x10</span>)<br>		&#123;<br>			video_type = VIDEO_TYPE_EGAM;	<br>			video_mem_end = <span class="hljs-number">0xb8000</span>;<br>			display_desc = <span class="hljs-string">&quot;EGAm&quot;</span>;	<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			video_type = VIDEO_TYPE_MDA;<br>			video_mem_end = <span class="hljs-number">0xb2000</span>;<br>			display_desc = <span class="hljs-string">&quot;*MDA&quot;</span>;	<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">else</span><br>	&#123;<br>		video_mem_start = <span class="hljs-number">0xb8000</span>;<br>		video_port_reg = <span class="hljs-number">0x3d4</span>;<br>		video_port_val = <span class="hljs-number">0x3d5</span>;<br>        <br>		<span class="hljs-keyword">if</span> ((ORIG_VIDEO_EGA_BX &amp; <span class="hljs-number">0xff</span>) != <span class="hljs-number">0x10</span>)<br>		&#123;<br>			video_type = VIDEO_TYPE_EGAC;<br>			video_mem_end = <span class="hljs-number">0xbc000</span>;<br>			display_desc = <span class="hljs-string">&quot;EGAc&quot;</span>;	<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			video_type = VIDEO_TYPE_CGA;<br>			video_mem_end = <span class="hljs-number">0xba000</span>;<br>			display_desc = <span class="hljs-string">&quot;*CGA&quot;</span>;<br>		&#125;<br>	&#125;<br><br>	display_ptr = ((<span class="hljs-keyword">char</span> *) video_mem_start) + video_size_row - <span class="hljs-number">8</span>;<br>	<span class="hljs-keyword">while</span> (*display_desc)<br>	&#123;<br>		*display_ptr++ = *display_desc++;<br>		display_ptr++;<br>	&#125;<br><br>	origin = video_mem_start;<br>	scr_end = video_mem_start + video_num_lines * video_size_row;<br>	top = <span class="hljs-number">0</span>;<br>	bottom = video_num_lines;<br><br>	gotoxy (ORIG_X, ORIG_Y);<br>	set_trap_gate (<span class="hljs-number">0x21</span>, &amp;keyboard_interrupt);<br>	outb_p ((<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>)(inb_p (<span class="hljs-number">0x21</span>) &amp; <span class="hljs-number">0xfd</span>), <span class="hljs-number">0x21</span>);<br>	a = inb_p (<span class="hljs-number">0x61</span>);	<br>	outb_p ((<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>)(a | <span class="hljs-number">0x80</span>), <span class="hljs-number">0x61</span>);<br>	outb (a, <span class="hljs-number">0x61</span>);	<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>最后我们还有一项任务就是激活<code>Process0</code>。此时才算真正完成了开机任务！</p>
 
@@ -359,15 +359,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Linux/Linux-Learning/" class="category-chain-item">Linux Learning</a>
-  
-  
-
   
 
       </span>
@@ -403,25 +396,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>January 9, 2019</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -443,7 +436,7 @@
                       <a href="/2019/02/18/2021/Bash-in-Linux/" title="Bash-in-Linux">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Bash-in-Linux</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -452,7 +445,7 @@
                     
                       <a href="/2019/01/02/2021/Linux%E7%9A%84%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/" title="Linux的权限">
                         <span class="hidden-mobile">Linux的权限</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -471,7 +464,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -526,7 +519,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -534,7 +527,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -686,7 +679,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

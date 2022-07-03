@@ -24,7 +24,7 @@
 <meta property="og:description" content="Why Ubuntu?In the very beginnning in this serials of tutorial, I wanna quote some words from Mr. Richard Feyman.">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-02-11T14:53:37.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:47:00.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:42:58.476Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="System">
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          1.7k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          NaN mins
+          15 分钟
         
       </span>
     
@@ -290,10 +290,10 @@
 <p>So, let our story begin.</p>
 <h1 id="FFFFirst"><a href="#FFFFirst" class="headerlink" title="FFFFirst"></a>FFFFirst</h1><p>FFFFirst things(Why 4 Fs, Hmmm, there are 4 very very important things, I cannot sort their importance) are:</p>
 <h2 id="Install-vim"><a href="#Install-vim" class="headerlink" title="Install vim"></a>Install vim</h2><p>Hmm, I wanna emphasize here that <code>vi</code> is not <code>vim</code>. They are different apps.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install vim</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install vim<br></code></pre></td></tr></table></figure>
 
 <p>And if you are a really green hand on Linux. I recommand some other tools for you.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nano</span><br><span class="line">sudo apt install gedit</span><br><span class="line">sudo apt install geany</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install nano<br>sudo apt install gedit<br>sudo apt install geany<br></code></pre></td></tr></table></figure>
 
 <p>There editors are all quite easy to get and easy to use.</p>
 <h2 id="Change-the-source"><a href="#Change-the-source" class="headerlink" title="Change the source"></a>Change the source</h2><p>As I am a Chinese, the official source is too slow for me.</p>
@@ -301,10 +301,10 @@
 <p><a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/repogen/">repository file generator</a></p>
 <p>You can genetate a new source config file easily.</p>
 <p>And then you just need to backup your old source config and create a new file here. Just like this:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/source.list /etc/apt/source.list.old</span><br><span class="line">sudo vim /etc/apt/source.list</span><br><span class="line"><span class="comment"># copy the source.list generated before</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo cp /etc/apt/source.list /etc/apt/source.list.old<br>sudo vim /etc/apt/source.list<br><span class="hljs-comment"># copy the source.list generated before</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="Update-source"><a href="#Update-source" class="headerlink" title="Update source"></a>Update source</h2><p>And don’t forget to update your source after change the source.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt upgrade<br></code></pre></td></tr></table></figure>
 
 <h2 id="Build-proxy"><a href="#Build-proxy" class="headerlink" title="Build proxy"></a>Build proxy</h2><p>It’s essential for Chinese users, many forums and resources are unavailable unless you have VPN.<br>(But I won’t teach you how to build proxy here, I will show you about it in another tutorial)</p>
 
@@ -325,15 +325,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Linux/Linux-Learning/" class="category-chain-item">Linux Learning</a>
-  
-  
-
   
 
       </span>
@@ -367,25 +360,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>February 11, 2020</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -407,7 +400,7 @@
                       <a href="/2020/02/11/2021/Rebuild-My-Home-02-Office/" title="Rebuild My Home - 02 Office">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Rebuild My Home - 02 Office</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -416,7 +409,7 @@
                     
                       <a href="/2019/12/05/2021/Ubuntu-Hotspot-Creating-and-Configuring/" title="Ubuntu Hotspot Creating and Configuring">
                         <span class="hidden-mobile">Ubuntu Hotspot Creating and Configuring</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -435,7 +428,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -490,7 +483,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -498,7 +491,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -650,7 +643,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

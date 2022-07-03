@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://yeasy.gitbook.io/~/files/v0/b/gitbook-28427.appspot.com/o/assets%2F-M5xTVjmK7ax94c8ZQcm%2F-M5xT_hHX2g5ldlyp9nm%2F-M5xTdXP2scg0hxytUHA%2Fdocker.png?generation=1588021947474061&alt=media">
 <meta property="og:image" content="https://chivier.github.io/2022/01/22/2022/2112-Docker%E7%AC%94%E8%AE%B0/image1.png">
 <meta property="article:published_time" content="2022-01-21T18:44:25.000Z">
-<meta property="article:modified_time" content="2022-01-21T18:47:49.246Z">
+<meta property="article:modified_time" content="2022-07-03T05:13:35.107Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Tutorial">
@@ -124,7 +124,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -136,7 +136,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -148,7 +148,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -160,7 +160,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -172,7 +172,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          2k 字
         
       </span>
     
@@ -239,7 +239,7 @@
         
         
         
-          NaN mins
+          17 分钟
         
       </span>
     
@@ -291,19 +291,19 @@
 <p><img src="https://yeasy.gitbook.io/~/files/v0/b/gitbook-28427.appspot.com/o/assets%2F-M5xTVjmK7ax94c8ZQcm%2F-M5xT_hHX2g5ldlyp9nm%2F-M5xTdXP2scg0hxytUHA%2Fdocker.png?generation=1588021947474061&alt=media" srcset="/img/loading.gif" lazyload></p>
 <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h2><p>root 文件系统<br>比如官方镜像 <code>ubuntu:18.04</code> 就包含了完整的一套 Ubuntu 18.04 最小系统的 <code>root</code> 文件系统。</p>
 <h2 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h2><p>镜像（<code>Image</code>）和容器（<code>Container</code>）的关系，就像是面向对象程序设计中的 <code>类</code> 和 <code>实例</code> 一样，镜像是静态的定义，容器是镜像运行时的实体</p>
-<h1 id="使用镜像"><a href="#使用镜像" class="headerlink" title="使用镜像"></a>使用镜像</h1><h2 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]</span><br></pre></td></tr></table></figure>
+<h1 id="使用镜像"><a href="#使用镜像" class="headerlink" title="使用镜像"></a>使用镜像</h1><h2 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull [选项] [Docker Registry 地址[:端口号]/]仓库名[:标签]<br></code></pre></td></tr></table></figure>
 
 <p>一般情况下 docker 的镜像下载如果是教育网，那么速度非常高效。如果需要使用镜像，那么可以使用：</p>
 <p><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/mirror">https://yeasy.gitbook.io/docker_practice/install/mirror</a></p>
 <p>的教程进行安排。</p>
-<h2 id="镜像列表"><a href="#镜像列表" class="headerlink" title="镜像列表"></a>镜像列表</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls</span><br></pre></td></tr></table></figure>
+<h2 id="镜像列表"><a href="#镜像列表" class="headerlink" title="镜像列表"></a>镜像列表</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker image ls<br></code></pre></td></tr></table></figure>
 
 <img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
 
-<h2 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image rm ...</span><br></pre></td></tr></table></figure>
+<h2 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker image rm ...<br></code></pre></td></tr></table></figure>
 
 
-<h1 id="使用容器"><a href="#使用容器" class="headerlink" title="使用容器"></a>使用容器</h1><h2 id="创建容器实例"><a href="#创建容器实例" class="headerlink" title="创建容器实例"></a>创建容器实例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --rm ubuntu:18.04 bash</span><br></pre></td></tr></table></figure>
+<h1 id="使用容器"><a href="#使用容器" class="headerlink" title="使用容器"></a>使用容器</h1><h2 id="创建容器实例"><a href="#创建容器实例" class="headerlink" title="创建容器实例"></a>创建容器实例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -it --rm ubuntu:18.04 bash<br></code></pre></td></tr></table></figure>
 
 <ul>
 <li><code>-it</code>：这是两个参数，一个是 <code>-i</code>：交互式操作，一个是 <code>-t</code> 终端。我们这里打算进入 <code>bash</code> 执行一些命令并查看返回结果，因此我们需要交互式终端。</li>
@@ -315,17 +315,17 @@
 <p>更多操作在<a target="_blank" rel="noopener" href="https://www.docker.com/sites/default/files/d8/2019-09/docker-cheat-sheet.pdf">Docker Cheatsheet</a>中学习</p>
 <h1 id="使用实例：-Overleaf-docker-安装"><a href="#使用实例：-Overleaf-docker-安装" class="headerlink" title="使用实例： Overleaf docker 安装"></a>使用实例： Overleaf docker 安装</h1><p>这里介绍一下在node6上配置overleaf的过程。</p>
 <p>由于overleaf已经开源，所以可以使用他们的docker直接进行配置。</p>
-<h2 id="镜像拉取"><a href="#镜像拉取" class="headerlink" title="镜像拉取"></a>镜像拉取</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sharelatex/sharelatex</span><br></pre></td></tr></table></figure>
+<h2 id="镜像拉取"><a href="#镜像拉取" class="headerlink" title="镜像拉取"></a>镜像拉取</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull sharelatex/sharelatex<br></code></pre></td></tr></table></figure>
 
-<h2 id="配置文件拉取"><a href="#配置文件拉取" class="headerlink" title="配置文件拉取"></a>配置文件拉取</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/sharelatex/sharelatex/master/docker-compose.yml</span><br><span class="line">sudo vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件拉取"><a href="#配置文件拉取" class="headerlink" title="配置文件拉取"></a>配置文件拉取</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://raw.githubusercontent.com/sharelatex/sharelatex/master/docker-compose.yml<br>sudo vim docker-compose.yml<br></code></pre></td></tr></table></figure>
 
 <p>需要修改的就是<code>ports: - 80:80</code>,一般80端口都被apache或nginx占用了，改用其他端口如：<code>ports: - 9000:80</code></p>
-<h2 id="启动sharelatex"><a href="#启动sharelatex" class="headerlink" title="启动sharelatex"></a>启动sharelatex</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h2 id="启动sharelatex"><a href="#启动sharelatex" class="headerlink" title="启动sharelatex"></a>启动sharelatex</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker-compose up -d<br></code></pre></td></tr></table></figure>
 
-<h2 id="安装latex包"><a href="#安装latex包" class="headerlink" title="安装latex包"></a>安装latex包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it sharelatex bash</span><br><span class="line">tlmgr update --self --all</span><br><span class="line">tlmgr install scheme-full</span><br></pre></td></tr></table></figure>
+<h2 id="安装latex包"><a href="#安装latex包" class="headerlink" title="安装latex包"></a>安装latex包</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it sharelatex bash<br>tlmgr update --self --all<br>tlmgr install scheme-full<br></code></pre></td></tr></table></figure>
 
 <h2 id="创建admin"><a href="#创建admin" class="headerlink" title="创建admin"></a>创建admin</h2><p>打开： <a target="_blank" rel="noopener" href="http://hostname:9000/launchpad">http://hostname:9000/launchpad</a><br>创建admin即可</p>
-<h2 id="配置高亮"><a href="#配置高亮" class="headerlink" title="配置高亮"></a>配置高亮</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install python3</span><br><span class="line">apt install python-pygments</span><br></pre></td></tr></table></figure>
+<h2 id="配置高亮"><a href="#配置高亮" class="headerlink" title="配置高亮"></a>配置高亮</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install python3<br>apt install python-pygments<br></code></pre></td></tr></table></figure>
 
 
 <p>参考：<br>【1】<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/408a3b7a40b0">https://www.jianshu.com/p/408a3b7a40b0</a><br>【2】<a target="_blank" rel="noopener" href="https://yxnchen.github.io/technique/Docker%E9%83%A8%E7%BD%B2ShareLaTeX%E5%B9%B6%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/#%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEShareLaTeX">https://yxnchen.github.io/technique/Docker%E9%83%A8%E7%BD%B2ShareLaTeX%E5%B9%B6%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%E4%B8%AD%E6%96%87%E7%8E%AF%E5%A2%83/#%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEShareLaTeX</a><br>【3】<a target="_blank" rel="noopener" href="https://sparktour.me/2021/04/02/self-host-overleaf/">https://sparktour.me/2021/04/02/self-host-overleaf/</a></p>
@@ -347,15 +347,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Docker/" class="category-chain-item">Docker</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Docker/Tutorial/" class="category-chain-item">Tutorial</a>
-  
-  
-
   
 
       </span>
@@ -389,25 +382,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>January 22, 2022</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -429,7 +422,7 @@
                       <a href="/2022/01/22/2022/2111-%E6%95%B0%E6%8D%AE%E6%B5%81%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87%E6%95%B4%E7%90%86/" title="2111-数据流经典论文整理">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">2111-数据流经典论文整理</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -438,7 +431,7 @@
                     
                       <a href="/2022/01/22/2022/2112-Obsidian2Hexo/" title="2112-Obsidian2Hexo">
                         <span class="hidden-mobile">2112-Obsidian2Hexo</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -457,7 +450,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -512,7 +505,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -520,7 +513,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -672,7 +665,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

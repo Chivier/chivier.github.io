@@ -24,7 +24,7 @@
 <meta property="og:description" content="When I use Linux or wanna use x-forward to use remote linux applications, I have to check out the x-forward port. But how to check is a really fuszy problem.">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-09-29T02:02:00.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:47:04.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:48:46.667Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="System">
@@ -121,7 +121,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -133,7 +133,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -145,7 +145,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -157,7 +157,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -169,7 +169,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          2.7k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          NaN mins
+          23 分钟
         
       </span>
     
@@ -285,11 +285,11 @@
 <p>Reference: <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/17255/is-there-a-command-to-list-all-open-displays-on-a-machine/17278#17278">Stackoverflow: Is there a command to list all open displays on a machine</a></p>
 <blockquote>
 <p>If you want the X connection forwarded over SSH, you need to enable it on both the server side and the client side. (Depending on the distribution, it may be enabled or disabled by default.) On the server side, make sure that you have X11Forwarding yes in /etc/sshd_config (or /etc/ssh/sshd_config or wherever the configuration file is). On the client side, pass the -X option to the ssh command, or put ForwardX11 in your ~/.ssh/config.<br>If you run ssh -X localhost, you should see that $DISPLAY is (probably) localhost:10.0. Contrast with :0.0, which is the value when you’re not connected over SSH. (The .0 part may be omitted; it’s a screen number, but multiple screens are rarely used.) There are two forms of X displays that you’re likely to ever encounter:<br>Local displays, with nothing before the :.<br>TCP displays, with a hostname before the :.<br>With ssh -X localhost, you can access the X server through both displays, but the applications will use a different method: :NUMBER accesses the server via local sockets and shared memory, whereas HOSTNAME:NUMBER accesses the server over TCP, which is slower and disables some extensions.<br>Note that you need a form of authorization to access an X server, called a cookie and normally stored behind the scenes in the file ~/.Xauthority. If you’re using ssh to access a different user account, or if your distribution puts the cookies in a different file, you may find that DISPLAY=:0 doesn’t work within the SSH session (but ssh -X will, if it’s enabled in the server; you never need to mess with XAUTHORITY when doing ssh -X). If that’s a problem, you need to set the XAUTHORITY environment variable or obtain the other user’s cookies.<br>To answer your actual question:<br>Local displays correspond to a socket in /tmp/.X11-unix.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;(cd &#x2F;tmp&#x2F;.X11-unix &amp;&amp; for x in X*; do echo &quot;:$&#123;x#X&#125;&quot;; done)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">&gt;</span><span class="bash">(<span class="hljs-built_in">cd</span> /tmp/.X11-unix &amp;&amp; <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> X*; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;:<span class="hljs-variable">$&#123;x#X&#125;</span>&quot;</span>; <span class="hljs-keyword">done</span>)</span><br></code></pre></td></tr></table></figure>
 <p>Remote displays correspond to open TCP ports above 6000; accessing display number N on machine M is done by connecting to TCP port 6000+N on machine M. From machine M itself:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;netstat -lnt | awk &#39;</span><br><span class="line"> sub(&#x2F;.*:&#x2F;,&quot;&quot;,$4) &amp;&amp; $4 &gt;&#x3D; 6000 &amp;&amp; $4 &lt; 6100 &#123;</span><br><span class="line">   print ($1 &#x3D;&#x3D; &quot;tcp6&quot; ? &quot;ip6-localhost:&quot; : &quot;localhost:&quot;) ($4 - 6000)</span><br><span class="line"> &#125;&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stata">&gt;netstat -lnt | awk &#x27;<br> sub(/.*:/,<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-variable">$4</span>) &amp;&amp; <span class="hljs-variable">$4</span> &gt;= 6000 &amp;&amp; <span class="hljs-variable">$4</span> &lt; 6100 &#123;<br>   <span class="hljs-keyword">print</span> (<span class="hljs-variable">$1</span> == <span class="hljs-string">&quot;tcp6&quot;</span> ? <span class="hljs-string">&quot;ip6-localhost:&quot;</span> : <span class="hljs-string">&quot;localhost:&quot;</span>) (<span class="hljs-variable">$4</span> - 6000)<br> &#125;&#x27;<br></code></pre></td></tr></table></figure>
 <p>(The rest of this bullet point is of academic interest only.)<br>From another machine, you can use nmap -p 6000-6099 host_name to probe open TCP ports in the usual range. It’s rare nowadays to have X servers listening on a TCP socket, especially outside the loopback interface.<br>Strictly speaking, another application could be using a port in the range usually used by X servers. You can tell whether an X server is listening by checking which program has the port open.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;lsof -i -n | awk &#39;$9 ~ &#x2F;:60[0-9][0-9]$&#x2F; &#123;print&#125;&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart">&gt;lsof -i -n | awk <span class="hljs-string">&#x27;<span class="hljs-subst">$9</span> ~ /:60[0-9][0-9]$/ &#123;print&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
 <p>If that shows something ambiguous like sshd, there’s no way to know for sure whether it’s an X server or a coincidence.</p>
 </blockquote>
 
@@ -310,7 +310,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/System/" class="category-chain-item">System</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
   
 
@@ -347,25 +347,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>September 29, 2020</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -387,7 +387,7 @@
                       <a href="/2021/03/25/2021/NewLaptop/" title="New Laptop">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">New Laptop</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -396,7 +396,7 @@
                     
                       <a href="/2020/09/29/2021/WSL2-Quick-Fix/" title="WSL 2 Quick Fix">
                         <span class="hidden-mobile">WSL 2 Quick Fix</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -415,7 +415,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -470,7 +470,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -478,7 +478,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -630,7 +630,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>

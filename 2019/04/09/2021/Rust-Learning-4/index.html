@@ -24,10 +24,10 @@
 <meta property="og:description" content="Rust学习进阶">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-04-09T02:47:23.000Z">
-<meta property="article:modified_time" content="2021-12-23T04:47:02.000Z">
+<meta property="article:modified_time" content="2022-07-03T04:43:48.703Z">
 <meta property="article:author" content="Chivier Humber">
 <meta property="article:tag" content="Rust">
-<meta property="article:tag" content="Programming language">
+<meta property="article:tag" content="Programming Language">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -120,7 +120,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                Home
+                首页
               </a>
             </li>
           
@@ -132,7 +132,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                Archives
+                归档
               </a>
             </li>
           
@@ -144,7 +144,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                Categories
+                分类
               </a>
             </li>
           
@@ -156,7 +156,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                Tags
+                标签
               </a>
             </li>
           
@@ -168,7 +168,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                About
+                关于
               </a>
             </li>
           
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          7.1k 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          NaN mins
+          59 分钟
         
       </span>
     
@@ -282,18 +282,18 @@
 <span id="more"></span>
 
 <h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>生命周期的主要目标是避免悬垂引用，它会导致程序引用了非预期引用的数据。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> r;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> x = <span class="number">5</span>;</span><br><span class="line">        r = &amp;x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;r: &#123;&#125;&quot;</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs rust">&#123;<br>    <span class="hljs-keyword">let</span> r;<br><br>    &#123;<br>        <span class="hljs-keyword">let</span> x = <span class="hljs-number">5</span>;<br>        r = &amp;x;<br>    &#125;<br><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;r: &#123;&#125;&quot;</span>, r);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>例如上面的程序</p>
 <p>外部作用域声明了一个没有初值的变量 <code>r</code>，而内部作用域声明了一个初值为 5 的变量<code>x</code>。在内部作用域中，我们尝试将 <code>r</code> 的值设置为一个 <code>x</code> 的引用。接着在内部作用域结束后，尝试打印出 <code>r</code> 的值。这段代码不能编译因为 <code>r</code> 引用的值在尝试使用之前就离开了作用域。如下是错误信息：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">error[E0597]: `x` does not live long enough</span><br><span class="line">  --&gt; src/main.rs:7:5</span><br><span class="line">   |</span><br><span class="line">6  |         r = &amp;x;</span><br><span class="line">   |              - borrow occurs here</span><br><span class="line">7  |     &#125;</span><br><span class="line">   |     ^ `x` dropped here while still borrowed</span><br><span class="line">...</span><br><span class="line">10 | &#125;</span><br><span class="line">   | - borrowed value needs to live until here</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs text">error[E0597]: `x` does not live long enough<br>  --&gt; src/main.rs:7:5<br>   |<br>6  |         r = &amp;x;<br>   |              - borrow occurs here<br>7  |     &#125;<br>   |     ^ `x` dropped here while still borrowed<br>...<br>10 | &#125;<br>   | - borrowed value needs to live until here<br></code></pre></td></tr></table></figure>
 
 <p>Rust 编译器有一个 <strong>借用检查器</strong>（<em>borrow checker</em>），它比较作用域来确保所有的借用都是有效的。</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> r;                <span class="comment">// ---------+-- &#x27;a</span></span><br><span class="line">                          <span class="comment">//          |</span></span><br><span class="line">    &#123;                     <span class="comment">//          |</span></span><br><span class="line">        <span class="keyword">let</span> x = <span class="number">5</span>;        <span class="comment">// -+-- &#x27;b  |</span></span><br><span class="line">        r = &amp;x;           <span class="comment">//  |       |</span></span><br><span class="line">    &#125;                     <span class="comment">// -+       |</span></span><br><span class="line">                          <span class="comment">//          |</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;r: &#123;&#125;&quot;</span>, r); <span class="comment">//          |</span></span><br><span class="line">&#125;                         <span class="comment">// ---------+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs rust">&#123;<br>    <span class="hljs-keyword">let</span> r;                <span class="hljs-comment">// ---------+-- &#x27;a</span><br>                          <span class="hljs-comment">//          |</span><br>    &#123;                     <span class="hljs-comment">//          |</span><br>        <span class="hljs-keyword">let</span> x = <span class="hljs-number">5</span>;        <span class="hljs-comment">// -+-- &#x27;b  |</span><br>        r = &amp;x;           <span class="hljs-comment">//  |       |</span><br>    &#125;                     <span class="hljs-comment">// -+       |</span><br>                          <span class="hljs-comment">//          |</span><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;r: &#123;&#125;&quot;</span>, r); <span class="hljs-comment">//          |</span><br>&#125;                         <span class="hljs-comment">// ---------+</span><br></code></pre></td></tr></table></figure>
 
 <p>这里将 <code>r</code> 的生命周期标记为 <code>&#39;a</code> 并将 <code>x</code> 的生命周期标记为 <code>&#39;b</code>。如你所见，内部的 <code>&#39;b</code> 块要比外部的生命周期 <code>&#39;a</code> 小得多。在编译时，Rust 比较这两个生命周期的大小，并发现 <code>r</code> 拥有生命周期 <code>&#39;a</code>，不过它引用了一个拥有生命周期 <code>&#39;b</code> 的对象。程序被拒绝编译，因为生命周期 <code>&#39;b</code> 比生命周期 <code>&#39;a</code> 要小：被引用的对象比它的引用者存在的时间更短。</p>
 <p>下面是一个资源借用的例子：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">100_i32</span>;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> x = &amp;a;</span><br><span class="line">    &#125;  <span class="comment">// x 作用域结束</span></span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() &#123;<br>    <span class="hljs-keyword">let</span> a = <span class="hljs-number">100_i32</span>;<br><br>    &#123;<br>        <span class="hljs-keyword">let</span> x = &amp;a;<br>    &#125;  <span class="hljs-comment">// x 作用域结束</span><br>    <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, x);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>编译时，我们会看到一个严重的错误提示：</p>
 <blockquote>
@@ -308,38 +308,38 @@
 </ul>
 <p>强调下，无论是资源的所有者还是资源的借用/引用，都存在在一个有效的存活时间或区间，这个时间区间称为<strong>生命周期</strong>， 也可以直接以<strong>Scope作用域</strong>去理解。</p>
 <p>所以上例子代码中的生命周期/作用域图示如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">            &#123;    a    &#123;    x    &#125;    *    &#125;</span><br><span class="line">所有者 a:         |________________________|</span><br><span class="line">借用者 x:                   |____|            x &#x3D; &amp;a</span><br><span class="line">  访问 x:                             |       失败：访问 x</span><br></pre></td></tr></table></figure>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-code">            &#123;    a    &#123;    x    &#125;    *    &#125;</span><br>所有者 a:         |<span class="hljs-emphasis">_____</span><span class="hljs-emphasis">_____</span><span class="hljs-emphasis">_____</span><span class="hljs-emphasis">_____</span>____|<br>借用者 x:                   |<span class="hljs-emphasis">____</span>|            x = &amp;a<br><span class="hljs-code">  访问 x:                             |       失败：访问 x</span><br></code></pre></td></tr></table></figure>
 
 <p>可以看到，借用者 <code>x</code> 的生命周期是资源所有者 <code>a</code> 的生命周期的<strong>子集</strong>。但是 <code>x</code> 的生命周期在第一个 <code>&#125;</code> 时结束并销毁，在接下来的 <code>println!</code> 中再次访问便会发生严重的错误。</p>
 <p>我们来修正上面的例子：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">100_i32</span>;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> x = &amp;a;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>, x);</span><br><span class="line">    &#125;  <span class="comment">// x 作用域结束</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">main</span></span>() &#123;<br>    <span class="hljs-keyword">let</span> a = <span class="hljs-number">100_i32</span>;<br><br>    &#123;<br>        <span class="hljs-keyword">let</span> x = &amp;a;<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>, x);<br>    &#125;  <span class="hljs-comment">// x 作用域结束</span><br><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这里我们仅仅把 <code>println!</code> 放到了中间的 <code>&#123;&#125;</code>, 这样就可以在 <code>x</code>的生命周期内正常的访问 <code>x</code> ，此时的Lifetime图示如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">            &#123;    a    &#123;    x    *    &#125;    &#125;</span><br><span class="line">所有者 a:         |________________________|</span><br><span class="line">借用者 x:                   |_________|       x &#x3D; &amp;a</span><br><span class="line">  访问 x:                        |            OK：访问 x</span><br></pre></td></tr></table></figure>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-code">            &#123;    a    &#123;    x    *    &#125;    &#125;</span><br>所有者 a:         |<span class="hljs-emphasis">_____</span><span class="hljs-emphasis">_____</span><span class="hljs-emphasis">_____</span><span class="hljs-emphasis">_____</span>____|<br>借用者 x:                   |<span class="hljs-emphasis">_____</span>____|       x = &amp;a<br><span class="hljs-code">  访问 x:                        |            OK：访问 x</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="隐式Lifetime"><a href="#隐式Lifetime" class="headerlink" title="隐式Lifetime"></a>隐式Lifetime</h2><p>我们经常会遇到参数或者返回值为引用类型的函数：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">foo</span></span>(x: &amp;<span class="built_in">str</span>) -&gt; &amp;<span class="built_in">str</span> &#123;</span><br><span class="line">    x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>(x: &amp;<span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-built_in">str</span> &#123;<br>    x<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>上面函数在实际应用中并没有太多用处，<code>foo</code> 函数仅仅接受一个 <code>&amp;str</code> 类型的参数（<code>x</code>为对某个<code>string</code>类型资源<code>Something</code>的借用），并返回对资源<code>Something</code>的一个新的借用。</p>
 <p>实际上，上面函数包含该了隐性的生命周期命名，这是由编译器自动推导的，相当于：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">foo</span></span>&lt;<span class="symbol">&#x27;a</span>&gt;(x: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span>) -&gt; &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span> &#123;</span><br><span class="line">    x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span> &#123;<br>    x<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>在这里，约束返回值的Lifetime必须大于或等于参数<code>x</code>的Lifetime。下面函数写法也是合法的：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">foo</span></span>&lt;<span class="symbol">&#x27;a</span>&gt;(x: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span>) -&gt; &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span> &#123;</span><br><span class="line">    <span class="string">&quot;hello, world!&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span> &#123;<br>    <span class="hljs-string">&quot;hello, world!&quot;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>为什么呢？这是因为字符串”hello, world!”的类型是<code>&amp;&#39;static str</code>，我们知道<code>static</code>类型的Lifetime是整个程序的运行周期，所以她比任意传入的参数的Lifetime<code>&#39;a</code>都要长，即<code>&#39;static &gt;= &#39;a</code>满足。</p>
 <p>在上例中Rust可以自动推导Lifetime，所以并不需要程序员显式指定Lifetime <code>&#39;a</code> 。</p>
 <p><code>&#39;a</code>是什么呢？它是Lifetime的标识符，这里的<code>a</code>也可以用<code>b</code>、<code>c</code>、<code>d</code>、<code>e</code>、…，甚至可以用<code>this_is_a_long_name</code>等，当然实际编程中并不建议用这种冗长的标识符，这样会严重降低程序的可读性。<code>foo</code>后面的<code>&lt;&#39;a&gt;</code>为Lifetime的声明，可以声明多个，如<code>&lt;&#39;a, &#39;b&gt;</code>等等。</p>
 <p>另外，除非编译器无法自动推导出Lifetime，否则不建议显式指定Lifetime标识符，会降低程序的可读性。</p>
 <h2 id="显式Lifetime"><a href="#显式Lifetime" class="headerlink" title="显式Lifetime"></a>显式Lifetime</h2><p>当输入参数为多个借用/引用时会发生什么呢？</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">foo</span></span>(x: &amp;<span class="built_in">str</span>, y: &amp;<span class="built_in">str</span>) -&gt; &amp;<span class="built_in">str</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="literal">true</span> &#123;</span><br><span class="line">        x</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>(x: &amp;<span class="hljs-built_in">str</span>, y: &amp;<span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-built_in">str</span> &#123;<br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> &#123;<br>        x<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        y<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这时候再编译，就没那么幸运了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: missing lifetime specifier [E0106]</span><br><span class="line">fn foo(x: &amp;str, y: &amp;str) -&gt; &amp;str &#123;</span><br><span class="line">                            ^~~~</span><br></pre></td></tr></table></figure>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs subunit"><span class="hljs-keyword">error: </span>missing lifetime specifier [E0106]<br>fn foo(x: &amp;str, y: &amp;str) -&gt; &amp;str &#123;<br>                            ^~~~<br></code></pre></td></tr></table></figure>
 
 <p>编译器告诉我们，需要我们显式指定Lifetime标识符，因为这个时候，编译器无法推导出返回值的Lifetime应该是比 <code>x</code>长，还是比<code>y</code>长。虽然我们在函数中中用了 <code>if true</code> 确认一定可以返回<code>x</code>，但是要知道，编译器是在编译时候检查，而不是运行时，所以编译期间会同时检查所有的输入参数和返回值。</p>
 <p>修复后的代码如下：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">foo</span></span>&lt;<span class="symbol">&#x27;a</span>&gt;(x: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span>, y: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span>) -&gt; &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="literal">true</span> &#123;</span><br><span class="line">        x</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>, y: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span> &#123;<br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> &#123;<br>        x<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        y<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h2 id="Lifetime推导"><a href="#Lifetime推导" class="headerlink" title="Lifetime推导"></a>Lifetime推导</h2><p>要推导Lifetime是否合法，先明确两点：</p>
 <ul>
@@ -347,31 +347,31 @@
 <li>输入值的Lifetime大于或等于输出值的Lifetime (准确来说：子集，而不是大于或等于)</li>
 </ul>
 <p><strong>Lifetime推导公式：</strong> 当输出值R依赖输入值X Y Z …，当且仅当输出值的Lifetime为所有输入值的Lifetime交集的子集时，生命周期合法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lifetime(R) ⊆ ( Lifetime(X) ∩ Lifetime(Y) ∩ Lifetime(Z) ∩ Lifetime(...) )</span><br></pre></td></tr></table></figure>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-function"><span class="hljs-title">Lifetime</span>(<span class="hljs-variable">R</span>) ⊆ ( <span class="hljs-title">Lifetime</span>(<span class="hljs-variable">X</span>) ∩ <span class="hljs-title">Lifetime</span>(<span class="hljs-variable">Y</span>) ∩ <span class="hljs-title">Lifetime</span>(<span class="hljs-variable">Z</span>) ∩ <span class="hljs-title">Lifetime</span>(...) )</span><br></code></pre></td></tr></table></figure>
 
 <p>对于例子1：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">foo</span></span>&lt;<span class="symbol">&#x27;a</span>&gt;(x: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span>, y: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span>) -&gt; &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="literal">true</span> &#123;</span><br><span class="line">        x</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>, y: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span> &#123;<br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> &#123;<br>        x<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        y<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>因为返回值同时依赖输入参数<code>x</code>和<code>y</code>，所以</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Lifetime(返回值) ⊆ ( Lifetime(x) ∩ Lifetime(y) )</span><br><span class="line"></span><br><span class="line">即：</span><br><span class="line"></span><br><span class="line">&#39;a ⊆ (&#39;a ∩ &#39;a)  &#x2F;&#x2F; 成立</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">Lifetime(返回值)</span> ⊆ ( <span class="hljs-constructor">Lifetime(<span class="hljs-params">x</span>)</span> ∩ <span class="hljs-constructor">Lifetime(<span class="hljs-params">y</span>)</span> )<br><br>即：<br><br>&#x27;a ⊆ (&#x27;a ∩ &#x27;a)  <span class="hljs-comment">// 成立</span><br></code></pre></td></tr></table></figure>
 
 <h4 id="定义多个Lifetime标识符"><a href="#定义多个Lifetime标识符" class="headerlink" title="定义多个Lifetime标识符"></a>定义多个Lifetime标识符</h4><p>那我们继续看个更复杂的例子，定义多个Lifetime标识符：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">foo</span></span>&lt;<span class="symbol">&#x27;a</span>, <span class="symbol">&#x27;b</span>&gt;(x: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span>, y: &amp;<span class="symbol">&#x27;b</span> <span class="built_in">str</span>) -&gt; &amp;<span class="symbol">&#x27;a</span> <span class="built_in">str</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="literal">true</span> &#123;</span><br><span class="line">        x</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>, <span class="hljs-symbol">&#x27;b</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>, y: &amp;<span class="hljs-symbol">&#x27;b</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span> &#123;<br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> &#123;<br>        x<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        y<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>先看下编译，又报错了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;anon&gt;:5:3: 5:4 error: cannot infer an appropriate lifetime for automatic coercion due to conflicting requirements [E0495]</span><br><span class="line">&lt;anon&gt;:5        y</span><br><span class="line">                ^</span><br><span class="line">&lt;anon&gt;:1:1: 7:2 help: consider using an explicit lifetime parameter as shown: fn foo&lt;&#39;a&gt;(x: &amp;&#39;a str, y: &amp;&#39;a str) -&gt; &amp;&#39;a str</span><br><span class="line">&lt;anon&gt;:1 fn bar&lt;&#39;a, &#39;b&gt;(x: &amp;&#39;a str, y: &amp;&#39;b str) -&gt; &amp;&#39;a str &#123;</span><br><span class="line">&lt;anon&gt;:2    if true &#123;</span><br><span class="line">&lt;anon&gt;:3        x</span><br><span class="line">&lt;anon&gt;:4    &#125; else &#123;</span><br><span class="line">&lt;anon&gt;:5        y</span><br><span class="line">&lt;anon&gt;:6    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs rust">&lt;anon&gt;:<span class="hljs-number">5</span>:<span class="hljs-number">3</span>: <span class="hljs-number">5</span>:<span class="hljs-number">4</span> error: cannot infer an appropriate lifetime <span class="hljs-keyword">for</span> automatic coercion due to conflicting requirements [E0495]<br>&lt;anon&gt;:<span class="hljs-number">5</span>        y<br>                ^<br>&lt;anon&gt;:<span class="hljs-number">1</span>:<span class="hljs-number">1</span>: <span class="hljs-number">7</span>:<span class="hljs-number">2</span> help: consider using an explicit lifetime parameter <span class="hljs-keyword">as</span> shown: <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>, y: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span><br>&lt;anon&gt;:<span class="hljs-number">1</span> <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">bar</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>, <span class="hljs-symbol">&#x27;b</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>, y: &amp;<span class="hljs-symbol">&#x27;b</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span> &#123;<br>&lt;anon&gt;:<span class="hljs-number">2</span>    <span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> &#123;<br>&lt;anon&gt;:<span class="hljs-number">3</span>        x<br>&lt;anon&gt;:<span class="hljs-number">4</span>    &#125; <span class="hljs-keyword">else</span> &#123;<br>&lt;anon&gt;:<span class="hljs-number">5</span>        y<br>&lt;anon&gt;:<span class="hljs-number">6</span>    &#125;<br></code></pre></td></tr></table></figure>
 
 <p>编译器说自己无法正确地推导返回值的Lifetime，读者可能会疑问，“我们不是已经指定返回值的Lifetime为<code>&#39;a</code>了吗？”。</p>
 <p>这儿我们同样可以通过生命周期推导公式推导：</p>
 <p>因为返回值同时依赖<code>x</code>和<code>y</code>，所以</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Lifetime(返回值) ⊆ ( Lifetime(x) ∩ Lifetime(y) )</span><br><span class="line"></span><br><span class="line">即：</span><br><span class="line"></span><br><span class="line">&#39;a ⊆ (&#39;a ∩ &#39;b)  &#x2F;&#x2F;不成立</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-constructor">Lifetime(返回值)</span> ⊆ ( <span class="hljs-constructor">Lifetime(<span class="hljs-params">x</span>)</span> ∩ <span class="hljs-constructor">Lifetime(<span class="hljs-params">y</span>)</span> )<br><br>即：<br><br>&#x27;a ⊆ (&#x27;a ∩ &#x27;b)  <span class="hljs-comment">//不成立</span><br></code></pre></td></tr></table></figure>
 
 <p>很显然，上面我们根本没法保证成立。</p>
 <p>所以，这种情况下，我们可以显式地告诉编译器<code>&#39;b</code>比<code>&#39;a</code>长（<code>&#39;a</code>是<code>&#39;b</code>的子集），只需要在定义Lifetime的时候, 在<code>&#39;b</code>的后面加上<code>: &#39;a</code>, 意思是<code>&#39;b</code>比<code>&#39;a</code>长，<code>&#39;a</code>是<code>&#39;b</code>的子集:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fn foo&lt;&#39;a, &#39;b: &#39;a&gt;(x: &amp;&#39;a str, y: &amp;&#39;b str) -&gt; &amp;&#39;a str &#123;</span><br><span class="line">    if true &#123;</span><br><span class="line">        x</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">foo</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>, <span class="hljs-symbol">&#x27;b</span>: <span class="hljs-symbol">&#x27;a</span>&gt;(x: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span>, y: &amp;<span class="hljs-symbol">&#x27;b</span> <span class="hljs-built_in">str</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">str</span> &#123;<br>    <span class="hljs-keyword">if</span> <span class="hljs-literal">true</span> &#123;<br>        x<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        y<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这里我们根据公式继续推导：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">条件：Lifetime(x) ⊆ Lifetime(y)</span><br><span class="line">推导：Lifetime(返回值) ⊆ ( Lifetime(x) ∩ Lifetime(y) )</span><br><span class="line"></span><br><span class="line">即：</span><br><span class="line"></span><br><span class="line">条件： &#39;a ⊆ &#39;b</span><br><span class="line">推导：&#39;a ⊆ (&#39;a ∩ &#39;b) &#x2F;&#x2F; 成立</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">条件：<span class="hljs-constructor">Lifetime(<span class="hljs-params">x</span>)</span> ⊆ <span class="hljs-constructor">Lifetime(<span class="hljs-params">y</span>)</span><br>推导：<span class="hljs-constructor">Lifetime(返回值)</span> ⊆ ( <span class="hljs-constructor">Lifetime(<span class="hljs-params">x</span>)</span> ∩ <span class="hljs-constructor">Lifetime(<span class="hljs-params">y</span>)</span> )<br><br>即：<br><br>条件： &#x27;a ⊆ &#x27;b<br>推导：&#x27;a ⊆ (&#x27;a ∩ &#x27;b) <span class="hljs-comment">// 成立</span><br></code></pre></td></tr></table></figure>
 
 <p>上面是成立的，所以可以编译通过。</p>
 <h4 id="推导总结"><a href="#推导总结" class="headerlink" title="推导总结"></a>推导总结</h4><p>通过上面的学习相信大家可以很轻松完成Lifetime的推导，总之，记住两点：</p>
@@ -381,38 +381,38 @@
 </ol>
 <h2 id="Lifetime-in-struct"><a href="#Lifetime-in-struct" class="headerlink" title="Lifetime in struct"></a>Lifetime in struct</h2><p>上面我们更多讨论了函数中Lifetime的应用，在<code>struct</code>中Lifetime同样重要。</p>
 <p>我们来定义一个<code>Person</code>结构体：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span></span> &#123;</span><br><span class="line">    age: &amp;<span class="built_in">u8</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Person</span></span> &#123;<br>    age: &amp;<span class="hljs-built_in">u8</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>编译时我们会得到一个error：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;anon&gt;:2:8: 2:12 error: missing lifetime specifier [E0106]</span><br><span class="line">&lt;anon&gt;:2    age: &amp;str,</span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-params">&lt;anon&gt;</span>:<span class="hljs-number">2</span>:<span class="hljs-number">8</span>: <span class="hljs-number">2</span>:<span class="hljs-number">12</span> error: missing lifetime specifier [E0106]<br><span class="hljs-params">&lt;anon&gt;</span>:<span class="hljs-number">2</span>    age: <span class="hljs-variable">&amp;str</span>,<br></code></pre></td></tr></table></figure>
 
 <p>之所以会报错，这是因为Rust要确保<code>Person</code>的Lifetime不会比它的<code>age</code>借用长，不然会出现<code>Dangling Pointer</code>的严重内存问题。所以我们需要为<code>age</code>借用声明Lifetime：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Person</span></span>&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    age: &amp;<span class="symbol">&#x27;a</span> <span class="built_in">u8</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Person</span></span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt; &#123;<br>    age: &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">u8</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>不需要对<code>Person</code>后面的<code>&lt;&#39;a&gt;</code>感到疑惑，这里的<code>&#39;a</code>并不是指<code>Person</code>这个<code>struct</code>的Lifetime，仅仅是一个泛型参数而已，<code>struct</code>可以有多个Lifetime参数用来约束不同的<code>field</code>，实际的Lifetime应该是所有<code>field</code>Lifetime交集的子集。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fn main() &#123;</span><br><span class="line">    let x &#x3D; 20_u8;</span><br><span class="line">    let stormgbs &#x3D; Person &#123;</span><br><span class="line">                        age: &amp;x,</span><br><span class="line">                     &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript">fn <span class="hljs-function"><span class="hljs-title">main</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-keyword">let</span> x = 20_u8;<br>    <span class="hljs-keyword">let</span> stormgbs = Person &#123;<br>                        age: &amp;x,<br>                     &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这里，生命周期/Scope的示意图如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">                  &#123;   x    stormgbs      *     &#125;</span><br><span class="line">所有者 x:              |________________________|</span><br><span class="line">所有者 stormgbs:                |_______________|  &#39;a</span><br><span class="line">借用者 stormgbs.age:            |_______________|  stormgbs.age &#x3D; &amp;x</span><br></pre></td></tr></table></figure>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs coq">                  &#123;   x    stormgbs      *     &#125;<br>所有者 x:              |<span class="hljs-type">________________________</span>|<span class="hljs-type"></span><br><span class="hljs-type">所有者 stormgbs</span>:                |<span class="hljs-type">_______________</span>|  <span class="hljs-type">&#x27;a</span><br>借用者 stormgbs.age:            |<span class="hljs-type">_______________</span>|  <span class="hljs-type">stormgbs</span>.age = &amp;x<br></code></pre></td></tr></table></figure>
 
 <p>既然<code>&lt;&#39;a&gt;</code>作为<code>Person</code>的泛型参数，所以在为<code>Person</code>实现方法时也需要加上<code>&lt;&#39;a&gt;</code>，不然：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span> Person &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">print_age</span></span>(&amp;<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;Person.age = &#123;&#125;&quot;</span>, <span class="keyword">self</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span> Person &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">print_age</span></span>(&amp;<span class="hljs-keyword">self</span>) &#123;<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Person.age = &#123;&#125;&quot;</span>, <span class="hljs-keyword">self</span>.age);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;anon&gt;:5:6: 5:12 error: wrong number of lifetime parameters: expected 1, found 0 [E0107]</span><br><span class="line">&lt;anon&gt;:5 impl Person &#123;</span><br><span class="line">              ^~~~~~</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-symbol">&lt;anon&gt;</span>:<span class="hljs-number">5</span>:<span class="hljs-number">6</span>: <span class="hljs-number">5</span>:<span class="hljs-number">12</span> error: wrong <span class="hljs-keyword">number</span> of lifetime parameter<span class="hljs-variable">s:</span> expected <span class="hljs-number">1</span>, found <span class="hljs-number">0</span> [E0107]<br><span class="hljs-symbol">&lt;anon&gt;</span>:<span class="hljs-number">5</span> impl Person &#123;<br>              ^~~~~~<br></code></pre></td></tr></table></figure>
 
 <p><strong>正确的做法是</strong>：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span>&lt;<span class="symbol">&#x27;a</span>&gt; Person&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">print_age</span></span>(&amp;<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="built_in">println!</span>(<span class="string">&quot;Person.age = &#123;&#125;&quot;</span>, <span class="keyword">self</span>.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt; Person&lt;<span class="hljs-symbol">&#x27;a</span>&gt; &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">print_age</span></span>(&amp;<span class="hljs-keyword">self</span>) &#123;<br>        <span class="hljs-built_in">println!</span>(<span class="hljs-string">&quot;Person.age = &#123;&#125;&quot;</span>, <span class="hljs-keyword">self</span>.age);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这样加上<code>&lt;&#39;a&gt;</code>后就可以了。读者可能会疑问，为什么<code>print_age</code>中不需要加上<code>&#39;a</code>？这是个好问题。因为<code>print_age</code>的输出参数为<code>()</code>，也就是可以不依赖任何输入参数, 所以编译器此时可以不必关心和推导Lifetime。即使是<code>fn print_age(&amp;self, other_age: &amp;i32) &#123;...&#125;</code>也可以编译通过。</p>
 <p><strong>如果Person的方法存在输出值（借用）呢？</strong></p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span>&lt;<span class="symbol">&#x27;a</span>&gt; Person&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">get_age</span></span>(&amp;<span class="keyword">self</span>) -&gt; &amp;<span class="built_in">u8</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt; Person&lt;<span class="hljs-symbol">&#x27;a</span>&gt; &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">get_age</span></span>(&amp;<span class="hljs-keyword">self</span>) -&gt; &amp;<span class="hljs-built_in">u8</span> &#123;<br>        <span class="hljs-keyword">self</span>.age<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><code>get_age</code>方法的输出值依赖一个输入值<code>&amp;self</code>，这种情况下，Rust编译器可以自动推导为：</p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span>&lt;<span class="symbol">&#x27;a</span>&gt; Person&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">get_age</span></span>(&amp;<span class="symbol">&#x27;a</span> <span class="keyword">self</span>) -&gt; &amp;<span class="symbol">&#x27;a</span> <span class="built_in">u8</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.age</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&#x27;a</span>&gt; Person&lt;<span class="hljs-symbol">&#x27;a</span>&gt; &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">get_age</span></span>(&amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-keyword">self</span>) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">u8</span> &#123;<br>        <span class="hljs-keyword">self</span>.age<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><strong>如果输出值（借用）依赖了多个输入值呢？</strong></p>
-<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">impl</span>&lt;<span class="symbol">&#x27;a</span>, <span class="symbol">&#x27;b</span>&gt; Person&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">    <span class="function"><span class="keyword">fn</span> <span class="title">get_max_age</span></span>(&amp;<span class="symbol">&#x27;a</span> <span class="keyword">self</span>, p: &amp;<span class="symbol">&#x27;a</span> Person) -&gt; &amp;<span class="symbol">&#x27;a</span> <span class="built_in">u8</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">self</span>.age &gt; p.age &#123;</span><br><span class="line">            <span class="keyword">self</span>.age</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            p.age</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-keyword">impl</span>&lt;<span class="hljs-symbol">&#x27;a</span>, <span class="hljs-symbol">&#x27;b</span>&gt; Person&lt;<span class="hljs-symbol">&#x27;a</span>&gt; &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">fn</span> <span class="hljs-title">get_max_age</span></span>(&amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-keyword">self</span>, p: &amp;<span class="hljs-symbol">&#x27;a</span> Person) -&gt; &amp;<span class="hljs-symbol">&#x27;a</span> <span class="hljs-built_in">u8</span> &#123;<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">self</span>.age &gt; p.age &#123;<br>            <span class="hljs-keyword">self</span>.age<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            p.age<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>类似之前的Lifetime推导章节，当返回值（借用）依赖多个输入值时，需显示声明Lifetime。和函数Lifetime同理。</p>
 <p><strong>其他</strong></p>
@@ -435,15 +435,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Programming-language/" class="category-chain-item">Programming language</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Programming-language/Rust/" class="category-chain-item">Rust</a>
-  
-  
-
   
 
       </span>
@@ -459,7 +452,7 @@
       
         <a href="/tags/Rust/">#Rust</a>
       
-        <a href="/tags/Programming-language/">#Programming language</a>
+        <a href="/tags/Programming-Language/">#Programming Language</a>
       
     </div>
   
@@ -477,25 +470,25 @@
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
+          <div>作者</div>
           <div>Chivier Humber</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
+          <div>发布于</div>
           <div>April 9, 2019</div>
         </div>
       
       
       <div class="license-meta-item">
-        <div>Licensed under</div>
+        <div>许可协议</div>
         <div>
           
             
             
               <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
                 <i class="iconfont icon-by"></i>
               </span>
               </a>
@@ -517,7 +510,7 @@
                       <a href="/2019/04/10/2021/Operating-System-Concept-1/" title="Operating System Concept - 1">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Operating System Concept - 1</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -526,7 +519,7 @@
                     
                       <a href="/2019/04/07/2021/Rust-Learning-3/" title="Rust-Learning-3">
                         <span class="hidden-mobile">Rust-Learning-3</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -545,7 +538,7 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -600,7 +593,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -608,7 +601,7 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -760,7 +753,7 @@
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>
