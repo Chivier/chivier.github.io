@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://chivier.github.io/2022/04/11/2022/2204-GPU%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</loc>
+    
+    <lastmod>2022-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://chivier.github.io/2022/02/20/2022/2202-CudaProgramming/</loc>
+    
+    <lastmod>2022-07-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://chivier.github.io/2022/07/06/2022/2207-%E5%8A%9F%E8%80%97%E7%9B%91%E6%B5%8B%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2022-07-05</lastmod>
@@ -39,15 +57,6 @@
   
   <url>
     <loc>https://chivier.github.io/2022/04/26/2022/2204-qinitial/</loc>
-    
-    <lastmod>2022-07-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chivier.github.io/2022/04/11/2022/2204-GPU%E7%A8%8B%E5%BA%8F%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2022-07-03</lastmod>
     
@@ -129,15 +138,6 @@
   
   <url>
     <loc>https://chivier.github.io/2022/02/04/2022/2202-QemuTest/</loc>
-    
-    <lastmod>2022-07-03</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://chivier.github.io/2022/02/20/2022/2202-CudaProgramming/</loc>
     
     <lastmod>2022-07-03</lastmod>
     
@@ -706,7 +706,7 @@
 
   <url>
     <loc>https://chivier.github.io/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -714,357 +714,357 @@
   
   <url>
     <loc>https://chivier.github.io/tags/COD/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Assembly/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Linux/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/System/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Verilog/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Git/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Network/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Blog/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Latex/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Linux-Software/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Maths/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Logic/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Tools/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Windows/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Softwares/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Rust/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Programming-language/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Shell/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Linux-Tricks/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Electronic/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Circuits/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/C/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/LLVM/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/DSL/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Compiler/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Architechture/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Dataflow/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Docker/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Tutorial/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Translator/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/ICS/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/TA/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Work/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Develop/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Qemu/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Cuda/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Parallel/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Tricks/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/DARTS/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Tensorflow/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Deeplearning/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Graphics/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/FP/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/CPU/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Programming-Language/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Markdown/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Python/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Trick/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Applications/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/Lammps/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/tags/MPI/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -1073,28 +1073,28 @@
   
   <url>
     <loc>https://chivier.github.io/categories/Develop/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/categories/Skill/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/categories/Knowledge/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://chivier.github.io/categories/Research/</loc>
-    <lastmod>2022-07-07</lastmod>
+    <lastmod>2022-07-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
