@@ -278,7 +278,6 @@
                 
                 <h1 id="Why-Ubuntu"><a href="#Why-Ubuntu" class="headerlink" title="Why Ubuntu?"></a>Why Ubuntu?</h1><p>In the very beginnning in this serials of tutorial, I wanna quote some words from Mr. Richard Feyman.</p>
 <span id="more"></span>
-
 <blockquote>
 <p>What I cannot create, I do not understand.</p>
 </blockquote>
@@ -289,10 +288,8 @@
 <h1 id="FFFFirst"><a href="#FFFFirst" class="headerlink" title="FFFFirst"></a>FFFFirst</h1><p>FFFFirst things(Why 4 Fs, Hmmm, there are 4 very very important things, I cannot sort their importance) are:</p>
 <h2 id="Install-vim"><a href="#Install-vim" class="headerlink" title="Install vim"></a>Install vim</h2><p>Hmm, I wanna emphasize here that <code>vi</code> is not <code>vim</code>. They are different apps.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install vim<br></code></pre></td></tr></table></figure>
-
 <p>And if you are a really green hand on Linux. I recommand some other tools for you.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install nano<br>sudo apt install gedit<br>sudo apt install geany<br></code></pre></td></tr></table></figure>
-
 <p>There editors are all quite easy to get and easy to use.</p>
 <h2 id="Change-the-source"><a href="#Change-the-source" class="headerlink" title="Change the source"></a>Change the source</h2><p>As I am a Chinese, the official source is too slow for me.</p>
 <p>Here I recommand a tool:</p>
@@ -300,10 +297,8 @@
 <p>You can genetate a new source config file easily.</p>
 <p>And then you just need to backup your old source config and create a new file here. Just like this:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo cp /etc/apt/source.list /etc/apt/source.list.old<br>sudo vim /etc/apt/source.list<br><span class="hljs-comment"># copy the source.list generated before</span><br></code></pre></td></tr></table></figure>
-
 <h2 id="Update-source"><a href="#Update-source" class="headerlink" title="Update source"></a>Update source</h2><p>And don’t forget to update your source after change the source.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update<br>sudo apt upgrade<br></code></pre></td></tr></table></figure>
-
 <h2 id="Build-proxy"><a href="#Build-proxy" class="headerlink" title="Build proxy"></a>Build proxy</h2><p>It’s essential for Chinese users, many forums and resources are unavailable unless you have VPN.<br>(But I won’t teach you how to build proxy here, I will show you about it in another tutorial)</p>
 
                 

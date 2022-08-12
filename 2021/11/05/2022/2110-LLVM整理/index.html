@@ -281,16 +281,11 @@
               <div class="markdown-body">
                 
                 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><span id="more"></span>
-
 <p>这里首先先说明我整理次文档的目的，LLVM是我日常工作学习中最常用的工具，小到用C++写一个demo，大到做自带代码优化和代码分析，可以说我的日常工作学习离不开LLVM的Toolchains，在这里，我将自己对LLVM的见解和认识在这里做一个系统的整理和介绍。</p>
 <p>这里我基于 LLVM 12 版本进行介绍，参考了一些 LLVM 的相关总结资料和书籍，结合官方文档，进行如下总结。</p>
-<h2 id="使用系统环境"><a href="#使用系统环境" class="headerlink" title="使用系统环境"></a>使用系统环境</h2><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-## 编译 LLVM 项目
-
-<p>简单来说步骤如下：</p>
+<h2 id="使用系统环境"><a href="#使用系统环境" class="headerlink" title="使用系统环境"></a>使用系统环境</h2><p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"><br><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
+<h2 id="编译-LLVM-项目"><a href="#编译-LLVM-项目" class="headerlink" title="编译 LLVM 项目"></a>编译 LLVM 项目</h2><p>简单来说步骤如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/llvm/llvm-project.git<br>git checkout -b llvmorg-12.0.0<br><span class="hljs-built_in">cd</span> llvm-project<br>mkdir build<br>cmake –G Ninja -DCMAKE_INSTALL_PREFIX=<span class="hljs-variable">$INSTALL_DIR</span> -DLLVM_ENABLE_PROJECTS=clang ../llvm<br></code></pre></td></tr></table></figure>
-
 <p>对于cmake项目的一般编译方法如此，这里需要对一些选项补充说明：</p>
 <ul>
 <li>LLVM_TARGETS_TO_BUILD： LLVM的目标平台，例如：<code>AArch64</code>, <code>AMDGPU</code>, <code>ARM</code>, <code>BPF</code>, <code>Hexagon</code>, <code>Lanai</code>, <code>Mips</code>, <code>MSP430</code>, <code>NVPTX</code>, <code>PowerPC</code>, <code>RISCV</code>, <code>Sparc</code>, <code>SystemZ</code>, <code>WebAssembly</code>, <code>X86</code>。默认和目前所在机器一致。</li>

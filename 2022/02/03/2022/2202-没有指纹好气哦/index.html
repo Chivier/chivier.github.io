@@ -281,8 +281,6 @@
                 
                 <p>今天是没有指纹的第X天，自从我更新到 Ubuntu 22.04 之后，我深刻意识到这个系统相比 Debian 的落伍之处，虽然大家都是 Debian 系的，但是近两年来 Ubuntu 开发者开始不做人事。和 Gnome 开发组进行摆烂竞赛。对于此事我不做过多评价，只是：</p>
 <span id="more"></span>
-
-
 <ol>
 <li>Ubuntu 升级之后大量的硬件驱动失去了支持，例如指纹、触控板等</li>
 <li>Gnome 升级后和 GTK-3 系列软件发生快捷键冲突</li>
@@ -292,14 +290,12 @@
 <h1 id="开始分析"><a href="#开始分析" class="headerlink" title="开始分析"></a>开始分析</h1><p>首先我先在 Google 上面进行了一番查询，发现了 Stack Overflow 上有人遇到了类似的情况：</p>
 <p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1231185/fingerprint-login-in-20-04">类似状况链接</a></p>
 <p>但是下面的解决方案不太管用。这个时候我开始怀疑自己的电脑是不是因为之前进水导致指纹传感坏了。</p>
-<h1 id="再次分析"><a href="#再次分析" class="headerlink" title="再次分析"></a>再次分析</h1><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<h1 id="再次分析"><a href="#再次分析" class="headerlink" title="再次分析"></a>再次分析</h1><p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>在 lsusb 的界面里，发现了一个我感到陌生的模块，这个模块我之前并未过多在意，仔细一查：</p>
 <p><a target="_blank" rel="noopener" href="https://www.dell.com/community/Linux-General/No-driver-for-fingerprint-reader-Goodix-27c6-5381-on-Linux/td-p/8018706">https://www.dell.com/community/Linux-General/No-driver-for-fingerprint-reader-Goodix-27c6-5381-on-Linux/td-p/8018706</a></p>
 <p>好家伙，就是你做坏事了。</p>
 <p>紧急查阅驱动，使用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo -E ./hw-probe -all -upload<br></code></pre></td></tr></table></figure>
-
 <p>检测配件看看：</p>
 <p><a target="_blank" rel="noopener" href="https://linux-hardware.org/?probe=30ddfbc611">https://linux-hardware.org/?probe=30ddfbc611</a></p>
 <p>寄，这下裂开了，所有的发行版后面都跟着大大的 Fail</p>
@@ -309,11 +305,9 @@
 <p>这个时候发现，我用的 libfprintd 版本是 0.4。而一个可用的版本是 0.6。</p>
 <p>在一番搜索之后，在 Dell 驱动支持的一个民间网站上找到了一个版本，用下面的命令下载：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -O ~/Downloads/libp.deb http://dell.archive.canonical.com/updates/pool/public/libf/libfprint-2-tod1-goodix/libfprint-2-tod1-goodix_0.0.6-0ubuntu1\~somer  <br>ville1_amd64.deb<br></code></pre></td></tr></table></figure>
-
 <p>好吧，折腾一圈心力憔悴。</p>
 <p>终于可以读入我的指纹信息了，我开开心心录完指纹之后发现：</p>
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>KDE 不支持，但是具体的原因是什么呢？这个时候我再次进行探究。</p>
 <h1 id="登录系统"><a href="#登录系统" class="headerlink" title="登录系统"></a>登录系统</h1><p>我们在登录的时候，我们不能使用指纹录入。Ubuntu 的登录使用的是 gdm 系统，而 KDE 用的是 sddm。Sddm 的最新方面还没有支持上，Plasma 也没支持……那我只能寄了。</p>
 <h1 id="题外话（关于差点吧电脑搞没）"><a href="#题外话（关于差点吧电脑搞没）" class="headerlink" title="题外话（关于差点吧电脑搞没）"></a>题外话（关于差点吧电脑搞没）</h1><p>我今天的一次测试差点把我电脑直接搞死。</p>
@@ -322,7 +316,6 @@
 <p>我改完之后彻底没了……</p>
 <p>所有用到 sudo 的地方都开始报错：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo: PAM account management error: Permission denied<br></code></pre></td></tr></table></figure>
-
 <p>最终我找到了一丝生机：</p>
 <p>我们使用 Dolphin 调用编辑器的时候，我可以用用户密码去获取 root 权限，而 Shell 中不可能得到。<br>这次事件之后我把我的 root 密码写到了我的笔记本（纸质）上面。终于活下来了。</p>
 

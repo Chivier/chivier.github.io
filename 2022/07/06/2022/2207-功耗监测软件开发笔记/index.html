@@ -279,13 +279,11 @@
               <div class="markdown-body">
                 
                 <h1 id="Version-0-0"><a href="#Version-0-0" class="headerlink" title="Version 0.0"></a>Version 0.0</h1><span id="more"></span>
-
 <h2 id="功耗监测软件"><a href="#功耗监测软件" class="headerlink" title="功耗监测软件"></a>功耗监测软件</h2><p>2022-07-05 开发测试<br>为了更好的对软件的功耗和行为进行监测</p>
 <h2 id="设计阶段-1"><a href="#设计阶段-1" class="headerlink" title="设计阶段 1"></a>设计阶段 1</h2><p>首先，启发我完善该项目的是一位师弟: <a target="_blank" rel="noopener" href="https://github.com/xwy-bit">https://github.com/xwy-bit</a></p>
 <p>原始项目： <a target="_blank" rel="noopener" href="https://github.com/xwy-bit/IPMI">https://github.com/xwy-bit/IPMI</a></p>
 <p>那么整理需求，绘制设计草稿：</p>
-<img src="image1.jpeg" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image1.jpeg" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>需求有如下：</p>
 <ol>
 <li>如果绘制程序的设置进行了变更，我们需要 Reset</li>
@@ -296,7 +294,6 @@
 </ol>
 <h1 id="Development-Step-1"><a href="#Development-Step-1" class="headerlink" title="Development Step 1"></a>Development Step 1</h1><p>首先我们选择框架和组件。框架上选择 PyQt6 作为顶层框架，之后开始设计布局：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dashboard</span>(<span class="hljs-params">QWidget</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-built_in">super</span>().__init__()<br>        self.setWindowTitle(<span class="hljs-string">&quot;Dashboard&quot;</span>)<br>        self.setGeometry(<span class="hljs-number">400</span>, <span class="hljs-number">400</span>, <span class="hljs-number">850</span>, <span class="hljs-number">500</span>)<br>		...<br>        self.initUI()<br>        self.show()<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initUI</span>(<span class="hljs-params">self</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		1. define basic items</span><br><span class="hljs-string">		2. set item</span><br><span class="hljs-string">		3. set layout</span><br><span class="hljs-string">		4. connect items</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>		...<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">load_machine</span>(<span class="hljs-params">self</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		load machine ipmi config</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>	<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_interval</span>(<span class="hljs-params">self, text</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		update interval</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>		<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_maxtime</span>(<span class="hljs-params">self, text</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		update maxtime</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>		<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reset_system</span>(<span class="hljs-params">self</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		reset system</span><br><span class="hljs-string">		Clear Plot</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>	<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reset_machine</span>(<span class="hljs-params">self</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		reset_machine</span><br><span class="hljs-string">		Reset machine information and status</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>	<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">clear_layout</span>(<span class="hljs-params">self</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		update layout</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>		<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">timer_start</span>(<span class="hljs-params">self</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		timer start trigger</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br>		<br>	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">plot_power</span>(<span class="hljs-params">self</span>):</span><br>		<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">		update power information and plot</span><br><span class="hljs-string">		&#x27;&#x27;&#x27;</span><br></code></pre></td></tr></table></figure>
-
 <p>设计框架完成之后开始设计链接逻辑</p>
 <h2 id="按钮逻辑"><a href="#按钮逻辑" class="headerlink" title="按钮逻辑"></a>按钮逻辑</h2><p>Start/Reset 按钮:</p>
 <ul>
@@ -321,18 +318,17 @@
 </ul>
 <p>分别 connected 对应函数即可。</p>
 <p>效果如下：</p>
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h1 id="之后的计划"><a href="#之后的计划" class="headerlink" title="之后的计划"></a>之后的计划</h1><ul>
-<li><input disabled="" type="checkbox"> 代码重构，添加注释</li>
-<li><input disabled="" type="checkbox"> 多条曲线分别显示机器的功耗</li>
-<li><input disabled="" type="checkbox"> 显示 GPU 和 CPU 的功耗</li>
-<li><input disabled="" type="checkbox"> 曲线平滑、粗细调整</li>
-<li><input disabled="" type="checkbox"> 添加图例</li>
-<li><input disabled="" type="checkbox"> 坐标轴添加单位</li>
-<li><input disabled="" type="checkbox"> x 轴更新为程序运行时间</li>
-<li><input disabled="" type="checkbox"> 添加风扇控制页面</li>
-<li><input disabled="" type="checkbox"> Label 的自体调整</li>
+<li>[ ] 代码重构，添加注释</li>
+<li>[ ] 多条曲线分别显示机器的功耗</li>
+<li>[ ] 显示 GPU 和 CPU 的功耗</li>
+<li>[ ] 曲线平滑、粗细调整</li>
+<li>[ ] 添加图例</li>
+<li>[ ] 坐标轴添加单位</li>
+<li>[ ] x 轴更新为程序运行时间</li>
+<li>[ ] 添加风扇控制页面</li>
+<li>[ ] Label 的自体调整</li>
 </ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li>Qt6 教程 <a target="_blank" rel="noopener" href="https://maicss.gitbook.io/pyqt-chinese-tutoral/pyqt6/layout">https://maicss.gitbook.io/pyqt-chinese-tutoral/pyqt6/layout</a></li>

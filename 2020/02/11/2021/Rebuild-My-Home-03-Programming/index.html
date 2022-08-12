@@ -279,7 +279,6 @@
                 <p>As a programmer, I don’t think you can bear only working with ‘gdb’ and ‘vim’. Tools can never too better.</p>
 <p>I will introduce my working environment.</p>
 <span id="more"></span>
-
 <h1 id="ZSH-amp-Tilix-amp-Gogh"><a href="#ZSH-amp-Tilix-amp-Gogh" class="headerlink" title="ZSH &amp; Tilix &amp; Gogh"></a>ZSH &amp; Tilix &amp; Gogh</h1><p>Ah, the most unbearable thing in Ubuntu is the default terminal is really ugly. Also I do not like bash.</p>
 <p>So I really recommend zsh + tilix.</p>
 <h2 id="ZSH-install"><a href="#ZSH-install" class="headerlink" title="ZSH install"></a>ZSH install</h2><ol>
@@ -288,7 +287,6 @@
 </li>
 <li><p>Execute</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure>
-
 <p>And then you can install zsh automatically.</p>
 </li>
 <li><p>Set zsh as default shell</p>
@@ -296,20 +294,16 @@
 </li>
 <li><p>Set zsh theme and edit your zsh configure.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim ~/.zshrc<br></code></pre></td></tr></table></figure>
-
 <p>I need to add some my aliases, also I need to set up some plugins for my zsh</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/.oh-my-zsh/custom/plugins<br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions<br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-history-substring-search<br>git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting<br></code></pre></td></tr></table></figure>
-
 <p>Don’t forget to add them to your .zshrc/plugins</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugins=(git zsh-history-substring-search zsh-autosuggestions colored-man-pages zsh-syntax-highlighting)<br></code></pre></td></tr></table></figure>
-
-<h2 id="Tilix"><a href="#Tilix" class="headerlink" title="Tilix"></a>Tilix</h2></li>
+</li>
 </ol>
-<p>So, why tilix?</p>
+<h2 id="Tilix"><a href="#Tilix" class="headerlink" title="Tilix"></a>Tilix</h2><p>So, why tilix?</p>
 <p>tilix is a really useful terminal that can split screen easily.</p>
 <p>Tilix is easy to install.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install tilix<br></code></pre></td></tr></table></figure>
-
 <p>But I wanna to set tilix as my default terminal.</p>
 <p>Here is a tutorial:</p>
 <ol>
@@ -320,11 +314,10 @@
 <p>About this problem I will share how to edit ‘right click’ panel in another tutorial.</p>
 </li>
 </ol>
-<h2 id="Gogh"><a href="#Gogh" class="headerlink" title="Gogh"></a>Gogh</h2><p>Um, we almost finish all the steps. But I am unsatisfied with the color theme. Here I will share a perfect tool with you — ‘gogh.sh’</p>
+<h2 id="Gogh"><a href="#Gogh" class="headerlink" title="Gogh"></a>Gogh</h2><p>Um, we almost finish all the steps. But I am unsatisfied with the color theme. Here I will share a perfect tool with you —- ‘gogh.sh’</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Mayccoll/Gogh">gogh github</a></p>
 <p>I recommend install it from here:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash -c  <span class="hljs-string">&quot;<span class="hljs-subst">$(wget -qO- https://git.io/vQgMr)</span>&quot;</span> <br></code></pre></td></tr></table></figure>
-
 <p>And then choose your favorite color theme to download and then you can also choose in tilix preference.</p>
 <h1 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h1><p>My favorite IDE, you can view more information here: <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">VS Code</a></p>
 <h1 id="Qt"><a href="#Qt" class="headerlink" title="Qt"></a>Qt</h1><p>For Visualization.</p>

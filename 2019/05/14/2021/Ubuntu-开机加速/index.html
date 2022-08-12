@@ -281,20 +281,14 @@
                 
                 <p> 啊啊啊，真的等不及了……开机慢死了怎么破～</p>
 <span id="more"></span>
-
 <h1 id="开机时间分析"><a href="#开机时间分析" class="headerlink" title="开机时间分析"></a>开机时间分析</h1><p>我们需要加速开机流程，受限最重要的是知道那些地方影响了开机速度。我们利用<code>systemd-analyse blame</code>命令来观察具体那些流程较慢：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemd-analyse blame<br></code></pre></td></tr></table></figure>
-
-<img src="p1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
-<img src="p2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="p1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
+<p><img src="p2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>看出来了吧，第一项巨慢无比，不能忍，掐掉。</p>
 <h1 id="掐掉？"><a href="#掐掉？" class="headerlink" title="掐掉？"></a>掐掉？</h1><p>掐掉之前，稳妥一点的做法是搜索一下，这一开机启动service的作用，确认没有恶劣影响之后我们可以关闭：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">systemctl mask xx.service<br></code></pre></td></tr></table></figure>
-
-<img src="p3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="p3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>至此，开机加速任务完成。</p>
 
                 

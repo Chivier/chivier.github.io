@@ -29,8 +29,8 @@
 <meta property="article:published_time" content="2019-03-18T22:17:17.000Z">
 <meta property="article:modified_time" content="2022-07-03T04:36:46.643Z">
 <meta property="article:author" content="Chivier Humber">
-<meta property="article:tag" content="Assembly">
 <meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Assembly">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://www.xumenger.com/media/image/2018-02-05/02.png">
   
@@ -280,7 +280,6 @@
                 
                 <p>安装emu8086 并在该环境下写简单的汇编程序。一个快速上手的教程。旨在实用，旨在实用。</p>
 <span id="more"></span>
-
 <h1 id="Install-emu8086"><a href="#Install-emu8086" class="headerlink" title="Install emu8086"></a>Install emu8086</h1><p>下载地址：<a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~llxx/cod/software/emu8086.zip">EMU8086 Download</a></p>
 <p>安装自行解决～</p>
 <p>官方教程：<a target="_blank" rel="noopener" href="http://dsearls.org/courses/C391OrgSys/IntelAL/8086_instruction_set.html">8086set</a></p>
@@ -309,36 +308,29 @@
 </ul>
 <p>举例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ASSUME CS:CODE,DS:DATA<br><br>DATA SEGMENT<br>        ...;标注变量<br>DATA ENDS<br><br>CODE SEGMENT<br>        ...;写代码的部分<br>CODE ENDS<br></code></pre></td></tr></table></figure>
-
 <h1 id="变量和赋值"><a href="#变量和赋值" class="headerlink" title="变量和赋值"></a>变量和赋值</h1><p>例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ASSUME CS:CODE,DS:DATA<br><br>DATA SEGMENT<br>        A DB 0<br>        B DB 100<br>DATA ENDS<br><br>...<br>MOV AL, A ;取变量<br>ADD AL, 1<br>MOV A, AL ;存变量<br>...<br></code></pre></td></tr></table></figure>
-
 <p>这样我们可以存取变量并且完成赋值</p>
 <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组简而言之，我们用一段连续的地址进行实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">DATA SEGMENT<br>        ARR DB 48h, 65h, 6Ch, 6Ch, 6Fh, 00h<br>        STRING DB &#39;Hello&#39;, 0<br>        REPEAT DB 5 DUP(9)<br>DATA ENDS<br></code></pre></td></tr></table></figure>
-
 <p>这几种都是合法的数组定义初始化方法，A是一一赋值；B是字符串定义，需要注意一下我们有结尾0；C是重复定义，含义为5个9</p>
 <p>对于数组取值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs assembly">MOV AL, ARR[3]  ;下标取值，注意，下标从0开始标记<br><br>MOV SI, 3<br>MOV AL, ARR[SI]<br></code></pre></td></tr></table></figure>
-
 <h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><p>既然有了数组，为实现某些简单操作，我们也自然希望有指针这种东西</p>
 <p>有两种主要的实现方式：</p>
 <ul>
 <li><p>LEA</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">MOV AL, VAR1 ;AL &#x3D; VAR1<br>LEA BX, VAR1 ;BX &#x3D; &amp;VAR1<br>MOV BYTE PTR [BX], 44H ;*BX &#x3D; 44H<br></code></pre></td></tr></table></figure>
-
 <p>注意一下<code>BYTE PTR</code>的必要性，表示按字节读数据，不能少</p>
 </li>
 <li><p>OFFSET</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">MOV AL, VAR1 ;AL &#x3D; VAR1<br>MOV BX, OFFSET VAR1 ;BX &#x3D; &amp;VAR1<br>MOV BYTE PTR [BX], 44H ;*BX &#x3D; 44H<br></code></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <h1 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h1><p>基本定义完成之后我们进入下一步：if语句的实现</p>
 <p>8086中比较僵硬，实现是两句配套使用</p>
 <p>第一句是固定的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs assembly">CMP OP1,OP2<br></code></pre></td></tr></table></figure>
-
 <p>结果是寄存在寄存器之中的Flag的CF、ZF、OF、AF、PF这几个标志位，具体是：</p>
 <ul>
 <li>ZF=1，表示两个操作数相等</li>
@@ -362,11 +354,9 @@
 <h1 id="函数（子程序）"><a href="#函数（子程序）" class="headerlink" title="函数（子程序）"></a>函数（子程序）</h1><p>关于子程序的使用，不同于C/C++等高级语言，我们必须将即将使用的寄存器进行保存。</p>
 <p>直接上例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs assembly">SUB PROC NEAR ;beginning of SUB<br>    PUSH AL    ;保护寄存器<br>    PUSH BL<br>    ...<br>    POP BL<br>    POP AL ;还原寄存器<br>SUB ENDP      ;ending of SUB<br></code></pre></td></tr></table></figure>
-
 <p>我们这样可以简单的实现子程序的编写</p>
 <p>当然也有另外一种保护寄存器的方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs assembly">SUB PROC NEAR ;beginning of SUB<br>    MOV STAL,AL    ;保护寄存器<br>    MOV STBL,BL<br>    ...<br>    MOV BL,STAL<br>    MOV AL,STBL ;还原寄存器<br>SUB ENDP      ;ending of SUB<br></code></pre></td></tr></table></figure>
-
 <p>两种方法各有优劣，前者使用需要注意PUSH和POP的顺序，因为我们是在往栈立存取数据，所以POP顺序和PUSH顺序需要倒置；后者使用便捷随意，但是局限性是不可以进行递归，即不能二次调用，除非手动用数组进行寄存变量；总之个人推荐第一种。</p>
 <h1 id="系统中断"><a href="#系统中断" class="headerlink" title="系统中断"></a>系统中断</h1><p>有些特殊的操作只能以来系统中断进行完成，例如：PRINT等</p>
 <p><a target="_blank" rel="noopener" href="http://www.gabrielececchetti.it/Teaching/CalcolatoriElettronici/Docs/i8086_and_DOS_interrupts.pdf">INT中断表</a></p>
@@ -375,10 +365,8 @@
 <p>源码是在<a target="_blank" rel="noopener" href="https://github.com/AhmadNaserTurnkeySolutions/emu8086/blob/master/inc/emu8086.inc">EMU8086.INC源码</a>可以自由下载浏览</p>
 <p>这样输入输出只要一句话就可以完成，下面给一个简单的例子，源自asm_tutorial：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs assembly">; demonstrate scan_num, print_num, pthis<br>;----------------------------------------<br>include &#39;emu8086.inc&#39;<br>ORG    100h<br><br>LEA    SI, msg1       ; ask for the number<br>CALL   print_string   ;<br>CALL   scan_num       ; get number in CX.<br><br>MOV    AX, CX         ; copy the number to AX.<br><br>; print the following string:<br>CALL   pthis<br>DB  13, 10, &#39;You have entered: &#39;, 0<br><br>CALL   print_num      ; print number in AX.<br><br>RET                   ; return to operating system.<br><br>; data<br>msg1   DB  &#39;Enter the number: &#39;, 0<br><br>; macros to define procs<br>DEFINE_SCAN_NUM<br>DEFINE_PRINT_STRING<br>DEFINE_PRINT_NUM<br>DEFINE_PRINT_NUM_UNS  ; required for print_num.<br>DEFINE_PTHIS<br><br>END                   ; directive to stop the compiler.<br></code></pre></td></tr></table></figure>
-
 <p>关于很多人好奇的计时，可以给一套模板供大家简便使用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><code class="hljs assembly">MARKTIME PROC NEAR<br>    MOV STAH,AH<br>    MOV STBH,BH<br>    MOV STCL,CL<br>    MOV STCH,CH<br>    MOV STDL,DL<br>    MOV AH,2CH<br>    INT 21H<br>    MOV STM,CL<br>    MOV STS,DH<br>    MOV STSS,DL<br>    MOV STH,CH <br>    MOV AH,STAH<br>    MOV CL,STCL<br>    MOV CH,STCH<br>    MOV DH,STDH<br>    MOV DL,STDL<br>    RET   <br>MARKTIME ENDP<br><br>PRINTTIME PROC NEAR<br>    MOV STAH,AH<br>    MOV STBH,BH<br>    MOV STCL,CL<br>    MOV STCH,CH<br>    MOV STDL,DL<br><br><br>    MOV AH,2CH<br>    INT 21H  <br>    SUB CH,STH <br>    SUB CL,STM<br>    SUB DH,STS <br>    SUB DL,STSS<br><br>    MOV AX,60<br>    MUL CH <br>    ADD AL,CL<br>    MOV CX,AX<br>    MOV AX,60<br>    MUL CL<br>    ADD AL,DH <br>    PRINT  &quot;TIME: &quot;<br>    CALL PRINT_NUM_UNS<br>    PUTC &#39;.&#39;<br>    MOV AX,0<br>    MOV AL,DL <br>    CALL PRINT_NUM_UNS<br>    PRINT &quot; S&quot;<br><br>    MOV AH,STAH<br>    MOV CL,STCL<br>    MOV CH,STCH<br>    MOV DH,STDH<br>    MOV DL,STDL   <br>    RET<br>PRINTTIME ENDP<br></code></pre></td></tr></table></figure>
-
 <p>两者配套使用。</p>
 
                 
@@ -413,9 +401,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Assembly/">#Assembly</a>
-      
         <a href="/tags/Programming-Language/">#Programming Language</a>
+      
+        <a href="/tags/Assembly/">#Assembly</a>
       
     </div>
   

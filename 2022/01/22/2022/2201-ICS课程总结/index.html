@@ -280,8 +280,6 @@
               <div class="markdown-body">
                 
                 <h1 id="ICS课程总结"><a href="#ICS课程总结" class="headerlink" title="ICS课程总结"></a>ICS课程总结</h1><span id="more"></span>
-
-
 <p>在2021年的最后，我对之前的所有实验给出一份参考。</p>
 <p>首先先介绍各个实验的设计思路：</p>
 <ol>
@@ -309,10 +307,8 @@
 </ul>
 <p>这种需求不可避免要用git。这里补充一些其他工具，在这里只列一些我常用的工具。</p>
 <p>gitg：一个便捷的可视化工具，轻量免费</p>
-<img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>在vscode里安装git插件也是非常好的选择，我日常都是这么使用的以至于我对很多git操作其实并不熟练。</p>
 <h2 id="Lab-1"><a href="#Lab-1" class="headerlink" title="Lab 1"></a>Lab 1</h2><h3 id="实验思路"><a href="#实验思路" class="headerlink" title="实验思路"></a>实验思路</h3><p>这是一个使用 LC3 指令复现乘法的实验，首先理解问题非常重要：什么是乘法</p>
 <blockquote>
@@ -320,38 +316,33 @@
 </blockquote>
 <p>这句话看起来像是一个废话，但是包含了本次试验最基本的算法：使用加法累加完成。但是如果是负数次或者0次，改定义需要拓展。对应的，程序可能需要写分支进行处理。但是这个不是这次试验的本意。</p>
 <p>但是众所周知，LC3的机器使用补码对数字进行存储。这里需要对补码进行更加深入的认识（下面为了方便使用8位补码举例）：</p>
-<p>$$<br>-2 = (11111110)_2<br>$$</p>
-<p>但是如果换一种理解，我们可以认为：</p>
-<p>$$<br>(11111110)<em>2 = (100000000)_2 - (10)_2 = 256</em>{10} - 2_{10}<br>$$</p>
-<p>那么一个数字Num的补码等价于：</p>
-<p>$$<br>2^{totalbits} + Num<br>$$</p>
-<p>LC3中我们使用的是16位二进制，这里我们使用 $M$ 表示 $2^{totalbits}$ 。</p>
-<p>如果使用乘法计算 $(a \times b) ; mod ; M$ ，相当于：</p>
-<p>$$<br>a \times b ; mod ; M = (M + a) \times (M + b) ; mod ; M<br>$$</p>
-<p>也就是说：</p>
+<script type="math/tex; mode=display">
+-2 = (11111110)_2</script><p>但是如果换一种理解，我们可以认为：</p>
+<script type="math/tex; mode=display">
+(11111110)_2 = (100000000)_2 - (10)_2 = 256_{10} - 2_{10}</script><p>那么一个数字Num的补码等价于：</p>
+<script type="math/tex; mode=display">
+2^{totalbits} + Num</script><p>LC3中我们使用的是16位二进制，这里我们使用 $M$ 表示 $2^{totalbits}$ 。</p>
+<p>如果使用乘法计算 $(a \times b) \; mod \; M$ ，相当于：</p>
+<script type="math/tex; mode=display">
+a \times b \; mod \; M = (M + a) \times (M + b) \; mod \; M</script><p>也就是说：</p>
 <ol>
 <li>我们可以无视补码条件，直接暴力进行加法</li>
 <li>即使其中一个数$x$是负数，我们也可以将它视作$(M+x)$的形式，暴力处理</li>
 </ol>
 <p>那么 L 版本的代码就得到了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">0001 111 111 0 00 000<br>0001 001 001 1 11111<br>0000 101 111111101<br></code></pre></td></tr></table></figure>
-
 <p>那么如果需要考虑性能呢？</p>
 <p>我们会用另一种我们在小学三年级的时候用过的算法进行实现，下面举一个例子：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">         1 0 1 1 1<br><br>       * 1 1 0 1 0<br>      ──────────────<br>       1 0 1 1 1<br><br>   1 0 1 1 1<br><br> 1 0 1 1 1<br>─────────────────────<br>...<br></code></pre></td></tr></table></figure>
-
 <p>在列出结果之前，相比大家已经知道做法了，就是采用位移和加法的形式对数值进行相加。</p>
 <p>下面是一个参考程序，为了方便阅读，先给出了实验的汇编形式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs assembly">ADD R3, R3, #1<br>ADD R5, R5, #8<br>ADD R5, R5, #8<br>LOOP    AND R6, R3, R1<br>        BRZ NEXT<br>        ADD R7, R7, R0<br>NEXT    ADD R3, R3, R3   ; R3 &lt;&lt;&#x3D; 1<br>        ADD R0, R0, R0   ; R0 &lt;&lt;&#x3D; 1<br>        ADD R5, R5, #-1  ; R5 -&#x3D; 1<br>        BRP LOOP<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs assembly">0001011011100001<br>0001101101101000<br>0001101101101000<br>0101110011000000<br>0000010000000001<br>0001111111000001<br>0001011011000011<br>0001001001000001<br>0001101101111111<br>0000001111111001<br></code></pre></td></tr></table></figure>
-
 <p>但是这依旧不是最好的方案，显然，可以采用“<strong>循环展开</strong>”再次优化。在Lab3的分析中我将给出详细介绍。</p>
 <p>第一次试验看似非常简单，但是蕴含了一个重要的思想：如果操作$2^x$次操作$A$可以被操作$B$替代，那么我们可以将算法进行指数级别化简。下面介绍两个类似的应用。</p>
-<h3 id="应用1：快速幂算法"><a href="#应用1：快速幂算法" class="headerlink" title="应用1：快速幂算法"></a>应用1：快速幂算法</h3><p>计算$a^b ; mod ; c$。</p>
+<h3 id="应用1：快速幂算法"><a href="#应用1：快速幂算法" class="headerlink" title="应用1：快速幂算法"></a>应用1：快速幂算法</h3><p>计算$a^b \; mod \; c$。</p>
 <p>一个简单的思路是采用我们上面L版本程序的思路：循环进行乘法</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> i;<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; b; ++i) &#123;<br>        ans = ans * a % c;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>而一个优化版本的方法和P版本程序思路一致：</p>
 <ul>
 <li><p>我们计算并且记录 $a^1,a^2,a^4,a^8…$</p>
@@ -360,18 +351,19 @@
 </li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">calc</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c)</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">int</span> t = a;<br>    <span class="hljs-keyword">while</span> (b) &#123;<br>        <span class="hljs-keyword">if</span> (b &amp; <span class="hljs-number">1</span>) &#123;<br>            ans = ans * t % c;<br>        &#125;<br>        b &gt;&gt;= <span class="hljs-number">1</span>;<br>        t = t * t % c;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <h3 id="应用2：递推公式求解"><a href="#应用2：递推公式求解" class="headerlink" title="应用2：递推公式求解"></a>应用2：递推公式求解</h3><p>对于递推公式，例如：</p>
-<p>$$<br>f(n) = a_{n-1}f(n-1) + a_{n-2}f(n-2) + a_{n-3}f(n-3) + … + a_{n-k}f(n-k)<br>$$</p>
-<p>我们可以采用求解特征方程（组）的方法对其进行求解，得到一个时间复杂度为$O(1)$的算法。但是这样会有精度问题，举一个最简单的例子，对于一般的Fibonacci数列进行求解。</p>
-<p>$$<br>f(1) = 1 \<br>f(2) = 1 \<br>f(n) = f(n-1) + f(n-2)<br>$$</p>
-<p>容易得到通项公式为：</p>
-<p>$$<br>f(n) = \frac{1}{\sqrt{5}} ((\frac{1+\sqrt{5}}{2})^{n} - (\frac{1-\sqrt{5}}{2})^{n})<br>$$</p>
-<p>但是求数值的时候一定会有精度损失，特别是当n特别大的时候精度会被放大，具体原理大家学习浮点数表示方法的时候应该有所体会。所以大部分时候，我们都不会用这种方法进行计算，而是采用一个类似于应用一的方法。</p>
-<p>$$<br>{\displaystyle {f(n+2) \choose f(n+1)}={\begin{pmatrix}1&amp;1\1&amp;0\end{pmatrix}}{f(n+1) \choose f(n)}}<br>$$</p>
-<p>我们将递推公式写成矩阵形式，这样不难看出我们求下一项的方法其实是以此乘法计算。那么我们复用上一个应用的算法，得到：</p>
-<p>$$<br>{\displaystyle {f(n) \choose f(n-1)}={\begin{pmatrix}1&amp;1\1&amp;0\end{pmatrix}}^n{f(1) \choose f(0)}}<br>$$</p>
-<p>计算一个矩阵的幂我们采用类似的方法进行计算即可。</p>
+<script type="math/tex; mode=display">
+f(n) = a_{n-1}f(n-1) + a_{n-2}f(n-2) + a_{n-3}f(n-3) + ... + a_{n-k}f(n-k)</script><p>我们可以采用求解特征方程（组）的方法对其进行求解，得到一个时间复杂度为$O(1)$的算法。但是这样会有精度问题，举一个最简单的例子，对于一般的Fibonacci数列进行求解。</p>
+<script type="math/tex; mode=display">
+f(1) = 1 \\
+f(2) = 1 \\
+f(n) = f(n-1) + f(n-2)</script><p>容易得到通项公式为：</p>
+<script type="math/tex; mode=display">
+f(n) = \frac{1}{\sqrt{5}} ((\frac{1+\sqrt{5}}{2})^{n} - (\frac{1-\sqrt{5}}{2})^{n})</script><p>但是求数值的时候一定会有精度损失，特别是当n特别大的时候精度会被放大，具体原理大家学习浮点数表示方法的时候应该有所体会。所以大部分时候，我们都不会用这种方法进行计算，而是采用一个类似于应用一的方法。</p>
+<script type="math/tex; mode=display">
+{\displaystyle {f(n+2) \choose f(n+1)}={\begin{pmatrix}1&1\\1&0\end{pmatrix}}{f(n+1) \choose f(n)}}</script><p>我们将递推公式写成矩阵形式，这样不难看出我们求下一项的方法其实是以此乘法计算。那么我们复用上一个应用的算法，得到：</p>
+<script type="math/tex; mode=display">
+{\displaystyle {f(n) \choose f(n-1)}={\begin{pmatrix}1&1\\1&0\end{pmatrix}}^n{f(1) \choose f(0)}}</script><p>计算一个矩阵的幂我们采用类似的方法进行计算即可。</p>
 <h3 id="原始方案"><a href="#原始方案" class="headerlink" title="原始方案"></a>原始方案</h3><p>采用和平均代码指令数，平均执行指令数的比值作为成绩。而且仅有本次实验占比的20%。这种评分方法参考清华大学的并行编程课程，我个人也非常赞同这种方案，可以看出同学之间水平的差异，也方便评分，不至于到期末的时候大家都被教务处把分数弄得一团糟。既然这一部分<strong>因为某些原因</strong>被取消，那么大家基本都是满分了，这次实验就变得异常简单。大家都快乐的完成了实验。</p>
 <h2 id="Lab-2-amp-3"><a href="#Lab-2-amp-3" class="headerlink" title="Lab 2 &amp; 3"></a>Lab 2 &amp; 3</h2><h3 id="实验思路-1"><a href="#实验思路-1" class="headerlink" title="实验思路"></a>实验思路</h3><p>这两次的实验是计算一个递推关系：</p>
 <ul>
@@ -383,23 +375,18 @@
 <p>这里如果我们使用递归方法进行编程，那么将会耗费大量的时间，所以我们采用递推方法进行编程。同时采用类似于流水的设计方案。</p>
 <p>参考代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs assembly">.ORIG x3000<br>LD R5, MODNUMBER<br>ADD R1, R1, #1<br>ADD R2, R2, #1 ;F[1] &#x3D; 1<br>ADD R3, R3, #2 ;F[2] &#x3D; 2<br>ADD R4, R3, #0<br>LOOP ADD R4, R4, R1 ;F[N] &#x3D; F[N - 1] + F[N - 3]<br>     ADD R4, R4, R1 ;F[N] &#x3D; 2 * F[N - 1] + F[N - 3]<br>     AND R4, R4, R5 ;F[N] &#x3D; (2 * F[N - 1] + F[N - 3]) mod 1024<br>     ADD R1, R2, #0<br>     ADD R2, R3, #0<br>     ADD R3, R4, #0<br>     ADD R0, R0, #-1 ;N--<br>BRNP LOOP<br>ADD R7, R1, #0<br>HALT<br>MODNUMBER .FILL #1023<br>NUMBERA .FILL #0<br>NUMBERB .FILL #0<br>NUMBERC .FILL #0<br>NUMBERD .FILL #0<br>.END<br></code></pre></td></tr></table></figure>
-
 <p>程序性能的评估方法在这里为大家进行介绍，很多同学不会统计自己程序的时间。但是这一个部分的工作其实非常简单，而且方法非常多样，这里只介绍一种作为参考。例如上面的程序如果我要进行评测指令条数，最简单的方法是用一个“同构的程序”进行计算。</p>
 <p>例如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>r5 = <span class="hljs-number">1023</span>;<br>count++;<br>r1 = <span class="hljs-number">1</span>;<br>count++;<br>r2 = <span class="hljs-number">1</span>;<br>count++;<br>r3 = <span class="hljs-number">2</span>;<br>count++;<br>r4 = <span class="hljs-number">0</span>;<br>count++;<br>loop: r4 = r4 + r1;<br>count++;<br>...<br></code></pre></td></tr></table></figure>
-
 <p>每一条指令之后我都进行一个count自增操作，最后输出count即可。（所以建议使用有goto语句的语言进行同构程序评测，否则需要手动转换成while/for循环）</p>
 <p>对于实验3的优化其实也非常简单，一个直观的思路是采取循环展开进行优化。我们举一个具体的例子进行理解。</p>
 <p>下面有两个循环：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/// Loop A</span><br><span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>    f[i] = g[i] * <span class="hljs-number">2</span>;<br>    g[i] = h[i] - <span class="hljs-number">2</span>;<br>&#125;<br><br><span class="hljs-comment">/// Loop B</span><br><span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i += <span class="hljs-number">2</span>) &#123;<br>    f[i] = g[i] * <span class="hljs-number">2</span>;<br>    g[i] = h[i] - <span class="hljs-number">2</span>;<br>    f[i + <span class="hljs-number">1</span>] = g[i + <span class="hljs-number">1</span>] * <span class="hljs-number">2</span>;<br>    g[i + <span class="hljs-number">1</span>] = h[i + <span class="hljs-number">1</span>] - <span class="hljs-number">2</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>这两个循环是否一样呢？他们看起来都计算了f的10项和g数组的10项，但是两个循环的指令数目不同。原因在于对于i的操作的数目不同。我们将两个循环完整的展开：</p>
 <p>Loop A:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c">f[i] = g[i] * <span class="hljs-number">2</span>;<br>g[i] = h[i] - <span class="hljs-number">2</span>;<br>i++;<br>f[i] = g[i] * <span class="hljs-number">2</span>;<br>g[i] = h[i] - <span class="hljs-number">2</span>;<br>i++;<br>...<br></code></pre></td></tr></table></figure>
-
 <p>Loop B:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c">f[i] = g[i] * <span class="hljs-number">2</span>;<br>g[i] = h[i] - <span class="hljs-number">2</span>;<br>f[i + <span class="hljs-number">1</span>] = g[i + <span class="hljs-number">1</span>] * <span class="hljs-number">2</span>;<br>g[i + <span class="hljs-number">1</span>] = h[i + <span class="hljs-number">1</span>] - <span class="hljs-number">2</span>;<br>i += <span class="hljs-number">2</span>;<br>...<br></code></pre></td></tr></table></figure>
-
 <p>同样计算两项，前者用了6条指令，后者只有5条。</p>
 <p>对于lab3的数据的设计我也采用了一个直观的方法：只评测10项，这10项我都是4的倍数，那么可以使用四次展开的方法进行优化。</p>
 <p>但是这是否达到最优了呢？</p>
@@ -408,27 +395,26 @@
 <h3 id="原始设计方案"><a href="#原始设计方案" class="headerlink" title="原始设计方案"></a>原始设计方案</h3><p>Lab2：使用最少寄存器进行编程（R0和R7作为输入和输出不算在内），使用5个寄存器，如果超出限制则会扣除10%的分数。使用最少指令数进行编程进行评分。</p>
 <p>Lab3：递推的范围，公式变为</p>
 <ul>
-<li>F(n) = (F(n-1) + 2 * F(n-3)) mod 1024 (1 &lt;= n &lt;= <strong>65536</strong>)</li>
+<li>F(n) = (F(n-1) + 2 <em> F(n-3)) mod 1024 (1 &lt;= n &lt;= <em>*65536</em></em>)</li>
 </ul>
 <p>但是出于<strong>某种原因</strong>，此部分评分被移除，大家都非常愉快的完成了这两次实验。</p>
 <h2 id="Lab-4"><a href="#Lab-4" class="headerlink" title="Lab 4"></a>Lab 4</h2><h3 id="实验思路-2"><a href="#实验思路-2" class="headerlink" title="实验思路"></a>实验思路</h3><p>对于这次实验，其实是一个娱乐性质的游戏。我们先从第一个部分分析。</p>
 <p>第一个部分的代码，我们给出的分析模式非常简单，只有4位需要补充。最简单的方法是进行16次枚举，配合LC3 Tool完成实验。其实希望通过这一个部分的实验收取大家的脚本，看看大家都用了什么自动化的方法和工具。</p>
 <p>这一个部分希望借助这个代码帮大家理解递归程序的思想，原始汇编如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs assembly">.ORIG x3000<br>LEA R2,Stack ; R2 is Stack<br>AND R0,R0,#0 ; Foo called?<br>Main JSR Foo<br>HALT<br>Foo STR R7,R2,#0 ; Store R7 to stack<br>ADD R2,R2,#1 ; Increment stack<br>ADD R0,R0,#1 ; Called Foo!<br>LD R1,Counter ; Decrement Counter<br>ADD R1,R1,#-1<br>ST R1,Counter<br>BRz After ; After N times,RET<br>JSR Foo ; Otherwise, recur<br>After ADD R2,R2,#-1 ; Decrement stack<br>LDR R7,R2,#0<br>RET<br>Stack .BLKW #10<br>Counter .FILL #5<br>.END<br></code></pre></td></tr></table></figure>
-
 <p>机器码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs plain">1110010000001110<br>0101000000100000<br>0100100000000001<br>1111000000100101<br>0111111010000000<br>0001010010100001<br>0001000000100001<br>0010001000010001<br>0001001001111111<br>0011001000001111<br>0000010000000001<br>0100111111111000<br>0001010010111111<br>0110111010000000<br>1100000111000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000000<br>0000000000000101<br></code></pre></td></tr></table></figure>
-
-<p>第二个部分的程序我这边进行了一些提示，程序是希望对7计算余数，但是有一个部分是对8计算除法，我们计算$x$对7的余数时，不妨换一个表达方法，让$x = 8k + r$其中$0 \le r &lt; 8$<br>$$<br>x ; mod ; 7 = (8k + r) ; mod ; 7 = (k + r) ; mod ; 7<br>$$<br>有了这个提示，这个程序也就不难了，除8是通过位移进行的，对8取余数是通过AND进行计算的。</p>
+<p>第二个部分的程序我这边进行了一些提示，程序是希望对7计算余数，但是有一个部分是对8计算除法，我们计算$x$对7的余数时，不妨换一个表达方法，让$x = 8k + r$其中$0 \le r &lt; 8$</p>
+<script type="math/tex; mode=display">
+x \; mod \; 7 = (8k + r) \; mod \; 7 = (k + r) \; mod \; 7</script><p>有了这个提示，这个程序也就不难了，除8是通过位移进行的，对8取余数是通过AND进行计算的。</p>
 <p>原始汇编如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs assembly">.ORIG x3000<br>LOOPM JSR DIV8<br>AND R2, R1, #7<br>ADD R1, R2, R4<br>ADD R0, R1, #-7<br>BRP LOOPM<br>ADD R0, R1, #-7<br>BRN STOP<br>ADD R1, R1, #-7<br>STOP HALT<br>DIV8 AND R2, R2, #0 ; R1 &#x2F; 8 -&gt; R4<br>AND R3, R3, #0<br>AND R4, R4, #0<br>ADD R2, R2, #1<br>ADD R3, R3, #8<br>LOOP AND R5, R3, R1<br>BRZ NEXT<br>ADD R4, R2, R4<br>NEXT ADD R2, R2, R2<br>ADD R3, R3, R3<br>BRP LOOP<br>RET<br>.END<br></code></pre></td></tr></table></figure>
-
 <h3 id="原始设计"><a href="#原始设计" class="headerlink" title="原始设计"></a>原始设计</h3><p>每个人拿到的程序都是不同的，是对16位bit进行随机反转得到的（不告诉你哪16位有错误）。鉴于实验难度过大，以及教务处提倡位更多同学减轻实验负担，这个部分已经被删除。于是大家都轻松愉快的完成了实验。</p>
 <h2 id="Lab-5"><a href="#Lab-5" class="headerlink" title="Lab 5"></a>Lab 5</h2><p>这一部分的实验显然大部分同学曲解了我的本意，实验本意是：<code>functionally</code>复现，也就是说我只要你判断素数即可，算法我不care。但是大部分同学都在楞写了乘法去余数，这里我只希望大家复习一下筛法求素数的算法：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AD%9B%E6%B3%95%E6%B1%82%E7%B4%A0%E6%95%B0/8670409">筛法素数百度百科</a></p>
 <p>我依稀记得我在五年级的数学课本后的数学小天地（也可能是其他名字）里面学习过这个算法，相比这个算法不是很难，但是几乎没有同学用这个算法进行实践，因此我推荐大家复习一下小学数学课本。</p>
 <p>这里程序不再详细写出，评测过程正在进行。</p>
 <h2 id="Lab-6"><a href="#Lab-6" class="headerlink" title="Lab 6"></a>Lab 6</h2><p>一个不需要我评讲的实验，希望大家自己学习一下<strong>自己常用语言的时间评测工具</strong>，这种属于基本技能，相比是之后的科研工作中不可或缺的一个部分，希望大家能够掌握。</p>
-<h2 id="Lab-A-amp-S"><a href="#Lab-A-amp-S" class="headerlink" title="Lab A&amp;S"></a>Lab A&amp;S</h2><p>今年第一次采用了**<u>程序填空+提问</u>**的方式进行检查实验。个人来看达到了比较好的实验效果，掌握了如何构建编译环境、如何编译命令行工具。这门课的重要作用之一就是在计算机学院的学习中承担承上启下的作用。掌握一些先进的开发工具和一些正确的开发方法是一个积极向上的计算机系学生的必备素养，所以这里我坚持使用C++进行实验设计。</p>
+<h2 id="Lab-A-amp-S"><a href="#Lab-A-amp-S" class="headerlink" title="Lab A&amp;S"></a>Lab A&amp;S</h2><p>今年第一次采用了<strong><u>程序填空+提问</u></strong>的方式进行检查实验。个人来看达到了比较好的实验效果，掌握了如何构建编译环境、如何编译命令行工具。这门课的重要作用之一就是在计算机学院的学习中承担承上启下的作用。掌握一些先进的开发工具和一些正确的开发方法是一个积极向上的计算机系学生的必备素养，所以这里我坚持使用C++进行实验设计。</p>
 <p>其中有一些设计是为了大家进行更好的理解和学习，例如：</p>
 <ul>
 <li>汇编器实验中存留接口，可以方便有兴趣的同学设计指令集拓展，可以自己开发更有意思的部分</li>

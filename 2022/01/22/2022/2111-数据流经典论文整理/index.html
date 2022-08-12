@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.1k 字
+          4k 字
         
       </span>
     
@@ -284,7 +284,6 @@
               <div class="markdown-body">
                 
                 <h1 id="数据流发展综述"><a href="#数据流发展综述" class="headerlink" title="数据流发展综述"></a>数据流发展综述</h1><span id="more"></span>
-
 <p>自计算机诞生以来, 计算机系统研究人员为提升计算速度, 一直百折不挠、不懈努力. 几十年间学  术界、产业界开展了多种多样的计算机体系结构探索, 产生了很多令人耳目一新的成果, 人们熟知的冯诺依曼结构瓶颈被反复诟病, 但是冯诺依曼计算机结构依然是当前计算机系统的主流架构. 在  谈及非冯计算机体系结构时, 数据流计算机无疑是被提及最多的.</p>
 <p>控制流计算思想在表达计算任务方面比较符合人类的思考习惯.首先通过指令序列描述计算任务执行过程. 其中, 指令用操作码表示功能, 操作数表示被处理的数据. 控制流计算任务被描述为一串指令序列. 经典计算机体系结构中, 设计了以程序计数器 (program counter, PC) 为核心的控制器实现控制流计算思想.在执行时首先需要将待执行的指令取出, 经过译码后执行指令, 并通过地址访问内存, 获取需要的数据, 最后将结果数据写回到存储器中. 完成该条指令后, 程序计数器自动加一, 获取下一条指令继续上述流程. 在计算机系统发展初期,研究人员逐渐发现控制流计算思想中存在的性能瓶颈问题, 即指令执行是串行的, 而且取指令、取操作数、存结果等动作都需要访问存储器。</p>
 <p>在基于数据流的计算任务中, 一项运算操作在获得了所有需要的操作数时即可执行, 所产生的结果数据不会被存储器保存, 而是直接作为操作数发送给后续的操作, 直到产生最终的输出结果. 与控制流计算思想中的指令序列串相比, 数据流图以图的形式描述了计算任务的并发执行全过程, 同时数据可以按照数据流图中边的指向直接传递到运算操作, 不需要缓存到存储器中.</p>
@@ -301,34 +300,28 @@
 <li>Merge</li>
 </ol>
 <p>图示：</p>
-<img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
-<p>数据流图中，所有的值可以表示为 token 的形式，一般来说，token 采用一个三元组的形式：&lt;ip, p, v&gt;， 其中，ip为指令指针，指向对应的数据流元件，p为端口，表示对应的数据流接口，v为指令值，表示传递过去的数据。</p>
-<p>举个例子：<br>$x = (a + b) * (b * 7)$</p>
+<p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
+<p>数据流图中，所有的值可以表示为 token 的形式，一般来说，token 采用一个三元组的形式：<ip, p, v>， 其中，ip为指令指针，指向对应的数据流元件，p为端口，表示对应的数据流接口，v为指令值，表示传递过去的数据。</p>
+<p>举个例子：<br>$x = (a + b) <em> (b </em> 7)$</p>
 <p>流图形式为：</p>
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
-<p>其中 (a + b) 的结果 姑且称为 c，c可以记录为：&lt;Mul-2, Left, (a + b)&gt;, Mul-2 是因为他传入第二层的乘号，Left 是传入左侧 Port</p>
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
+<p>其中 (a + b) 的结果 姑且称为 c，c可以记录为：<Mul-2, Left, (a + b)>, Mul-2 是因为他传入第二层的乘号，Left 是传入左侧 Port</p>
 <p>一个非常经典的例子可以说明控制流和数据流的区别：</p>
-<img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>其中所有的弧线表示数据依赖，如果采用数据流，那么每一个格子，即我们使用到数据的地方，是不可能有重复弧边的，这说明数据流方法可以有效规避数据依赖导致的冒险等问题。</p>
 <p>为了使得程序正常运作，需要一些“协议”保证，论文原文如下：</p>
-<img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>即输入就绪、输出弧无数据阻塞。但是静态数据流依旧。此外还有一条，但是是在static的定义中被补充：<br>每个计算节点只有一个指令实例可以被fire。</p>
 <p>即每一条指令同一时间只能被一次执行。对于高度复用类型的程序，static数据流就不再合适，例如：循环程序和复杂数据结构。</p>
 <h1 id="Monsoon-处理器"><a href="#Monsoon-处理器" class="headerlink" title="Monsoon 处理器"></a>Monsoon 处理器</h1><p> 文章： Executing a Program on the MIT TaggedToken Dataflow Architecture</p>
 <p>上述所说，为了处理类似循环，我们需要将token放在unbounded queue的结构中。这就诞生了 dynamic dataflow。</p>
 <p>dynamic dataflow 中引入了一个新的结构，有人称为 context， 有人称为 frame pointer，有人称为 instruction template。总之就是对 token 的一个拓展。</p>
-<p>现在的形式为：<br>token &lt;fp, ip, port, data&gt;</p>
+<p>现在的形式为：<br>token <fp, ip, port, data></p>
 <p>fp 即为 frame pointer，用于记录此条token将被哪个指令实例所接收。如果Frame里面已经有buffer记录了，那么可以流动起来并且计算结果，否则就将此token记录存储在frame列表中。</p>
-<img src="image5.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image5.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>此设计被发表于 ISCA 1990</p>
 <p>动态数据流的思路可以简单的用这张图概括：</p>
-<img src="image6.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image6.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>更多关于 Tag 的处理在论文中有所介绍，不过这一部分和我们的需求不尽相同，这里不做过多探究。</p>
 <h1 id="传统数据流方法的优劣"><a href="#传统数据流方法的优劣" class="headerlink" title="传统数据流方法的优劣"></a>传统数据流方法的优劣</h1><p>上述的两种方法其实都是传统数据流方法。作为经典的数据流方法，他们的优势是非常明显的：</p>
 <ul>

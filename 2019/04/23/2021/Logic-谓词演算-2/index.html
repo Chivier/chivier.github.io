@@ -277,7 +277,6 @@
               <div class="markdown-body">
                 
                  <span id="more"></span>
-
 <h1 id="谓词演算语义"><a href="#谓词演算语义" class="headerlink" title="谓词演算语义"></a>谓词演算语义</h1><h2 id="解释域和项解释"><a href="#解释域和项解释" class="headerlink" title="解释域和项解释"></a>解释域和项解释</h2><p><strong>解释域</strong>:非空集合M具有</p>
 <ol>
 <li>K中每个个体常元$c_i$，M中都有对应的$\overline{c_i}$</li>
@@ -294,7 +293,7 @@
 </ul>
 <p>我们类似定义出我们的<strong>项解释</strong>$\varphi:T\rightarrow M$：</p>
 <ul>
-<li><p>$\varphi(x_i)=\varphi_0(x_i),,\varphi(c_i)=\overline{c_i}$</p>
+<li><p>$\varphi(x_i)=\varphi_0(x_i),\,\varphi(c_i)=\overline{c_i}$</p>
 </li>
 <li><p>若$\varphi(t_1),…,\varphi(t_n)$已经定义好，那么</p>
 <p>$\varphi(f_i^n(t_1,…,t_n))=\overline{f_i^n}(\varphi(t_1),…,\varphi(t_n))$（保运算性）</p>
@@ -305,11 +304,12 @@
 <p>项解释完成了变元的映射</p>
 <p>这样M中所有元素都有了相对应的映射。</p>
 <p>解释域M下我们的所有发项解释集合记作$\Phi_M$</p>
-<p><strong>项解释的变元变通</strong>：x是某个给定的个体变元，y是任意的个体变元，$\varphi,,\varphi’ \in \Phi_M$</p>
-<p>使得：$y\neq x ,\Rightarrow , \varphi(y)=\varphi’(y)$，则$\varphi’$叫$\varphi$的变通。</p>
+<p><strong>项解释的变元变通</strong>：x是某个给定的个体变元，y是任意的个体变元，$\varphi,\,\varphi’ \in \Phi_M$</p>
+<p>使得：$y\neq x \,\Rightarrow \, \varphi(y)=\varphi’(y)$，则$\varphi’$叫$\varphi$的变通。</p>
 <font color=0x0099ff>
 
-<p>通俗来说，变通，顾名思义，就是说明再特定变量x上采取变通的方式，只有变量x的解释产生变化，其余变量保持不变。</p>
+通俗来说，变通，顾名思义，就是说明再特定变量x上采取变通的方式，只有变量x的解释产生变化，其余变量保持不变。
+
 </font>
 
 
@@ -317,12 +317,24 @@
 <p>按下面的方式定义的$|p|:\Phi_M \rightarrow Z_2​$叫公式的赋值函数：</p>
 <p>对于任意项解释$\varphi$，</p>
 <ul>
-<li><p>p为原子公式$R_i^n(t_1,…,t_n)​$时，令<br>$$<br>|p|(\varphi)=\begin{cases}<br>1,\quad if,(\overline{t_1},\overline{t_2},…,\overline{t_n})\in \overline{R^n_i} \\<br>0,\quad if,(\overline{t_1},\overline{t_2},…,\overline{t_n})\notin \overline{R^n_i}<br>\end{cases}<br>$$<br>规定原子公式的赋值</p>
+<li><p>p为原子公式$R_i^n(t_1,…,t_n)​$时，令</p>
+<script type="math/tex; mode=display">
+|p|(\varphi)=\begin{cases}
+1,\quad if\,(\overline{t_1},\overline{t_2},...,\overline{t_n})\in \overline{R^n_i} \\\\
+0,\quad if\,(\overline{t_1},\overline{t_2},...,\overline{t_n})\notin \overline{R^n_i}
+\end{cases}</script><p>规定原子公式的赋值</p>
 </li>
-<li><p>$p=\neg q​$ 或 $p=q\rightarrow r​$<br>$$<br>|\neg q| (\varphi) = \neg |q| (\varphi) \\<br>|q \rightarrow r| (\varphi) = |q| (\varphi) \rightarrow |r| (\varphi)<br>$$<br>规定对于$\neg$和$\rightarrow$的保运算性</p>
+<li><p>$p=\neg q​$ 或 $p=q\rightarrow r​$</p>
+<script type="math/tex; mode=display">
+|\neg q| (\varphi) = \neg |q| (\varphi) \\\\
+|q \rightarrow r| (\varphi) = |q| (\varphi) \rightarrow |r| (\varphi)</script><p>规定对于$\neg$和$\rightarrow$的保运算性</p>
 </li>
-<li><p>$p=\forall q​$<br>$$<br>|\forall x q|(\varphi)=\begin{cases}<br>1,\quad if,\varphi任意一个x变通\varphi’都有|q|(\varphi’)=1\\<br>0,\quad otherwise<br>\end{cases}<br>$$</p>
-<p>规定全称</p>
+<li><p>$p=\forall q​$</p>
+<script type="math/tex; mode=display">
+|\forall x q|(\varphi)=\begin{cases}
+1,\quad if\,\varphi任意一个x变通\varphi'都有|q|(\varphi')=1\\\\
+0,\quad otherwise
+\end{cases}</script><p>规定全称</p>
 </li>
 </ul>
 <h2 id="闭式语义特征"><a href="#闭式语义特征" class="headerlink" title="闭式语义特征"></a>闭式语义特征</h2><h3 id="语义等性"><a href="#语义等性" class="headerlink" title="语义等性"></a>语义等性</h3><p>M是K的解释域$\varphi,\psi \in \Phi_M$</p>
@@ -334,16 +346,19 @@
 <p>$p$中所有的变元为$x_1,x_2,…,x_n$，则$\forall x_1 \forall x_2 … \forall x_n p$记作$p’$，成为<strong>全称闭式</strong></p>
 <p>对于这一类有如下两条重要关系：</p>
 <ul>
-<li><p>$$<br>|p|_M = 1 \Leftrightarrow |p’|_M = 1<br>$$</p>
-</li>
-<li><p>$$<br>|p|_M = 0 \Leftrightarrow |p’|_M = 0<br>$$</p>
-</li>
+<li><script type="math/tex; mode=display">
+|p|_M = 1 \Leftrightarrow |p'|_M = 1</script></li>
+<li><script type="math/tex; mode=display">
+|p|_M = 0 \Leftrightarrow |p'|_M = 0</script></li>
 </ul>
-<h2 id="语义推论和有效式"><a href="#语义推论和有效式" class="headerlink" title="语义推论和有效式"></a>语义推论和有效式</h2><p>模型： M为K的解释域，M是公式集$\Gamma$的模型是指$\Gamma$中每一个公式M中都恒真，即<br>$$<br>r \in \Gamma \Rightarrow |r|_M = 1<br>$$<br>语义推论：类似与语法推论，$\Gamma \models p$解释为，当所有$\Gamma$中元素都解释为真的时候，p解释也为恒真</p>
-<p>结论关系：<br>$$<br>\Gamma \models p \Leftrightarrow \Gamma \models p’<br>$$</p>
-<h1 id="语义语法关联"><a href="#语义语法关联" class="headerlink" title="语义语法关联"></a>语义语法关联</h1><h2 id="K可靠性"><a href="#K可靠性" class="headerlink" title="K可靠性"></a>K可靠性</h2><p>$$<br>\vdash p \Rightarrow \models p<br>$$</p>
-<h2 id="K完全性"><a href="#K完全性" class="headerlink" title="K完全性"></a>K完全性</h2><p>$$<br>\models p \Rightarrow \vdash p<br>$$</p>
-
+<h2 id="语义推论和有效式"><a href="#语义推论和有效式" class="headerlink" title="语义推论和有效式"></a>语义推论和有效式</h2><p>模型： M为K的解释域，M是公式集$\Gamma$的模型是指$\Gamma$中每一个公式M中都恒真，即</p>
+<script type="math/tex; mode=display">
+r \in \Gamma \Rightarrow |r|_M = 1</script><p>语义推论：类似与语法推论，$\Gamma \models p$解释为，当所有$\Gamma$中元素都解释为真的时候，p解释也为恒真</p>
+<p>结论关系：</p>
+<script type="math/tex; mode=display">
+\Gamma \models p \Leftrightarrow \Gamma \models p'</script><h1 id="语义语法关联"><a href="#语义语法关联" class="headerlink" title="语义语法关联"></a>语义语法关联</h1><h2 id="K可靠性"><a href="#K可靠性" class="headerlink" title="K可靠性"></a>K可靠性</h2><script type="math/tex; mode=display">
+\vdash p \Rightarrow \models p</script><h2 id="K完全性"><a href="#K完全性" class="headerlink" title="K完全性"></a>K完全性</h2><script type="math/tex; mode=display">
+\models p \Rightarrow \vdash p</script>
                 
               </div>
             

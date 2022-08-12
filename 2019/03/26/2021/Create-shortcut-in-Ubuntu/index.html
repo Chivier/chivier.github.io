@@ -277,14 +277,11 @@
                 
                 <p> 在Linux下创建快捷方式的小技巧。当然现在19.04版本之后，我们可以更简单的通过右击目标文件，点击创建连接就可以创建一个新的快捷方式了。</p>
 <span id="more"></span>
-
 <h1 id="Method-1-Copy-one"><a href="#Method-1-Copy-one" class="headerlink" title="Method 1: Copy one"></a>Method 1: Copy one</h1><p>Open <code>/usr/share/applications</code>. Look for the program you want to create the shortcut.</p>
 <p>Copy it.</p>
 <h1 id="Method-2-Create-desktop-file"><a href="#Method-2-Create-desktop-file" class="headerlink" title="Method 2: Create .desktop file"></a>Method 2: Create .desktop file</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo vim  /usr/share/applications/eclipse.desktop<br></code></pre></td></tr></table></figure>
-
 <p>And then input:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">[Desktop Entry] <br>Encoding=UTF-8 <br>Name=eclipse<br>Comment=Eclipse IDE  <br>Exec=/opt/eclipse/eclipse  # Where your program is<br>Icon=/opt/eclipse/icon.xpm  <br>Terminal=false<br>StartupNotify=true  <br>Type=Application  <br>Categories=Application;Development;<br></code></pre></td></tr></table></figure>
-
 <p>And then we can copy </p>
 <h1 id="Method-3-ln-s"><a href="#Method-3-ln-s" class="headerlink" title="Method 3 ln -s"></a>Method 3 ln -s</h1><p>run</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ln -s <span class="hljs-string">&#x27;Origin program&#x27;</span> <span class="hljs-string">&#x27;Your Destination&#x27;</span><br></code></pre></td></tr></table></figure>

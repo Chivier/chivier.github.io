@@ -281,8 +281,6 @@
                 
                 <p>实验记录：如何在 Tensorflow 中用 cuda 实现一个自定义的层的环境搭建（好吧我坦白我比较菜，环境就搞了好几天）</p>
 <span id="more"></span>
-
-
 <h1 id="Docker-配置"><a href="#Docker-配置" class="headerlink" title="Docker 配置"></a>Docker 配置</h1><p>首先我们最好在一个 docker 环境中进行测试，因为这个问题涉及到 cuda 版本、tf 版本和系统版本的多方调节，在 docker 中便于维护一个稳定独立的实验环境。</p>
 <p>参考的安装文档是：<br><a target="_blank" rel="noopener" href="https://github.com/NVIDIA/nvidia-docker">https://github.com/NVIDIA/nvidia-docker</a></p>
 <p>需要使用 Nivdia-Docker, 因为需要在 docker 中调用 GPU。</p>
@@ -292,15 +290,12 @@
 <h1 id="Custom-OP"><a href="#Custom-OP" class="headerlink" title="Custom OP"></a>Custom OP</h1><p><a target="_blank" rel="noopener" href="https://github.com/tensorflow/custom-op">https://github.com/tensorflow/custom-op</a></p>
 <p>Tensorflow 的官方给予了一个模版，不过这个模版的下载花费了不少力气，因为 docker proxy 配置花了不少时间。这里采用实验的 docker 镜像是：custom-op-gpu-ubuntu16</p>
 <p>此外，为了方便对 docker 内的代码进行修改，这里采用将本地的一个仓库目录直接挂载到 docker 里，例如我用如下的操作方式：</p>
-<h2 id="建立模板仓库"><a href="#建立模板仓库" class="headerlink" title="建立模板仓库"></a>建立模板仓库</h2><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<h2 id="建立模板仓库"><a href="#建立模板仓库" class="headerlink" title="建立模板仓库"></a>建立模板仓库</h2><p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>此处设置模板，之后 clone 到一个 <code>$CUSTOMOP</code> 目录下。</p>
 <h2 id="Docker-准备"><a href="#Docker-准备" class="headerlink" title="Docker 准备"></a>Docker 准备</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo docker run -it -v <span class="hljs-variable">$CUSTOMOP</span>:/custom-op --rm --gpus all chivier-tensorop /bin/bash<br></code></pre></td></tr></table></figure>
-
 <p>之后文件被复制到了 /custom-op 目录下</p>
 <p>但是这个时候官方的操作指令不能成功，在 GPU 版本的 custom-op 编译的时候会报关于 <code>cuda_helper.h</code> 找不到的错误，这个时候刷要借助一些特殊操作：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/lib/python3.6/dist-packages/tensorflow/include/<br>mkdir -p third_party/gpus/cuda<br><span class="hljs-built_in">cd</span> third_party/gpus/cuda<br>ln -s /usr/<span class="hljs-built_in">local</span>/cuda/* .<br></code></pre></td></tr></table></figure>
-
 <p>之后 Makefile 才可以正常工作，在配置完成之后我发现可能 pytorch 可以更好的解决问题。这一部分的 docker 在此封存。</p>
 
                 

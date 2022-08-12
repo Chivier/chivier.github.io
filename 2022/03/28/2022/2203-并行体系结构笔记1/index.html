@@ -278,8 +278,6 @@
                 
                 <p>A parallel computer is a collection of processing elements that can communicate and cooperate to solve a large problem fast.</p>
 <span id="more"></span>
-
-
 <h1 id="当代主流的并行机系统"><a href="#当代主流的并行机系统" class="headerlink" title="当代主流的并行机系统"></a>当代主流的并行机系统</h1><h3 id="并行机器结构纵览"><a href="#并行机器结构纵览" class="headerlink" title="并行机器结构纵览"></a>并行机器结构纵览</h3><h4 id="SIMD-阵列处理机"><a href="#SIMD-阵列处理机" class="headerlink" title="SIMD 阵列处理机"></a>SIMD 阵列处理机</h4><p>SIMD并行机的一种。多台处理器（即处理单元 PE）排成阵列的拓扑结构,利用资源重复的方法开拓并行性。此类<br>机器的程序是单控制线程,按照顺序或并行步执行之。单一的指令运行在大型规则的数据结构（如数组和矩阵等）上，使阵列处理机也常叫做数据并行结构（Data Parallel Architecture）。</p>
 <h4 id="向量处理机"><a href="#向量处理机" class="headerlink" title="向量处理机"></a>向量处理机</h4><p>在向量机中，标量处理器被集成为一组功能单元,它们以流水线方式执行存储器中的向量数据。能够操作于存储器中任何地方的向量就没有必要将应用数据结构映射到不变的互连结构上,从而大大地简化了数据对准的问题。</p>
 <h4 id="共享存储多处理机"><a href="#共享存储多处理机" class="headerlink" title="共享存储多处理机"></a>共享存储多处理机</h4><p>按照 Flynn 分类法，共享存储的多处理机系统，是属于 MIMD 系统。分为紧耦合和松耦合两种。前者共享主存通信；后者借助总线适配器处理数据，各个处理器地位平等。</p>
@@ -337,6 +335,7 @@
 <li>在 DSM 中，NORMA 就消失了。</li>
 </ol>
 <h1 id="CPI-MPIS-CPU-TIME-例子"><a href="#CPI-MPIS-CPU-TIME-例子" class="headerlink" title="CPI MPIS CPU_TIME 例子"></a>CPI MPIS CPU_TIME 例子</h1><p>使用4GHZ主频的标量处理器执行一个典型测试程序，其所执行的指令数及所需的周期数如下表所示。试计算执行该程序的有效CPI、MIPS速率及总的CPU执行时间**</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -345,7 +344,8 @@
 <th>时钟周期数</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>整数算术</td>
 <td>45，000</td>
 <td>1</td>
@@ -365,13 +365,15 @@
 <td>8，000</td>
 <td>2</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h2 id="CPI"><a href="#CPI" class="headerlink" title="CPI"></a>CPI</h2><p>= cycles per instruction</p>
-<p>= $\dfrac{45000 * 1 + 32000 * 2 + 15000 * 2 + 8000 * 2}{45000 + 32000 + 15000 + 8000}$</p>
+<p>= $\dfrac{45000 <em> 1 + 32000 </em> 2 + 15000 <em> 2 + 8000 </em> 2}{45000 + 32000 + 15000 + 8000}$</p>
 <p>=$\dfrac{155000}{100000}$</p>
 <p>= 1.55</p>
 <h2 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h2><p>= million instructions per second</p>
-<p>= $\dfrac{4 * 10^9}{1.55 * 10^6}$</p>
+<p>= $\dfrac{4 <em> 10^9}{1.55 </em> 10^6}$</p>
 <p>= 2580.6</p>
 <h2 id="CPU-Time"><a href="#CPU-Time" class="headerlink" title="CPU Time"></a>CPU Time</h2><p>= $\dfrac{155000}{4 * 10^9}$</p>
 <p>= 0.00003875 s</p>
@@ -380,7 +382,10 @@
 <li>对于很多大型计算,精度要求很高，即在此类应用中精度是个关键因素，而计算时间是固定不变的。此时为了提高精度,必须加大计算量,相应地亦必须增多处理器数,才能维持时间不变；</li>
 <li>除非学术研究,在实际应用中,没有必要固定工作负载,而计算程序运行在不同数目的处理器上,增多处理器必须相应地增大问题规模,才有实际意义。</li>
 </ol>
-<p>$$<br>S^{\prime}=\frac{W_{\mathrm{s}}+P W_{\mathrm{p}}}{W_{\mathrm{s}}+P \cdot W_{\mathrm{p}} / P}=\frac{W_{\mathrm{s}}+P W_{P}}{W_{\mathrm{s}}+W_{\mathrm{p}}}<br>$$<br>归一化后可得<br>$$<br>S^{\prime}=f+P\left(1-f^{\prime}\right)=P+f(1-P)=P-f(P-1)<br>$$<br>当 $P$ 充分大时, $S^{\prime}$ 与 $P$ 儿乎成线性关系, 其斜率为 $1-f$。它意昩着随着处理器数目的增多, 加速几羊与处理器数成比例地线性增加, 串行比例 $f$ 不再是程序的瓶颈。</p>
+<script type="math/tex; mode=display">
+S^{\prime}=\frac{W_{\mathrm{s}}+P W_{\mathrm{p}}}{W_{\mathrm{s}}+P \cdot W_{\mathrm{p}} / P}=\frac{W_{\mathrm{s}}+P W_{P}}{W_{\mathrm{s}}+W_{\mathrm{p}}}</script><p>归一化后可得</p>
+<script type="math/tex; mode=display">
+S^{\prime}=f+P\left(1-f^{\prime}\right)=P+f(1-P)=P-f(P-1)</script><p>当 $P$ 充分大时, $S^{\prime}$ 与 $P$ 儿乎成线性关系, 其斜率为 $1-f$。它意昩着随着处理器数目的增多, 加速几羊与处理器数成比例地线性增加, 串行比例 $f$ 不再是程序的瓶颈。</p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1>
                 
               </div>

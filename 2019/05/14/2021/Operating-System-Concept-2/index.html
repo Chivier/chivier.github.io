@@ -18,12 +18,12 @@
   <meta name="author" content="Chivier Humber">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ThreadBenefits Responsiveness. Multithreading an interactive application may allow a program to continue running even if part of it is blocked or is performing a lengthy operation, thereby increasi">
+    <meta name="description" content="ThreadBenefits Responsiveness. Multithreading an interactive application may allow a program to continue running even if part of it is blocked or is performing a lengthy operation, thereby increasin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Operating System Concept - 2">
 <meta property="og:url" content="https://chivier.github.io/2019/05/14/2021/Operating-System-Concept-2/index.html">
 <meta property="og:site_name" content="Chivier&#39;s Blog">
-<meta property="og:description" content="ThreadBenefits Responsiveness. Multithreading an interactive application may allow a program to continue running even if part of it is blocked or is performing a lengthy operation, thereby increasi">
+<meta property="og:description" content="ThreadBenefits Responsiveness. Multithreading an interactive application may allow a program to continue running even if part of it is blocked or is performing a lengthy operation, thereby increasin">
 <meta property="og:locale">
 <meta property="og:image" content="https://chivier.github.io/2019/05/14/2021/Operating-System-Concept-2/mto.png">
 <meta property="og:image" content="https://chivier.github.io/2019/05/14/2021/Operating-System-Concept-2/oto.png">
@@ -280,24 +280,20 @@
               <div class="markdown-body">
                 
                  <span id="more"></span>
-
 <h1 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h1><h2 id="Benefits"><a href="#Benefits" class="headerlink" title="Benefits"></a>Benefits</h2><ul>
 <li><strong>Responsiveness</strong>. Multithreading an interactive application may allow a program to continue running even if part of it is blocked or is performing a lengthy operation, thereby increasing responsiveness to the user. </li>
 <li><strong>Resource sharing</strong>. Processes can only share resources through techniques such as shared memory and message passing.</li>
 <li><strong>Economy</strong>. Allocating memory and resources for process creation is costly.</li>
 <li><strong>Scalability</strong>. The benefits of multithreading can be even greater in a multiprocessor architecture, where threads may be running in parallel on different processing cores. A single-threaded process can run on only one processor, regardless how many are available. We explore this issue further in the following section.</li>
 </ul>
-<h2 id="Multithreading-Models"><a href="#Multithreading-Models" class="headerlink" title="Multithreading Models"></a>Multithreading Models</h2><h3 id="Many-to-One-Model"><a href="#Many-to-One-Model" class="headerlink" title="Many-to-One Model"></a>Many-to-One Model</h3><img src="mto.png" srcset="/img/loading.gif" lazyload width="50%" height="50%">
-
+<h2 id="Multithreading-Models"><a href="#Multithreading-Models" class="headerlink" title="Multithreading Models"></a>Multithreading Models</h2><h3 id="Many-to-One-Model"><a href="#Many-to-One-Model" class="headerlink" title="Many-to-One Model"></a>Many-to-One Model</h3><p><img src="mto.png" srcset="/img/loading.gif" lazyload width="50%" height="50%"></p>
 <p>The many-to-one model maps many user-level threads to one kernel thread. </p>
 <p>Thread management is <strong>done by the thread library</strong> in <strong>user space</strong>,so it is efficient. However, the entire<br>process will block if a thread makes a blocking system call. Also, because <strong>only one thread can access the kernel at a time</strong>, multiple threads are <strong>unable to run in parallel</strong> on multi-core systems.</p>
-<h3 id="One-to-One-Model"><a href="#One-to-One-Model" class="headerlink" title="One-to-One Model"></a>One-to-One Model</h3><img src="oto.png" srcset="/img/loading.gif" lazyload width="50%" height="50%">
-
+<h3 id="One-to-One-Model"><a href="#One-to-One-Model" class="headerlink" title="One-to-One Model"></a>One-to-One Model</h3><p><img src="oto.png" srcset="/img/loading.gif" lazyload width="50%" height="50%"></p>
 <p>Provide <strong>more concurrency</strong> than the many-to-one model by allowing another thread to run when a thread makes a blocking system call.</p>
 <p>Allow multiple threads to <strong>run in parallel</strong> on multiprocessors.</p>
 <p>Drawbacks: overhead of creating kernel threads can burden the performance of an application.</p>
-<h3 id="Many-to-Many-Model"><a href="#Many-to-Many-Model" class="headerlink" title="Many-to-Many Model"></a>Many-to-Many Model</h3><img src="mtm.png" srcset="/img/loading.gif" lazyload width="50%" height="50%">
-
+<h3 id="Many-to-Many-Model"><a href="#Many-to-Many-Model" class="headerlink" title="Many-to-Many Model"></a>Many-to-Many Model</h3><p><img src="mtm.png" srcset="/img/loading.gif" lazyload width="50%" height="50%"></p>
 <p>A balance between concurrency and developing.</p>
 <p>Many-to-one model: easy to develop, bad concurrency.</p>
 <p>One-to-one mode: great concurrency, hard to develop. Developers have to pay much attentions on how many system threads to create since the number of threads is strictly limited.</p>

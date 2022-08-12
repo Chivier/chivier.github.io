@@ -276,768 +276,772 @@
               <div class="markdown-body">
                 
                 <h1 id="Version-0-0"><a href="#Version-0-0" class="headerlink" title="Version 0.0"></a>Version 0.0</h1><span id="more"></span>
-
-
 <h2 id="omp2tbb"><a href="#omp2tbb" class="headerlink" title="omp2tbb"></a>omp2tbb</h2><p>2022-05-04 开发测试</p>
 <h2 id="整理-OpenMP-5-2-导语"><a href="#整理-OpenMP-5-2-导语" class="headerlink" title="整理 OpenMP 5.2 导语"></a>整理 OpenMP 5.2 导语</h2><p>制作测试集合，用来测试各种导语的 LLVM-openmp 对应的导语。</p>
 <p>首先位于上层的接口是：</p>
 <p>LLVM OMP Stmt</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
 <th>LLVM OPENMPIR</th>
 <th>OMP CLAUSE</th>
-<th align="center">Care?(Y/N)</th>
+<th style="text-align:center">Care?(Y/N)</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>OMPParallelDirective</td>
 <td>pragma omp parallel</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPSimdDirective</td>
 <td>pragma omp simd</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPForDirective</td>
 <td>pragma omp for</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPForSimdDirective</td>
 <td>pragma omp for simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPSectionsDirective</td>
 <td>pragma omp sections</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPSectionDirective</td>
 <td>pragma omp section</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPSingleDirective</td>
 <td>pragma omp single</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPMasterDirective</td>
 <td>pragma omp master</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPCriticalDirective</td>
 <td>pragma omp critical</td>
-<td align="center">Y</td>
+<td style="text-align:center">Y</td>
 </tr>
 <tr>
 <td>OMPParallelForDirective</td>
 <td>pragma omp parallel for</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPParallelForSimdDirective</td>
 <td>pragma omp parallel for simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPParallelMasterDirective</td>
 <td>pragma omp parallel master</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPParallelSectionsDirective</td>
 <td>pragma omp parallel sections</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTaskDirective</td>
 <td>pragma omp task</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTaskyieldDirective</td>
 <td>pragma omp taskyield</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPBarrierDirective</td>
 <td>pragma omp barrier</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTaskwaitDirective</td>
 <td>pragma omp taskwait</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTaskgroupDirective</td>
 <td>pragma omp taskgroup</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPFlushDirective</td>
 <td>pragma omp flush</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPDepobjDirective</td>
 <td>pragma omp depobj</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPOrderedDirective</td>
 <td>pragma omp ordered</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPAtomicDirective</td>
 <td>pragma omp atomic</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetDirective</td>
 <td>pragma omp target</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetDataDirective</td>
 <td>pragma omp target data</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetEnterDataDirective</td>
 <td>pragma omp target enter data</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetExitDataDirective</td>
 <td>pragma omp target exit data</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetParallelDirective</td>
 <td>pragma omp target parallel</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetParallelForDirective</td>
 <td>pragma omp target parallel for</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTeamsDirective</td>
 <td>pragma omp teams</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPCancellationPointDirective</td>
 <td>pragma omp cancellation point</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPCancelDirective</td>
 <td>pragma omp cancel</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTaskLoopDirective</td>
 <td>pragma omp taskloop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTaskLoopSimdDirective</td>
 <td>pragma omp taskloop simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPMasterTaskLoopDirective</td>
 <td>pragma omp master taskloop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPMasterTaskLoopSimdDirective</td>
 <td>pragma omp master taskloop simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPParallelMasterTaskLoopDirective</td>
 <td>pragma omp parallel master taskloop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPParallelMasterTaskLoopSimdDirective</td>
 <td>pragma omp parallel master taskloop simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPDistributeDirective</td>
 <td>pragma omp distribute</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetUpdateDirective</td>
 <td>pragma omp target update</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPDistributeParallelForDirective</td>
 <td>pragma omp distribute parallel for</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPDistributeParallelForSimdDirective</td>
 <td>pragma omp distribute parallel for simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPDistributeSimdDirective</td>
 <td>pragma omp distribute simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetParallelForSimdDirective</td>
 <td>pragma omp target parallel for simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetSimdDirective</td>
 <td>pragma omp target simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTeamsDistributeDirective</td>
 <td>pragma omp teams distribute</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTeamsDistributeSimdDirective</td>
 <td>pragma omp teams distribute simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTeamsDistributeParallelForSimdDirective</td>
 <td>pragma omp teams distribute parallel for simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTeamsDistributeParallelForDirective</td>
 <td>pragma omp teams distribute parallel for</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetTeamsDirective</td>
 <td>pragma omp target teams</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetTeamsDistributeDirective</td>
 <td>pragma omp target teams distribute</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetTeamsDistributeParallelForDirective</td>
 <td>pragma omp target teams distribute parallel for</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetTeamsDistributeParallelForSimdDirective</td>
 <td>pragma omp target teams distribute parallel for simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetTeamsDistributeSimdDirective</td>
 <td>pragma omp target teams distribute simd</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTileDirective</td>
 <td>pragma omp tile</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPUnrollDirective</td>
 <td>pragma omp unroll</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPScanDirective</td>
 <td>pragma omp scan</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPInteropDirective</td>
 <td>pragma omp interop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPDispatchDirective</td>
 <td>pragma omp dispatch</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPMaskedDirective</td>
 <td>pragma omp masked</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPMetaDirective</td>
 <td>pragma omp metadirective</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPGenericLoopDirective</td>
 <td>pragma omp loop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTeamsGenericLoopDirective</td>
 <td>pragma omp teams loop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetTeamsGenericLoopDirective</td>
 <td>pragma omp target teams loop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPParallelGenericLoopDirective</td>
 <td>pragma omp parallel loop</td>
-<td align="center"></td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
 <td>OMPTargetParallelGenericLoopDirective</td>
 <td>pragma omp target parallel loop</td>
-<td align="center"></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>作为最上层的识别层，之后下一层的是：</p>
 <p>LLVM Decl</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">LLVM OpenMP Decl</th>
+<th style="text-align:left">LLVM OpenMP Decl</th>
 <th>openmp decl</th>
 <th>Care?(Y/N)</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">OMPAllocatorClause</td>
+<tbody>
+<tr>
+<td style="text-align:left">OMPAllocatorClause</td>
 <td>allocator</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPAlignClause</td>
+<td style="text-align:left">OMPAlignClause</td>
 <td>align</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPAllocateClause</td>
+<td style="text-align:left">OMPAllocateClause</td>
 <td>allocate</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPIfClause</td>
+<td style="text-align:left">OMPIfClause</td>
 <td>if</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPFinalClause</td>
+<td style="text-align:left">OMPFinalClause</td>
 <td>final</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNumThreadsClause</td>
+<td style="text-align:left">OMPNumThreadsClause</td>
 <td>num_threads</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPSafelenClause</td>
+<td style="text-align:left">OMPSafelenClause</td>
 <td>safelen</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPSimdlenClause</td>
+<td style="text-align:left">OMPSimdlenClause</td>
 <td>simdlen</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPSizesClause</td>
+<td style="text-align:left">OMPSizesClause</td>
 <td>sizes</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPCollapseClause</td>
+<td style="text-align:left">OMPCollapseClause</td>
 <td>collapse</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDefaultClause</td>
+<td style="text-align:left">OMPDefaultClause</td>
 <td>default</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPProcBindClause</td>
+<td style="text-align:left">OMPProcBindClause</td>
 <td>proc_bind</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUnifiedAddressClause</td>
+<td style="text-align:left">OMPUnifiedAddressClause</td>
 <td>unified_address</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUnifiedSharedMemoryClause</td>
+<td style="text-align:left">OMPUnifiedSharedMemoryClause</td>
 <td>unified_shared_memory</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPReverseOffloadClause</td>
+<td style="text-align:left">OMPReverseOffloadClause</td>
 <td>reverse_offload</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDynamicAllocatorsClause</td>
+<td style="text-align:left">OMPDynamicAllocatorsClause</td>
 <td>dynamic_allocators</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPAtomicDefaultMemOrderClause</td>
+<td style="text-align:left">OMPAtomicDefaultMemOrderClause</td>
 <td>atomic_default_mem_order</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPScheduleClause</td>
+<td style="text-align:left">OMPScheduleClause</td>
 <td>schedule</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPOrderedClause</td>
+<td style="text-align:left">OMPOrderedClause</td>
 <td>ordered</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNowaitClause</td>
+<td style="text-align:left">OMPNowaitClause</td>
 <td>nowait</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUntiedClause</td>
+<td style="text-align:left">OMPUntiedClause</td>
 <td>untied</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPMergeableClause</td>
+<td style="text-align:left">OMPMergeableClause</td>
 <td>mergeable</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPReadClause</td>
+<td style="text-align:left">OMPReadClause</td>
 <td>read</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPWriteClause</td>
+<td style="text-align:left">OMPWriteClause</td>
 <td>write</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUpdateClause</td>
+<td style="text-align:left">OMPUpdateClause</td>
 <td>update</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPCaptureClause</td>
+<td style="text-align:left">OMPCaptureClause</td>
 <td>capture</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPCompareClause</td>
+<td style="text-align:left">OMPCompareClause</td>
 <td>compare</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPSeqCstClause</td>
+<td style="text-align:left">OMPSeqCstClause</td>
 <td>seq_cst</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPAcqRelClause</td>
+<td style="text-align:left">OMPAcqRelClause</td>
 <td>acq_rel</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPAcquireClause</td>
+<td style="text-align:left">OMPAcquireClause</td>
 <td>acquire</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPReleaseClause</td>
+<td style="text-align:left">OMPReleaseClause</td>
 <td>release</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPRelaxedClause</td>
+<td style="text-align:left">OMPRelaxedClause</td>
 <td>relaxed</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPPrivateClause</td>
+<td style="text-align:left">OMPPrivateClause</td>
 <td>private</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPFirstprivateClause</td>
+<td style="text-align:left">OMPFirstprivateClause</td>
 <td>firstprivate</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPLastprivateClause</td>
+<td style="text-align:left">OMPLastprivateClause</td>
 <td>lastprivate</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPSharedClause</td>
+<td style="text-align:left">OMPSharedClause</td>
 <td>shared</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPReductionClause</td>
+<td style="text-align:left">OMPReductionClause</td>
 <td>reduction</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPTaskReductionClause</td>
+<td style="text-align:left">OMPTaskReductionClause</td>
 <td>task_reduction</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPInReductionClause</td>
+<td style="text-align:left">OMPInReductionClause</td>
 <td>in_reduction</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPLinearClause</td>
+<td style="text-align:left">OMPLinearClause</td>
 <td>linear</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPAlignedClause</td>
+<td style="text-align:left">OMPAlignedClause</td>
 <td>aligned</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPCopyinClause</td>
+<td style="text-align:left">OMPCopyinClause</td>
 <td>copyin</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPCopyprivateClause</td>
+<td style="text-align:left">OMPCopyprivateClause</td>
 <td>copyprivate</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPFlushClause</td>
+<td style="text-align:left">OMPFlushClause</td>
 <td>flush</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDepobjClause</td>
+<td style="text-align:left">OMPDepobjClause</td>
 <td>depobj</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDependClause</td>
+<td style="text-align:left">OMPDependClause</td>
 <td>depend</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDeviceClause</td>
+<td style="text-align:left">OMPDeviceClause</td>
 <td>device</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPThreadsClause</td>
+<td style="text-align:left">OMPThreadsClause</td>
 <td>threads</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPSIMDClause</td>
+<td style="text-align:left">OMPSIMDClause</td>
 <td>simd</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPMapClause</td>
+<td style="text-align:left">OMPMapClause</td>
 <td>map</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNumTeamsClause</td>
+<td style="text-align:left">OMPNumTeamsClause</td>
 <td>num_teams</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPThreadLimitClause</td>
+<td style="text-align:left">OMPThreadLimitClause</td>
 <td>thread_limit</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPPriorityClause</td>
+<td style="text-align:left">OMPPriorityClause</td>
 <td>priority</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPGrainsizeClause</td>
+<td style="text-align:left">OMPGrainsizeClause</td>
 <td>grainsize</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNogroupClause</td>
+<td style="text-align:left">OMPNogroupClause</td>
 <td>nogroup</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNumTasksClause</td>
+<td style="text-align:left">OMPNumTasksClause</td>
 <td>num_tasks</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPHintClause</td>
+<td style="text-align:left">OMPHintClause</td>
 <td>hint</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDistScheduleClause</td>
+<td style="text-align:left">OMPDistScheduleClause</td>
 <td>dist_schedule</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDefaultmapClause</td>
+<td style="text-align:left">OMPDefaultmapClause</td>
 <td>defaultmap</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPToClause</td>
+<td style="text-align:left">OMPToClause</td>
 <td>to</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPFromClause</td>
+<td style="text-align:left">OMPFromClause</td>
 <td>from</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUseDevicePtrClause</td>
+<td style="text-align:left">OMPUseDevicePtrClause</td>
 <td>use_device_ptr</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUseDeviceAddrClause</td>
+<td style="text-align:left">OMPUseDeviceAddrClause</td>
 <td>use_device_addr</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPIsDevicePtrClause</td>
+<td style="text-align:left">OMPIsDevicePtrClause</td>
 <td>is_device_ptr</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPHasDeviceAddrClause</td>
+<td style="text-align:left">OMPHasDeviceAddrClause</td>
 <td>has_device_ptr</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNontemporalClause</td>
+<td style="text-align:left">OMPNontemporalClause</td>
 <td>nontemporal</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPOrderClause</td>
+<td style="text-align:left">OMPOrderClause</td>
 <td>order</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPInitClause</td>
+<td style="text-align:left">OMPInitClause</td>
 <td>init</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUseClause</td>
+<td style="text-align:left">OMPUseClause</td>
 <td>use</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDestroyClause</td>
+<td style="text-align:left">OMPDestroyClause</td>
 <td>destroy</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNovariantsClause</td>
+<td style="text-align:left">OMPNovariantsClause</td>
 <td>novariants</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPNocontextClause</td>
+<td style="text-align:left">OMPNocontextClause</td>
 <td>nocontext</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPDetachClause</td>
+<td style="text-align:left">OMPDetachClause</td>
 <td>detach</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPInclusiveClause</td>
+<td style="text-align:left">OMPInclusiveClause</td>
 <td>inclusive</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPExclusiveClause</td>
+<td style="text-align:left">OMPExclusiveClause</td>
 <td>exclusive</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPUsesAllocatorsClause</td>
+<td style="text-align:left">OMPUsesAllocatorsClause</td>
 <td>uses_allocators</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPAffinityClause</td>
+<td style="text-align:left">OMPAffinityClause</td>
 <td>affinity</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPFilterClause</td>
+<td style="text-align:left">OMPFilterClause</td>
 <td>filter</td>
 <td></td>
 </tr>
 <tr>
-<td align="left">OMPBindClause</td>
+<td style="text-align:left">OMPBindClause</td>
 <td>bind</td>
-<td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>属实有点多，目前位置我们的目标是：<br>对于 OpenMP 的代码块，我们识别出”最上层的逻辑块”，之后将其提取成为新的函数。<br>对于包含了 OpenMP 的函数块，我们也将其提取成”新函数”。</p>
 <p>我们给新的函数命名，之后进行我们的代码翻译工作。<br>首先第一步工作是将并行代码串行化。</p>
 <h1 id="Development-Step-1"><a href="#Development-Step-1" class="headerlink" title="Development Step 1"></a>Development Step 1</h1><ul>
-<li><input checked="" disabled="" type="checkbox"> 构建可以识别 Stmt 的 Visitor</li>
-<li><input checked="" disabled="" type="checkbox"> 构建可以识别 OpenMP Directive 的 Visitor ✅ 2022-05-05</li>
-<li><input checked="" disabled="" type="checkbox"> 找出 OpenMP Directive 的范围，从而找出新的范围 ✅ 2022-05-05</li>
+<li>[x] 构建可以识别 Stmt 的 Visitor</li>
+<li>[x] 构建可以识别 OpenMP Directive 的 Visitor ✅ 2022-05-05</li>
+<li>[x] 找出 OpenMP Directive 的范围，从而找出新的范围 ✅ 2022-05-05</li>
 </ul>
-<p>记录：<br>这里遇到一个非常大的坑点，使用 libclang 开发的工具需要加 – -fopenmp 才能启用编译选项</p>
+<p>记录：<br>这里遇到一个非常大的坑点，使用 libclang 开发的工具需要加 — -fopenmp 才能启用编译选项</p>
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 详细构建 Openmp 的树形结构</li>
+<li>[x] 详细构建 Openmp 的树形结构</li>
 </ul>
 <h1 id="Development-Step-0"><a href="#Development-Step-0" class="headerlink" title="Development Step 0"></a>Development Step 0</h1><p>OpenMP Examples Build</p>
 <p>顺着 openmp 官方的 example 文档构建 openmp 的并行例子。从而方便我们做之后的优化分析。</p>
 <h2 id="例子构建"><a href="#例子构建" class="headerlink" title="例子构建"></a>例子构建</h2><ul>
-<li><input checked="" disabled="" type="checkbox"> 测试时间工具部署 ✅ 2022-05-11</li>
-<li><input checked="" disabled="" type="checkbox"> 阅读 Structured Programming Models</li>
+<li>[x] 测试时间工具部署 ✅ 2022-05-11</li>
+<li>[x] 阅读 Structured Programming Models</li>
 </ul>
 <p>分为两类:</p>
 <ul>

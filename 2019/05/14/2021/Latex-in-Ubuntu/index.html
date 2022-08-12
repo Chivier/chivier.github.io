@@ -276,34 +276,25 @@
             
               <div class="markdown-body">
                 
-                <p>在Ubuntu下安装中文Latex以及安装package的教程～</p>
-<span id="more"></span>
-
+                <p>在Ubuntu下安装中文Latex以及安装package的教程～<br><span id="more"></span></p>
 <h1 id="安装latex"><a href="#安装latex" class="headerlink" title="安装latex"></a>安装latex</h1><p>可以简单的直接再应用商店里面随便搜索一款latex的编辑器，就可以解决大部分问题。但是缺点在于不够灵活，设置僵硬。推荐还是按下面的步骤进行。</p>
 <h1 id="安装Latex中文环境和TexStudio"><a href="#安装Latex中文环境和TexStudio" class="headerlink" title="安装Latex中文环境和TexStudio"></a>安装Latex中文环境和TexStudio</h1><p>个人推荐的tex编辑器是TexStudio，确实十分好用，按<code>F5</code>就可以直接生成pdf再旁边，随点随用，两边同步。</p>
 <p>安装如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install texlive<br>sudo apt-get install texlive-xetex<br>sudo apt-get install texlive-lang-chinese<br>sudo apt-get install texstudio<br></code></pre></td></tr></table></figure>
-
 <p>就完成了所有安装。</p>
 <p>但是进入texstudio之后并不能直接使用，需要我们调整一些设置，再<code>Option</code>栏里的<code>Configure TexStudio...</code>里的<code>Build</code>选项，我们需要将<code>Default</code>的编译方式转为<strong>Xelatex</strong>。这样才可以完成配置。</p>
 <h1 id="新包安装"><a href="#新包安装" class="headerlink" title="新包安装"></a>新包安装</h1><p>latex里，我们会使用各种package以满足我们的需求。Ubuntu下配置包方法如下。</p>
 <p>配置package文件都位于：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/usr/share/texlive/texmf-dist/tex/latex<br></code></pre></td></tr></table></figure>
-
 <p>我们进入CTAN网站下载需要的包：<a target="_blank" rel="noopener" href="https://www.ctan.org/pkg/">CTAN</a></p>
 <p>下载之后复制到之前所说的目录里，最后再运行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo texhash<br></code></pre></td></tr></table></figure>
-
 <p>之后就可以顺利使用了</p>
 <h1 id="插入代码"><a href="#插入代码" class="headerlink" title="插入代码"></a>插入代码</h1><p>对于CS的同学，论文中插入代码必不可少，优雅的插入代码也十分关键。</p>
 <p>一般我们先生命风格，再添加代码。</p>
 <p>这里以插入verilog代码作为例子</p>
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\definecolor</span>&#123;dkgreen&#125;&#123;rgb&#125;&#123;0,0.6,0&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;gray&#125;&#123;rgb&#125;&#123;0.5,0.5,0.5&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;mauve&#125;&#123;rgb&#125;&#123;0.58,0,0.82&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;vgreen&#125;&#123;RGB&#125;&#123;104,180,104&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;vblue&#125;&#123;RGB&#125;&#123;49,49,255&#125;<br><span class="hljs-keyword">\definecolor</span>&#123;vorange&#125;&#123;RGB&#125;&#123;255,143,102&#125;<br><span class="hljs-keyword">\lstdefinestyle</span>&#123;verilog-style&#125;<br>&#123;<br>	language=Verilog,<br>	basicstyle=<span class="hljs-keyword">\small</span><span class="hljs-keyword">\ttfamily</span>,<br>	breaklines=true,<br>	showstringspaces=false,<br>	columns=flexible,<br>	keywordstyle=<span class="hljs-keyword">\color</span>&#123;vblue&#125;,<br>	identifierstyle=<span class="hljs-keyword">\color</span>&#123;black&#125;,<br>	commentstyle=<span class="hljs-keyword">\color</span>&#123;vgreen&#125;,<br>	numbers=left,<br>	numberstyle=<span class="hljs-keyword">\tiny</span><span class="hljs-keyword">\color</span>&#123;black&#125;,<br>	numbersep=7pt,<br>	tabsize=4,<br>	literate=*&#123;:&#125;&#123;&#123;<span class="hljs-keyword">\textcolor</span>&#123;black&#125;&#123;:&#125;&#125;&#125;1<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex"><span class="hljs-keyword">\lstinputlisting</span>[style=&#123;verilog-style&#125;,caption=&#123;....v&#125;]&#123;...&#125;<br></code></pre></td></tr></table></figure>
-
-
-
 <p>插入MIPS汇编的方法有些特殊，CTAN没有官方的sty文件，民间有一个可以用得很顺的版本：<a target="_blank" rel="noopener" href="https://xvx.ca/notes/mips-latex.html">Latex-mips</a></p>
 <h1 id="MathType"><a href="#MathType" class="headerlink" title="MathType"></a>MathType</h1><p>输入数学公式符号表：<a target="_blank" rel="noopener" href="http://web.ift.uib.no/Teori/KURS/WRK/TeX/symALL.html">Math Symbol</a></p>
 <h1 id="模板网"><a href="#模板网" class="headerlink" title="模板网"></a>模板网</h1><p><a target="_blank" rel="noopener" href="https://www.latextemplates.com/">Templates</a></p>

@@ -284,7 +284,6 @@
                 
                 <h1 id="Step-0-Before-All"><a href="#Step-0-Before-All" class="headerlink" title="Step 0: Before All"></a>Step 0: Before All</h1><p>2021年2月23日，我拿到了自己的新电脑，LG Gram 2021 16寸电脑。在这里记录我对电脑的配置过程和一些使用体验。</p>
 <span id="more"></span>
-
 <h2 id="Step-0-1-Reinstall-Windows"><a href="#Step-0-1-Reinstall-Windows" class="headerlink" title="Step 0.1: Reinstall Windows"></a>Step 0.1: Reinstall Windows</h2><p>在一切的一切之前，我先重新安装了系统。Windows家庭版缺少组策略和磁盘安全管理的功能，对我而言使用不是那么理想。所以在这里先重新安装了一些。不过这个时候问题已经出来了，重新安装Windows之后，由于驱动也被一并卸载了，所以需要重新安装。</p>
 <p>百度lggram贴吧已经给出了一个解决方案：</p>
 <p><a target="_blank" rel="noopener" href="https://tieba.baidu.com/p/7239910408">https://tieba.baidu.com/p/7239910408</a></p>
@@ -309,19 +308,16 @@
 <p>Markdown个人最喜欢的编辑器</p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://typora.io/">https://typora.io/</a></p>
 <p>这里补充一些，用于默认的主题都不是特批满意，个人在typora主页里面下载了额外的主题风格，我个人选择的是Ursine。</p>
-<img src="image00.png" srcset="/img/loading.gif" lazyload>
-
+<p><img src="image00.png" srcset="/img/loading.gif" lazyload></p>
 <p>在这里可以打开Style文件夹，对风格进行配置。</p>
 </li>
 <li><p>Eartrumpet</p>
 <p>WIndows下最好用的音量管理工具，比原有的音量设置好用的多。</p>
-<img src="image01.png" srcset="/img/loading.gif" lazyload>
-
+<p><img src="image01.png" srcset="/img/loading.gif" lazyload></p>
 <p>同样在Microsoft Store里面下载。</p>
 <p>这里我补充一个测量，因为Eartrumpet是一个独立的工具，两个喇叭按钮在下面放着可能会比较奇怪。移除Windows原生的音量控制会有点点小小的麻烦，具体操作如下：（这个时候就体现出组策略的优势了）</p>
 <p><code>Windows</code>+<code>R</code>执行gpedit.msc</p>
-<img src="image02.png" srcset="/img/loading.gif" lazyload>
-
+<p><img src="image02.png" srcset="/img/loading.gif" lazyload></p>
 <p>如图所示，左侧的 <strong>User Configuration &gt; Administrative Templates &gt; Start Menu and Taskbar</strong>，在里面找到<strong>Remove the volumn control icon</strong>。启用这个选项就可以了。</p>
 </li>
 <li><p>AutoHotKey</p>
@@ -338,7 +334,7 @@
 <li><p>WIndows Terminal</p>
 <p>阳间终端，虽然现在Windows的终端比以前好看了一点点，但是黑Windows Terminal还是没有什么可比性的。</p>
 <p>Microsoft Store安装即可。</p>
-<img src="image03.png" srcset="/img/loading.gif" lazyload>
+<p><img src="image03.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>社交通讯</p>
 <p>QQ，微信，腾讯会议，telegram，飞书，Zoom</p>
@@ -406,8 +402,7 @@
 <h2 id="2-6-WSL2"><a href="#2-6-WSL2" class="headerlink" title="2.6 WSL2"></a>2.6 WSL2</h2><p>这个是我日常工作不可或缺的一部分了，是我最常用的虚拟工作环境。</p>
 <p><a target="_blank" rel="noopener" href="https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10">https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10</a></p>
 <p>此处为安装教程。</p>
-<img src="image04.png" srcset="/img/loading.gif" lazyload>
-
+<p><img src="image04.png" srcset="/img/loading.gif" lazyload></p>
 <p>如果安装不成功，需要下载<em>wsl_update_x64</em>进行补丁。</p>
 <p>安装之后就可以顺利启动了。</p>
 <h2 id="2-7-Jetbrains"><a href="#2-7-Jetbrains" class="headerlink" title="2.7 Jetbrains"></a>2.7 Jetbrains</h2><ul>
@@ -421,16 +416,13 @@
 <h2 id="2-8-X410"><a href="#2-8-X410" class="headerlink" title="2.8 X410"></a>2.8 X410</h2><p>X转发服务器，这里选用了X410，Microsoft Store 购买。</p>
 <p>安装之后需要将WSL2和X410进行绑定和使用。使用有些技巧，在X410启动之后，需要更改WSL2的显示设置，在bashrc末尾添加如下内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> DISPLAY_NUMBER=<span class="hljs-string">&quot;0&quot;</span><br><span class="hljs-built_in">export</span> DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>):<span class="hljs-variable">$DISPLAY_NUMBER</span><br><span class="hljs-built_in">export</span> LIBGL_ALWAYS_INDIRECT=1<br></code></pre></td></tr></table></figure>
-
 <p>这样就实现了WSL的X转发。</p>
 <h2 id="2-9-Tilix"><a href="#2-9-Tilix" class="headerlink" title="2.9 Tilix"></a>2.9 Tilix</h2><p>Tilix是我个人偏好的终端，是在Linux下分屏最方便的终端。安装在WSL中进行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install tilix<br></code></pre></td></tr></table></figure>
-
 <p>安装即可。</p>
 <p>在windows中更自然的使用，需要做一下额外的调整和配置。</p>
 <p>用AHK写一个快速启动的配置，使用更加像Linux。</p>
 <figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vbscript">^!t::<br>    Run, C:\app\tilix\tilix.vbs<br>Return<br><br>^BackSpace:: ;;Delete previous word<br>    Send ^+&#123;Left&#125;&#123;Del&#125;<br>Return<br></code></pre></td></tr></table></figure>
-
 <p>这里有一个使用习惯，Ctrl + BackSpace用于删除整个单词。</p>
 
                 

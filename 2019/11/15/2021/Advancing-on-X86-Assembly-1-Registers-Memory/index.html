@@ -32,8 +32,8 @@
 <meta property="article:published_time" content="2019-11-15T01:30:04.000Z">
 <meta property="article:modified_time" content="2022-07-03T04:37:06.368Z">
 <meta property="article:author" content="Chivier Humber">
-<meta property="article:tag" content="Assembly">
 <meta property="article:tag" content="Programming Language">
+<meta property="article:tag" content="Assembly">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://flint.cs.yale.edu/cs421/papers/x86-asm/x86-registers.png">
   
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.3k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          26 分钟
+          28 分钟
         
       </span>
     
@@ -297,7 +297,6 @@
 </li>
 </ul>
 <span id="more"></span>
-
 <h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><p><img src="http://flint.cs.yale.edu/cs421/papers/x86-asm/x86-registers.png" srcset="/img/loading.gif" lazyload alt="X86Registers"></p>
 <p>General-Purpose Registers (GPR) </p>
 <p>The 8 GPRs are:</p>
@@ -318,82 +317,7 @@
 <li><p>SP（RSP、ESP）： 堆栈指针。通过指针存取堆栈存储器中的数据</p>
 </li>
 <li><p>RFLAGS：</p>
-<table>
-<thead>
-<tr>
-<th align="left">Position</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">0.</td>
-<td>CF : Carry Flag. Set if the last arithmetic operation carried (addition) or borrowed (subtraction) a bit beyond the size of the register. This is then checked when the operation is followed with an add-with-carry or subtract-with-borrow to deal with values too large for just one register to contain.</td>
-</tr>
-<tr>
-<td align="left">2.</td>
-<td>PF : Parity Flag. Set if the number of set bits in the least significant byte is a multiple of 2.</td>
-</tr>
-<tr>
-<td align="left">4.</td>
-<td>AF : Adjust Flag. Carry of Binary Code Decimal (BCD) numbers arithmetic operations.</td>
-</tr>
-<tr>
-<td align="left">6.</td>
-<td>ZF : Zero Flag. Set if the result of an operation is Zero (0).</td>
-</tr>
-<tr>
-<td align="left">7.</td>
-<td>SF : Sign Flag. Set if the result of an operation is negative.</td>
-</tr>
-<tr>
-<td align="left">8.</td>
-<td>TF : Trap Flag. Set if step by step debugging.</td>
-</tr>
-<tr>
-<td align="left">9.</td>
-<td>IF : Interruption Flag. Set if interrupts are enabled.</td>
-</tr>
-<tr>
-<td align="left">10.</td>
-<td>DF : Direction Flag. Stream direction. If set, string operations will decrement their pointer rather than incrementing it, reading memory backwards.</td>
-</tr>
-<tr>
-<td align="left">11.</td>
-<td>OF : Overflow Flag. Set if signed arithmetic operations result in a value too large for the register to contain.</td>
-</tr>
-<tr>
-<td align="left">12-13.</td>
-<td>IOPL : I/O Privilege Level field (2 bits). I/O Privilege Level of the current process.</td>
-</tr>
-<tr>
-<td align="left">14.</td>
-<td>NT : Nested Task flag. Controls chaining of interrupts. Set if the current process is linked to the next process.</td>
-</tr>
-<tr>
-<td align="left">16.</td>
-<td>RF : Resume Flag. Response to debug exceptions.</td>
-</tr>
-<tr>
-<td align="left">17.</td>
-<td>VM : Virtual-8086 Mode. Set if in 8086 compatibility mode.</td>
-</tr>
-<tr>
-<td align="left">18.</td>
-<td>AC : Alignment Check. Set if alignment checking of memory references is done.</td>
-</tr>
-<tr>
-<td align="left">19.</td>
-<td>VIF : Virtual Interrupt Flag. Virtual image of IF.</td>
-</tr>
-<tr>
-<td align="left">20.</td>
-<td>VIP : Virtual Interrupt Pending flag. Set if an interrupt is pending.</td>
-</tr>
-<tr>
-<td align="left">21.</td>
-<td>ID : Identification Flag. Support for CPUID instruction if can be set.</td>
-</tr>
-</tbody></table>
+<p>| Position |                                                                                                                                                                                                                                                                                                              |<br>|:———— | —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— |<br>| 0.       | CF : Carry Flag. Set if the last arithmetic operation carried (addition) or borrowed (subtraction) a bit beyond the size of the register. This is then checked when the operation is followed with an add-with-carry or subtract-with-borrow to deal with values too large for just one register to contain. |<br>| 2.       | PF : Parity Flag. Set if the number of set bits in the least significant byte is a multiple of 2.                                                                                                                                                                                                            |<br>| 4.       | AF : Adjust Flag. Carry of Binary Code Decimal (BCD) numbers arithmetic operations.                                                                                                                                                                                                                          |<br>| 6.       | ZF : Zero Flag. Set if the result of an operation is Zero (0).                                                                                                                                                                                                                                               |<br>| 7.       | SF : Sign Flag. Set if the result of an operation is negative.                                                                                                                                                                                                                                               |<br>| 8.       | TF : Trap Flag. Set if step by step debugging.                                                                                                                                                                                                                                                               |<br>| 9.       | IF : Interruption Flag. Set if interrupts are enabled.                                                                                                                                                                                                                                                       |<br>| 10.      | DF : Direction Flag. Stream direction. If set, string operations will decrement their pointer rather than incrementing it, reading memory backwards.                                                                                                                                                         |<br>| 11.      | OF : Overflow Flag. Set if signed arithmetic operations result in a value too large for the register to contain.                                                                                                                                                                                             |<br>| 12-13.   | IOPL : I/O Privilege Level field (2 bits). I/O Privilege Level of the current process.                                                                                                                                                                                                                       |<br>| 14.      | NT : Nested Task flag. Controls chaining of interrupts. Set if the current process is linked to the next process.                                                                                                                                                                                            |<br>| 16.      | RF : Resume Flag. Response to debug exceptions.                                                                                                                                                                                                                                                              |<br>| 17.      | VM : Virtual-8086 Mode. Set if in 8086 compatibility mode.                                                                                                                                                                                                                                                   |<br>| 18.      | AC : Alignment Check. Set if alignment checking of memory references is done.                                                                                                                                                                                                                                |<br>| 19.      | VIF : Virtual Interrupt Flag. Virtual image of IF.                                                                                                                                                                                                                                                           |<br>| 20.      | VIP : Virtual Interrupt Pending flag. Set if an interrupt is pending.                                                                                                                                                                                                                                        |<br>| 21.      | ID : Identification Flag. Support for CPUID instruction if can be set.                                                                                                                                                                                                                                       |</p>
 </li>
 </ul>
 <h2 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h2><p>The 6 Segment Registers are:</p>
@@ -406,15 +330,14 @@
 <li>G Segment (GS). Pointer to still more extra data (‘G’ comes after ‘F’).</li>
 </ul>
 <h1 id="Memory-Management"><a href="#Memory-Management" class="headerlink" title="Memory Management"></a>Memory Management</h1><p>不论何种寻址模式，我们基本上的框架都算是基于<code>segment address + offset address</code>进行计算的，每个<code>segment address</code>对应1MB空间，例如：</p>
-<p>2000H — 起始地址：20000H ～ 种植地址：2FFFFH</p>
+<p>2000H —- 起始地址：20000H ～ 种植地址：2FFFFH</p>
 <p>加上偏移就可以定位具体的位置。</p>
 <h2 id="实模式寻址"><a href="#实模式寻址" class="headerlink" title="实模式寻址"></a>实模式寻址</h2><p>实模式寻址就是直接的由base address + offset得到</p>
 <p>默认的组合有：</p>
-<img src="Picture1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="Picture1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h2 id="保护模式寻址"><a href="#保护模式寻址" class="headerlink" title="保护模式寻址"></a>保护模式寻址</h2><p>保护模式的寻址模式其实是一种扩张性质的描述方法：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-1a08d48367745c2870e8818b7881b373_hd.jpg" srcset="/img/loading.gif" lazyload></p>
-<p>上面的这一张图里面就交代了**全局描述符表(GDT)**的结构。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-1a08d48367745c2870e8818b7881b373_hd.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>上面的这一张图里面就交代了<strong>全局描述符表(GDT)</strong>的结构。</p>
 <p>G 表示粒度，G=1，界限值以4KB为单位，G=0，以字节为单位。</p>
 <p>AV位：Available for use by system software，提供给系统软件使用。可用于指示段是否有效。AV=0，段有效；AV=1，段有效。</p>
 <p>D位：指示保护模式下或实模式下80386~Core2指令如何访问寄存器和存储器数据。</p>
@@ -424,8 +347,7 @@
 <p>S：S=1表示该描述符为代码或数据段描述符；S=0，表示该描述符为系统段描述符。</p>
 <p>Type：段的类型（与段描述符类型相关）。</p>
 <h2 id="平展模式"><a href="#平展模式" class="headerlink" title="平展模式"></a>平展模式</h2><p>不分页不分段直接访问的模式</p>
-<h1 id="Something-about-Moving-Data"><a href="#Something-about-Moving-Data" class="headerlink" title="Something about Moving Data"></a>Something about Moving Data</h1><img src="Picture2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<h1 id="Something-about-Moving-Data"><a href="#Something-about-Moving-Data" class="headerlink" title="Something about Moving Data"></a>Something about Moving Data</h1><p><img src="Picture2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>就MOV指令而言：<br>不允许段寄存器到段寄存器的MOV指令。<br>CS不能作为MOV指令的目的操作数。</p>
 
                 
@@ -460,9 +382,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Assembly/">#Assembly</a>
-      
         <a href="/tags/Programming-Language/">#Programming Language</a>
+      
+        <a href="/tags/Assembly/">#Assembly</a>
       
     </div>
   

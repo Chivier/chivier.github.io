@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          539 字
+          540 字
         
       </span>
     
@@ -278,18 +278,13 @@
                 
                 <p>As Tecent Inc. has updated their <code>QQ for linux</code>. Although this project is really silly and out-of-date, we have to admit that this version of QQ is one of the stablest version in Linux.</p>
 <span id="more"></span>
-
 <h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p>However, there are still many silly bugs need us to fix by ourselves.</p>
 <p>For example, when you have changed your GTK panel style, QQ would become very fragile. So we have to use some special method.</p>
 <p>First of all, we need to create a new file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo gedit /usr/bin/qq<br></code></pre></td></tr></table></figure>
-
 <p>And then, input the following code:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/sh</span><br><span class="hljs-built_in">export</span> GDK_NATIVE_WINDOWS=<span class="hljs-literal">true</span><br><span class="hljs-built_in">cd</span> /usr/share/tencent/qq/<br>./qq<br></code></pre></td></tr></table></figure>
-
-
-
-<p>Finally, a friendly hints here — never click too fast, it will shut your QQ down.</p>
+<p>Finally, a friendly hints here —- never click too fast, it will shut your QQ down.</p>
 
                 
               </div>

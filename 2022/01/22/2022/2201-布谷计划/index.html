@@ -29,8 +29,8 @@
 <meta property="article:published_time" content="2022-01-21T18:42:53.000Z">
 <meta property="article:modified_time" content="2022-07-03T05:14:36.488Z">
 <meta property="article:author" content="Chivier Humber">
-<meta property="article:tag" content="Tools">
 <meta property="article:tag" content="Work">
+<meta property="article:tag" content="Tools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chivier.github.io/2022/01/22/2022/2201-%E5%B8%83%E8%B0%B7%E8%AE%A1%E5%88%92/image1.png">
   
@@ -280,17 +280,13 @@
                 
                 <p>好吧，从2022年开始，我计划将自己变成一个不咕的人。为了实行这个计划，我觉得还是有必要用自己的博客督促一下自己。那么我的博客重新更新开始，但是在更新之前，我发现我过去一年其实写了很多文章和报告。</p>
 <span id="more"></span>
-
-
 <p>不过……</p>
 <p>Hexo的格式僵硬，我日常一般用更利于同步的obsidian和notion。为了更好的解决这个问题，我个人觉得使用一个翻译器比我手动改更好一些。</p>
 <p>在编写之前，我个人预想了一些设计理念，最终选定了Python编写（主要是便捷）。但是我一般使用python只是作为脚本类小工具编写，这里我需要做一个好用一点的命令行工具，最好用pypi进行打包。那么我们开始。</p>
 <h1 id="Pypi"><a href="#Pypi" class="headerlink" title="Pypi"></a>Pypi</h1><p>首先进行比较，我在使用pypi的setup.py前后，我对自己的程序需要进行什么改动？<br><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>简而言之，我自己对自己的程序进行了参数翻新。使得我们的程序可以进行更好的参数解析。如果使用 sys.argv 可能会有无法正确解析的问题，它更适合用来写小脚本，而不是功能复杂的命令行工具。argparse这里有一篇短文非常适合速成学习：</p>
 <p><a target="_blank" rel="noopener" href="https://haosquare.com/python-argparse/">Python-argparse</a></p>
-<p>至于 setup.py 由于我是自用，所以我就快点搞搞得了，直接简单粗暴搞出来：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>setup(<br>    name=<span class="hljs-string">&quot;o2h&quot;</span>,<br>    version=<span class="hljs-string">&quot;0.1.0&quot;</span>,<br>    author=<span class="hljs-string">&quot;Chivier Humber&quot;</span>,<br>    entry_points=&#123;<br>        <span class="hljs-string">&quot;console_scripts&quot;</span>: [<span class="hljs-string">&quot;obs2hexo=o2h.o2h:o2h&quot;</span>],<br>    &#125;,<br>    license=<span class="hljs-string">&quot;MIT&quot;</span>,<br>    keywords=<span class="hljs-string">&quot;translator&quot;</span>,<br>    packages=find_packages(),<br>)<br><br></code></pre></td></tr></table></figure>
-
+<p>至于 setup.py 由于我是自用，所以我就快点搞搞得了，直接简单粗暴搞出来：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>setup(<br>    name=<span class="hljs-string">&quot;o2h&quot;</span>,<br>    version=<span class="hljs-string">&quot;0.1.0&quot;</span>,<br>    author=<span class="hljs-string">&quot;Chivier Humber&quot;</span>,<br>    entry_points=&#123;<br>        <span class="hljs-string">&quot;console_scripts&quot;</span>: [<span class="hljs-string">&quot;obs2hexo=o2h.o2h:o2h&quot;</span>],<br>    &#125;,<br>    license=<span class="hljs-string">&quot;MIT&quot;</span>,<br>    keywords=<span class="hljs-string">&quot;translator&quot;</span>,<br>    packages=find_packages(),<br>)<br><br></code></pre></td></tr></table></figure></p>
 <p>复杂的功能并没有补充，这里介绍两项：</p>
 <ul>
 <li>entry_points： 用来制定命令行工具，格式为 <code>[执行命令]=‘模块名’.&#39;文件名&#39;:&#39;函数名&#39;</code>。我的例子写的不好，可以参考 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/56534678/how-to-create-a-cli-in-python-that-can-be-installed-with-pip">StackOverflow pypi</a>。<a target="_blank" rel="noopener" href="https://python-packaging.readthedocs.io/en/latest/command-line-scripts.html">官方教程</a>也有更完善的信息。</li>
@@ -330,9 +326,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Tools/">#Tools</a>
-      
         <a href="/tags/Work/">#Work</a>
+      
+        <a href="/tags/Tools/">#Tools</a>
       
     </div>
   

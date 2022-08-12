@@ -18,12 +18,12 @@
   <meta name="author" content="Chivier Humber">
   <meta name="keywords" content="">
   
-    <meta name="description" content="OS A piece of software that manages a computer, making computer’s hardwareresources accessible to software through a consistent set of interfaces.  并发(Concurrence) 共享(Sharing)  虚拟(Virtual)  异步(Asyn">
+    <meta name="description" content="OS A piece of software that manages a computer, making computer’s hardwareresources accessible to software through a consistent set of interfaces.  并发(Concurrence) 共享(Sharing)  虚拟(Virtual)  异步(Async">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Operating System Concept - 1">
 <meta property="og:url" content="https://chivier.github.io/2019/04/10/2021/Operating-System-Concept-1/index.html">
 <meta property="og:site_name" content="Chivier&#39;s Blog">
-<meta property="og:description" content="OS A piece of software that manages a computer, making computer’s hardwareresources accessible to software through a consistent set of interfaces.  并发(Concurrence) 共享(Sharing)  虚拟(Virtual)  异步(Asyn">
+<meta property="og:description" content="OS A piece of software that manages a computer, making computer’s hardwareresources accessible to software through a consistent set of interfaces.  并发(Concurrence) 共享(Sharing)  虚拟(Virtual)  异步(Async">
 <meta property="og:locale">
 <meta property="og:image" content="https://chivier.github.io/2019/04/10/2021/Operating-System-Concept-1/DOS.png">
 <meta property="og:image" content="https://chivier.github.io/2019/04/10/2021/Operating-System-Concept-1/Unix.png">
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.5k 字
+          5.4k 字
         
       </span>
     
@@ -284,7 +284,6 @@
               <div class="markdown-body">
                 
                  <span id="more"></span>
-
 <h1 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h1><blockquote>
 <p>A piece of software that manages a computer, making computer’s hardware<br>resources accessible to software through a consistent set of interfaces.</p>
 </blockquote>
@@ -341,8 +340,7 @@
 <li>Not divided into modules</li>
 <li>Interfaces and levels of functionality not well separated</li>
 </ul>
-<img src="DOS.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="DOS.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h3 id="Unix"><a href="#Unix" class="headerlink" title="Unix"></a>Unix</h3><p>Limited by hardware functionality</p>
 <p>Original UNIX operating system consists of two separable parts:</p>
 <ul>
@@ -354,8 +352,7 @@
 </ul>
 </li>
 </ul>
-<img src="Unix.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="Unix.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h2 id="Layered-Structure"><a href="#Layered-Structure" class="headerlink" title="Layered Structure"></a>Layered Structure</h2><p> Operating system is divided many layers (levels)</p>
 <ul>
 <li>Each built on top of lower layers</li>
@@ -371,8 +368,7 @@
 <h2 id="Module-based"><a href="#Module-based" class="headerlink" title="Module based"></a>Module based</h2><p>Most modern operating systems implement kernel<br>modules<br>• Uses object-oriented approach<br>• Each core component is separate<br>• Each talks to the others over known interfaces<br>• Each is loadable as needed within the kernel</p>
 <p>类似于layered structure，但是灵活性大大增长</p>
 <p>Example:</p>
-<img src="Queueing-diagram.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="Queueing-diagram.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <ol>
 <li>Scheduling classes</li>
 <li>File systems</li>
@@ -394,7 +390,7 @@
 <p>.NET 框架的核心是公共语言运行时间 (CLR)</p>
 <p> CLR 是 .NET 虚拟机的实现</p>
 <p>用 C#或者 VB.NET 编写的程序被编译为一种平台无关的中间语言(叫做微软中间语言 MS-IU 。这些被编译好的文件叫做组合 (assembly) ,它包含了 MS-IL 指令和元数据。它们的文件名后缀是.dll 或者.exeo 当要运行这些程序的时候， CLR 把这些组合加载进应用程序域 (Application Domain) 。</p>
-<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><p>进程不只是程序代码，程序代码有时称为<strong>文本段(或代码段)**。进程还包括</strong>当前活动<strong>，通过程序计数器的值和处理器寄存器的内容来表示。另外，进程通常还包括进程</strong>堆栈段**(包括临时数据，如函数参数、返回地址和局部变量)和<strong>数据段</strong>(包括全局变量)。进程还可能包括堆 (heap) ，是在进程运行期间动态分配的内存。</p>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><h2 id="进程概念"><a href="#进程概念" class="headerlink" title="进程概念"></a>进程概念</h2><p>进程不只是程序代码，程序代码有时称为<strong>文本段(或代码段)</strong>。进程还包括<strong>当前活动</strong>，通过程序计数器的值和处理器寄存器的内容来表示。另外，进程通常还包括进程<strong>堆栈段</strong>(包括临时数据，如函数参数、返回地址和局部变量)和<strong>数据段</strong>(包括全局变量)。进程还可能包括堆 (heap) ，是在进程运行期间动态分配的内存。</p>
 <p>英文解释更为简单：</p>
 <p><strong>A process is a program in execution</strong></p>
 <p>进程在执行时产生许多进程是很常见的。</p>
@@ -414,28 +410,24 @@
 <li>就绪:进程等待分配处理器。</li>
 <li>终止:进程完成执行。</li>
 </ul>
-<img src="process.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="process.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h3 id="进程控制块"><a href="#进程控制块" class="headerlink" title="进程控制块"></a>进程控制块</h3><p>每个进程在操作系统内用<strong>进程控制块</strong> (process control block. PCB. 也称为任务控制块)来表示。</p>
-<img src="PCB.png" srcset="/img/loading.gif" lazyload width="30%" height="30%">
-
+<p><img src="PCB.png" srcset="/img/loading.gif" lazyload width="30%" height="30%"></p>
 <ul>
-<li>**进程状态:**状态可包括新的、就绪、运行、等待、停止等。</li>
-<li>**程序计数器:**计数器表示进程要执行的下个指令的地址。</li>
-<li>**CPU 寄存器:**根据计算机体系结构的不同，寄存器的数量和类型也不同。它们包括累加器、索引寄存器、堆战指针、通用寄存器和其他条件码信息寄存器。与程序计数器一起，这些状态信息在出现中断时也需要保存，以便进程以后能正确地继续执行。</li>
-<li>**CPU 调度信息:**这类信息包括进程优先级、调度队列的指针和其他调度参数</li>
-<li>**内存管理信息:**根据操作系统所使用的内存系统，这类信息包括基址和界限寄存器的值、页表或段表(见第 8 章)。</li>
-<li>**记账信息:**这类信息包括 CPU 时间、实际使用时间、时间界限、记账数据、作业或进程数量等。</li>
-<li>**I/O 状态信息:**这类信息包括分配给进程的 νo 设备列表、打开的文件列表等。<br>简而言之， PCB 简单地作为这些信息的仓库，这些信息在进程与进程之间是不同的。</li>
+<li><strong>进程状态:</strong>状态可包括新的、就绪、运行、等待、停止等。</li>
+<li><strong>程序计数器:</strong>计数器表示进程要执行的下个指令的地址。</li>
+<li><strong>CPU 寄存器:</strong>根据计算机体系结构的不同，寄存器的数量和类型也不同。它们包括累加器、索引寄存器、堆战指针、通用寄存器和其他条件码信息寄存器。与程序计数器一起，这些状态信息在出现中断时也需要保存，以便进程以后能正确地继续执行。</li>
+<li><strong>CPU 调度信息:</strong>这类信息包括进程优先级、调度队列的指针和其他调度参数</li>
+<li><strong>内存管理信息:</strong>根据操作系统所使用的内存系统，这类信息包括基址和界限寄存器的值、页表或段表(见第 8 章)。</li>
+<li><strong>记账信息:</strong>这类信息包括 CPU 时间、实际使用时间、时间界限、记账数据、作业或进程数量等。</li>
+<li><strong>I/O 状态信息:</strong>这类信息包括分配给进程的 νo 设备列表、打开的文件列表等。<br>简而言之， PCB 简单地作为这些信息的仓库，这些信息在进程与进程之间是不同的。</li>
 </ul>
-<img src="PCB_Switch.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="PCB_Switch.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>一个进程是一个只能进行单个执行线程的程序。</p>
 <h2 id="进程调度"><a href="#进程调度" class="headerlink" title="进程调度"></a>进程调度</h2><h3 id="调度队列"><a href="#调度队列" class="headerlink" title="调度队列"></a>调度队列</h3><p>进程进入系统时，会被加到作业队列中，该队列包括系统中的所有进程。</p>
 <p>讨论进程调度的常用表示方法是<strong>队列图</strong></p>
 <p>每个长方形表示一个队列。有两种队列:就绪队列和一组设备队列。圆形表示为队列服务的资源，箭头表示系统内进程的流向。</p>
-<img src="Queueing-diagram.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="Queueing-diagram.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h2 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h2><p>当进程创建新进程时，有两种执行可能:</p>
 <ul>
 <li>父进程与子进程并发执行。</li>
@@ -452,7 +444,6 @@
 <p><strong>子进程怎么执行：</strong></p>
 <p>=》<strong>子进程从fork()的位置开始执行</strong>，也就是说前面的代码不走，但是拥有之前的变量以及变量的值，与父进程的值一样，这次fork()，返回值是0，所以在子进程里面直接执行了pid==0这一个分支，父进程里面并不执行这个分支的语句。这就为我们在写mian函数的时候怎么写子进程的程序提供了一个方法来隔离代码。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">pid_t</span> pid[<span class="hljs-number">3</span>];<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<br>    pid[<span class="hljs-number">0</span>] = fork();<br>    pid[<span class="hljs-number">1</span>] = fork();<br>    pid[<span class="hljs-number">2</span>] = fork();<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;this is process\n&quot;</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>运行会输出8次<code>this is a process</code></p>
 <h2 id="进程结束"><a href="#进程结束" class="headerlink" title="进程结束"></a>进程结束</h2><p>当进程完成执行最后的语句并使用系统调用<code>exit()</code>请求操作系统删除自身时，进程终止。这时，进程可以返回状态值(通常为整数)到父进程(通过系统调用<code>wait()</code>) 。所有进程资源(包括物理和虚拟内存、打开文件和 I/O 缓冲)会被操作系统释放。</p>
 <p>有些系统，包括 VMS ，不允许子进程在父进程己终止的情况下存在。对于这类系统，如果一个进程终止(正常或不正常)，那么它的所有子进程也将终止。这种现象，称为<strong>级联终止</strong>( cascading termination) ，通常由操作系统进行。</p>

@@ -32,8 +32,8 @@
 <meta property="article:published_time" content="2022-02-04T05:26:31.000Z">
 <meta property="article:modified_time" content="2022-07-03T05:15:10.914Z">
 <meta property="article:author" content="Chivier Humber">
-<meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Compiler">
+<meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Qemu">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://chivier.github.io/2022/02/04/2022/2202-QemuTest/image1.png">
@@ -284,91 +284,61 @@
                 
                 <p>由于重装系统之后，我的本地实验环境一直没有找时间去重新配置。在这里总结一下关于 riscv 测试环境的一些配置方法。</p>
 <span id="more"></span>
-
-
 <p>主要参考为：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html">Running 64- and 32-bit RISC-V Linux on QEMU</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/258394849">在 QEMU 上运行 RISC-V 64 位版本的 Linux</a></li>
 </ul>
 <h1 id="本地配置环境"><a href="#本地配置环境" class="headerlink" title="本地配置环境"></a>本地配置环境</h1><p>本地系统环境如下：</p>
-<img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>内核有点更新过头，不过不碍事，可以继续正常使用。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev \<br>                 gawk build-essential bison flex texinfo gperf libtool patchutils bc \<br>                 zlib1g-dev libexpat-dev git \<br>                 libglib2.0-dev libfdt-dev libpixman-1-dev \<br>                 libncurses5-dev libncursesw5-dev<br></code></pre></td></tr></table></figure>
-
 <p>就完成了准备环境的安装。<br>我们之后的工作单独建立一个目录：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ....[Anything you like]<br>mkdir riscv<br><span class="hljs-built_in">cd</span> riscv<br><span class="hljs-built_in">export</span> RISCV_EXP_HOME=<span class="hljs-variable">$PWD</span><br></code></pre></td></tr></table></figure>
-
 <h1 id="Riscv-gnu-toolchains"><a href="#Riscv-gnu-toolchains" class="headerlink" title="Riscv-gnu-toolchains"></a>Riscv-gnu-toolchains</h1><h2 id="使用软件源"><a href="#使用软件源" class="headerlink" title="使用软件源"></a>使用软件源</h2><p>一个偷懒的方法是使用软件源里已经编译完成的 riscv 软件工具链。使用 apt 可以看到如下的包可以选择进行安装：</p>
-<img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h2 id="编译安装（推荐）"><a href="#编译安装（推荐）" class="headerlink" title="编译安装（推荐）"></a>编译安装（推荐）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$RISCV_EXP_HOME</span><br>git <span class="hljs-built_in">clone</span> https://gitee.com/mirrors/riscv-gnu-toolchain<br></code></pre></td></tr></table></figure>
-
 <p>直接下载 gitee 上的镜像，速度更快。</p>
-<p>之后我们需要对一个模块进行切除：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> riscv-gnu-toolchain<br>git rm qemu<br></code></pre></td></tr></table></figure>
-
+<p>之后我们需要对一个模块进行切除：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> riscv-gnu-toolchain<br>git rm qemu<br></code></pre></td></tr></table></figure></p>
 <p>Qemu 我们之后自己进行安装。</p>
 <p>接着复制子模块内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git submodule update --init --recursive<br></code></pre></td></tr></table></figure>
-
 <p>然后进行 autoconf 工具链的编译：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --prefix=/opt/riscv64<br>sudo make linux -j 4<br></code></pre></td></tr></table></figure>
-
-<p>最后测试安装是否成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">riscv64-unknown-linux-gnu-gcc -v<br></code></pre></td></tr></table></figure>
-
-<img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p>最后测试安装是否成功：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">riscv64-unknown-linux-gnu-gcc -v<br></code></pre></td></tr></table></figure></p>
+<p><img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>其实如果是为了测试编译的话，我们到这一步已经完成了。如果需要检验我们是否有可靠的 riscv 环境下的可用二进制可执行文件，我们需要使用 Qemu 进行测试。</p>
 <h1 id="Qemu"><a href="#Qemu" class="headerlink" title="Qemu"></a>Qemu</h1><p>首先下载解压：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$RISCV_EXP_HOME</span><br>wget https://download.qemu.org/qemu-5.1.0.tar.xz<br>tar xf qemu-5.1.0.tar.xz<br><span class="hljs-built_in">cd</span> qemu-5.1.0.tar.xz<br></code></pre></td></tr></table></figure>
-
 <p>Autoconf 软件，老样子直接安装，注意需要指定一下这里是 riscv 的工作环境：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">./configure --target-list=riscv64-softmmu,riscv64-linux-user --prefix=/opt/qemu<br>make -j 4<br>sudo make install<br></code></pre></td></tr></table></figure>
-
 <h1 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h1><p>再完成上面两个步骤之后，我们最重要的工具链已经基本完成了。可以把下面的这句写到环境变量里面：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:/opt/riscv64/bin:/opt/qemu/bin<br></code></pre></td></tr></table></figure>
-
 <p>下载内核，可以从镜像下载，这里选择一个特定的内核版本：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> git@gitee.com:mirrors/linux_old1.git<br>git checkout v5.4<br></code></pre></td></tr></table></figure>
-
 <p>内核编译就是沿用如下方法：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- defconfig<br>make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- -j 4<br></code></pre></td></tr></table></figure>
-
 <h1 id="制作文件系统"><a href="#制作文件系统" class="headerlink" title="制作文件系统"></a>制作文件系统</h1><p>这里使用 busybox 制作，首先下载源码：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://gitee.com/mirrors/busyboxsource.git<br><span class="hljs-built_in">cd</span> busyboxsource<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">CROSS_COMPILE=riscv64-unknown-linux-gnu- make menuconfig<br></code></pre></td></tr></table></figure>
-
 <p>打开配置菜单后进入第一行的 “Settings”，在”Build Options”节中，选中 “Build static binary (no shared libs)”，设置好后退出保存配置。</p>
 <p>之后再次配置和编译：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">CROSS_COMPILE=riscv64-unknown-linux-gnu- make -j 4<br>CROSS_COMPILE=riscv64-unknown-linux-gnu- make install<br></code></pre></td></tr></table></figure>
-
 <p>完成之后我们回到实验目录：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">qemu-img create rootfs.img  4g<br></code></pre></td></tr></table></figure>
-
 <p>安排 4g 的实验空间。将它文件格式定为 ext4：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkfs.ext4 rootfs.img<br></code></pre></td></tr></table></figure>
-
 <p>之后把刚刚在 busybox 中生成的内容移动过来：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$RISCV_EXP_HOME</span><br>mkdir rootfs<br>sudo mount -o loop rootfs.img  rootfs<br><span class="hljs-built_in">cd</span> rootfs<br>sudo cp -r ../busyboxsource/_install/* .<br>sudo mkdir proc sys dev etc etc/init.d<br><span class="hljs-built_in">cd</span> etc/init.d/<br>sudo touch rcS<br></code></pre></td></tr></table></figure>
-
 <p>在 RC 文件中写入一些基本信息：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">mount -t proc none /proc<br>mount -t sysfs none /sys<br>/sbin/mdev -s<br></code></pre></td></tr></table></figure>
-
 <p>修改 RC 权限：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo chmod +x rcS<br></code></pre></td></tr></table></figure>
-
 <p>安全期间，退文件环境。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo umount rootfs<br></code></pre></td></tr></table></figure>
-
 <p>至此，我们已经完成了所有的操作。</p>
 <h1 id="使用-Qemu-启动"><a href="#使用-Qemu-启动" class="headerlink" title="使用 Qemu 启动"></a>使用 Qemu 启动</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">qemu-system-riscv64 -M virt -m 256M -nographic -kernel linux/arch/riscv/boot/Image -drive file=rootfs.img,format=raw,id=hd0  -device virtio-blk-device,drive=hd0 -append <span class="hljs-string">&quot;root=/dev/vda rw console=ttyS0&quot;</span><br></code></pre></td></tr></table></figure>
-
 <p>我们就可以启动了。我个人使用 alias 将上面命名为 rsicvexp 方便自己进行测试。</p>
 <p>之后测试的时候在外部交叉编译生成 riscv 的可执行文件，复制到 rootfs 里面，然后就可以进行运行和测试了。</p>
 
@@ -404,9 +374,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Linux/">#Linux</a>
-      
         <a href="/tags/Compiler/">#Compiler</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
       
         <a href="/tags/Qemu/">#Qemu</a>
       

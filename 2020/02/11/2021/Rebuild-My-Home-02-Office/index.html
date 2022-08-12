@@ -278,27 +278,22 @@
                 
                 <p>Many people say that Ubuntu is not fit for Office work. I do not agree. Here I will introduce some apps to you and teach you how to install them.</p>
 <span id="more"></span>
-
 <h1 id="Netease-Music"><a href="#Netease-Music" class="headerlink" title="Netease Music"></a>Netease Music</h1><p>Hmm, no music no life.</p>
 <p>You can download from <a target="_blank" rel="noopener" href="https://music.163.com/#/download">Netease Homepage</a></p>
 <p>And you can find a Linux version.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo dpkg -i netease-cloud-music_xxx(version).deb<br></code></pre></td></tr></table></figure>
-
 <p>And now I can build my Ubuntu with beautiful music.</p>
 <h1 id="WPS"><a href="#WPS" class="headerlink" title="WPS"></a>WPS</h1><p>WPS Office is a perfect office on linux. You can write documents, make PPTs very fluently with its help.</p>
 <p>You can download here:</p>
 <p><a target="_blank" rel="noopener" href="https://www.wps.cn/product/wpslinux">WPS foe linux</a></p>
 <p>I prefer using DEB file for installation.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo dpkg -i wps-offxxx.deb<br></code></pre></td></tr></table></figure>
-
 <p>You might meet some trouble here, if your Ubuntu is a grand new one.</p>
 <p>You might meet error information like:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">dpkg: dependency problems prevent configuration of wps-office:<br> wps-office depends on libgtk2.0-0; however:<br>  Package libgtk2.0-0 is not installed.<br></code></pre></td></tr></table></figure>
-
 <p>This means you need to install ‘libgtk2.0-common’. If there are other errors, you can solve by fix-broken.</p>
 <p>Just like this:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install ligtk2.0-common<br>sudo apt-get --fix-broken install<br></code></pre></td></tr></table></figure>
-
 <p>After fix gtk dependencies, you can redo the install step by executing <code>sudo dpkg -i xxx</code></p>
 <h1 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h1><p>As a Markdown lover, I cannot live without an elegant markdown editor.</p>
 <p>You can follow the installation steps on their home page.</p>
@@ -312,7 +307,6 @@
 <p>However, install Sogou pinyin is a little difficult.</p>
 <p>Firstly, you need install Fcitx as a frame to hole Sogou pinyin.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install fcitx<br></code></pre></td></tr></table></figure>
-
 <p>And then download Sogou here: <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux">Sogou pinyin for linux</a></p>
 <p>Use <code>sudo dpkg -i</code> to install it.</p>
 <p>Now open settings panel, choose <code>Region &amp; Language</code> and click <code>Manage Installed language</code>. </p>
@@ -328,7 +322,6 @@
 </li>
 <li><p>Finally, do not forget to lock it.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">chmod -w config<br></code></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <h1 id="Snap-store"><a href="#Snap-store" class="headerlink" title="Snap store"></a>Snap store</h1><p>Here I am going to install a series of apps by using snap store system. It’s really convenient to install through snap.</p>
@@ -352,7 +345,6 @@
 <h1 id="Dia"><a href="#Dia" class="headerlink" title="Dia"></a>Dia</h1><p>An convenient app to draw almost all kinds of simple graphs you need.</p>
 <p>It’s just like VISIO in linux.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install dia <br></code></pre></td></tr></table></figure>
-
 <h1 id="QQ"><a href="#QQ" class="headerlink" title="QQ"></a>QQ</h1><p>Also there is a QQ-for-linux you can easily install by ‘apt install’.</p>
 <p>However, it is really awful: easily to get unconnected and you can only scan the QR code to login.</p>
 <p>So I recommend wine-QQ.</p>

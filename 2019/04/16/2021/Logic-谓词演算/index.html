@@ -277,20 +277,24 @@
               <div class="markdown-body">
                 
                   <span id="more"></span>
-
 <h1 id="基本元素"><a href="#基本元素" class="headerlink" title="基本元素"></a>基本元素</h1><h2 id="基本集合"><a href="#基本集合" class="headerlink" title="基本集合"></a>基本集合</h2><p>谓词演算与命题演算不同之处在于公式定义上的区别，产生了新的命题元素：$\forall$</p>
 <p>四个基本集合：</p>
 <p>个体变元集$X$，个体常元集$C$，运算函数集$F$，谓词集$R$</p>
 <p>我们定义项集T为层次集合，$T_i​$为i次运算函数产生的项</p>
-<p><strong>原子公式集</strong>:<br>$$<br>Y = \bigcup_\text{i,n} ((R_i^n) \times T \times … \times T)<br>$$<br>定义为原子公式集。原子公式就是指代形如$R_i^n(t_1,…,t_2)$。</p>
+<p><strong>原子公式集</strong>:</p>
+<script type="math/tex; mode=display">
+Y = \bigcup_\text{i,n} ((R_i^n) \times T \times ... \times T)</script><p>定义为原子公式集。原子公式就是指代形如$R_i^n(t_1,…,t_2)$。</p>
 <h2 id="基本公式"><a href="#基本公式" class="headerlink" title="基本公式"></a>基本公式</h2><p>公式定义：</p>
 <ul>
 <li>原子公式是公式</li>
 <li>若$p,q​$是公式，则$\neg p​$，$p \rightarrow q​$，$\forall x_i p​$都是公式</li>
 <li>前两条若干次变换</li>
 </ul>
-<h2 id="其他运算定义"><a href="#其他运算定义" class="headerlink" title="其他运算定义"></a>其他运算定义</h2><p>$$<br>p \vee q = \neg p \rightarrow q \\<br>p \wedge q = \neg (p \rightarrow \neg q) \\<br>p \leftrightarrow q = (p \rightarrow q) \wedge (q \rightarrow p) \\<br>\exists x_i p = \neg \forall x_i p<br>$$</p>
-<p>定义了$\vee\ \quad \wedge \quad \leftrightarrow \quad \exists​$四种运算符</p>
+<h2 id="其他运算定义"><a href="#其他运算定义" class="headerlink" title="其他运算定义"></a>其他运算定义</h2><script type="math/tex; mode=display">
+p \vee q = \neg p \rightarrow q \\\\
+p \wedge q = \neg (p \rightarrow \neg q) \\\\
+p \leftrightarrow q = (p \rightarrow q) \wedge (q \rightarrow p) \\\\
+\exists x_i p = \neg \forall x_i p</script><p>定义了$\vee\ \quad \wedge \quad \leftrightarrow \quad \exists​$四种运算符</p>
 <h2 id="约束出现和自由出现"><a href="#约束出现和自由出现" class="headerlink" title="约束出现和自由出现"></a>约束出现和自由出现</h2><p>变元的<strong>自由出现</strong>指变元$x$不在$\forall x​$的范围内出现，反之叫约束出现</p>
 <p>如果公式中没有自由出现的变元，则叫<strong>闭式</strong></p>
 <p><strong>项t对p中x自由</strong>，完整的说法是“项t对于公式p中的x变元自由”，即用t取替换p中自由出现的x之后，所有的t变元还是自由的。等价于满足下面3条中任意一条：</p>
@@ -306,8 +310,8 @@
 <p>(K1) $p \rightarrow (q \rightarrow p)​$</p>
 <p>(K2) $(p \rightarrow (q \rightarrow r)) \rightarrow ((p \rightarrow q) \rightarrow (p \rightarrow r))$</p>
 <p>(K3) $(\neg p  \rightarrow \neg q) \rightarrow (q \rightarrow p)$</p>
-<p>(K4) $\forall x ,p(x)  \rightarrow p(t) \quad$其中t对p(x)中x自由</p>
-<p>(K5) $\forall x,(p \rightarrow q) \rightarrow (p \rightarrow \forall x ,q)\quad$其中x不在p中自由出现</p>
+<p>(K4) $\forall x \,p(x)  \rightarrow p(t) \quad$其中t对p(x)中x自由</p>
+<p>(K5) $\forall x\,(p \rightarrow q) \rightarrow (p \rightarrow \forall x \,q)\quad$其中x不在p中自由出现</p>
 </li>
 <li><p>证明</p>
 <p>p是公式，$\Gamma$是公式集。p从$\Gamma$可证，记作$\Gamma \vdash p$</p>
@@ -317,14 +321,15 @@
 <li>$p_k \in \Gamma$</li>
 <li>$p_k$是公理</li>
 <li>$\exists i,j&lt;k$使得$p_j = p_i \rightarrow p_k$ <em>（等价于：要有$p_k$，必须现有$p_i$和$p_i \rightarrow p_k$）</em></li>
-<li>$\exists j&lt;k$使得$p_k = \forall x , p_j $</li>
+<li>$\exists j&lt;k$使得$p_k = \forall x \, p_j $</li>
 </ul>
 </li>
 </ul>
 <h2 id="永真式和定理"><a href="#永真式和定理" class="headerlink" title="永真式和定理"></a>永真式和定理</h2><p>如果K中命题再L中有对应的命题演算定理，且永真，则叫永真式</p>
 <p>简而言之：L中也有的叫永真，永真式一定是定理，反之未必</p>
-<h2 id="exists-1-规则"><a href="#exists-1-规则" class="headerlink" title="$\exists_1$规则"></a>$\exists_1$规则</h2><p>如果项t对于p中x自由，则：<br>$$<br>\vdash p (t) \rightarrow \exists x,p(x)<br>$$</p>
-<h2 id="exists-2-规则"><a href="#exists-2-规则" class="headerlink" title="$\exists_2$规则"></a>$\exists_2$规则</h2><p>设$\Gamma \cup {p}\vdash q​$其证明中Gen变元不在p中自由出现，x不在q中自由出现，则有$\Gamma \cup {\exists x , p}\vdash q​$，且出来x不增加其他Gen变元</p>
+<h2 id="exists-1-规则"><a href="#exists-1-规则" class="headerlink" title="$\exists_1$规则"></a>$\exists_1$规则</h2><p>如果项t对于p中x自由，则：</p>
+<script type="math/tex; mode=display">
+\vdash p (t) \rightarrow \exists x\,p(x)</script><h2 id="exists-2-规则"><a href="#exists-2-规则" class="headerlink" title="$\exists_2$规则"></a>$\exists_2$规则</h2><p>设$\Gamma \cup {p}\vdash q​$其证明中Gen变元不在p中自由出现，x不在q中自由出现，则有$\Gamma \cup {\exists x \, p}\vdash q​$，且出来x不增加其他Gen变元</p>
 <p>注意：<strong>演绎定理、归谬律、反证律</strong>都可以使用，但是<strong>略有不同</strong></p>
 <h2 id="演绎定理"><a href="#演绎定理" class="headerlink" title="演绎定理"></a>演绎定理</h2><ul>
 <li>若$\Gamma \vdash p \rightarrow q​$则$\Gamma \cup {p} \vdash q​$</li>
@@ -346,33 +351,34 @@
 <li>$\wedge​$和$\vee​$互换</li>
 <li>$\forall​$和$\exists​$互换</li>
 </ul>
-<p>新公式记为$p^<em>​$则<br>$$<br>\vdash p^</em> \leftrightarrow \neg p<br>$$</p>
-<h2 id="前束范式"><a href="#前束范式" class="headerlink" title="前束范式"></a>前束范式</h2><p>形如$Q_1x…Q_ny p​$的式子叫前束范式，其中$Q_i​$表示量词符号$\forall​$或者$\exists​$，一般的，我们将$Q​$的对偶符号记作$Q^*​$</p>
+<p>新公式记为$p^*​$则</p>
+<script type="math/tex; mode=display">
+\vdash p^* \leftrightarrow \neg p</script><h2 id="前束范式"><a href="#前束范式" class="headerlink" title="前束范式"></a>前束范式</h2><p>形如$Q_1x…Q_ny p​$的式子叫前束范式，其中$Q_i​$表示量词符号$\forall​$或者$\exists​$，一般的，我们将$Q​$的对偶符号记作$Q^*​$</p>
 <p>结论：</p>
 <ol>
 <li>若y不在$p(x)​$中自由出现，则</li>
 </ol>
-<p>$$<br>\vdash Qxp(x) \leftrightarrow Qyp(y)<br>$$</p>
-<ol start="2">
+<script type="math/tex; mode=display">
+\vdash Qxp(x) \leftrightarrow Qyp(y)</script><ol>
 <li>若x不在p中自由出现，则</li>
 </ol>
-<p>$$<br>\vdash (p\rightarrow Qxq) \leftrightarrow Qx(p\rightarrow q)<br>$$<br>​    若x不在q中自由出现，则<br>$$<br>\vdash(Qxp \rightarrow q) \leftrightarrow Q^*x(p \rightarrow q)<br>$$</p>
-<ol start="3">
-<li>$$<br> \vdash \neg Q x p \leftrightarrow Q^* x \neg p<br> $$</li>
+<script type="math/tex; mode=display">
+\vdash (p\rightarrow Qxq) \leftrightarrow Qx(p\rightarrow q)</script><p>​    若x不在q中自由出现，则</p>
+<script type="math/tex; mode=display">
+\vdash(Qxp \rightarrow q) \leftrightarrow Q^*x(p \rightarrow q)</script><ol>
+<li><script type="math/tex; mode=display">
+ \vdash \neg Q x p \leftrightarrow Q^* x \neg p</script></li>
 </ol>
 <font color=0x0099ff>
 
-<p>用上述三条结论完成前束范式的变形，步骤：</p>
-<ul>
-<li><p>利用好结论1和子公式替换，替换p中变元</p>
-</li>
-<li><p>利用结论2和3将量词移动 </p>
-<ul>
-<li>结论2用于移动量词在$\rightarrow$两侧的情况</li>
-<li>结论3用于移动再$\neg$之后的情况</li>
-</ul>
-</li>
-</ul>
+用上述三条结论完成前束范式的变形，步骤：
+
+- 利用好结论1和子公式替换，替换p中变元
+
+- 利用结论2和3将量词移动 
+  - 结论2用于移动量词在$\rightarrow$两侧的情况
+  - 结论3用于移动再$\neg$之后的情况
+
 </font>
 
 

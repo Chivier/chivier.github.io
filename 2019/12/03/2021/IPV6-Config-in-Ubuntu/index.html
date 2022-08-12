@@ -278,29 +278,21 @@
                 
                 <p>Linux is a simple OS, and you can almost define every system configure as you like. Today’s problem is about IPV6. In Windows or Mac, ipv6 config is done automaticlly by the system. However, in Linux, it’s a little hard to do such work. You have to change some system-conf file manually.</p>
 <span id="more"></span>
-
 <h1 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h1><p>Install some dependencies is required:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install miredo<br></code></pre></td></tr></table></figure>
-
 <h1 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h1><p>Modify file <code>/etc/default/ufw</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo gedit /etc/default/ufw<br></code></pre></td></tr></table></figure>
-
 <p>And change <code>IPV6=no</code> to <code>IPV6=yes</code>. If <code>IPV6</code> has already changed into <code>yes</code>, just skip this step. </p>
 <h1 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h1><p>Restart the system serivce:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo invoke-rc.d networking restart<br></code></pre></td></tr></table></figure>
-
 <h1 id="Step-4-Optional"><a href="#Step-4-Optional" class="headerlink" title="Step 4 (Optional)"></a>Step 4 (Optional)</h1><p>There is something more we have to do if you are connecting into <code>ethernet</code> like your education-network.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo gedit /etc/sysctl.d/10-ipv6-privacy.conf<br></code></pre></td></tr></table></figure>
-
 <p>Change</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reStructuredText">net.ipv6.conf.all.use_tempaddr &#x3D; 2<br>net.ipv6.conf.default.use_tempaddr &#x3D; 2<br></code></pre></td></tr></table></figure>
-
 <p>into </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs reStructuredText">net.ipv6.conf.all.use_tempaddr &#x3D; 0<br>net.ipv6.conf.default.use_tempaddr &#x3D; 0<br></code></pre></td></tr></table></figure>
-
 <p>And then refresh your configures:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo sysctl --system<br></code></pre></td></tr></table></figure>
-
 
                 
               </div>

@@ -290,10 +290,8 @@
                 
                 <p>最近重读计算机体系结构，对于浮点数进行一些整理和复习。</p>
 <span id="more"></span>
-
-
 <h1 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h1><blockquote>
-<p>The <strong>IEEE Standard for Floating-Point Arithmetic</strong> (<strong>IEEE 754</strong>) is a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Technical_standard" title="Technical standard">technical standard</a> for <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic" title="Floating-point arithmetic">floating-point arithmetic</a> established in 1985 by the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers" title="Institute of Electrical and Electronics Engineers">Institute of Electrical and Electronics Engineers</a> (IEEE). The standard <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#IEEE_754_design_rationale" title="Floating-point arithmetic">addressed many problems</a> found in the diverse floating-point implementations that made them difficult to use reliably and <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Software_portability" title="Software portability">portably</a>. Many hardware <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Floating-point_unit" title="Floating-point unit">floating-point units</a> use the IEEE 754 standard.<br>– From Wikipedia IEEE754</p>
+<p>The <strong>IEEE Standard for Floating-Point Arithmetic</strong> (<strong>IEEE 754</strong>) is a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Technical_standard" title="Technical standard">technical standard</a> for <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic" title="Floating-point arithmetic">floating-point arithmetic</a> established in 1985 by the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers" title="Institute of Electrical and Electronics Engineers">Institute of Electrical and Electronics Engineers</a> (IEEE). The standard <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#IEEE_754_design_rationale" title="Floating-point arithmetic">addressed many problems</a> found in the diverse floating-point implementations that made them difficult to use reliably and <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Software_portability" title="Software portability">portably</a>. Many hardware <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Floating-point_unit" title="Floating-point unit">floating-point units</a> use the IEEE 754 standard.<br>— From Wikipedia IEEE754</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="http://evanw.github.io/float-toy/">http://evanw.github.io/float-toy/</a></p>
 <p>IEEE 754 是一类标准，主要包含：</p>
@@ -305,13 +303,11 @@
 <li>exception handling: indications of exceptional conditions (such as division by zero, overflow, etc.)</li>
 </ul>
 <p>一般的浮点数表示形式如：</p>
-<img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>采用 :<br>Sign(Blue) + Biased Exponet(Green) + Fraction(Red)</p>
 <p>对于我们编程来说有如下需要注意的问题：</p>
 <h2 id="Rounding-Rule"><a href="#Rounding-Rule" class="headerlink" title="Rounding Rule"></a>Rounding Rule</h2><p>Round to nearest, ties to even<br>Round to nearest, ties away from zero<br>Round toward 0<br>Round toward +∞<br>Round toward −∞</p>
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>(Since C++11)<br>    std::round, std::roundf<br>    std::roundl, std::lround<br>    std::lroundf, std::lroundl<br>    std::llround, std::llroundf</p>
 <h2 id="NAN"><a href="#NAN" class="headerlink" title="NAN"></a>NAN</h2><p>NAN 有两种：</p>
 <ul>
@@ -320,9 +316,7 @@
 </ul>
 <p>其中 QNAN 是可以利用计算构造的，SNAN 则是内置标注的<br><img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>下面用几个例子说明如何使用：</p>
-<img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-<img src="image5.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"><br><img src="image5.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>常见的比较方式有：<br><img src="image6.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"><br>Most operations with at least one NaN operand.</p>
 <ul>
 <li>Indeterminate forms:<ul>
@@ -344,10 +338,7 @@
 </ul>
 </li>
 </ul>
-<img src="image7.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-<img src="image8.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-<img src="image9.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image7.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"><br><img src="image8.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"><br><img src="image9.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>如果需要 trace NAN 的时候，可以这样：<br><img src="image10.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/IEEE_754">https://en.wikipedia.org/wiki/IEEE_754</a></li>

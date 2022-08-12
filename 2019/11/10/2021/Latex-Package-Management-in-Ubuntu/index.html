@@ -278,23 +278,17 @@
                 
                 <p>上次确实介绍了一些关于Linux Latex的基本使用，但是过多的Package让人头皮发麻，所以今天就介绍与点简单的package处理方法。</p>
 <span id="more"></span>
-
-
-
 <h2 id="方法一：简单粗暴"><a href="#方法一：简单粗暴" class="headerlink" title="方法一：简单粗暴"></a>方法一：简单粗暴</h2><p>讲道理，与其考虑缺这缺那，不如全部安装。所以</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install texlive-full<br></code></pre></td></tr></table></figure>
-
 <p>至此，问题全部解决</p>
 <h2 id="方法二：高级工具"><a href="#方法二：高级工具" class="headerlink" title="方法二：高级工具"></a>方法二：高级工具</h2><p>这里介绍一下一个LaTeX Package管理工具：<code>tlmgr</code></p>
 <p>这个工具安装可以直接<code>apt-get</code>进行安装处理</p>
 <p>使用第一步是进入你的package管理目录，这个在之前的Blog里面有提到。</p>
 <p>在该目录同级的位置，执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tlmgr init-usertree<br></code></pre></td></tr></table></figure>
-
 <p>可能会需要sudo</p>
 <p>我们之后就可以进行package的简单安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tlmgr install &#123;<span class="hljs-variable">$package_name</span>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>同样，可能也需要sudo</p>
 <p>至此，问题全部解决</p>
 

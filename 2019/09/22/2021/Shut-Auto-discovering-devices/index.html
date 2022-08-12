@@ -276,20 +276,15 @@
               <div class="markdown-body">
                 
                   <span id="more"></span>
-
 <p>Well, you may say, ‘Hey, Chivier, It’s really convenient that Ubuntu can automatically add new web-devices like printers, scanners. Why are you going to shut it down?’</p>
 <p>First I wanna say that, it’s <strong>UNSAFE</strong>. In many special places, maybe they will have some strange devices which are covered up just like printers.  For example, I wanna hack into your computer, I bought something just like a printer and use some tricks to pack it up, and your computer may recognize it as a printer. However, I will program some dirty thing into <code>auto setup</code> program. And now, get it?</p>
 <p>Second, it will generate many useless messages into my computer. Many many use less <code>HTTP GET</code> requests and responses. It’s awful when you are catching packets in wireshark or something else.</p>
 <p>So, let’s figure out how to shut this function down.</p>
 <p>Fist step is to modify the configure file.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/cups/cups-browsed.conf<br></code></pre></td></tr></table></figure>
-
 <p>Add <code>BrowseProtocols none</code> and <code>BrowseRemoteProtocols none</code>.</p>
 <p>Second run following.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">service cups-browsed restart<br>service cups restart<br></code></pre></td></tr></table></figure>
-
-
-
 <p>When you wanna to turn this function on, just do something reverse~</p>
 
                 

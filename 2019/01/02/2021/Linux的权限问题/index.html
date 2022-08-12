@@ -280,7 +280,6 @@
                 
                 <p> 简单介绍Ubuntu下的文件权限系统。</p>
  <span id="more"></span>
-
 <h2 id="使用者"><a href="#使用者" class="headerlink" title="使用者"></a>使用者</h2><p>Linux中，使用文件的对象一般为三类，[u],[g],[o]。分别为user，group和others。网上的解释很多，但是这里我声明一下～最好理解的方式还是英文原意最合适：</p>
 <ul>
 <li>u - user who owns the file</li>
@@ -337,7 +336,7 @@
 <p>其中<code>-r</code>开关表示是否对子目录和子文件内容进行修改。</p>
 <h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>chown顾名思义，是我们修改user的命令。</p>
 <p>格式为</p>
-<p><code>chown [-r] new_user_name1[:new_user_name2:...] dir/file_name </code></p>
+<p><code>chown [-r] new_user_name1[:new_user_name2:...] dir/file_name</code></p>
 <p>其中<code>-r</code>开关表示是否对子目录和子文件内容进行修改。</p>
 <p>与上面不同的是一个文件可以有多个owner，因此我们可以用<code>：</code>进行分割。</p>
 <h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>chmod对权限的具体内容进行了修改。</p>
@@ -345,6 +344,7 @@
 <p><code>chmod [-r] xyz dir/file_name</code></p>
 <p>xyz都是0~7的数字，就是将rwx-的字符根据之前给出的权值对应，给出我们希望的权限目标。</p>
 <p>有一些简单的方式用于微调：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -355,18 +355,22 @@
 <th>文件</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>chomod</td>
 <td>u/g/o/a</td>
 <td>+/-/=</td>
 <td>rwx-</td>
 <td>w文件名</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>直接给出几个具体的例子：</p>
 <p><code>chmod u=rwx,go=rx .bashrc</code></p>
-<p><code> chmod a+w .bashrc</code></p>
+<p><code>chmod a+w .bashrc</code></p>
 <p>一些常用的权限：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -375,7 +379,8 @@
 <th>Meaning</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>-rw-------</code></td>
 <td>(600)</td>
 <td>Only the owner has read and write permissions.</td>
@@ -410,7 +415,9 @@
 <td>(777)</td>
 <td>Everyone can read, write, and execute. (Again, this permissions setting can be hazardous.)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
                 
               </div>

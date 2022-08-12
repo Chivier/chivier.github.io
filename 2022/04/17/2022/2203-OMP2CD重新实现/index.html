@@ -287,12 +287,9 @@
                 
                 <p>之所以会有这一片文章，是因为 LLVM OMP2CD 的项目中出现了一些不太符合实验数据的情况，其项目完整性和项目可用性存疑。在这里提出一些我的个人异议。并且基于此异议提出新的个人实现方案。</p>
 <span id="more"></span>
-
-
 <p>由于一周前 LLVM14 正式发布稳定版本，因此之后的实现方案基于 LLVM14 进行。（好吧其实我个人之会 LLVM9 以前的项目框架，12 还在学习中，之后打算写一个 LLVM12 的学习笔记）</p>
 <h1 id="论文阅读"><a href="#论文阅读" class="headerlink" title="论文阅读"></a>论文阅读</h1><p>首先看论文原文： <a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/3155288">https://dl.acm.org/doi/pdf/10.1145/3155288</a></p>
-<img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image1.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>走的是一个传统的 LLVM 框架：</p>
 <ol>
 <li>首先是前端分析生成 AST</li>
@@ -321,18 +318,14 @@
 <li>extra-tools</li>
 <li>clang</li>
 </ul>
-<img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image2.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">./llvm/tools/clang/include/clang/AST/OpenMPClause.h:class OMPCodeletClause : public OMPClause &#123;  <br>./llvm/tools/clang/include/clang/AST/OpenMPClause.h: OMPCodeletClause(SourceLocation StartLoc, SourceLocation End  <br>Loc)  <br>./llvm/tools/clang/include/clang/AST/OpenMPClause.h: OMPCodeletClause()  <br>./llvm/tools/clang/include/clang/AST/RecursiveASTVisitor.h:bool RecursiveASTVisitor&lt;Derived&gt;::VisitOMPCodeletClaus  <br>e(OMPCodeletClause *) &#123;  <br>./llvm/tools/clang/include/clang/Basic/OpenMPKinds.def:OPENMP_CLAUSE(codelet, OMPCodeletClause)  <br>./llvm/tools/clang/lib/AST/StmtProfile.cpp:void OMPClauseProfiler::VisitOMPCodeletClause(const OMPCodeletClause *)  <br>&#123;&#125;  <br>./llvm/tools/clang/lib/AST/StmtPrinter.cpp:void OMPClausePrinter::VisitOMPCodeletClause(OMPCodeletClause*) &#123;&#125;  <br>./llvm/tools/clang/lib/Sema/SemaOpenMP.cpp: <span class="hljs-built_in">return</span> new (Context) OMPCodeletClause(StartLoc, EndLoc);  <br>./llvm/tools/clang/lib/Sema/TreeTransform.h:TreeTransform&lt;Derived&gt;::TransformOMPCodeletClause(OMPCodeletClause *C)  <br>&#123;  <br>./llvm/tools/clang/lib/Serialization/ASTWriterStmt.cpp:void OMPClauseWriter::VisitOMPCodeletClause(OMPCodeletClaus  <br>e *) &#123;&#125;  <br>./llvm/tools/clang/lib/Serialization/ASTReaderStmt.cpp: C = new (Context) OMPCodeletClause();  <br>./llvm/tools/clang/lib/Serialization/ASTReaderStmt.cpp:void OMPClauseReader::VisitOMPCodeletClause(OMPCodeletClaus  <br>e *) &#123;&#125;  <br>./llvm/tools/clang/tools/libclang/CIndex.cpp:void OMPClauseEnqueue::VisitOMPCodeletClause(const OMPCodeletClause *  <br>) &#123;&#125;  <br>./llvm/tools/clang/tools/extra/omp2cd/src/Compiler/ASTVisit.cpp: <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dyn_cast&lt;OMPCodeletClause&gt;(clause  <br>)) &#123;<br></code></pre></td></tr></table></figure>
-
 <p>移植 llvm 14 已经完成：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Chivier/chranslate">https://github.com/Chivier/chranslate</a></p>
 <h1 id="思路整理"><a href="#思路整理" class="headerlink" title="思路整理"></a>思路整理</h1><p>如果我们使用 LLVM 的框架，我们需要遍历 AST。</p>
-<img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image3.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>读取命令行参数</p>
-<img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image4.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <p>只处理两层以内的 omp 嵌套。</p>
 <p>代码精读：</p>
 <h1 id="评价和思考"><a href="#评价和思考" class="headerlink" title="评价和思考"></a>评价和思考</h1><p>这个论文的工作其实不复杂，可以说非常工程，首先先评价一下这个工作。这个工作虽然发了 TACO，但是惨淡的引用量反应了很多问题：</p>
@@ -349,8 +342,7 @@
 <p>LLVM, since <a target="_blank" rel="noopener" href="https://releases.llvm.org/download.html#11.0.0">version 11</a> (12 Oct 2020), has an <a target="_blank" rel="noopener" href="https://openmp.llvm.org/optimizations/OpenMPOpt.html">OpenMP-Aware optimization pass</a> as well as the ability to <a target="_blank" rel="noopener" href="https://openmp.llvm.org/optimizations/OpenMPUnawareOptimizations.html">perform “scalar optimizations” across OpenMP region boundaries</a>.<br>In-depth discussion of the topic can be found <a target="_blank" rel="noopener" href="https://openmp.llvm.org/optimizations/Overview.html">here</a>.</p>
 </blockquote>
 <p>说明 2020 年之前是不可能做成一个可以便捷拓展的项目的。<br><img src="image5.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
-<img src="image6.png" srcset="/img/loading.gif" lazyload width="80%" height="80%">
-
+<p><img src="image6.png" srcset="/img/loading.gif" lazyload width="80%" height="80%"></p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1>
                 
               </div>

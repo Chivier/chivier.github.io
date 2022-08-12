@@ -278,7 +278,6 @@
               <div class="markdown-body">
                 
                 <h1 id="系统重装笔记"><a href="#系统重装笔记" class="headerlink" title="系统重装笔记"></a>系统重装笔记</h1><span id="more"></span>
-
 <p>自从更换了新电脑之后，用了接近一年的windows11，但是在工作的时候发现了诸多问题。首先，从回顾我的工作流程开始：</p>
 <ol>
 <li>开机</li>
@@ -296,19 +295,16 @@
 <h2 id="1-输入法"><a href="#1-输入法" class="headerlink" title="1. 输入法"></a>1. 输入法</h2><p>现在的Linux下，输入法名称不再是 SogouPinyin， 搜狗官方予以的支持也非常不完善。要不是因为我长期使用小鹤双拼，我已经专用百度输入法了。</p>
 <p>这里使用麒麟Ubuntu的源，直接安装里面配置好的sogou pinyin即可：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -sL <span class="hljs-string">&#x27;https://keyserver.ubuntu.com/pks/lookup?&amp;op=get&amp;search=0x73BC8FBCF5DE40C6ADFCFFFA9C949F2093F565FF&#x27;</span> | sudo apt-key add<br>sudo apt-add-repository <span class="hljs-string">&#x27;deb http://archive.ubuntukylin.com/ukui focal main&#x27;</span><br>sudo apt upgrade<br></code></pre></td></tr></table></figure>
-
 <p>之后直接安装即可。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install sogouimebs<br></code></pre></td></tr></table></figure>
-
 <p>最后在语言选项中，和之前一样的方法修改成<code>fcitx</code><br>如果输入经常卡主，可能使ibus和fcitx5的冲突导致，可以用<strong>卸载ibus</strong>的方式解决。不过方法比较激进，慎重操作。</p>
 <h2 id="2-Wechat-amp-TIM"><a href="#2-Wechat-amp-TIM" class="headerlink" title="2. Wechat &amp; TIM"></a>2. Wechat &amp; TIM</h2><p>这里使用一种偷懒的方法进行安装。直接使用deepin-wine的源进行安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -O- https://deepin-wine.i-m.dev/setup.sh | sh<br></code></pre></td></tr></table></figure>
-
 <p>之后使用命令安装：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install com.qq.weixin.deepin<br></code></pre></td></tr></table></figure>
-
 <p>即可。</p>
 <p>顺带一提，这种方法还可以安装一些其他软件：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -316,7 +312,8 @@
 <th>Package Name</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Wechat</td>
 <td>com.qq.weicin.deepin</td>
 </tr>
@@ -336,7 +333,9 @@
 <td>爱奇艺</td>
 <td>com.iqiyi.deepin</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>此外，Wine Tray 的处理方法是使用Gnome Extensions的Topicon</p>
 <h2 id="3-Utools"><a href="#3-Utools" class="headerlink" title="3. Utools"></a>3. Utools</h2><p>Utools可以替代部分Albert之前的内容。随软件发展，尽管Utools没有和Linux适配的检索软件，但是大量好用的插件可以弥补不足。主要的常用功能有：</p>
 <ol>
