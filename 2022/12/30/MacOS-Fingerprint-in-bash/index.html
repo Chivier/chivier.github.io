@@ -18,21 +18,34 @@
   <meta name="author" content="Chivier Humber">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="https://chivier.github.io/tags/index.html">
+    <meta name="description" content="First, open up Terminal. Navigate to the directory where the system stores the list of PAMs by typing cd &#x2F;etc&#x2F;pam.d&#x2F; and open the sudo file there in your favorite command-line text editor.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MacOS Fingerprint in bash">
+<meta property="og:url" content="https://chivier.github.io/2022/12/30/MacOS-Fingerprint-in-bash/index.html">
 <meta property="og:site_name" content="Chivier&#39;s Blog">
+<meta property="og:description" content="First, open up Terminal. Navigate to the directory where the system stores the list of PAMs by typing cd &#x2F;etc&#x2F;pam.d&#x2F; and open the sudo file there in your favorite command-line text editor.">
 <meta property="og:locale">
+<meta property="og:image" content="https://cubox.pro/c/filters:no_upscale(">
+<meta property="article:published_time" content="2022-12-30T09:17:57.000Z">
+<meta property="article:modified_time" content="2023-02-02T21:08:36.064Z">
 <meta property="article:author" content="Chivier Humber">
+<meta property="article:tag" content="MacOS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cubox.pro/c/filters:no_upscale(">
   
   
   
-  <title>标签 - Chivier&#39;s Blog</title>
+  <title>MacOS Fingerprint in bash - Chivier&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 
@@ -82,7 +95,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 80vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -187,17 +200,53 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="标签"></span>
+            <span id="subtitle" data-typed-text="MacOS Fingerprint in bash"></span>
           
         </div>
 
         
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-30 17:17" pubdate>
+          December 30, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
       </div>
 
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
       
     </div>
   </div>
@@ -209,24 +258,187 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center tagcloud">
-  <a href="/tags/MacOS/" style="font-size: 15px; color: #bbe">MacOS</a>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MacOS Fingerprint in bash</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>First, open up Terminal. Navigate to the directory where the system stores the list of PAMs by typing <code>cd /etc/pam.d/</code> and open the <code>sudo</code> file there in your favorite command-line text editor.</p>
+<span id="more"></span>
+<p>1 (You can also always use a GUI editor like BBEdit too.) Note that if you open it via the command-line, you’ll need to use <code>sudo</code> itself to do so, since the file is (understandably) protected.</p>
+<p>Once you’ve opened it, add the following below the first line (you’ll see the headers under which each of the entries goes):</p>
+<blockquote>
+<p><code>auth sufficient pam_tid.so</code></p>
+</blockquote>
+<p>That line basically tells the <code>sudo</code> command that the Touch ID authentication module is sufficient to authorize the user, which is all you need to do.</p>
+<p><img src="https://cubox.pro/c/filters:no_upscale(" srcset="/img/loading.gif" lazyload alt="Sudo with Touch ID">?imageUrl=https%3A%2F%2Fi0.wp.com%2Fsixcolors.com%2Fwp-content%2Fuploads%2F2020%2F11%2Fsudo-touchid.png%3Fssl%3D1)</p>
+<p>Save the file and you’re done! Now, the next time you use the <code>sudo</code> command, instead of being prompted for your password, you’ll get a dialog box asking you to authenticate with Touch ID, just as you would any other time you needed to authenticate. (And, as an extra bonus, if you choose to click the Enter Password, you’ll get prompted to use either the password <em>or</em> your Apple Watch, if you have one.)</p>
+<ol>
+<li>I’m going to forestall the <code>vi</code> versus <code>emacs</code> debate by saying I’m a <code>pico</code>/<code>nano</code> guy, don’t @ me. ↩</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://sixcolors.com/post/2020/11/quick-tip-enable-touch-id-for-sudo/">查看原网页: sixcolors.com</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/MacOS/">#MacOS</a>
+      
+    </div>
+  
 </div>
 
-              </div>
-            </div>
-          </div>
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MacOS Fingerprint in bash</div>
+      <div>https://chivier.github.io/2022/12/30/MacOS-Fingerprint-in-bash/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chivier Humber</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>December 30, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
         </div>
       </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
     
 
     
@@ -320,6 +532,72 @@
 
 
 
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
 
   <script  src="/js/local-search.js" ></script>
 
