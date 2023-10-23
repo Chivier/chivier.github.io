@@ -18,22 +18,24 @@
   <meta name="author" content="Chivier Humber">
   <meta name="keywords" content="">
   
-    <meta name="description" content="深夜，独坐家中，闲来无事，翻起了自己以前写过的文章和笔记。不能说井井有条吧，只能说杂乱不堪。在此静坐反思，寻求解决方法。">
+    <meta name="description" content="First, open up Terminal. Navigate to the directory where the system stores the list of PAMs by typing cd &#x2F;etc&#x2F;pam.d&#x2F; and open the sudo file there in your favorite command-line text editor.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我为什么从零开始新建 blog">
-<meta property="og:url" content="https://chivier.github.io/2023/02/03/2023/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%96%B0%E5%BB%BA-blog/index.html">
+<meta property="og:title" content="MacOS Fingerprint in bash">
+<meta property="og:url" content="https://chivier.github.io/2023/02/02/2023/MacOS-Fingerprint-in-bash/index.html">
 <meta property="og:site_name" content="Chivier&#39;s Blog">
-<meta property="og:description" content="深夜，独坐家中，闲来无事，翻起了自己以前写过的文章和笔记。不能说井井有条吧，只能说杂乱不堪。在此静坐反思，寻求解决方法。">
+<meta property="og:description" content="First, open up Terminal. Navigate to the directory where the system stores the list of PAMs by typing cd &#x2F;etc&#x2F;pam.d&#x2F; and open the sudo file there in your favorite command-line text editor.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-02-02T21:46:17.000Z">
-<meta property="article:modified_time" content="2023-02-02T21:46:30.756Z">
+<meta property="og:image" content="https://i0.wp.com/sixcolors.com/wp-content/uploads/2020/11/sudo-touchid.png?ssl=1">
+<meta property="article:published_time" content="2023-02-02T21:25:23.000Z">
+<meta property="article:modified_time" content="2023-02-02T21:25:29.955Z">
 <meta property="article:author" content="Chivier Humber">
-<meta property="article:tag" content="blog">
+<meta property="article:tag" content="MacOS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i0.wp.com/sixcolors.com/wp-content/uploads/2020/11/sudo-touchid.png?ssl=1">
   
   
   
-  <title>我为什么从零开始新建 blog - Chivier&#39;s Blog</title>
+  <title>MacOS Fingerprint in bash - Chivier&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="我为什么从零开始新建 blog"></span>
+            <span id="subtitle" data-typed-text="MacOS Fingerprint in bash"></span>
           
         </div>
 
@@ -209,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-03 05:46" pubdate>
-          February 3, 2023 am
+        <time datetime="2023-02-02 21:25" pubdate>
+          February 2, 2023 pm
         </time>
       </span>
     
@@ -221,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          736 words
+          910 words
         
       </span>
     
@@ -232,7 +234,7 @@
         
         
         
-          7 mins
+          8 mins
         
       </span>
     
@@ -270,25 +272,22 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">我为什么从零开始新建 blog</h1>
+            <h1 style="display: none">MacOS Fingerprint in bash</h1>
             
             
               <div class="markdown-body">
                 
-                <p>深夜，独坐家中，闲来无事，翻起了自己以前写过的文章和笔记。不能说井井有条吧，只能说杂乱不堪。在此静坐反思，寻求解决方法。</p>
+                <p>First, open up Terminal. Navigate to the directory where the system stores the list of PAMs by typing <code>cd /etc/pam.d/</code> and open the <code>sudo</code> file there in your favorite command-line text editor.</p>
 <span id="more"></span>
-<h1 id="我之前都写了啥？"><a href="#我之前都写了啥？" class="headerlink" title="我之前都写了啥？"></a>我之前都写了啥？</h1><p>我的老笔记，是通过 github page 发布出去的。写的都是我日常工作遇到的问题，或者整理的一些资料和文件。<strong>准确来说，他们不是合格的 blog，他们只是聚集的信息。</strong>而信息没有进行加工和处理，是不会具有附加价值的。</p>
-<h1 id="为什么会变成这样？"><a href="#为什么会变成这样？" class="headerlink" title="为什么会变成这样？"></a>为什么会变成这样？</h1><p>现在博客凌乱的局面有两个原因：</p>
-<ol>
-<li>没有区分博客、笔记两者的区别，没有设立明确的分界线。</li>
-<li>记录信息之后没有归纳较健康的数据流系统，没有定期复习。</li>
-<li>输出的时候没有进行充分的思考和理解，只是对一些问题进行了复述。</li>
-</ol>
-<p>所以我的问题不在于我写不出东西，而在于写不出高质量的剖析。主要的原因是缺乏独立的深度思考。</p>
-<h1 id="之后怎么办？"><a href="#之后怎么办？" class="headerlink" title="之后怎么办？"></a>之后怎么办？</h1><p>首先我花费了接近一个月完成自己的知识系统的重建。这个之后的 blog 我会详细的进行一次介绍，关于我的信息流是如何变成知识库的。</p>
-<p>同时，我也找到了更合适的写作发布平台，可以对不同领域的问题进行发布和解读。现在在这里写作就非常舒适，比起之前的 github page 来说，两者差异不大，但是自定义的域名、自己的流量统计、自己的 wordpress 让我更加安心吧。不过 wordpress 也有他的缺点，例如需要手动编辑大量的页面信息。因此我最终决定两者配合使用，wordpress 可以作为内容的备份。</p>
-<p>此外，我回到 github page 重建 blog 的原因是我一时兴起重构了自己的工作流，可以在 obsidian 中一键发布编辑好的笔记，这种工作体验也是我之前从未想过的。</p>
-<p>最后我想说，在这里，我的主要任务是和国内的程序员、学生群体交流。我作为这两个群体中的成员，我希望吧我的一些想法和思考摆上台面，大家一起讨论。随时欢迎大家和我联系交流。</p>
+<p>1 (You can also always use a GUI editor like BBEdit too.) Note that if you open it via the command-line, you’ll need to use <code>sudo</code> itself to do so, since the file is (understandably) protected.</p>
+<p>Once you’ve opened it, add the following below the first line (you’ll see the headers under which each of the entries goes):</p>
+<blockquote>
+<p><code>auth sufficient pam_tid.so</code></p>
+</blockquote>
+<p>That line basically tells the <code>sudo</code> command that the Touch ID authentication module is sufficient to authorize the user, which is all you need to do.</p>
+<p><img src="https://i0.wp.com/sixcolors.com/wp-content/uploads/2020/11/sudo-touchid.png?ssl=1" srcset="/img/loading.gif" lazyload alt="Sudo with Touch ID"></p>
+<p>Save the file and you’re done! Now, the next time you use the <code>sudo</code> command, instead of being prompted for your password, you’ll get a dialog box asking you to authenticate with Touch ID, just as you would any other time you needed to authenticate. (And, as an extra bonus, if you choose to click the Enter Password, you’ll get prompted to use either the password <em>or</em> your Apple Watch, if you have one.)</p>
+<p><a target="_blank" rel="noopener" href="https://sixcolors.com/post/2020/11/quick-tip-enable-touch-id-for-sudo/">查看原网页: sixcolors.com</a></p>
 
                 
               </div>
@@ -307,7 +306,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Fun/" class="category-chain-item">Fun</a>
+  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
   
   
 
@@ -322,7 +321,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/blog/">#blog</a>
+        <a href="/tags/MacOS/">#MacOS</a>
       
     </div>
   
@@ -334,8 +333,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>我为什么从零开始新建 blog</div>
-      <div>https://chivier.github.io/2023/02/03/2023/我为什么从零开始新建-blog/</div>
+      <div>MacOS Fingerprint in bash</div>
+      <div>https://chivier.github.io/2023/02/02/2023/MacOS-Fingerprint-in-bash/</div>
     </div>
     <div class="license-meta">
       
@@ -347,7 +346,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 3, 2023</div>
+          <div>February 2, 2023</div>
         </div>
       
       
@@ -377,21 +376,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/08/2023/6/" title="6">
+                      <a href="/2023/02/02/2023/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%96%B0%E5%BB%BA-blog/" title="我为什么从零开始新建 blog">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">6</span>
+                        <span class="hidden-mobile">我为什么从零开始新建 blog</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2023/02/03/2023/MacOS-Fingerprint-in-bash/" title="MacOS Fingerprint in bash">
-                        <span class="hidden-mobile">MacOS Fingerprint in bash</span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
